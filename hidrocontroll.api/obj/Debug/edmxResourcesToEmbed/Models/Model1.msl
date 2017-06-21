@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hidrocontrollModelStoreContainer" CdmEntityContainer="hidrocontrollEntities">
+    <EntitySetMapping Name="CAD_ADMINISTRADOR">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_ADMINISTRADOR">
+        <MappingFragment StoreEntitySet="CAD_ADMINISTRADOR">
+          <ScalarProperty Name="ID_ADMINISTRADOR" ColumnName="ID_ADMINISTRADOR" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+          <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,77 @@
+﻿<!-- Conteúdo a direita -->
+<md-content class="conteudo-lateral">
+    <div class="container">
+
+        <!-- Campos de filtro -->
+        <div style="width: 100%;" layout="row">
+            <span layout="column">
+                <h2>{{culturaRel.tabela.titulo}}</h2>
+                <p>{{culturaRel.tabela.subtitulo}}</p>
+            </span>
+
+            <md-input-container style="position: absolute; right: 20px; top: 20px;">
+                <md-input-container>
+                    <label>Tipo</label>
+                    <md-select ng-model="culturaRel.tipo">
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="tipo in culturaRel.tabela.tipo" ng-value="tipo">
+                            {{tipo}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Data</label>
+                    <md-select ng-model="culturaRel.data">
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="data in culturaRel.tabela.data" ng-value="data">
+                            {{data}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Parcela</label>
+                    <md-select ng-model="culturaRel.parcela">
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="parcela in culturaRel.parcelas" ng-value="parcela">
+                            {{parcelas}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Atributos</label>
+                    <md-select multiple="" ng-model="culturaRel.atributo">
+                        <md-optgroup label="Atributos">
+                            <md-option><em>None</em></md-option>
+                            <md-option ng-repeat="atributo in culturaRel.atributos" ng-value="atributo">
+                                {{atributo}}
+                            </md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-input-container>
+            </md-input-container>
+        </div>
+        <!-- Campos de entrada de datas -->
+        <div style="width: 100%;" ng-show="culturaRel.data == 'Período'">
+            <md-datepicker style="float: right;" ng-model="culturaRel.tabela.data_fim" md-placeholder="Data de Fim">
+                {{dados.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
+            </md-datepicker>
+            <md-datepicker style="float: right;" ng-model="culturaRel.tabela.data_inicio" md-placeholder="Data de Início">
+                {{dados.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
+            </md-datepicker>
+        </div>
+    </div>
+
+    <!-- Tabela -->
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th ng-repeat="equipamento in culturaRel.tabela.cabecalho">{{equipamento}}</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    </div>
+</md-content>

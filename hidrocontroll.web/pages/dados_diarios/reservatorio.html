@@ -1,0 +1,35 @@
+﻿<!-- Conteúdo a direita -->
+<md-content class="conteudo-lateral">
+    <div class="container">
+        <div style="width: 100%;" layout="row">
+            <span layout="column">
+                <h2>{{reservatorioDds.tabela.titulo}}</h2>
+                <p style="display: inline; margin-right= 50px;">{{reservatorioDds.tabela.subtitulo}}</p>
+            </span>
+        </div>
+
+        <!-- Campos de entrada de datas -->
+        <span style="float: right;">
+            <md-datepicker ng-model="reservatorioDds.tabela.data_inicio" md-placeholder="Data de Início">
+                {{reservatorioDds.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
+            </md-datepicker>
+            <md-datepicker ng-model="reservatorioDds.tabela.data_fim" md-placeholder="Data de Fim">
+                {{reservatorioDds.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
+            </md-datepicker>
+        </span>
+
+        <!-- Tabela -->
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th ng-repeat="dado in reservatorioDds.tabela.cabecalho">{{dado}}</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Botões -->
+    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
+    <md-button style="float: right;" class="md-primary md-raised">Imprimir</md-button>
+</md-content>

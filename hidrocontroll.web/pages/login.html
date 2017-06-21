@@ -1,0 +1,36 @@
+﻿<div id="login-background" data-layout=row" data-layout-align="center start" data-flex class="default-background">
+    <md-card id="login-interface">
+        <md-card-title>
+            <form data-layout="column" data-layout-align="center center">
+                <md-card-title-media>
+                    <div class="md-media-lg card-media" style="padding-top:15%;">
+                        <img src="./img/ihm-Stefanini.png" />
+                    </div>
+                </md-card-title-media>
+            </form>
+        </md-card-title>
+
+
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline" style="color: #9FC762;">Hidrocontroll</span>
+                <!--<span class="md-subhead" style="color: #1E498F">Sistema de Rastreabilidade de Produção</span>-->
+            </md-card-title-text>
+        </md-card-title>
+
+
+        <md-card-actions>
+            <form data-layout="column" data-layout-align="center center">
+                <md-input-container>
+                    <label>Matrícula</label>
+                    <input ng-model="login.obj.NUM_MATRICULA">
+                </md-input-container>
+                <md-input-container>
+                    <label>Senha</label>
+                    <input type="password" ng-model="login.obj.SENHA_USUARIO">
+                </md-input-container>
+                <md-button class="login-button md-raised md-primary" ng-click="login.entrar()" type="submit">Entrar</md-button>
+            </form>
+        </md-card-actions>
+    </md-card>
+</div>

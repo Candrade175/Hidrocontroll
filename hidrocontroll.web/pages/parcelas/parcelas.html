@@ -1,0 +1,28 @@
+﻿<!-- Conteúdo a direita -->
+<md-content class="conteudo-lateral">
+    <div class="container">
+        <h2>{{parcelasPrc.tabela.titulo}}</h2>
+        <p style="display: inline; margin-right= 50px;">{{parcelasPrc.tabela.subtitulo}}</p>
+
+        <!-- Campo de busca -->
+        <md-input-container style="float: right; margin: 0; height: 50px;" class="">
+            <label for="busca">Busca</label>
+            <input type="number" ng-model="parcelasPrc.tabela.busca" aria-label="ShowHideAccountant" value="busca" />
+        </md-input-container>
+
+        <!-- Tabela -->
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th ng-repeat="dado in parcelasPrc.tabela.cabecalho">{{dado}}</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botões -->
+    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
+    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+</md-content>

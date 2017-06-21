@@ -1,0 +1,41 @@
+﻿<md-toolbar id="tool-bar" layout="row">
+    <md-button ng-click="body.toggle()" aria-label="Menu">
+        <md-icon style="color: #ffffff; font-size: 30px;"> menu </md-icon>
+    </md-button>
+    <h3 class="titulo">Hidrocontroll<span ng-show="body.gtSm"> {{body.$state.$current.menu}}</span></h3>
+    <md-card-title-media>
+        <div class="md-media-lg card-media" style="padding-top: 5px; padding-right: 10px">
+            <img src="./img/logoBranca.png" />
+        </div>
+    </md-card-title-media>
+</md-toolbar>
+
+<div style="width: 100%;" class="container" data-layout="row" data-flex>
+    <md-sidenav style="width: 300px;" class="md-whiteframe-4dp" md-component-id="left">
+        <nav class="navbar navbar-default sidebar" role="navigation">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown" ng-repeat="menuOpt in body.menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown">{{menuOpt.menu}} <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity {{menuOpt.iconClass}}"></span></a>
+                            <ul class="dropdown-menu forAnimate" role="menu">
+                                <span ng-repeat="submenu in menuOpt.subMenu">
+                                    <li ng-click="body.go(('main.' + submenu.nome + menuOpt.menu).replace(' ',''))">
+                                        <a style="width: 100%; text-align: left;" class="btn btn-default">{{submenu.nome}}
+                                            <span class="pull-right {{submenu.icon}}"</span>
+                                        </a>
+                                    </li>
+                                    <!--<li class="divider"></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </md-sidenav>
+
+    <md-content class="content" flex>
+        <div data-layout="row" data-layout-align="end center" data-flex></div>
+        <div data-ui-view></div>
+    </md-content>
+</div>

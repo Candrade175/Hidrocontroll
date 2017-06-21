@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="hidrocontrollModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAD_ADMINISTRADOR">
+          <Key>
+            <PropertyRef Name="ID_ADMINISTRADOR" />
+          </Key>
+          <Property Name="ID_ADMINISTRADOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar(max)" />
+          <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+          <Property Name="SENHA" Type="varchar" MaxLength="50" />
+          <Property Name="ATIVO" Type="bit" />
+        </EntityType>
+        <EntityType Name="CAD_USUARIO">
+          <Key>
+            <PropertyRef Name="IDC_USUARIO" />
+          </Key>
+          <Property Name="IDC_USUARIO" Type="numeric" Precision="15" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_USUARIO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NUM_MATRICULA" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SENHA_USUARIO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DTH_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="DTH_ALTERACAO" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="hidrocontrollModelStoreContainer">
+          <EntitySet Name="CAD_ADMINISTRADOR" EntityType="Self.CAD_ADMINISTRADOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAD_USUARIO" EntityType="Self.CAD_USUARIO" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hidrocontrollModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="hidrocontrollEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAD_ADMINISTRADOR" EntityType="hidrocontrollModel.CAD_ADMINISTRADOR" />
+          <EntitySet Name="CAD_USUARIO" EntityType="hidrocontrollModel.CAD_USUARIO" />
+        </EntityContainer>
+        <EntityType Name="CAD_ADMINISTRADOR">
+          <Key>
+            <PropertyRef Name="ID_ADMINISTRADOR" />
+          </Key>
+          <Property Name="ID_ADMINISTRADOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SENHA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ATIVO" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CAD_USUARIO">
+          <Key>
+            <PropertyRef Name="IDC_USUARIO" />
+          </Key>
+          <Property Name="IDC_USUARIO" Type="Decimal" Nullable="false" Precision="15" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_USUARIO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NUM_MATRICULA" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SENHA_USUARIO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DTH_CRIACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DTH_ALTERACAO" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hidrocontrollModelStoreContainer" CdmEntityContainer="hidrocontrollEntities">
+          <EntitySetMapping Name="CAD_ADMINISTRADOR">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_ADMINISTRADOR">
+              <MappingFragment StoreEntitySet="CAD_ADMINISTRADOR">
+                <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
+                <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="ID_ADMINISTRADOR" ColumnName="ID_ADMINISTRADOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_USUARIO">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
+              <MappingFragment StoreEntitySet="CAD_USUARIO">
+                <ScalarProperty Name="DTH_ALTERACAO" ColumnName="DTH_ALTERACAO" />
+                <ScalarProperty Name="DTH_CRIACAO" ColumnName="DTH_CRIACAO" />
+                <ScalarProperty Name="SENHA_USUARIO" ColumnName="SENHA_USUARIO" />
+                <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+                <ScalarProperty Name="IDC_USUARIO" ColumnName="IDC_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

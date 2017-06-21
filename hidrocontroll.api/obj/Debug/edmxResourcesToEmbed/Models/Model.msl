@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hidrocontrollModelStoreContainer" CdmEntityContainer="hidrocontrollEntities">
+    <EntitySetMapping Name="CAD_ADMINISTRADOR">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_ADMINISTRADOR">
+        <MappingFragment StoreEntitySet="CAD_ADMINISTRADOR">
+          <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
+          <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="ID_ADMINISTRADOR" ColumnName="ID_ADMINISTRADOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_USUARIO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
+        <MappingFragment StoreEntitySet="CAD_USUARIO">
+          <ScalarProperty Name="DTH_ALTERACAO" ColumnName="DTH_ALTERACAO" />
+          <ScalarProperty Name="DTH_CRIACAO" ColumnName="DTH_CRIACAO" />
+          <ScalarProperty Name="SENHA_USUARIO" ColumnName="SENHA_USUARIO" />
+          <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+          <ScalarProperty Name="IDC_USUARIO" ColumnName="IDC_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
