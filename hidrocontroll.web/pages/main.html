@@ -18,7 +18,7 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown" ng-repeat="menuOpt in body.menu">
                             <a class="dropdown-toggle" data-toggle="dropdown">{{menuOpt.menu}} <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity {{menuOpt.iconClass}}"></span></a>
-                            <ul class="dropdown-menu forAnimate" role="menu">
+                            <ul style="padding-bottom:30px;" class="dropdown-menu forAnimate" role="menu">
                                 <span ng-repeat="submenu in menuOpt.subMenu">
                                     <li ng-click="body.go(('main.' + submenu.nome + menuOpt.menu).replace(' ',''))">
                                         <a style="width: 100%; text-align: left;" class="btn btn-default">{{submenu.nome}}

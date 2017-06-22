@@ -66,3 +66,5 @@ C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\b
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\obj\Debug\hidrocontroll.api.csprojResolveAssemblyReference.cache
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\obj\Debug\hidrocontroll.dll
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\obj\Debug\hidrocontroll.pdb
+C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\bin\hidrocontroll.dll.CodeAnalysisLog.xml
+C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\bin\hidrocontroll.dll.lastcodeanalysissucceeded
