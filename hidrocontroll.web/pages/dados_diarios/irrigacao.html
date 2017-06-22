@@ -2,7 +2,7 @@
 <md-content class="conteudo-lateral">
     <div class="container">
         <div class="tabela-cabecalho" layout="row">
-            <span class="tabela-cabecalho-titulo" layout=" column">
+            <span class="tabela-cabecalho-titulo" layout="column">
                 <h2>{{irrigacaoDds.tabela.titulo}}</h2>
                 <p style="display: inline; margin-right= 50px;">{{irrigacaoDds.tabela.subtitulo}}</p>
             </span>
@@ -16,7 +16,7 @@
                     {{irrigacaoDds.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
                 </md-datepicker>
 
-                <md-input-container class="tabela-cabecalho-select">
+                <md-input-container class="tabela-cabecalho-input">
                     <label>Parcela</label>
                     <md-select ng-model="irrigacaoDds.parcela">
                         <md-option><em>None</em></md-option>

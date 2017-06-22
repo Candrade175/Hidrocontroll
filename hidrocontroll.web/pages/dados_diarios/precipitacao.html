@@ -1,32 +1,32 @@
 ﻿<!-- Conteúdo a direita -->
 <md-content class="conteudo-lateral">
     <div class="container">
-        <div style="width: 100%;" layout="row">
-            <span layout="column">
+        <div class="tabela-cabecalho" layout="row">
+            <span class="tabela-cabecalho-titulo" layout="column">
                 <h2>{{precipitacaoDds.tabela.titulo}}</h2>
                 <p style="display: inline; margin-right= 50px;">{{precipitacaoDds.tabela.subtitulo}}</p>
             </span>
 
-            <md-input-container style="position: absolute; right: 20px; top: 20px;">
-                <label>Parcela</label>
-                <md-select ng-model="precipitacaoDds.parcela">
-                    <md-option><em>None</em></md-option>
-                    <md-option ng-repeat="parcela in precipitacaoDds.parcelas" ng-value="parcela">
-                        {{parcelas}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-        </div>
+            <!-- Campos de entrada de datas -->
+            <span class="tabela-cabecalho-campos">
+                <md-datepicker class="tabela-cabecalho-float" ng-model="precipitacaoDds.tabela.data_inicio" md-placeholder="Data de Início">
+                    {{precipitacaoDds.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+                <md-datepicker class="tabela-cabecalho-float" ng-model="precipitacaoDds.tabela.data_fim" md-placeholder="Data de Fim">
+                    {{precipitacaoDds.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
 
-        <!-- Campos de entrada de datas -->
-        <span style="float: right;">
-            <md-datepicker ng-model="precipitacaoDds.tabela.data_inicio" md-placeholder="Data de Início">
-                {{precipitacaoDds.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
-            </md-datepicker>
-            <md-datepicker ng-model="precipitacaoDds.tabela.data_fim" md-placeholder="Data de Fim">
-                {{precipitacaoDds.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
-            </md-datepicker>
-        </span>
+                <md-input-container class="tabela-cabecalho-input">
+                    <label>Parcela</label>
+                    <md-select ng-model="precipitacaoDds.parcela">
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="parcela in precipitacaoDds.parcelas" ng-value="parcela">
+                            {{parcelas}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </span>
+        </div>
 
         <!-- Tabela -->
         <table class="table table-striped table-bordered table-hover">
@@ -36,10 +36,10 @@
                 </tr>
             </thead>
             <tbody></tbody>
-        </table>
+        </table> 
+        
+        <!-- Botões -->
+        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
+        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
     </div>
-
-    <!-- Botões -->
-    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
-    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
 </md-content>
