@@ -1,37 +1,34 @@
 ﻿<!-- Conteúdo a direita -->
 <md-content class="conteudo-lateral">
-    <div class="container">
-
-        <!-- Campos de filtro -->
-        <div style="width: 100%;" layout="row">
-            <span layout="column">
+    <div class="container tabela-container">
+        <div class="tabela-cabecalho" layout="row">
+            <span class="tabela-cabecalho-titulo" layout="column">
                 <h2>{{consumoOutRel.tabela.titulo}}</h2>
                 <p>{{consumoOutRel.tabela.subtitulo}}</p>
             </span>
-        </div>
-        <!-- Campos de entrada de datas -->
-        <div style="width: 100%;">
-            <md-datepicker style="float: right;" ng-model="consumoOutRel.tabela.data_fim" md-placeholder="Data de Fim">
-                {{dados.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
-            </md-datepicker>
-            <md-datepicker style="float: right;" ng-model="consumoOutRel.tabela.data_inicio" md-placeholder="Data de Início">
-                {{dados.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
-            </md-datepicker>
-        </div>
-    </div>
 
-    <!-- Tabela -->
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th ng-repeat="equipamento in consumoOutRel.tabela.cabecalho">{{equipamento}}</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    </div>
+            <!-- Campos de entrada de datas -->
+            <span class="tabela-cabecalho-campos">
+                <md-datepicker class="tabela-cabecalho-float" ng-model="consumoOutRel.tabela.data_fim" md-placeholder="Data de Fim">
+                    {{dados.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+                <md-datepicker class="tabela-cabecalho-float" ng-model="consumoOutRel.tabela.data_inicio" md-placeholder="Data de Início">
+                    {{dados.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+            </span>
+        </div>
 
-    <!-- Botão -->
-    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+        <!-- Tabela -->
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th ng-repeat="equipamento in consumoOutRel.tabela.cabecalho">{{equipamento}}</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Botão -->
+        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+    </div>
 </md-content>

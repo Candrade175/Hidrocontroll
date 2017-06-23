@@ -1,14 +1,21 @@
 ﻿<!-- Conteúdo a direita -->
 <md-content class="conteudo-lateral">
-    <div class="container">
-        <h2>{{parcelasPrc.tabela.titulo}}</h2>
-        <p style="display: inline; margin-right= 50px;">{{parcelasPrc.tabela.subtitulo}}</p>
+    <div class="container tabela-container">
+        <div class="tabela-cabecalho" layout="row">
+            <span class="tabela-cabecalho-titulo" layout="column">
+                <h2>{{parcelasPrc.tabela.titulo}}</h2>
+                <p style="display: inline; margin-right= 50px;">{{parcelasPrc.tabela.subtitulo}}</p>
+            </span>
 
-        <!-- Campo de busca -->
-        <md-input-container style="float: right; margin: 0; height: 50px;" class="">
-            <label for="busca">Busca</label>
-            <input type="number" ng-model="parcelasPrc.tabela.busca" aria-label="ShowHideAccountant" value="busca" />
-        </md-input-container>
+            <!-- Campos de entrada de datas -->
+            <span class="tabela-cabecalho-campos">
+                <!-- Campo de busca -->
+                <md-input-container class="tabela-cabecalho-input">
+                    <label for="busca">Busca</label>
+                    <input type="number" ng-model="parcelasPrc.tabela.busca" aria-label="ShowHideAccountant" value="busca" />
+                </md-input-container>
+            </span>
+        </div>
 
         <!-- Tabela -->
         <table class="table table-striped table-bordered table-hover">
@@ -17,12 +24,11 @@
                     <th ng-repeat="dado in parcelasPrc.tabela.cabecalho">{{dado}}</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
         </table>
-    </div>
 
-    <!-- Botões -->
-    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
-    <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+        <!-- Botões -->
+        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
+        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+    </div>
 </md-content>

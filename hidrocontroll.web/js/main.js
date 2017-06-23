@@ -59,7 +59,7 @@
             })
 
             .state('main.ClimaDadosDiários', {
-                url: "/clima",
+                url: "/dadosClima",
                 templateUrl: "pages/dados_diarios/clima.html",
                 controller: "ClimaDadosController",
                 controllerAs: "climaDds"
@@ -149,7 +149,7 @@
             })
 
             .state('main.CulturaParcelas', {
-                url: "/cultura",
+                url: "/culturaParcelas",
                 templateUrl: "pages/parcelas/cultura.html",
                 controller: "CulturaParcelasController",
                 controllerAs: "culturaPrc"
@@ -182,14 +182,14 @@
             })
 
             .state('main.ClimaRelatórios', {
-                url: "/clima",
+                url: "/relatorioClima",
                 templateUrl: "pages/relatorios/clima.html",
                 controller: "ClimaRelatoriosController",
                 controllerAs: "climaRel"
             })
 
             .state('main.CulturaRelatórios', {
-                url: "/cultura",
+                url: "/relatorioCultura",
                 templateUrl: "pages/relatorios/cultura.html",
                 controller: "CulturaRelatoriosController",
                 controllerAs: "culturaRel"

@@ -4,7 +4,7 @@
     font-style: normal;
     font-weight: 400;
     src: url(MaterialIcons-Regular.eot); /* For IE6-8 */
-    src: local('Material Icons'), local('MaterialIcons-Regular'),
+    src: local('Material Icons'), local('MaterialIcons-Regular'),;
     /*url(MaterialIcons-Regular.woff2) format('woff2'),
        url(MaterialIcons-Regular.woff) format('woff'),*/
 }
@@ -280,18 +280,23 @@ section {
 }
 
 .tabela-cabecalho-campos {
-    width: 50%;
+    width: 70%;
     padding-top: 50px;
 }
 
 .tabela-cabecalho-input {
-    float: right; 
-    padding: 0; 
+    float: right;
+    padding: 0;
     margin: 0;
 }
 
 .tabela-cabecalho-titulo {
-    width: 50%;
+    width: 30%;
+}
+
+.tabela-container {
+    margin: 0;
+    width: 98%;
 }
 
 .titulo {
