@@ -12,9 +12,8 @@ using hidrocontroll.Models;
 
 namespace hidrocontroll.Controllers
 {
-    public class AdministradorController : ApiController
+    public class AdministradorController : BaseController
     {
-        private hidrocontrollEntities db = new hidrocontrollEntities();
 
         // GET api/Administrador
         public IQueryable<CAD_ADMINISTRADOR> GetCAD_ADMINISTRADOR()
@@ -36,14 +35,14 @@ namespace hidrocontroll.Controllers
         }
 
         // PUT api/Administrador/5
-        public IHttpActionResult PutCAD_ADMINISTRADOR(int id, CAD_ADMINISTRADOR cad_administrador)
+        public IHttpActionResult PutCAD_ADMINISTRADOR(string id, CAD_ADMINISTRADOR cad_administrador)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cad_administrador.ID_ADMINISTRADOR)
+            if (id != cad_administrador.USUARIO)
             {
                 return BadRequest();
             }
@@ -86,7 +85,7 @@ namespace hidrocontroll.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CAD_ADMINISTRADORExists(cad_administrador.ID_ADMINISTRADOR))
+                if (CAD_ADMINISTRADORExists(cad_administrador.USUARIO))
                 {
                     return Conflict();
                 }
@@ -96,7 +95,7 @@ namespace hidrocontroll.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cad_administrador.ID_ADMINISTRADOR }, cad_administrador);
+            return CreatedAtRoute("DefaultApi", new { id = cad_administrador.USUARIO }, cad_administrador);
         }
 
         // DELETE api/Administrador/5
@@ -124,9 +123,9 @@ namespace hidrocontroll.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CAD_ADMINISTRADORExists(int id)
+        private bool CAD_ADMINISTRADORExists(string id)
         {
-            return db.CAD_ADMINISTRADOR.Count(e => e.ID_ADMINISTRADOR == id) > 0;
+            return db.CAD_ADMINISTRADOR.Count(e => e.USUARIO == id) > 0;
         }
     }
 }

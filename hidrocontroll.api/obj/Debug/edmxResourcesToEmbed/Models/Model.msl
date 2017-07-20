@@ -4,24 +4,305 @@
     <EntitySetMapping Name="CAD_ADMINISTRADOR">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_ADMINISTRADOR">
         <MappingFragment StoreEntitySet="CAD_ADMINISTRADOR">
-          <ScalarProperty Name="ATIVO" ColumnName="ATIVO" />
-          <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+          <ScalarProperty Name="CFG_ATIVO_ADMINISTRADOR" ColumnName="CFG_ATIVO_ADMINISTRADOR" />
+          <ScalarProperty Name="CFG_SENHA_ADMINISTRADOR" ColumnName="CFG_SENHA_ADMINISTRADOR" />
+          <ScalarProperty Name="CFG_EMAIL_ADMINISTRADOR" ColumnName="CFG_EMAIL_ADMINISTRADOR" />
+          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
           <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
-          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-          <ScalarProperty Name="NOME" ColumnName="NOME" />
-          <ScalarProperty Name="ID_ADMINISTRADOR" ColumnName="ID_ADMINISTRADOR" />
+          <ScalarProperty Name="IDC_CAD_ADMINISTRADOR" ColumnName="IDC_CAD_ADMINISTRADOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_CIDADE">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CIDADE">
+        <MappingFragment StoreEntitySet="CAD_CIDADE">
+          <ScalarProperty Name="CAD_ESTADO_IDC_CAD_ESTADO" ColumnName="CAD_ESTADO_IDC_CAD_ESTADO" />
+          <ScalarProperty Name="NOM_CIDADE" ColumnName="NOM_CIDADE" />
+          <ScalarProperty Name="IDC_CAD_CIDADE" ColumnName="IDC_CAD_CIDADE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_CLIENTE">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIENTE">
+        <MappingFragment StoreEntitySet="CAD_CLIENTE">
+          <ScalarProperty Name="CNF_ATIVO_CLIENTE" ColumnName="CNF_ATIVO_CLIENTE" />
+          <ScalarProperty Name="CNF_SENHA_CLIENTE" ColumnName="CNF_SENHA_CLIENTE" />
+          <ScalarProperty Name="CNF_EMAIL_CLIENTE" ColumnName="CNF_EMAIL_CLIENTE" />
+          <ScalarProperty Name="NOM_CLIENTE" ColumnName="NOM_CLIENTE" />
+          <ScalarProperty Name="CNF_USUARIO_CLIENTE" ColumnName="CNF_USUARIO_CLIENTE" />
+          <ScalarProperty Name="IDC_CAD_CLIENTE" ColumnName="IDC_CAD_CLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_CLIMA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
+        <MappingFragment StoreEntitySet="CAD_CLIMA">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
+          <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
+          <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
+          <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
+          <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
+          <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
+          <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
+          <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
+          <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_CULTURA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CULTURA">
+        <MappingFragment StoreEntitySet="CAD_CULTURA">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="NOM_CULTURA" ColumnName="NOM_CULTURA" />
+          <ScalarProperty Name="IDC_CAD_CULTURA" ColumnName="IDC_CAD_CULTURA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_ESTADO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_ESTADO">
+        <MappingFragment StoreEntitySet="CAD_ESTADO">
+          <ScalarProperty Name="NOM_ESTADO" ColumnName="NOM_ESTADO" />
+          <ScalarProperty Name="SIG_ESTADO" ColumnName="SIG_ESTADO" />
+          <ScalarProperty Name="IDC_CAD_ESTADO" ColumnName="IDC_CAD_ESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_FASE_OUTORGA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_FASE_OUTORGA">
+        <MappingFragment StoreEntitySet="CAD_FASE_OUTORGA">
+          <ScalarProperty Name="CAD_OUTORGA_IDC_CAD_OUTORGA" ColumnName="CAD_OUTORGA_IDC_CAD_OUTORGA" />
+          <ScalarProperty Name="LIM_FASE_OUTORGA" ColumnName="LIM_FASE_OUTORGA" />
+          <ScalarProperty Name="DAT_FIM" ColumnName="DAT_FIM" />
+          <ScalarProperty Name="NOM_FASE_OUTORGA" ColumnName="NOM_FASE_OUTORGA" />
+          <ScalarProperty Name="DAT_INICIO" ColumnName="DAT_INICIO" />
+          <ScalarProperty Name="IDC_CAD_FASE_OUTORGA" ColumnName="IDC_CAD_FASE_OUTORGA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_FAZENDA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_FAZENDA">
+        <MappingFragment StoreEntitySet="CAD_FAZENDA">
+          <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+          <ScalarProperty Name="CAD_CIDADE_IDC_CAD_CIDADE" ColumnName="CAD_CIDADE_IDC_CAD_CIDADE" />
+          <ScalarProperty Name="VAR_ALTITUDE" ColumnName="VAR_ALTITUDE" />
+          <ScalarProperty Name="ARE_FAZENDA" ColumnName="ARE_FAZENDA" />
+          <ScalarProperty Name="NOM_FAZENDA" ColumnName="NOM_FAZENDA" />
+          <ScalarProperty Name="IDC_CAD_FAZENDA" ColumnName="IDC_CAD_FAZENDA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_GOTEJADOR">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_GOTEJADOR">
+        <MappingFragment StoreEntitySet="CAD_GOTEJADOR">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="VAR_LAMINA" ColumnName="VAR_LAMINA" />
+          <ScalarProperty Name="VAR_UNIFORMIDADE" ColumnName="VAR_UNIFORMIDADE" />
+          <ScalarProperty Name="LAR_FAIXA_MOLHADA" ColumnName="LAR_FAIXA_MOLHADA" />
+          <ScalarProperty Name="VAR_ESPACAMENTO_LINHAS_LATERAIS" ColumnName="VAR_ESPACAMENTO_LINHAS_LATERAIS" />
+          <ScalarProperty Name="VAR_ESPACAMENTO_GOTEJADORES" ColumnName="VAR_ESPACAMENTO_GOTEJADORES" />
+          <ScalarProperty Name="VAZ_GOTEJADOR" ColumnName="VAZ_GOTEJADOR" />
+          <ScalarProperty Name="NOM_GOTEJADOR" ColumnName="NOM_GOTEJADOR" />
+          <ScalarProperty Name="IDC_CAD_GOTEJADOR" ColumnName="IDC_CAD_GOTEJADOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_IRRIGACAO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_IRRIGACAO">
+        <MappingFragment StoreEntitySet="CAD_IRRIGACAO">
+          <ScalarProperty Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
+          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VAR_FERTIRRIGACAO" ColumnName="VAR_FERTIRRIGACAO" />
+          <ScalarProperty Name="VAR_VALOR_ENERGETICO" ColumnName="VAR_VALOR_ENERGETICO" />
+          <ScalarProperty Name="VOL_CONSUMIDO" ColumnName="VOL_CONSUMIDO" />
+          <ScalarProperty Name="VOL_IRRIGACAO" ColumnName="VOL_IRRIGACAO" />
+          <ScalarProperty Name="TMO_IRRIGACAO" ColumnName="TMO_IRRIGACAO" />
+          <ScalarProperty Name="VOL_IRRIGACAO_GOTEJO" ColumnName="VOL_IRRIGACAO_GOTEJO" />
+          <ScalarProperty Name="VOL_IRRIGACAO_PIVO" ColumnName="VOL_IRRIGACAO_PIVO" />
+          <ScalarProperty Name="DAT_IRRIGACAO" ColumnName="DAT_IRRIGACAO" />
+          <ScalarProperty Name="IDC_CAD_IRRIGACAO" ColumnName="IDC_CAD_IRRIGACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_MODELO_PIVO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MODELO_PIVO">
+        <MappingFragment StoreEntitySet="CAD_MODELO_PIVO">
+          <ScalarProperty Name="NOM_MODELO_PIVO" ColumnName="NOM_MODELO_PIVO" />
+          <ScalarProperty Name="IDC_CAD_MODELO_PIVO" ColumnName="IDC_CAD_MODELO_PIVO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_MOTOBOMBA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA">
+        <MappingFragment StoreEntitySet="CAD_MOTOBOMBA">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="VAR_TARIFAS" ColumnName="VAR_TARIFAS" />
+          <ScalarProperty Name="VAZ_MOTOBOMBA" ColumnName="VAZ_MOTOBOMBA" />
+          <ScalarProperty Name="VAR_CONSUMO" ColumnName="VAR_CONSUMO" />
+          <ScalarProperty Name="VAR_POTENCIA" ColumnName="VAR_POTENCIA" />
+          <ScalarProperty Name="NOM_MOTOBOMBA" ColumnName="NOM_MOTOBOMBA" />
+          <ScalarProperty Name="IDC_CAD_MOTOBOMBA" ColumnName="IDC_CAD_MOTOBOMBA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_MOTOBOMBA_TARIFA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA">
+        <MappingFragment StoreEntitySet="CAD_MOTOBOMBA_TARIFA">
+          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+          <ScalarProperty Name="VAL_TARIFA" ColumnName="VAL_TARIFA" />
+          <ScalarProperty Name="HOR_FIM_TARIFA" ColumnName="HOR_FIM_TARIFA" />
+          <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
+          <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
+          <ScalarProperty Name="IDC_CAD_MOTOBOMBA_TARIFA" ColumnName="IDC_CAD_MOTOBOMBA_TARIFA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_OUTORGA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_OUTORGA">
+        <MappingFragment StoreEntitySet="CAD_OUTORGA">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="NOM_OUTORGA" ColumnName="NOM_OUTORGA" />
+          <ScalarProperty Name="IDC_CAD_OUTORGA" ColumnName="IDC_CAD_OUTORGA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_PIVO_CENTRAL">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PIVO_CENTRAL">
+        <MappingFragment StoreEntitySet="CAD_PIVO_CENTRAL">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" ColumnName="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" />
+          <ScalarProperty Name="VAR_LAMINA" ColumnName="VAR_LAMINA" />
+          <ScalarProperty Name="VAR_EFICIENCIA" ColumnName="VAR_EFICIENCIA" />
+          <ScalarProperty Name="VAZ_PIVO" ColumnName="VAZ_PIVO" />
+          <ScalarProperty Name="VAR_VAO_BALANCO" ColumnName="VAR_VAO_BALANCO" />
+          <ScalarProperty Name="DIS_RAIO_TOTAL" ColumnName="DIS_RAIO_TOTAL" />
+          <ScalarProperty Name="TEMP_DIARIO_MAX" ColumnName="TEMP_DIARIO_MAX" />
+          <ScalarProperty Name="VEL_100_PIVO" ColumnName="VEL_100_PIVO" />
+          <ScalarProperty Name="IDC_CAD_PIVO_CENTRAL" ColumnName="IDC_CAD_PIVO_CENTRAL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_PRECIPITACAO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PRECIPITACAO">
+        <MappingFragment StoreEntitySet="CAD_PRECIPITACAO">
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VAR_PRECIPITACAO" ColumnName="VAR_PRECIPITACAO" />
+          <ScalarProperty Name="DAT_PRECIPITACAO" ColumnName="DAT_PRECIPITACAO" />
+          <ScalarProperty Name="IDC_CAD_PRECIPITACAO" ColumnName="IDC_CAD_PRECIPITACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_RESERVATORIO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_RESERVATORIO">
+        <MappingFragment StoreEntitySet="CAD_RESERVATORIO">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="VAR_VALOR" ColumnName="VAR_VALOR" />
+          <ScalarProperty Name="VOL_ATUAL" ColumnName="VOL_ATUAL" />
+          <ScalarProperty Name="NOM_RESERVATORIO" ColumnName="NOM_RESERVATORIO" />
+          <ScalarProperty Name="IDC_CAD_RESERVATORIO" ColumnName="IDC_CAD_RESERVATORIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_RESERVATORIO_DIARIO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_RESERVATORIO_DIARIO">
+        <MappingFragment StoreEntitySet="CAD_RESERVATORIO_DIARIO">
+          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+          <ScalarProperty Name="CAD_RESERVATORIO_IDC_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_RESERVATORIO" />
+          <ScalarProperty Name="VAR_CONSUMO" ColumnName="VAR_CONSUMO" />
+          <ScalarProperty Name="VOL_RESERVATORIO_DIARIO" ColumnName="VOL_RESERVATORIO_DIARIO" />
+          <ScalarProperty Name="TMO_TERMINO" ColumnName="TMO_TERMINO" />
+          <ScalarProperty Name="TMO_INICIO" ColumnName="TMO_INICIO" />
+          <ScalarProperty Name="DAT_RESERVATORIO_DIARIO" ColumnName="DAT_RESERVATORIO_DIARIO" />
+          <ScalarProperty Name="IDC_CAD_RESERVATORIO_DIARIO" ColumnName="IDC_CAD_RESERVATORIO_DIARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_UMIDADE">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_UMIDADE">
+        <MappingFragment StoreEntitySet="CAD_UMIDADE">
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VOL_CM60" ColumnName="VOL_CM60" />
+          <ScalarProperty Name="VOL_CM50" ColumnName="VOL_CM50" />
+          <ScalarProperty Name="VOL_CM40" ColumnName="VOL_CM40" />
+          <ScalarProperty Name="VOL_CM30" ColumnName="VOL_CM30" />
+          <ScalarProperty Name="VOL_CM20" ColumnName="VOL_CM20" />
+          <ScalarProperty Name="VOL_CM10" ColumnName="VOL_CM10" />
+          <ScalarProperty Name="DAT_UMIDADE" ColumnName="DAT_UMIDADE" />
+          <ScalarProperty Name="IDC_CAD_UMIDADE" ColumnName="IDC_CAD_UMIDADE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CAD_USUARIO">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
         <MappingFragment StoreEntitySet="CAD_USUARIO">
-          <ScalarProperty Name="DTH_ALTERACAO" ColumnName="DTH_ALTERACAO" />
-          <ScalarProperty Name="DTH_CRIACAO" ColumnName="DTH_CRIACAO" />
-          <ScalarProperty Name="SENHA_USUARIO" ColumnName="SENHA_USUARIO" />
-          <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+          <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
+          <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+          <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
+          <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
           <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
-          <ScalarProperty Name="IDC_USUARIO" ColumnName="IDC_USUARIO" />
+          <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+          <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REG_MANEJO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.REG_MANEJO">
+        <MappingFragment StoreEntitySet="REG_MANEJO">
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VAREXTRESSE_ULTRAPASSADO" ColumnName="VAREXTRESSE_ULTRAPASSADO" />
+          <ScalarProperty Name="QTD_IRRIGADA" ColumnName="QTD_IRRIGADA" />
+          <ScalarProperty Name="TMP_IRRIGADO_PIVO" ColumnName="TMP_IRRIGADO_PIVO" />
+          <ScalarProperty Name="TMO_IRRIGADO_GOTEJO" ColumnName="TMO_IRRIGADO_GOTEJO" />
+          <ScalarProperty Name="VAR_PRECIPITACAO" ColumnName="VAR_PRECIPITACAO" />
+          <ScalarProperty Name="VAR_KL" ColumnName="VAR_KL" />
+          <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
+          <ScalarProperty Name="VAR_ETO" ColumnName="VAR_ETO" />
+          <ScalarProperty Name="VAR_BALANCO" ColumnName="VAR_BALANCO" />
+          <ScalarProperty Name="VAR_KS" ColumnName="VAR_KS" />
+          <ScalarProperty Name="TMO_MANEJO" ColumnName="TMO_MANEJO" />
+          <ScalarProperty Name="VOL_CONSUMO_DIARIO" ColumnName="VOL_CONSUMO_DIARIO" />
+          <ScalarProperty Name="PER_PERCENTIMETRO" ColumnName="PER_PERCENTIMETRO" />
+          <ScalarProperty Name="VOL_IRRIGACAO_REALIZADA" ColumnName="VOL_IRRIGACAO_REALIZADA" />
+          <ScalarProperty Name="VOL_IRRIGACAO_NECESSARIA" ColumnName="VOL_IRRIGACAO_NECESSARIA" />
+          <ScalarProperty Name="VAR_IDADE_PARCELA" ColumnName="VAR_IDADE_PARCELA" />
+          <ScalarProperty Name="DAT_MANEJO" ColumnName="DAT_MANEJO" />
+          <ScalarProperty Name="IDC_CAD_MANEJO" ColumnName="IDC_CAD_MANEJO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_PARCELA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PARCELA">
+        <MappingFragment StoreEntitySet="CAD_PARCELA">
+          <ScalarProperty Name="DAT_PLANTIO" ColumnName="DAT_PLANTIO" />
+          <ScalarProperty Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" ColumnName="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" />
+          <ScalarProperty Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" ColumnName="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" />
+          <ScalarProperty Name="CAD_CULTURA_IDC_CAD_CULTURA" ColumnName="CAD_CULTURA_IDC_CAD_CULTURA" />
+          <ScalarProperty Name="CAD_OUTORGA_IDC_CAD_OUTORGA" ColumnName="CAD_OUTORGA_IDC_CAD_OUTORGA" />
+          <ScalarProperty Name="VAR_ESTRESSE_EXCEDIDO" ColumnName="VAR_ESTRESSE_EXCEDIDO" />
+          <ScalarProperty Name="VAR_UMIDADE_SOLO_PLANTIO" ColumnName="VAR_UMIDADE_SOLO_PLANTIO" />
+          <ScalarProperty Name="VAR_PLUVIOMETRO" ColumnName="VAR_PLUVIOMETRO" />
+          <ScalarProperty Name="ARE_PARCELA" ColumnName="ARE_PARCELA" />
+          <ScalarProperty Name="NOM_PARCELA" ColumnName="NOM_PARCELA" />
+          <ScalarProperty Name="IDC_CAD_PARCELA" ColumnName="IDC_CAD_PARCELA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_FASE_CULTURA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_FASE_CULTURA">
+        <MappingFragment StoreEntitySet="CAD_FASE_CULTURA">
+          <ScalarProperty Name="NUM_FIM" ColumnName="NUM_FIM" />
+          <ScalarProperty Name="NUM_INICIO" ColumnName="NUM_INICIO" />
+          <ScalarProperty Name="CAD_CULTURA_IDC_CAD_CULTURA" ColumnName="CAD_CULTURA_IDC_CAD_CULTURA" />
+          <ScalarProperty Name="DEN_APARENTE" ColumnName="DEN_APARENTE" />
+          <ScalarProperty Name="LIM_FASE_CULTURA" ColumnName="LIM_FASE_CULTURA" />
+          <ScalarProperty Name="ARE_SOMBREADA" ColumnName="ARE_SOMBREADA" />
+          <ScalarProperty Name="VAR_CAPACIDADE_CAMPO" ColumnName="VAR_CAPACIDADE_CAMPO" />
+          <ScalarProperty Name="VAR_PONTO_MURCHA" ColumnName="VAR_PONTO_MURCHA" />
+          <ScalarProperty Name="PRF_RAIZ" ColumnName="PRF_RAIZ" />
+          <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
+          <ScalarProperty Name="NOM_FASE_CULTURA" ColumnName="NOM_FASE_CULTURA" />
+          <ScalarProperty Name="IDC_CAD_FASE_CULTURA" ColumnName="IDC_CAD_FASE_CULTURA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

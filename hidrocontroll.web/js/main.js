@@ -47,6 +47,8 @@
                 state: "login"
             })
 
+           
+
             //### Dados diários ###
             .state('main.dadosDiarios', {
                 menu: "Dados Diários",
@@ -57,6 +59,8 @@
                     { "nome": "Reservatório", "icon": "glyphicon glyphicon-th-large" }],
                 iconClass: "glyphicon glyphicon-signal"
             })
+
+            
 
             .state('main.ClimaDadosDiários', {
                 url: "/dadosClima",
@@ -144,7 +148,8 @@
             .state('main.parcelas', {
                 menu: "Parcelas",
                 subMenu: [{ "nome": "Cultura", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Parcelas", "icon": "glyphicon glyphicon-tree-conifer" }],
+                    { "nome": "Parcelas", "icon": "glyphicon glyphicon-tree-conifer" },
+                    { "nome": "Fazendas", "icon": "glyphicon glyphicon-tree-conifer" }],
                 iconClass: "glyphicon glyphicon-leaf"
             })
 
@@ -161,6 +166,13 @@
                 controller: "ParcelasParcelasController",
                 controllerAs: "parcelasPrc"
             })
+
+             .state('main.FazendasParcelas', {
+                 url: "/fazendas",
+                 templateUrl: "pages/fazendas/fazenda.html",
+                 controller: "FazendaParcelasController",
+                 controllerAs: "fazenda",
+             })
 
             //### Relatórios ###
             .state('main.relatorios', {

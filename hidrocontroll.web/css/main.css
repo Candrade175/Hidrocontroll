@@ -35,6 +35,9 @@
 }
 
 /* Basic style for the html and body elements*/
+
+
+
 html, body {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -309,4 +312,21 @@ section {
 
 #tool-bar {
     background-color: #006622;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    border-color: #006622;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+    color:  #006622;
+}
+
+a.md-button.md-default-theme.md-primary, a.md-button.md-primary, .md-button.md-default-theme.md-primary, .md-button.md-primary {
+    color: #006622;
+}
+
+#th_editar_excluir{
+    text-align: center;
+    width:60px;
 }

@@ -20,7 +20,7 @@ namespace hidrocontroll.Controllers
         {
             try
             {
-                CAD_USUARIO user = db.CAD_USUARIO.Where(u => u.NUM_MATRICULA == login.NUM_MATRICULA && u.SENHA_USUARIO == login.SENHA_USUARIO).First();
+                CAD_USUARIO user = db.CAD_USUARIO.Where(u => u.NUM_MATRICULA == login.NUM_MATRICULA && u.CNF_SENHA == login.SENHA_USUARIO).First();
 
                 return user;
             }

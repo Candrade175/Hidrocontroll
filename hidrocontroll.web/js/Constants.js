@@ -14,7 +14,7 @@
 
         protocol: "http",
         mainUrl: "hidrocontroll.api/api",
-        id: "{{'IDC_'+config.name.toUpperCase()}}"
+        id: "{{'IDC_CAD_'+config.name.toUpperCase()}}"
     });
 
 

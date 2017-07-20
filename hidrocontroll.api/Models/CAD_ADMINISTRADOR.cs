@@ -14,11 +14,11 @@ namespace hidrocontroll.Models
     
     public partial class CAD_ADMINISTRADOR
     {
-        public int ID_ADMINISTRADOR { get; set; }
-        public string NOME { get; set; }
-        public string EMAIL { get; set; }
+        public int IDC_CAD_ADMINISTRADOR { get; set; }
         public string USUARIO { get; set; }
-        public string SENHA { get; set; }
-        public Nullable<bool> ATIVO { get; set; }
+        public string NOM_USUARIO { get; set; }
+        public string CFG_EMAIL_ADMINISTRADOR { get; set; }
+        public string CFG_SENHA_ADMINISTRADOR { get; set; }
+        public Nullable<byte> CFG_ATIVO_ADMINISTRADOR { get; set; }
     }
 }

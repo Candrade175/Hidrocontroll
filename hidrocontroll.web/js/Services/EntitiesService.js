@@ -3,7 +3,11 @@
 
     function entitiesService(Model) {
         Model([
-            { name: 'administrador' }
+            { name: 'administrador' },
+            { name: 'fazenda' },
+            { name: 'cidade' },
+            { name: 'estado' },
+            { name: 'cultura'}
         ]);
 
         return Model;

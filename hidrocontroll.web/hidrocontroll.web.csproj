@@ -114,6 +114,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
+    <Folder Include="js\Controllers\fazendas\" />
     <Folder Include="Properties\" />
     <Folder Include="svg\" />
     <Folder Include="xml\" />
@@ -140,6 +141,7 @@
     <Content Include="js\Controllers\equipamentos\OutorgaController.js" />
     <Content Include="js\Controllers\equipamentos\PivoCentralController.js" />
     <Content Include="js\Controllers\equipamentos\ReservatorioController.js" />
+    <Content Include="js\Controllers\parcelas\FazendaController.js" />
     <Content Include="js\Controllers\LoginController.js" />
     <Content Include="js\Controllers\parcelas\CulturaController.js" />
     <Content Include="js\Controllers\parcelas\ParcelasController.js" />
@@ -192,8 +194,11 @@
     <Content Include="pages\equipamentos\outorga.html" />
     <Content Include="pages\equipamentos\pivoCentral.html" />
     <Content Include="pages\equipamentos\reservatorio.html" />
+    <Content Include="pages\fazendas\criar_fazenda.html" />
+    <Content Include="pages\fazendas\fazenda.html" />
     <Content Include="pages\login.html" />
     <Content Include="pages\main.html" />
+    <Content Include="pages\parcelas\criar_cultura.html" />
     <Content Include="pages\parcelas\cultura.html" />
     <Content Include="pages\parcelas\parcelas.html" />
     <Content Include="pages\relatorios\clima.html" />

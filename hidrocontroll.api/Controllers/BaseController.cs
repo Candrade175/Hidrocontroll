@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace hidrocontroll.api.Controllers
+namespace hidrocontroll.Controllers
 {
     public class BaseController : ApiController
     {

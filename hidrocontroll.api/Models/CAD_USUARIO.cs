@@ -14,11 +14,14 @@ namespace hidrocontroll.Models
     
     public partial class CAD_USUARIO
     {
-        public decimal IDC_USUARIO { get; set; }
-        public string NOM_USUARIO { get; set; }
+        public int IDC_CAD_USUARIO { get; set; }
         public string NUM_MATRICULA { get; set; }
-        public string SENHA_USUARIO { get; set; }
-        public System.DateTime DTH_CRIACAO { get; set; }
-        public System.DateTime DTH_ALTERACAO { get; set; }
+        public string NOM_USUARIO { get; set; }
+        public string CNF_SENHA { get; set; }
+        public Nullable<System.DateTime> DAT_CRIACAO { get; set; }
+        public int CAD_CLIENTE_IDC_CAD_CLIENTE { get; set; }
+        public Nullable<System.DateTime> DAT_ALTERACAO { get; set; }
+    
+        public virtual CAD_CLIENTE CAD_CLIENTE { get; set; }
     }
 }

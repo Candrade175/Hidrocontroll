@@ -29,3 +29,4 @@ C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.web\b
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.web\bin\Antlr3.Runtime.pdb
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.web\obj\Debug\hidrocontroll.web.dll
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.web\obj\Debug\hidrocontroll.web.pdb
+C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.web\obj\Debug\hidrocontroll.web.csprojResolveAssemblyReference.cache

@@ -6,6 +6,7 @@ using System.Web.Http.Filters;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity;
 
 namespace hidrocontroll.api
 {
@@ -27,7 +28,6 @@ namespace hidrocontroll.api
 
             GlobalConfiguration.Configuration.Filters.Add(new AddCustomHeaderFilter());
             GlobalConfiguration.Configuration.Filters.Add(new CustomExceptionFilterAttribute());
-            GlobalConfiguration.Configuration.EnsureInitialized();
         }
     }
 
