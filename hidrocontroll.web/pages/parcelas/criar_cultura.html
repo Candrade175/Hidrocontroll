@@ -1,0 +1,44 @@
+﻿<md-dialog aria-label="Criar Cultura" ng-cloak>
+    <form name="culturaForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Criar Cultura</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <md-input-container class="width-100">
+                    <label>Nome</label>
+                    <input name="Nome" ng-model="selected.NOM_CULTURA" required ng-maxlength="20" ng-minlength="4">
+                    <!-- Error messages for the input -->
+                    <div ng-messages="culturaForm.Nome.$error" >
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="minlength">Campo muito pequeno.</div>
+                        <div ng-message="maxlength">Campo muito grande.</div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="md-block">
+                    <label>Fazenda</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.FAZENDA" md-items="fazenda in getMatchesFazenda(searchTextFazenda)" md-search-text="searchTextFazenda" md-item-text="fazenda.NOME" md-selected-item-change="onchangeSelectedFazenda(selected.FAZENDA)" md-min-length="0" ng-minlength="1">
+                        <span md-highlight-text="searchTextFazenda">{{fazenda.NOME}}</span>
+                    </md-autocomplete>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="culturaForm.$valid && salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

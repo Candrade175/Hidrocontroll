@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eca99b440afd4a8ebfc60ad94eca01c7" Name="Diagram1" ZoomLevel="47">
+      <Diagram DiagramId="eca99b440afd4a8ebfc60ad94eca01c7" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_ADMINISTRADOR" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_CIDADE" Width="1.5" PointX="1.875" PointY="9.75" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_CLIENTE" Width="1.5" PointX="1.875" PointY="12.5" />
@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_FASE_OUTORGA" Width="1.5" PointX="8.625" PointY="21.125" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_FAZENDA" Width="1.5" PointX="4.125" PointY="12" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_GOTEJADOR" Width="1.5" PointX="6.375" PointY="24" />
-        <EntityTypeShape EntityType="hidrocontrollModel.CAD_IRRIGACAO" Width="1.5" PointX="13.875" PointY="10.5" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_MODELO_PIVO" Width="1.5" PointX="7.125" PointY="1" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_MOTOBOMBA" Width="1.5" PointX="6.375" PointY="10.75" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA" Width="1.5" PointX="8.625" PointY="14.5" />
@@ -25,7 +24,6 @@
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_RESERVATORIO_DIARIO" Width="1.5" PointX="8.625" PointY="6.5" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_UMIDADE" Width="1.5" PointX="13.875" PointY="17.5" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_USUARIO" Width="1.5" PointX="4.125" PointY="32.75" />
-        <EntityTypeShape EntityType="hidrocontrollModel.REG_MANEJO" Width="1.5" PointX="13.875" PointY="20.875" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_CIDADE_CAD_ESTADO1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CIDADE1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" />
@@ -38,8 +36,6 @@
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_OUTORGA_CAD_FAZENDA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_RESERVATORIO_CAD_FAZENDA1" />
-        <AssociationConnector Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" />
-        <AssociationConnector Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_RESERVATORIO1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" />
@@ -47,14 +43,18 @@
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_PARCELA" Width="1.5" PointX="11.625" PointY="16.375" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_CULTURA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_GOTEJADOR1" />
-        <AssociationConnector Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_OUTORGA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_PIVO_CENTRAL1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_PRECIPITACAO_CAD_PARCELA1" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_UMIDADE_CAD_PARCELA1" />
-        <AssociationConnector Association="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1" />
         <EntityTypeShape EntityType="hidrocontrollModel.CAD_FASE_CULTURA" Width="1.5" PointX="11.125" PointY="26.625" />
         <AssociationConnector Association="hidrocontrollModel.fk_CAD_FASE_CULTURA_CAD_CULTURA1" />
+        <EntityTypeShape EntityType="hidrocontrollModel.CAD_IRRIGACAO" Width="1.5" PointX="13.875" PointY="10.375" />
+        <EntityTypeShape EntityType="hidrocontrollModel.REG_MANEJO" Width="1.5" PointX="13.875" PointY="28.5" />
+        <AssociationConnector Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" />
+        <AssociationConnector Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1" />
+        <AssociationConnector Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_RESERVATORIO1" />
+        <AssociationConnector Association="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
