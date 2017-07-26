@@ -774,7 +774,6 @@
           <EntitySet Name="CAD_ADMINISTRADOR" EntityType="hidrocontrollModel.CAD_ADMINISTRADOR" />
           <EntitySet Name="CAD_CIDADE" EntityType="hidrocontrollModel.CAD_CIDADE" />
           <EntitySet Name="CAD_CLIENTE" EntityType="hidrocontrollModel.CAD_CLIENTE" />
-          <EntitySet Name="CAD_CLIMA" EntityType="hidrocontrollModel.CAD_CLIMA" />
           <EntitySet Name="CAD_CULTURA" EntityType="hidrocontrollModel.CAD_CULTURA" />
           <EntitySet Name="CAD_ESTADO" EntityType="hidrocontrollModel.CAD_ESTADO" />
           <EntitySet Name="CAD_FASE_OUTORGA" EntityType="hidrocontrollModel.CAD_FASE_OUTORGA" />
@@ -805,10 +804,6 @@
           <AssociationSet Name="fk_CAD_USUARIO_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1">
             <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
             <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_CLIMA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1">
-            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-            <End Role="CAD_CLIMA" EntitySet="CAD_CLIMA" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_CULTURA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
@@ -902,6 +897,11 @@
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
             <End Role="REG_MANEJO" EntitySet="REG_MANEJO" />
           </AssociationSet>
+          <EntitySet Name="CAD_CLIMA" EntityType="hidrocontrollModel.CAD_CLIMA" />
+          <AssociationSet Name="fk_CAD_CLIMA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_CLIMA" EntitySet="CAD_CLIMA" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CAD_ADMINISTRADOR">
           <Key>
@@ -936,22 +936,6 @@
           <Property Name="CNF_ATIVO_CLIENTE" Type="Byte" />
           <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_CLIENTE" ToRole="CAD_FAZENDA" />
           <NavigationProperty Name="CAD_USUARIO" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_CLIENTE" ToRole="CAD_USUARIO" />
-        </EntityType>
-        <EntityType Name="CAD_CLIMA">
-          <Key>
-            <PropertyRef Name="IDC_CAD_CLIMA" />
-          </Key>
-          <Property Name="IDC_CAD_CLIMA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DAT_CLIMA" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TMP_CLIMA_MAX" Type="Double" />
-          <Property Name="TMP_CLIMA_MIN" Type="Double" />
-          <Property Name="TMP_CLIMA_MEDIA" Type="Double" />
-          <Property Name="VAR_UMIDADE_RELATIVA" Type="Double" />
-          <Property Name="VEL_VENTO" Type="Double" />
-          <Property Name="VAR_PRECIPITACAO_TOTAL" Type="Double" />
-          <Property Name="VAR_RADIACAO" Type="Double" />
-          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1" FromRole="CAD_CLIMA" ToRole="CAD_FAZENDA" />
         </EntityType>
         <EntityType Name="CAD_CULTURA">
           <Key>
@@ -997,13 +981,13 @@
           <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAD_CIDADE" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CIDADE1" FromRole="CAD_FAZENDA" ToRole="CAD_CIDADE" />
           <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIENTE" />
-          <NavigationProperty Name="CAD_CLIMA" Relationship="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIMA" />
           <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CULTURA" />
           <NavigationProperty Name="CAD_GOTEJADOR" Relationship="hidrocontrollModel.fk_CAD_GOTEJADOR_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_GOTEJADOR" />
           <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_MOTOBOMBA" />
           <NavigationProperty Name="CAD_OUTORGA" Relationship="hidrocontrollModel.fk_CAD_OUTORGA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_OUTORGA" />
           <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_PIVO_CENTRAL" />
           <NavigationProperty Name="CAD_RESERVATORIO" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_RESERVATORIO" />
+          <NavigationProperty Name="CAD_CLIMA" Relationship="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIMA" />
         </EntityType>
         <EntityType Name="CAD_GOTEJADOR">
           <Key>
@@ -1197,20 +1181,6 @@
             </Principal>
             <Dependent Role="CAD_USUARIO">
               <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_CLIMA_CAD_FAZENDA1">
-          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="hidrocontrollModel.CAD_CLIMA" Role="CAD_CLIMA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_FAZENDA">
-              <PropertyRef Name="IDC_CAD_FAZENDA" />
-            </Principal>
-            <Dependent Role="CAD_CLIMA">
-              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1585,6 +1555,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CAD_CLIMA">
+          <Key>
+            <PropertyRef Name="IDC_CAD_CLIMA" />
+          </Key>
+          <Property Name="IDC_CAD_CLIMA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DAT_CLIMA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TMP_CLIMA_MAX" Type="Double" />
+          <Property Name="TMP_CLIMA_MIN" Type="Double" />
+          <Property Name="TMP_CLIMA_MEDIA" Type="Double" />
+          <Property Name="VAR_UMIDADE_RELATIVA" Type="Double" />
+          <Property Name="VEL_VENTO" Type="Double" />
+          <Property Name="VAR_PRECIPITACAO_TOTAL" Type="Double" />
+          <Property Name="VAR_RADIACAO" Type="Double" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1" FromRole="CAD_CLIMA" ToRole="CAD_FAZENDA" />
+        </EntityType>
+        <Association Name="fk_CAD_CLIMA_CAD_FAZENDA1">
+          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hidrocontrollModel.CAD_CLIMA" Role="CAD_CLIMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_CLIMA">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1621,22 +1621,6 @@
                 <ScalarProperty Name="NOM_CLIENTE" ColumnName="NOM_CLIENTE" />
                 <ScalarProperty Name="CNF_USUARIO_CLIENTE" ColumnName="CNF_USUARIO_CLIENTE" />
                 <ScalarProperty Name="IDC_CAD_CLIENTE" ColumnName="IDC_CAD_CLIENTE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_CLIMA">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
-              <MappingFragment StoreEntitySet="CAD_CLIMA">
-                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-                <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
-                <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
-                <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
-                <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
-                <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
-                <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
-                <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
-                <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
-                <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1895,6 +1879,22 @@
                 <ScalarProperty Name="VAR_IDADE_PARCELA" ColumnName="VAR_IDADE_PARCELA" />
                 <ScalarProperty Name="DAT_MANEJO" ColumnName="DAT_MANEJO" />
                 <ScalarProperty Name="IDC_CAD_MANEJO" ColumnName="IDC_CAD_MANEJO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_CLIMA">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
+              <MappingFragment StoreEntitySet="CAD_CLIMA">
+                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+                <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
+                <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
+                <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
+                <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
+                <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
+                <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
+                <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
+                <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
+                <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

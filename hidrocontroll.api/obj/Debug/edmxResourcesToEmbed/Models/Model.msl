@@ -34,22 +34,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CAD_CLIMA">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
-        <MappingFragment StoreEntitySet="CAD_CLIMA">
-          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-          <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
-          <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
-          <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
-          <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
-          <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
-          <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
-          <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
-          <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
-          <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CAD_CULTURA">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CULTURA">
         <MappingFragment StoreEntitySet="CAD_CULTURA">
@@ -104,24 +88,6 @@
           <ScalarProperty Name="VAZ_GOTEJADOR" ColumnName="VAZ_GOTEJADOR" />
           <ScalarProperty Name="NOM_GOTEJADOR" ColumnName="NOM_GOTEJADOR" />
           <ScalarProperty Name="IDC_CAD_GOTEJADOR" ColumnName="IDC_CAD_GOTEJADOR" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CAD_IRRIGACAO">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_IRRIGACAO">
-        <MappingFragment StoreEntitySet="CAD_IRRIGACAO">
-          <ScalarProperty Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
-          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
-          <ScalarProperty Name="VAR_FERTIRRIGACAO" ColumnName="VAR_FERTIRRIGACAO" />
-          <ScalarProperty Name="VAR_VALOR_ENERGETICO" ColumnName="VAR_VALOR_ENERGETICO" />
-          <ScalarProperty Name="VOL_CONSUMIDO" ColumnName="VOL_CONSUMIDO" />
-          <ScalarProperty Name="VOL_IRRIGACAO" ColumnName="VOL_IRRIGACAO" />
-          <ScalarProperty Name="TMO_IRRIGACAO" ColumnName="TMO_IRRIGACAO" />
-          <ScalarProperty Name="VOL_IRRIGACAO_GOTEJO" ColumnName="VOL_IRRIGACAO_GOTEJO" />
-          <ScalarProperty Name="VOL_IRRIGACAO_PIVO" ColumnName="VOL_IRRIGACAO_PIVO" />
-          <ScalarProperty Name="DAT_IRRIGACAO" ColumnName="DAT_IRRIGACAO" />
-          <ScalarProperty Name="IDC_CAD_IRRIGACAO" ColumnName="IDC_CAD_IRRIGACAO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -246,31 +212,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="REG_MANEJO">
-      <EntityTypeMapping TypeName="hidrocontrollModel.REG_MANEJO">
-        <MappingFragment StoreEntitySet="REG_MANEJO">
-          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
-          <ScalarProperty Name="VAREXTRESSE_ULTRAPASSADO" ColumnName="VAREXTRESSE_ULTRAPASSADO" />
-          <ScalarProperty Name="QTD_IRRIGADA" ColumnName="QTD_IRRIGADA" />
-          <ScalarProperty Name="TMP_IRRIGADO_PIVO" ColumnName="TMP_IRRIGADO_PIVO" />
-          <ScalarProperty Name="TMO_IRRIGADO_GOTEJO" ColumnName="TMO_IRRIGADO_GOTEJO" />
-          <ScalarProperty Name="VAR_PRECIPITACAO" ColumnName="VAR_PRECIPITACAO" />
-          <ScalarProperty Name="VAR_KL" ColumnName="VAR_KL" />
-          <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
-          <ScalarProperty Name="VAR_ETO" ColumnName="VAR_ETO" />
-          <ScalarProperty Name="VAR_BALANCO" ColumnName="VAR_BALANCO" />
-          <ScalarProperty Name="VAR_KS" ColumnName="VAR_KS" />
-          <ScalarProperty Name="TMO_MANEJO" ColumnName="TMO_MANEJO" />
-          <ScalarProperty Name="VOL_CONSUMO_DIARIO" ColumnName="VOL_CONSUMO_DIARIO" />
-          <ScalarProperty Name="PER_PERCENTIMETRO" ColumnName="PER_PERCENTIMETRO" />
-          <ScalarProperty Name="VOL_IRRIGACAO_REALIZADA" ColumnName="VOL_IRRIGACAO_REALIZADA" />
-          <ScalarProperty Name="VOL_IRRIGACAO_NECESSARIA" ColumnName="VOL_IRRIGACAO_NECESSARIA" />
-          <ScalarProperty Name="VAR_IDADE_PARCELA" ColumnName="VAR_IDADE_PARCELA" />
-          <ScalarProperty Name="DAT_MANEJO" ColumnName="DAT_MANEJO" />
-          <ScalarProperty Name="IDC_CAD_MANEJO" ColumnName="IDC_CAD_MANEJO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CAD_PARCELA">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PARCELA">
         <MappingFragment StoreEntitySet="CAD_PARCELA">
@@ -303,6 +244,67 @@
           <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
           <ScalarProperty Name="NOM_FASE_CULTURA" ColumnName="NOM_FASE_CULTURA" />
           <ScalarProperty Name="IDC_CAD_FASE_CULTURA" ColumnName="IDC_CAD_FASE_CULTURA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_IRRIGACAO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_IRRIGACAO">
+        <MappingFragment StoreEntitySet="CAD_IRRIGACAO">
+          <ScalarProperty Name="TMO_IRRIGACAO_FIM" ColumnName="TMO_IRRIGACAO_FIM" />
+          <ScalarProperty Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
+          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VAR_FERTIRRIGACAO" ColumnName="VAR_FERTIRRIGACAO" />
+          <ScalarProperty Name="VAR_VALOR_ENERGETICO" ColumnName="VAR_VALOR_ENERGETICO" />
+          <ScalarProperty Name="VOL_CONSUMIDO" ColumnName="VOL_CONSUMIDO" />
+          <ScalarProperty Name="VOL_IRRIGACAO" ColumnName="VOL_IRRIGACAO" />
+          <ScalarProperty Name="TMO_IRRIGACAO_INICIO" ColumnName="TMO_IRRIGACAO_INICIO" />
+          <ScalarProperty Name="TMO_IRRIGACAO_GOTEJO" ColumnName="TMO_IRRIGACAO_GOTEJO" />
+          <ScalarProperty Name="TMO_IRRIGACAO_PIVO" ColumnName="TMO_IRRIGACAO_PIVO" />
+          <ScalarProperty Name="DAT_IRRIGACAO" ColumnName="DAT_IRRIGACAO" />
+          <ScalarProperty Name="IDC_CAD_IRRIGACAO" ColumnName="IDC_CAD_IRRIGACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REG_MANEJO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.REG_MANEJO">
+        <MappingFragment StoreEntitySet="REG_MANEJO">
+          <ScalarProperty Name="VOL_IRRIGACAO_DESNECESSARIA" ColumnName="VOL_IRRIGACAO_DESNECESSARIA" />
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VAR_EXTRESSE_ULTRAPASSADO" ColumnName="VAR_EXTRESSE_ULTRAPASSADO" />
+          <ScalarProperty Name="QTD_IRRIGADA" ColumnName="QTD_IRRIGADA" />
+          <ScalarProperty Name="TMO_IRRIGADO_PIVO" ColumnName="TMO_IRRIGADO_PIVO" />
+          <ScalarProperty Name="TMO_IRRIGADO_GOTEJO" ColumnName="TMO_IRRIGADO_GOTEJO" />
+          <ScalarProperty Name="VAR_PRECIPITACAO" ColumnName="VAR_PRECIPITACAO" />
+          <ScalarProperty Name="VAR_KL" ColumnName="VAR_KL" />
+          <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
+          <ScalarProperty Name="VAR_ETO" ColumnName="VAR_ETO" />
+          <ScalarProperty Name="VAR_BALANCO" ColumnName="VAR_BALANCO" />
+          <ScalarProperty Name="VAR_KS" ColumnName="VAR_KS" />
+          <ScalarProperty Name="TMO_MANEJO" ColumnName="TMO_MANEJO" />
+          <ScalarProperty Name="VOL_CONSUMO_DIARIO" ColumnName="VOL_CONSUMO_DIARIO" />
+          <ScalarProperty Name="PER_PERCENTIMETRO" ColumnName="PER_PERCENTIMETRO" />
+          <ScalarProperty Name="VOL_IRRIGACAO_REALIZADA" ColumnName="VOL_IRRIGACAO_REALIZADA" />
+          <ScalarProperty Name="VOL_IRRIGACAO_NECESSARIA" ColumnName="VOL_IRRIGACAO_NECESSARIA" />
+          <ScalarProperty Name="VAR_IDADE_PARCELA" ColumnName="VAR_IDADE_PARCELA" />
+          <ScalarProperty Name="DAT_MANEJO" ColumnName="DAT_MANEJO" />
+          <ScalarProperty Name="IDC_CAD_MANEJO" ColumnName="IDC_CAD_MANEJO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_CLIMA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
+        <MappingFragment StoreEntitySet="CAD_CLIMA">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
+          <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
+          <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
+          <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
+          <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
+          <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
+          <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
+          <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
+          <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

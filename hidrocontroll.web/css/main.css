@@ -330,3 +330,8 @@ a.md-button.md-default-theme.md-primary, a.md-button.md-primary, .md-button.md-d
     text-align: center;
     width:60px;
 }
+
+input[type="number"] {
+   width:200px;
+}
+

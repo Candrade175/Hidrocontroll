@@ -65,4 +65,3 @@ C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\b
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\bin\Antlr3.Runtime.pdb
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\obj\Debug\hidrocontroll.dll
 C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\obj\Debug\hidrocontroll.pdb
-C:\Users\Administrador\Documents\hidrocontroll\hidrocontroll\hidrocontroll.api\obj\Debug\hidrocontroll.api.csprojResolveAssemblyReference.cache

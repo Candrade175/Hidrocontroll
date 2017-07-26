@@ -1,8 +1,8 @@
-﻿<md-dialog aria-label="Criar Cultura" ng-cloak>
+﻿<md-dialog aria-label="Dados Cultura" ng-cloak>
     <form name="culturaForm">
         <md-toolbar>
             <div class="md-toolbar-tools" id="tool-bar">
-                <h2>Criar Cultura</h2>
+                <h2>Dados Cultura</h2>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     X
                 </md-button>
@@ -15,7 +15,7 @@
                     <label>Nome</label>
                     <input name="Nome" ng-model="selected.NOM_CULTURA" required ng-maxlength="20" ng-minlength="4">
                     <!-- Error messages for the input -->
-                    <div ng-messages="culturaForm.Nome.$error" >
+                    <div ng-messages="culturaForm.Nome.$error">
                         <div ng-message="required">Campo obrigatório.</div>
                         <div ng-message="minlength">Campo muito pequeno.</div>
                         <div ng-message="maxlength">Campo muito grande.</div>
@@ -24,8 +24,8 @@
                 <br />
                 <md-input-container class="md-block">
                     <label>Fazenda</label>
-                    <md-autocomplete md-no-cache="true" md-selected-item="selected.FAZENDA" md-items="fazenda in getMatchesFazenda(searchTextFazenda)" md-search-text="searchTextFazenda" md-item-text="fazenda.NOME" md-selected-item-change="onchangeSelectedFazenda(selected.FAZENDA)" md-min-length="0" ng-minlength="1">
-                        <span md-highlight-text="searchTextFazenda">{{fazenda.NOME}}</span>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_FAZENDA" md-items="fazenda in getMatchesFazenda(searchTextFazenda)" md-search-text="searchTextFazenda" md-item-text="fazenda.NOM_FAZENDA" md-selected-item-change="onchangeSelectedFazenda(selected.CAD_FAZENDA)" md-min-length="0" ng-minlength="1">
+                        <span md-highlight-text="searchTextFazenda">{{fazenda.NOM_FAZENDA}}</span>
                     </md-autocomplete>
                 </md-input-container>
             </div>

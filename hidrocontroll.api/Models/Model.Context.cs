@@ -28,7 +28,6 @@ namespace hidrocontroll.Models
         public DbSet<CAD_ADMINISTRADOR> CAD_ADMINISTRADOR { get; set; }
         public DbSet<CAD_CIDADE> CAD_CIDADE { get; set; }
         public DbSet<CAD_CLIENTE> CAD_CLIENTE { get; set; }
-        public DbSet<CAD_CLIMA> CAD_CLIMA { get; set; }
         public DbSet<CAD_CULTURA> CAD_CULTURA { get; set; }
         public DbSet<CAD_ESTADO> CAD_ESTADO { get; set; }
         public DbSet<CAD_FASE_OUTORGA> CAD_FASE_OUTORGA { get; set; }
@@ -48,5 +47,6 @@ namespace hidrocontroll.Models
         public DbSet<CAD_FASE_CULTURA> CAD_FASE_CULTURA { get; set; }
         public DbSet<CAD_IRRIGACAO> CAD_IRRIGACAO { get; set; }
         public DbSet<REG_MANEJO> REG_MANEJO { get; set; }
+        public DbSet<CAD_CLIMA> CAD_CLIMA { get; set; }
     }
 }

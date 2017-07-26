@@ -1,13 +1,13 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("ClimaRelatoriosController", climaController);
+    angular.module("hidrocontroll.web").controller("ClimaRelatoriosController", gotejadorController);
 
-    function climaController($http, C, store, $state, $mdDialog) {
-        var clima = this;
+    function gotejadorController($http, C, store, $state, $mdDialog) {
+        var gotejador = this;
 
         initializeData();
 
         function initializeData() {
-            clima.tabela = {
+            gotejador.tabela = {
                 "titulo": "Clima",
                 "subtitulo": "Relatório de dados:",
                 "cabecalho": ["Data",
@@ -21,7 +21,7 @@
                 "data": ["Período",
                          "Ciclo"]
             };
-            clima.atributos = ["Necessidade hídrica",
+            gotejador.atributos = ["Necessidade hídrica",
                                     "Precipitação",
                                     "Irrigação necessária",
                                     "Irrigação realizada",
@@ -35,7 +35,7 @@
                                     "Kc",
                                     "Kl",
                                     "Ks"];
-            clima.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
+            gotejador.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
         }
     };
 })();

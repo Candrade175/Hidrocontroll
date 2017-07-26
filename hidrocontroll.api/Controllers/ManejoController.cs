@@ -76,8 +76,11 @@ namespace hidrocontroll.Controllers
         {
             if (!ModelState.IsValid)
             {
+           
                 return BadRequest(ModelState);
+
             }
+           
 
             db.REG_MANEJO.Add(reg_manejo);
             db.SaveChanges();
@@ -106,14 +109,21 @@ namespace hidrocontroll.Controllers
             double necessariaInicial = 0;
             double ks = 0;
             double balanco = 0;
-
-            CAD_CULTURA cultura = db.CAD_CULTURA.Find(parcela.CAD_CULTURA);
-            CAD_FAZENDA fazenda = db.CAD_FAZENDA.Find(cultura.CAD_FAZENDA_IDC_CAD_FAZENDA);
+            double totalPivo = 0;
+            int? contInicio = DateTimeFunctional.diferencaDeDias(dataAtualizacao, parcela.DAT_PLANTIO);
+            int? contFim = DateTimeFunctional.diferencaDeDias(DateTime.Now, parcela.DAT_PLANTIO);
+            int diaFinal = 0;
 
             CAD_PIVO_CENTRAL pivo = null;
             CAD_GOTEJADOR gotejador = null;
+            CAD_CULTURA cultura = db.CAD_CULTURA.Include(c => c.CAD_PARCELA).Include(c => c.CAD_FASE_CULTURA).Where(c2 => c2.IDC_CAD_CULTURA == parcela.CAD_CULTURA_IDC_CAD_CULTURA).First();
+            CAD_FAZENDA fazenda = db.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Include(f => f.CAD_CLIMA).Where(f2 => f2.IDC_CAD_FAZENDA == cultura.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
+            CAD_FASE_CULTURA faseCultura = null;
 
-            double totalPivo = 0;
+
+           
+
+            
             if (parcela.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL != null)
             {
                 pivo = db.CAD_PIVO_CENTRAL.Find(parcela.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL);
@@ -125,7 +135,7 @@ namespace hidrocontroll.Controllers
                 gotejador = db.CAD_GOTEJADOR.Find(parcela.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR);
             }
 
-            foreach (REG_MANEJO manejo in parcela.REG_MANEJO)
+            foreach (REG_MANEJO manejo in db.REG_MANEJO.Where(r => r.CAD_PARCELA_IDC_CAD_PARCELA == parcela.IDC_CAD_PARCELA))
             {
                 if (dataAtualizacao.Date == manejo.DAT_MANEJO.Value.Date)
                 {
@@ -135,13 +145,8 @@ namespace hidrocontroll.Controllers
                 }
             }
 
-            int? contInicio = DateTimeFunctional.diferencaDeDias(dataAtualizacao, parcela.DAT_PLANTIO);
-            int? contFim = DateTimeFunctional.diferencaDeDias(DateTime.Now, parcela.DAT_PLANTIO);
-
             bool primeiro = true;
-            int diaFinal = 0;
 
-            CAD_FASE_CULTURA faseCultura = null;
 
             foreach (CAD_FASE_CULTURA fc in cultura.CAD_FASE_CULTURA)
             {
@@ -174,7 +179,7 @@ namespace hidrocontroll.Controllers
 
             }
 
-            foreach (REG_MANEJO m in parcela.REG_MANEJO)
+            foreach (REG_MANEJO m in db.REG_MANEJO.Where(r => r.CAD_PARCELA_IDC_CAD_PARCELA == parcela.IDC_CAD_PARCELA))
             {
                 if (m.DAT_MANEJO.Value.Date == dataAtualizacao.AddDays(-1).Date)
                 {
@@ -183,7 +188,7 @@ namespace hidrocontroll.Controllers
                 }
 
             }
-
+           
             if (contInicio == 0)
             {
                 necessariaInicial = (faseCultura.VAR_CAPACIDADE_CAMPO.Value - parcela.VAR_UMIDADE_SOLO_PLANTIO.Value) / 100 * 1.05 * (faseCultura.PRF_RAIZ.Value * 10);
@@ -207,7 +212,6 @@ namespace hidrocontroll.Controllers
                         break;
                     }
                 }
-
                 if (clima == null)
                 {
                     clima = new CAD_CLIMA();
@@ -221,7 +225,7 @@ namespace hidrocontroll.Controllers
                 }
 
                 CAD_PRECIPITACAO precipitacao = null;
-                foreach (CAD_PRECIPITACAO p in parcela.CAD_PRECIPITACAO)
+                foreach (CAD_PRECIPITACAO p in db.CAD_PRECIPITACAO.Where(p => p.CAD_PARCELA_IDC_CAD_PARCELA == parcela.IDC_CAD_PARCELA))
                 {
                     if (data.Date == p.DAT_PRECIPITACAO.Value.Date)
                     {
@@ -289,7 +293,7 @@ namespace hidrocontroll.Controllers
                 double eto = (b44 + b30) / b19;
 
                 CAD_IRRIGACAO irrigacao = null;
-                foreach (CAD_IRRIGACAO i in parcela.CAD_IRRIGACAO)
+                foreach (CAD_IRRIGACAO i in db.CAD_IRRIGACAO.Where(i => i.CAD_PARCELA_IDC_CAD_PARCELA == parcela.IDC_CAD_PARCELA))
                 {
                     if (data.Date == i.DAT_IRRIGACAO.Date)
                     {
@@ -363,36 +367,44 @@ namespace hidrocontroll.Controllers
                 }
 
                 REG_MANEJO manejo = null;
-                foreach (REG_MANEJO m in parcela.REG_MANEJO)
+                foreach (REG_MANEJO m in db.REG_MANEJO.Where(m => m.CAD_PARCELA_IDC_CAD_PARCELA == parcela.IDC_CAD_PARCELA))
                 {
                     if (m.DAT_MANEJO.Value.Date == data.Date)
                     {
                         manejo = m;
                         break;
                     }
-
                 }
-
                 if (manejo == null)
                 {
                     manejo = new REG_MANEJO();
-                    manejo.CAD_PARCELA = parcela;
+                    manejo.CAD_PARCELA_IDC_CAD_PARCELA= parcela.IDC_CAD_PARCELA;
                     manejo.DAT_MANEJO = data;
                     manejo.IDC_CAD_MANEJO = contInicio.Value;
+                    try
+                    {
+                        REG_MANEJO r = atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado);
+                        PostREG_MANEJO(r);
+                    }
+                    catch (Exception e)
+                    {
 
-                    PostREG_MANEJO(atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado));
+                    }
                 }
                 else
                 {
                     PutREG_MANEJO(manejo.IDC_CAD_MANEJO,atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado));
                 }
+
                 contInicio += 1;
+
             }
         }
 
         private REG_MANEJO atualizaDadosManejo(REG_MANEJO manejo, double? necessaria, double? VOL_IRRIGACAO, double irrigacaoDesnecessaria, double temponecessario, double percentimetro, double etc, double ks, double balanco,
             double eto, double? kc, double kl, double chuva, double? TMO_IRRIGACAO_GOTEJO, double? TMO_IRRIGACAO_PIVO, double? extresseUltrapassado)
         {
+                   
             manejo.VOL_IRRIGACAO_NECESSARIA = necessaria;
             manejo.VOL_IRRIGACAO_REALIZADA = VOL_IRRIGACAO;
             manejo.VOL_IRRIGACAO_DESNECESSARIA = irrigacaoDesnecessaria;
@@ -408,6 +420,7 @@ namespace hidrocontroll.Controllers
             manejo.TMO_IRRIGADO_GOTEJO = TMO_IRRIGACAO_GOTEJO;
             manejo.TMO_IRRIGADO_PIVO = TMO_IRRIGACAO_PIVO;
             manejo.VAR_EXTRESSE_ULTRAPASSADO = extresseUltrapassado;
+           
             return manejo;
         }
 

@@ -64,6 +64,7 @@
            
             if (item) {
                 item.$select();
+                item.CAD_FAZENDA = getFazenda(item.CAD_FAZENDA_IDC_CAD_FAZENDA);
                 console.log(item);
                 method = "$update";
             };
@@ -153,7 +154,7 @@
             $scope.onchangeSelectedFazenda = function (fazenda) {
                 try {
                     console.log(fazenda);
-                    self.Cultura.selected.CAD_FAZENDA_idCAD_FAZENDA = fazenda.IDC_CAD_FAZENDA;
+                    self.Cultura.selected.CAD_FAZENDA_IDC_CAD_FAZENDA = fazenda.IDC_CAD_FAZENDA;
                 } catch (err) {
                     //Tratamento de exceção
                 }

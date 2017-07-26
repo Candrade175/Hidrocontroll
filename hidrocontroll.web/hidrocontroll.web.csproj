@@ -183,12 +183,13 @@
     <Content Include="lib\js\angular.min.js.gzip" />
     <Content Include="lib\js\angular.min.js.map" />
     <Content Include="js\Services\Model.js" />
-    <Content Include="pages\createClima.html" />
+    <Content Include="pages\dados_diarios\criar_clima.html" />
     <Content Include="pages\dados_diarios\clima.html" />
     <Content Include="pages\dados_diarios\irrigacao.html" />
     <Content Include="pages\dados_diarios\precipitacao.html" />
     <Content Include="pages\dados_diarios\reservatorio.html" />
     <Content Include="pages\dados_diarios\umidade.html" />
+    <Content Include="pages\equipamentos\criar_gotejador.html" />
     <Content Include="pages\equipamentos\gotejador.html" />
     <Content Include="pages\equipamentos\motobomba.html" />
     <Content Include="pages\equipamentos\outorga.html" />

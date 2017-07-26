@@ -113,39 +113,59 @@ namespace hidrocontroll.Controllers
             base.Dispose(disposing);
         }
 
-        private void fazMudancasClima(CAD_CLIMA cad_clima){
+        private void fazMudancasClima(CAD_CLIMA cad_clima)
+        {
             DateTime dataAtualizacao = cad_clima.DAT_CLIMA;
-                CAD_FAZENDA fazenda = cad_clima.CAD_FAZENDA;
-                CAD_FASE_CULTURA faseCultura = null;
-                foreach (CAD_CULTURA c in fazenda.CAD_CULTURA)
+            CAD_FAZENDA fazenda = db.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Where(f2 => f2.IDC_CAD_FAZENDA == cad_clima.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
+            CAD_FASE_CULTURA faseCultura = null;
+            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\teste\\fazMudancasClima.txt");
+
+
+            file.WriteLine(DateTime.Now.ToString() + " - fazenda - " + fazenda.NOM_FAZENDA);
+            foreach (CAD_CULTURA c in fazenda.CAD_CULTURA)
+            {
+                bool primeiro = true;
+                file.WriteLine(DateTime.Now.ToString() + " - cultura - "+ c.NOM_CULTURA );
+                double fimFaseMax = 0;
+
+               
+               
+                foreach (CAD_FASE_CULTURA fc in db.CAD_FASE_CULTURA.Where(fc => fc.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
                 {
-                    bool primeiro = true;
-                    double fimFaseMax=0;
-                    foreach (CAD_FASE_CULTURA fc in c.CAD_FASE_CULTURA)
+
+                    file.WriteLine(DateTime.Now.ToString() + " - fase  - "+fc.NOM_FASE_CULTURA);
+                    if (primeiro)
                     {
-                        if (primeiro)
+                        fimFaseMax = fc.NUM_FIM;
+                        faseCultura = fc;
+                        primeiro = false;
+                    }
+                    else
+                    {
+                        if (fimFaseMax < fc.NUM_FIM)
                         {
                             fimFaseMax = fc.NUM_FIM;
                             faseCultura = fc;
-                            primeiro = false;
-                        }
-                        else
-                        {
-                            if (fimFaseMax < fc.NUM_FIM)
-                            {
-                                fimFaseMax = fc.NUM_FIM;
-                                faseCultura = fc;
-                            }
                         }
                     }
-                    foreach (CAD_PARCELA p in c.CAD_PARCELA)
-                    {
-                        if (fimFaseMax >= DateTimeFunctional.diferencaDeDias(DateTime.Now,p.DAT_PLANTIO)){
-                            new ManejoController().atualizaManejo(p,dataAtualizacao);
-                        }
-                    }
-                    
                 }
+
+                file.WriteLine(DateTime.Now.ToString() + " - fim - "+fimFaseMax);
+                foreach (CAD_PARCELA p in db.CAD_PARCELA.Where(p => p.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
+                {
+                    if (fimFaseMax >= DateTimeFunctional.diferencaDeDias(DateTime.Now, p.DAT_PLANTIO))
+                    {
+                        new ManejoController().atualizaManejo(p, dataAtualizacao);
+
+                        file.WriteLine(DateTime.Now.ToString() + " - entrou - ");
+                    }
+
+                    file.WriteLine(DateTime.Now.ToString() + " - parcela - " + p.NOM_PARCELA);
+                }
+
+            }
+
+            file.Close();
         }
 
         private bool CAD_CLIMAExists(int id)

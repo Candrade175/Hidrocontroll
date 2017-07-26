@@ -33,7 +33,7 @@
                 <tr ng-repeat="item  in culturaPrc.Cultura.list| filter:buscador">
                     <td ng-show="culturaPrc.$mdMedia('gt-sm')">{{item.IDC_CAD_CULTURA}}</td>
                     <td ng-show="culturaPrc.$mdMedia('gt-sm')">{{item.NOM_CULTURA}}</td>
-                    <td ng-show="culturaPrc.$mdMedia('gt-sm')">{{culturaPrc.getFazenda(item.CAD_FAZENDA_idCAD_FAZENDA).NOME}}</td>
+                    <td ng-show="culturaPrc.$mdMedia('gt-sm')">{{culturaPrc.getFazenda(item.CAD_FAZENDA_IDC_CAD_FAZENDA).NOM_FAZENDA}}</td>
                     <td id='td_editar_excluir'>
                         <md-button class="md-icon-button"
                                    ng-click="culturaPrc.update($event, item)"

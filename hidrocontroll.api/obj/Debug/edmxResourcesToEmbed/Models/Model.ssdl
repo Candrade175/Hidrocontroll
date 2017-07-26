@@ -120,9 +120,9 @@
     </Key>
     <Property Name="IDC_CAD_IRRIGACAO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DAT_IRRIGACAO" Type="date" Nullable="false" />
-    <Property Name="VOL_IRRIGACAO_PIVO" Type="float" />
-    <Property Name="VOL_IRRIGACAO_GOTEJO" Type="float" />
-    <Property Name="TMO_IRRIGACAO" Type="time" Precision="7" />
+    <Property Name="TMO_IRRIGACAO_PIVO" Type="float" />
+    <Property Name="TMO_IRRIGACAO_GOTEJO" Type="float" />
+    <Property Name="TMO_IRRIGACAO_INICIO" Type="time" Precision="7" />
     <Property Name="VOL_IRRIGACAO" Type="float" />
     <Property Name="VOL_CONSUMIDO" Type="float" />
     <Property Name="VAR_VALOR_ENERGETICO" Type="float" />
@@ -130,6 +130,7 @@
     <Property Name="CAD_PARCELA_IDC_CAD_PARCELA" Type="int" Nullable="false" />
     <Property Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" Type="int" Nullable="false" />
     <Property Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" Type="int" Nullable="false" />
+    <Property Name="TMO_IRRIGACAO_FIM" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="CAD_MODELO_PIVO">
     <Key>
@@ -277,10 +278,11 @@
     <Property Name="VAR_KL" Type="float" />
     <Property Name="VAR_PRECIPITACAO" Type="float" />
     <Property Name="TMO_IRRIGADO_GOTEJO" Type="float" />
-    <Property Name="TMP_IRRIGADO_PIVO" Type="float" />
+    <Property Name="TMO_IRRIGADO_PIVO" Type="float" />
     <Property Name="QTD_IRRIGADA" Type="float" />
-    <Property Name="VAREXTRESSE_ULTRAPASSADO" Type="float" />
+    <Property Name="VAR_EXTRESSE_ULTRAPASSADO" Type="float" />
     <Property Name="CAD_PARCELA_IDC_CAD_PARCELA" Type="int" Nullable="false" />
+    <Property Name="VOL_IRRIGACAO_DESNECESSARIA" Type="float" />
   </EntityType>
   <Association Name="fk_CAD_CIDADE_CAD_ESTADO1">
     <End Role="CAD_ESTADO" Type="Self.CAD_ESTADO" Multiplicity="1" />

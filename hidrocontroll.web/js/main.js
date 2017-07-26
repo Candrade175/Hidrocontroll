@@ -195,9 +195,9 @@
 
             .state('main.ClimaRelatórios', {
                 url: "/relatorioClima",
-                templateUrl: "pages/relatorios/clima.html",
+                templateUrl: "pages/relatorios/gotejador.html",
                 controller: "ClimaRelatoriosController",
-                controllerAs: "climaRel"
+                controllerAs: "gotejadorRel"
             })
 
             .state('main.CulturaRelatórios', {

@@ -1,0 +1,92 @@
+﻿<script type="text/ng-template" id="error-messages">
+    <div ng-message="required">This field is required</div>
+    <div ng-message="minlength">This field is too short</div>
+</script>
+
+<div ng-messages="myForm.myField.$error" role="alert">
+    <div ng-messages-include="error-messages"></div>
+</div>
+
+<md-dialog aria-label="Dados Gotejador" ng-cloak>
+    <form name="gotejadorForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Gotejador</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+
+            <div class="md-dialog-content">
+                <md-input-container class="full-width">
+                    <label>Nome</label>
+                    <input name="NOM_GOTEJADOR" type="text" ng-model="selected.NOM_GOTEJADOR" ng-min="4" max="40" required />
+                    <div ng-messages="gotejadorForm.NOM_GOTEJADOR.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="full-width">
+                    <label>Vazão (l/h)</label>
+                    <input name="VAZ_GOTEJADOR" type="number" ng-model="selected.VAZ_GOTEJADOR" required />
+                    <div ng-messages="gotejadorForm.VAZ_GOTEJADOR.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="full-width">
+                    <label>Espaçamento entre Gotejadores</label>
+                    <input name="VAR_ESPACAMENTO_GOTEJADORES" type="number" ng-model="selected.VAR_ESPACAMENTO_GOTEJADORES" required />
+                    <div ng-messages="gotejadorForm.VAR_ESPACAMENTO_GOTEJADORES.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="full-width">
+                    <label>Espaçamento entre linhas laterais</label>
+                    <input name="VAR_ESPACAMENTO_LINHAS_LATERAIS" type="number" ng-model="selected.VAR_ESPACAMENTO_LINHAS_LATERAIS" required />
+                    <div ng-messages="gotejadorForm.VAR_ESPACAMENTO_LINHAS_LATERAIS.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="full-width">
+                    <label>Largura da Faixa Molhada</label>
+                    <input name="LAR_FAIXA_MOLHADA" type="number" ng-model="selected.LAR_FAIXA_MOLHADA" required />
+                    <div ng-messages="gotejadorForm.LAR_FAIXA_MOLHADA.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="full-width">
+                    <label>Uniformidade (%)</label>
+                    <input name="VAR_UNIFORMIDADE" type="number" ng-model="selected.VAR_UNIFORMIDADE" required />
+                    <div ng-messages="gotejadorForm.VAR_UNIFORMIDADE.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+                <md-input-container class="full-width">
+                    <label>Lâmina (mm)</label>
+                    <input name="VAR_LAMINA" type="number" ng-model="selected.CAD_FAZENDA_IDC_CAD_FAZENDA" required />
+                    <div ng-messages="gotejadorForm.VAR_LAMINA.$error" role="alert">
+                        <div ng-messages-include="error-messages"></div>
+                    </div>
+                </md-input-container>
+                <br />
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="gotejadorForm.$valid &&salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

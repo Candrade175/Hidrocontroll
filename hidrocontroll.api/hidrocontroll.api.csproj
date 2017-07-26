@@ -146,6 +146,7 @@
     <Compile Include="Controllers\CulturaController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\FazendaController.cs" />
+    <Compile Include="Controllers\GotejadorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IrrigacaoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

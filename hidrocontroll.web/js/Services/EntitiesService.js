@@ -7,6 +7,8 @@
             { name: 'fazenda' },
             { name: 'cidade' },
             { name: 'estado' },
+            { name: 'clima' },
+            { name: 'gotejador' },
             { name: 'cultura'}
         ]);
 

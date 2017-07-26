@@ -19,8 +19,7 @@ namespace hidrocontroll.Controllers
         public IQueryable<CAD_CULTURA> GetCAD_CULTURA()
         {
 
-            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\teste\\get" + DateTime.Now.Millisecond.ToString() + ".txt");
-            file.WriteLine(DateTime.Now.ToString() +" get");
+           
             return db.CAD_CULTURA;
         }
 
@@ -41,8 +40,7 @@ namespace hidrocontroll.Controllers
         public IHttpActionResult PutCAD_CULTURA(int id, CAD_CULTURA cad_cultura)
         {
 
-            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\teste\\put" + DateTime.Now.Millisecond.ToString() + ".txt");
-            file.WriteLine(DateTime.Now.ToString() + " get");
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -78,8 +76,7 @@ namespace hidrocontroll.Controllers
         [ResponseType(typeof(CAD_CULTURA))]
         public IHttpActionResult PostCAD_CULTURA(CAD_CULTURA cad_cultura)
         {
-            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\teste\\post" + DateTime.Now.Millisecond.ToString() + ".txt");
-            file.WriteLine(DateTime.Now.ToString() + " get");
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -109,8 +106,7 @@ namespace hidrocontroll.Controllers
         public IHttpActionResult DeleteCAD_CULTURA(int id)
         {
             CAD_CULTURA cad_cultura = db.CAD_CULTURA.Find(id);
-            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\teste\\delete" + DateTime.Now.Millisecond.ToString() + ".txt");
-            file.WriteLine(DateTime.Now.ToString() + " get");
+          
             if (cad_cultura == null)
             {
                 return NotFound();
