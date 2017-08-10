@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("ReservatorioDadosController", reservatorioController);
+    angular.module("hidrocontroll.web").controller("ReservatorioDadosDiariosController", reservatorioController);
 
     function reservatorioController($http, C, store, $state, $mdDialog) {
         var reservatorio = this;

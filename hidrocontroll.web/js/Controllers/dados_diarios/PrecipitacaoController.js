@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("PrecipitacaoDadosController", precipitacaoController);
+    angular.module("hidrocontroll.web").controller("PrecipitacaoDadosDiariosController", precipitacaoController);
 
     function precipitacaoController($http, C, store, $state, $mdDialog) {
         var precipitacao = this;

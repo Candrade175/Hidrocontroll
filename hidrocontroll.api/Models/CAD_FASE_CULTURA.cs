@@ -18,14 +18,11 @@ namespace hidrocontroll.Models
         public string NOM_FASE_CULTURA { get; set; }
         public Nullable<double> VAR_KC { get; set; }
         public Nullable<double> PRF_RAIZ { get; set; }
-        public Nullable<double> VAR_PONTO_MURCHA { get; set; }
-        public Nullable<double> VAR_CAPACIDADE_CAMPO { get; set; }
         public Nullable<double> ARE_SOMBREADA { get; set; }
-        public Nullable<double> LIM_FASE_CULTURA { get; set; }
-        public Nullable<double> DEN_APARENTE { get; set; }
         public int CAD_CULTURA_IDC_CAD_CULTURA { get; set; }
         public int NUM_INICIO { get; set; }
         public int NUM_FIM { get; set; }
+        public Nullable<double> VAR_PREF_RADICULAR { get; set; }
     
         public virtual CAD_CULTURA CAD_CULTURA { get; set; }
     }

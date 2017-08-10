@@ -14,7 +14,7 @@ namespace hidrocontroll.Models
     
     public partial class REG_MANEJO
     {
-        public int IDC_CAD_MANEJO { get; set; }
+        public int IDC_REG_MANEJO { get; set; }
         public Nullable<System.DateTime> DAT_MANEJO { get; set; }
         public Nullable<int> VAR_IDADE_PARCELA { get; set; }
         public Nullable<double> VOL_IRRIGACAO_NECESSARIA { get; set; }

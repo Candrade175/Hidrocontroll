@@ -1,26 +1,26 @@
 ﻿<!-- Conteúdo a direita -->
 <md-content class="conteudo-lateral">
-    <div class="container tabela-container">
+    <div class="tabela-container">
         <div class="tabela-cabecalho" layout="row">
             <span class="tabela-cabecalho-titulo" layout="column">
                 <h2>{{climaDds.tabela.titulo}}</h2>
                 <p style="display: inline; margin-right= 50px;">{{climaDds.tabela.subtitulo}}</p>
             </span>
-            
+
         </div>
 
         <div layout="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 no-padding">
                 <!-- Botões -->
                 <md-button class="md-primary md-raised" ng-click="climaDds.create()">Novo</md-button>
                 <md-button class="md-primary md-raised" ng-click="climaDds.printData()">Imprimir</md-button>
             </div>
-                <!-- Campos de entrada de datas -->
-            <div class="col-sm-6">
-                <md-datepicker class="tabela-cabecalho-float" ng-model="climaDds.tabela.data_fim" md-placeholder="Data de Fim" md-min-date="climaDds.tabela.data_inicio">
+            <!-- Campos de entrada de datas -->
+            <div class="col-sm-6 no-padding">
+                <md-datepicker class="tabela-cabecalho-input" ng-model="climaDds.tabela.data_fim" md-placeholder="Data de Fim" md-min-date="climaDds.tabela.data_inicio">
                     {{climaDds.tabela.data_fim | date:"dd/MM/yyyy"}}
                 </md-datepicker>
-                <md-datepicker class="tabela-cabecalho-float" ng-model=" climaDds.tabela.data_inicio" md-placeholder="Data de Início">
+                <md-datepicker class="tabela-cabecalho-input" ng-model=" climaDds.tabela.data_inicio" md-placeholder="Data de Início">
                     {{climaDds.tabela.data_inicio | date:"dd/MM/yyyy"}}
                 </md-datepicker>
 
@@ -37,21 +37,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item  in climaDds.Clima.list | dateFilter:climaDds.tabela.data_inicio:climaDds.tabela.data_fim">
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.DAT_CLIMA | date:"dd/MM/yyyy"}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.TMP_CLIMA_MAX}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.TMP_CLIMA_MIN}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.TMP_CLIMA_MEDIA}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.VAR_UMIDADE_RELATIVA}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.VEL_VENTO}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.VAR_PRECIPITACAO_TOTAL}}</td>
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{item.VAR_RADIACAO}}</td>
-
-                    <td ng-show="climaDds.$mdMedia('gt-sm')">{{climaDds.getFazenda(item.CAD_FAZENDA_IDC_CAD_FAZENDA).NOM_FAZENDA}}</td>
+                <tr ng-repeat="item  in climaDds.Clima.list| orderBy:'-DAT_CLIMA' | dateFilter:climaDds.tabela.data_inicio:climaDds.tabela.data_fim | filter:{CAD_FAZENDA_IDC_CAD_FAZENDA:climaDds.codFazendaAtual}">
+                    <td>{{item.DAT_CLIMA | date:"dd/MM/yyyy"}}</td>
+                    <td>{{item.TMP_CLIMA_MAX}}</td>
+                    <td>{{item.TMP_CLIMA_MIN}}</td>
+                    <td>{{item.TMP_CLIMA_MEDIA}}</td>
+                    <td>{{item.VAR_UMIDADE_RELATIVA}}</td>
+                    <td>{{item.VEL_VENTO}}</td>
+                    <td>{{item.VAR_PRECIPITACAO_TOTAL}}</td>
+                    <td>{{item.VAR_RADIACAO}}</td>
                     <td id='td_editar_excluir'>
                         <md-button class="md-icon-button"
-                                    ng-click="climaDds.update($event, item)"
-                                    aria-label="Editar">
+                                   ng-click="climaDds.update($event, item)"
+                                   aria-label="Editar">
                             <md-icon> create </md-icon>
 
                         </md-button>
@@ -59,15 +57,15 @@
                     <td id='td_editar_excluir'>
 
                         <md-button class="md-icon-button"
-                                    ng-click="climaDds.excluir($event, item)"
-                                    aria-label="Excluir">
+                                   ng-click="climaDds.excluir($event, item)"
+                                   aria-label="Excluir">
                             <md-icon>delete</md-icon>
                         </md-button>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-
     </div>
+
+
 </md-content>

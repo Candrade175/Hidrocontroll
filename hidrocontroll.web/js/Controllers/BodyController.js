@@ -38,6 +38,7 @@
             $state.go(state);
         };
 
+
         //Função para abrir ou fechar a barra lateral
         function toggleSidenav() {
             $mdSidenav('left').toggle();

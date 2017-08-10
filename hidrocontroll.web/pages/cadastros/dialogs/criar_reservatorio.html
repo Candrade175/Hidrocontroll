@@ -1,0 +1,45 @@
+﻿<md-dialog aria-label="Dados Reservatorio" class="tela-cadastro" ng-cloak>
+    <form name="reservatorioForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Reservatório</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+
+                <md-input-container class="md-block">
+                    <label>Nome</label>
+                    <input name="Nome" ng-model="selected.NOM_RESERVATORIO" required ng-maxlength="45" ng-minlength="4">
+                    <!-- Error messages for the input -->
+                    <div ng-messages="reservatorioForm.Nome.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="minlength">Campo muito pequeno.</div>
+                        <div ng-message="maxlength">Campo muito grande.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Volume atual</label>
+                    <input name="VOL_ATUAL" type="number" ng-model="selected.VOL_ATUAL" ng-readonly="true" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Valor (m³/R$)</label>
+                    <input name="VAR_VALOR" type="number" ng-model="selected.VAR_VALOR" ng-readonly="true" />
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="reservatorioForm.$valid && salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,12 +1,13 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("ClimaDadosController", climaController).filter("dateFilter", dateFilter);
+    angular.module("hidrocontroll.web").controller("ClimaDadosDiariosController", climaController).filter("dateFilter", dateFilter);
 
-    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter) {
+    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter,store) {
         var self = this;
 
         initializeData();
 
         function initializeData() {
+            self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
             self.Clima = EntitiesService.clima;
             self.Fazenda = EntitiesService.fazenda;
             self.$mdMedia = $mdMedia;
@@ -14,7 +15,6 @@
             self.create = create;
             self.update = update;
             self.printData = printData;
-            self.getFazenda = getFazenda;
             self.showhints;
 
             self.tabela = {
@@ -27,8 +27,7 @@
                             "Umidade relativa (%)",
                             "Velocidade do vento (m/s)",
                             "Precipitação total (mm)",
-                            "Radiação média 24h (W/m²)",
-                            "Fazenda"]
+                            "Radiação média 24h (W/m²)"]
             };
 
             self.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
@@ -134,7 +133,7 @@
 
             return $mdDialog.show({
                 controller: dialogController,
-                templateUrl: 'pages/dados_diarios/criar_clima.html',
+                templateUrl: 'pages/dados_diarios/dialogs/criar_clima.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
@@ -158,6 +157,9 @@
             $scope.precipitacao_max = 300;
             $scope.precipitacao_min = 0;
 
+
+            $scope.selected.CAD_FAZENDA_IDC_CAD_FAZENDA = self.codFazendaAtual;
+
             $scope.hide = function () {
                 $mdDialog.hide();
             };
@@ -167,6 +169,7 @@
                 location.reload();
             };
             $scope.salvar = function (clima) {
+
                 if (!climaForm.classList.contains("ng-invalid")) {
                     $mdDialog.hide(clima);
                 }
@@ -188,32 +191,7 @@
 
             };  
 
-            $scope.getMatchesFazenda = function (text) {
-                return $filter('filter')(self.Fazenda.list, text);
-            };
-
-            $scope.onchangeSelectedFazenda = function (fazenda) {
-                try {
-                    console.log(fazenda);
-                    self.Clima.selected.CAD_FAZENDA_IDC_CAD_FAZENDA = fazenda.IDC_CAD_FAZENDA;
-                } catch (err) {
-                    //Tratamento de exceção
-                }
-            };
-
         };
-
-        
-     
-
-        function getFazenda(id) {
-            for (var i = 0; i < self.Fazenda.list.length; i++)
-                if (self.Fazenda.list[i].IDC_CAD_FAZENDA == id)
-                    return self.Fazenda.list[i];
-        };
-
-
-       
 
     };
 

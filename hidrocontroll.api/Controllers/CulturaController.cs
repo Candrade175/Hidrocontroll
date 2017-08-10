@@ -38,9 +38,7 @@ namespace hidrocontroll.Controllers
 
         // PUT api/Cultura/5
         public IHttpActionResult PutCAD_CULTURA(int id, CAD_CULTURA cad_cultura)
-        {
-
-           
+        {           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

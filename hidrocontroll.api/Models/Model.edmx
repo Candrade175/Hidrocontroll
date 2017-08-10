@@ -74,14 +74,11 @@
           <Property Name="NOM_FASE_CULTURA" Type="varchar" MaxLength="45" />
           <Property Name="VAR_KC" Type="float" />
           <Property Name="PRF_RAIZ" Type="float" />
-          <Property Name="VAR_PONTO_MURCHA" Type="float" />
-          <Property Name="VAR_CAPACIDADE_CAMPO" Type="float" />
           <Property Name="ARE_SOMBREADA" Type="float" />
-          <Property Name="LIM_FASE_CULTURA" Type="float" />
-          <Property Name="DEN_APARENTE" Type="float" />
           <Property Name="CAD_CULTURA_IDC_CAD_CULTURA" Type="int" Nullable="false" />
           <Property Name="NUM_INICIO" Type="int" Nullable="false" />
           <Property Name="NUM_FIM" Type="int" Nullable="false" />
+          <Property Name="VAR_PREF_RADICULAR" Type="float" />
         </EntityType>
         <EntityType Name="CAD_FASE_OUTORGA">
           <Key>
@@ -137,12 +134,12 @@
           <Property Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" Type="int" Nullable="false" />
           <Property Name="TMO_IRRIGACAO_FIM" Type="time" Precision="7" />
         </EntityType>
-        <EntityType Name="CAD_MODELO_PIVO">
+        <EntityType Name="CAD_MODELO_PIVO_CENTRAL">
           <Key>
-            <PropertyRef Name="IDC_CAD_MODELO_PIVO" />
+            <PropertyRef Name="IDC_CAD_MODELO_PIVO_CENTRAL" />
           </Key>
-          <Property Name="IDC_CAD_MODELO_PIVO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOM_MODELO_PIVO" Type="varchar" MaxLength="45" />
+          <Property Name="IDC_CAD_MODELO_PIVO_CENTRAL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_MODELO_PIVO_CENTRAL" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="CAD_MOTOBOMBA">
           <Key>
@@ -153,7 +150,6 @@
           <Property Name="VAR_POTENCIA" Type="int" />
           <Property Name="VAR_CONSUMO" Type="float" />
           <Property Name="VAZ_MOTOBOMBA" Type="float" />
-          <Property Name="VAR_TARIFAS" Type="varchar" MaxLength="45" />
           <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CAD_MOTOBOMBA_TARIFA">
@@ -179,7 +175,6 @@
           <Key>
             <PropertyRef Name="IDC_CAD_PARCELA" />
           </Key>
-          <Property Name="IDC_CAD_PARCELA" Type="int" Nullable="false" />
           <Property Name="NOM_PARCELA" Type="varchar" MaxLength="45" />
           <Property Name="ARE_PARCELA" Type="float" />
           <Property Name="VAR_PLUVIOMETRO" Type="varchar" MaxLength="45" />
@@ -190,6 +185,8 @@
           <Property Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" Type="int" />
           <Property Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" Type="int" />
           <Property Name="DAT_PLANTIO" Type="date" Nullable="false" />
+          <Property Name="IDC_CAD_PARCELA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CAD_SOLO_IDC_CAD_SOLO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CAD_PIVO_CENTRAL">
           <Key>
@@ -203,8 +200,9 @@
           <Property Name="VAZ_PIVO" Type="float" />
           <Property Name="VAR_EFICIENCIA" Type="float" />
           <Property Name="VAR_LAMINA" Type="float" />
-          <Property Name="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" Type="int" />
+          <Property Name="CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL" Type="int" />
           <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="int" Nullable="false" />
+          <Property Name="NOM_PIVO_CENTRAL" Type="varchar" MaxLength="45" />
         </EntityType>
         <EntityType Name="CAD_PRECIPITACAO">
           <Key>
@@ -238,6 +236,19 @@
           <Property Name="CAD_RESERVATORIO_IDC_RESERVATORIO" Type="int" Nullable="false" />
           <Property Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CAD_SOLO">
+          <Key>
+            <PropertyRef Name="IDC_CAD_SOLO" />
+          </Key>
+          <Property Name="IDC_CAD_SOLO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_SOLO" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="VAR_CAPACIDADE_CAMPO" Type="float" />
+          <Property Name="VAR_PONTO_MURCHA" Type="float" />
+          <Property Name="DEN_APARENTE" Type="float" />
+          <Property Name="VAR_LIMITE" Type="float" />
+          <Property Name="VAR_KS" Type="float" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="int" />
+        </EntityType>
         <EntityType Name="CAD_UMIDADE">
           <Key>
             <PropertyRef Name="IDC_CAD_UMIDADE" />
@@ -263,12 +274,13 @@
           <Property Name="DAT_CRIACAO" Type="date" />
           <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="int" Nullable="false" />
           <Property Name="DAT_ALTERACAO" Type="date" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="int" />
         </EntityType>
         <EntityType Name="REG_MANEJO">
           <Key>
-            <PropertyRef Name="IDC_CAD_MANEJO" />
+            <PropertyRef Name="IDC_REG_MANEJO" />
           </Key>
-          <Property Name="IDC_CAD_MANEJO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDC_REG_MANEJO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DAT_MANEJO" Type="date" />
           <Property Name="VAR_IDADE_PARCELA" Type="int" />
           <Property Name="VOL_IRRIGACAO_NECESSARIA" Type="float" />
@@ -288,6 +300,16 @@
           <Property Name="VAR_EXTRESSE_ULTRAPASSADO" Type="float" />
           <Property Name="CAD_PARCELA_IDC_CAD_PARCELA" Type="int" Nullable="false" />
           <Property Name="VOL_IRRIGACAO_DESNECESSARIA" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="fk_CAD_CIDADE_CAD_ESTADO1">
           <End Role="CAD_ESTADO" Type="Self.CAD_ESTADO" Multiplicity="1" />
@@ -379,6 +401,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
+          <End Role="CAD_FAZENDA" Type="Self.CAD_FAZENDA" Multiplicity="0..1" />
+          <End Role="CAD_USUARIO" Type="Self.CAD_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_USUARIO">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_CAD_GOTEJADOR_CAD_FAZENDA1">
           <End Role="CAD_FAZENDA" Type="Self.CAD_FAZENDA" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -407,12 +441,12 @@
         </Association>
         <Association Name="fk_CAD_IRRIGACAO_CAD_PARCELA1">
           <End Role="CAD_PARCELA" Type="Self.CAD_PARCELA" Multiplicity="1" />
-          <End Role="CAD_IRRIGACAO" Type="Self.CAD_IRRIGACAO" Multiplicity="*" />
+          <End Role="CAD_UMIDADE" Type="Self.CAD_UMIDADE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CAD_PARCELA">
               <PropertyRef Name="IDC_CAD_PARCELA" />
             </Principal>
-            <Dependent Role="CAD_IRRIGACAO">
+            <Dependent Role="CAD_UMIDADE">
               <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
             </Dependent>
           </ReferentialConstraint>
@@ -519,6 +553,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_CAD_PARCELA_CAD_SOLO">
+          <End Role="CAD_SOLO" Type="Self.CAD_SOLO" Multiplicity="1" />
+          <End Role="CAD_PARCELA" Type="Self.CAD_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_SOLO">
+              <PropertyRef Name="IDC_CAD_SOLO" />
+            </Principal>
+            <Dependent Role="CAD_PARCELA">
+              <PropertyRef Name="CAD_SOLO_IDC_CAD_SOLO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1">
           <End Role="CAD_FAZENDA" Type="Self.CAD_FAZENDA" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -534,14 +580,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1">
-          <End Role="CAD_MODELO_PIVO" Type="Self.CAD_MODELO_PIVO" Multiplicity="0..1" />
+          <End Role="CAD_MODELO_PIVO_CENTRAL" Type="Self.CAD_MODELO_PIVO_CENTRAL" Multiplicity="0..1" />
           <End Role="CAD_PIVO_CENTRAL" Type="Self.CAD_PIVO_CENTRAL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CAD_MODELO_PIVO">
-              <PropertyRef Name="IDC_CAD_MODELO_PIVO" />
+            <Principal Role="CAD_MODELO_PIVO_CENTRAL">
+              <PropertyRef Name="IDC_CAD_MODELO_PIVO_CENTRAL" />
             </Principal>
             <Dependent Role="CAD_PIVO_CENTRAL">
-              <PropertyRef Name="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" />
+              <PropertyRef Name="CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -595,6 +641,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_CAD_SOLO_CAD_FAZENDA">
+          <End Role="CAD_FAZENDA" Type="Self.CAD_FAZENDA" Multiplicity="0..1" />
+          <End Role="CAD_SOLO" Type="Self.CAD_SOLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_SOLO">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_CAD_UMIDADE_CAD_PARCELA1">
           <End Role="CAD_PARCELA" Type="Self.CAD_PARCELA" Multiplicity="1" />
           <End Role="CAD_UMIDADE" Type="Self.CAD_UMIDADE" Multiplicity="*" />
@@ -645,7 +703,7 @@
           <EntitySet Name="CAD_FAZENDA" EntityType="Self.CAD_FAZENDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_GOTEJADOR" EntityType="Self.CAD_GOTEJADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_IRRIGACAO" EntityType="Self.CAD_IRRIGACAO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CAD_MODELO_PIVO" EntityType="Self.CAD_MODELO_PIVO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAD_MODELO_PIVO_CENTRAL" EntityType="Self.CAD_MODELO_PIVO_CENTRAL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_MOTOBOMBA" EntityType="Self.CAD_MOTOBOMBA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_MOTOBOMBA_TARIFA" EntityType="Self.CAD_MOTOBOMBA_TARIFA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_OUTORGA" EntityType="Self.CAD_OUTORGA" Schema="dbo" store:Type="Tables" />
@@ -654,9 +712,11 @@
           <EntitySet Name="CAD_PRECIPITACAO" EntityType="Self.CAD_PRECIPITACAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_RESERVATORIO" EntityType="Self.CAD_RESERVATORIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_RESERVATORIO_DIARIO" EntityType="Self.CAD_RESERVATORIO_DIARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAD_SOLO" EntityType="Self.CAD_SOLO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_UMIDADE" EntityType="Self.CAD_UMIDADE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CAD_USUARIO" EntityType="Self.CAD_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REG_MANEJO" EntityType="Self.REG_MANEJO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_CAD_CIDADE_CAD_ESTADO1" Association="Self.fk_CAD_CIDADE_CAD_ESTADO1">
             <End Role="CAD_ESTADO" EntitySet="CAD_ESTADO" />
             <End Role="CAD_CIDADE" EntitySet="CAD_CIDADE" />
@@ -685,6 +745,10 @@
             <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
           </AssociationSet>
+          <AssociationSet Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA" Association="Self.fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
+          </AssociationSet>
           <AssociationSet Name="fk_CAD_GOTEJADOR_CAD_FAZENDA1" Association="Self.fk_CAD_GOTEJADOR_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_GOTEJADOR" EntitySet="CAD_GOTEJADOR" />
@@ -695,7 +759,7 @@
           </AssociationSet>
           <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_PARCELA1" Association="Self.fk_CAD_IRRIGACAO_CAD_PARCELA1">
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
-            <End Role="CAD_IRRIGACAO" EntitySet="CAD_IRRIGACAO" />
+            <End Role="CAD_UMIDADE" EntitySet="CAD_UMIDADE" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_RESERVATORIO1" Association="Self.fk_CAD_IRRIGACAO_CAD_RESERVATORIO1">
             <End Role="CAD_RESERVATORIO" EntitySet="CAD_RESERVATORIO" />
@@ -729,12 +793,16 @@
             <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
           </AssociationSet>
+          <AssociationSet Name="fk_CAD_PARCELA_CAD_SOLO" Association="Self.fk_CAD_PARCELA_CAD_SOLO">
+            <End Role="CAD_SOLO" EntitySet="CAD_SOLO" />
+            <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
+          </AssociationSet>
           <AssociationSet Name="fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" Association="Self.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" Association="Self.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1">
-            <End Role="CAD_MODELO_PIVO" EntitySet="CAD_MODELO_PIVO" />
+            <End Role="CAD_MODELO_PIVO_CENTRAL" EntitySet="CAD_MODELO_PIVO_CENTRAL" />
             <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_PRECIPITACAO_CAD_PARCELA1" Association="Self.fk_CAD_PRECIPITACAO_CAD_PARCELA1">
@@ -752,6 +820,10 @@
           <AssociationSet Name="fk_CAD_RESERVATORIO_DIARIO_CAD_RESERVATORIO1" Association="Self.fk_CAD_RESERVATORIO_DIARIO_CAD_RESERVATORIO1">
             <End Role="CAD_RESERVATORIO" EntitySet="CAD_RESERVATORIO" />
             <End Role="CAD_RESERVATORIO_DIARIO" EntitySet="CAD_RESERVATORIO_DIARIO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_SOLO_CAD_FAZENDA" Association="Self.fk_CAD_SOLO_CAD_FAZENDA">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_SOLO" EntitySet="CAD_SOLO" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_UMIDADE_CAD_PARCELA1" Association="Self.fk_CAD_UMIDADE_CAD_PARCELA1">
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
@@ -779,16 +851,11 @@
           <EntitySet Name="CAD_FASE_OUTORGA" EntityType="hidrocontrollModel.CAD_FASE_OUTORGA" />
           <EntitySet Name="CAD_FAZENDA" EntityType="hidrocontrollModel.CAD_FAZENDA" />
           <EntitySet Name="CAD_GOTEJADOR" EntityType="hidrocontrollModel.CAD_GOTEJADOR" />
-          <EntitySet Name="CAD_MODELO_PIVO" EntityType="hidrocontrollModel.CAD_MODELO_PIVO" />
-          <EntitySet Name="CAD_MOTOBOMBA" EntityType="hidrocontrollModel.CAD_MOTOBOMBA" />
-          <EntitySet Name="CAD_MOTOBOMBA_TARIFA" EntityType="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA" />
           <EntitySet Name="CAD_OUTORGA" EntityType="hidrocontrollModel.CAD_OUTORGA" />
-          <EntitySet Name="CAD_PIVO_CENTRAL" EntityType="hidrocontrollModel.CAD_PIVO_CENTRAL" />
           <EntitySet Name="CAD_PRECIPITACAO" EntityType="hidrocontrollModel.CAD_PRECIPITACAO" />
           <EntitySet Name="CAD_RESERVATORIO" EntityType="hidrocontrollModel.CAD_RESERVATORIO" />
           <EntitySet Name="CAD_RESERVATORIO_DIARIO" EntityType="hidrocontrollModel.CAD_RESERVATORIO_DIARIO" />
           <EntitySet Name="CAD_UMIDADE" EntityType="hidrocontrollModel.CAD_UMIDADE" />
-          <EntitySet Name="CAD_USUARIO" EntityType="hidrocontrollModel.CAD_USUARIO" />
           <AssociationSet Name="fk_CAD_CIDADE_CAD_ESTADO1" Association="hidrocontrollModel.fk_CAD_CIDADE_CAD_ESTADO1">
             <End Role="CAD_ESTADO" EntitySet="CAD_ESTADO" />
             <End Role="CAD_CIDADE" EntitySet="CAD_CIDADE" />
@@ -800,10 +867,6 @@
           <AssociationSet Name="fk_CAD_FAZENDA_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1">
             <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_USUARIO_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1">
-            <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
-            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_CULTURA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
@@ -817,42 +880,63 @@
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_GOTEJADOR" EntitySet="CAD_GOTEJADOR" />
           </AssociationSet>
-          <AssociationSet Name="fk_CAD_MOTOBOMBA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1">
-            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
-          </AssociationSet>
           <AssociationSet Name="fk_CAD_OUTORGA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_OUTORGA_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_OUTORGA" EntitySet="CAD_OUTORGA" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1">
-            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-            <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_RESERVATORIO_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_RESERVATORIO_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_RESERVATORIO" EntitySet="CAD_RESERVATORIO" />
           </AssociationSet>
-          <AssociationSet Name="fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" Association="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1">
-            <End Role="CAD_MODELO_PIVO" EntitySet="CAD_MODELO_PIVO" />
-            <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" Association="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1">
-            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
-            <End Role="CAD_MOTOBOMBA_TARIFA" EntitySet="CAD_MOTOBOMBA_TARIFA" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" Association="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1">
-            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
-            <End Role="CAD_RESERVATORIO_DIARIO" EntitySet="CAD_RESERVATORIO_DIARIO" />
-          </AssociationSet>
           <AssociationSet Name="fk_CAD_RESERVATORIO_DIARIO_CAD_RESERVATORIO1" Association="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_RESERVATORIO1">
             <End Role="CAD_RESERVATORIO" EntitySet="CAD_RESERVATORIO" />
             <End Role="CAD_RESERVATORIO_DIARIO" EntitySet="CAD_RESERVATORIO_DIARIO" />
           </AssociationSet>
+          <EntitySet Name="CAD_IRRIGACAO" EntityType="hidrocontrollModel.CAD_IRRIGACAO" />
+          <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_RESERVATORIO1" Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_RESERVATORIO1">
+            <End Role="CAD_RESERVATORIO" EntitySet="CAD_RESERVATORIO" />
+            <End Role="CAD_IRRIGACAO" EntitySet="CAD_IRRIGACAO" />
+          </AssociationSet>
+          <EntitySet Name="CAD_CLIMA" EntityType="hidrocontrollModel.CAD_CLIMA" />
+          <AssociationSet Name="fk_CAD_CLIMA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_CLIMA" EntitySet="CAD_CLIMA" />
+          </AssociationSet>
+          <EntitySet Name="CAD_USUARIO" EntityType="hidrocontrollModel.CAD_USUARIO" />
+          <AssociationSet Name="fk_CAD_USUARIO_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1">
+            <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
+            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA" Association="hidrocontrollModel.fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
+          </AssociationSet>
+          <EntitySet Name="CAD_MODELO_PIVO_CENTRAL" EntityType="hidrocontrollModel.CAD_MODELO_PIVO_CENTRAL" />
+          <EntitySet Name="CAD_PIVO_CENTRAL" EntityType="hidrocontrollModel.CAD_PIVO_CENTRAL" />
+          <EntitySet Name="sysdiagrams" EntityType="hidrocontrollModel.sysdiagram" />
+          <AssociationSet Name="fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" Association="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1">
+            <End Role="CAD_MODELO_PIVO_CENTRAL" EntitySet="CAD_MODELO_PIVO_CENTRAL" />
+            <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
+          </AssociationSet>
+          <EntitySet Name="CAD_FASE_CULTURA" EntityType="hidrocontrollModel.CAD_FASE_CULTURA" />
           <EntitySet Name="CAD_PARCELA" EntityType="hidrocontrollModel.CAD_PARCELA" />
+          <EntitySet Name="CAD_SOLO" EntityType="hidrocontrollModel.CAD_SOLO" />
+          <EntitySet Name="REG_MANEJO" EntityType="hidrocontrollModel.REG_MANEJO" />
+          <AssociationSet Name="fk_CAD_FASE_CULTURA_CAD_CULTURA1" Association="hidrocontrollModel.fk_CAD_FASE_CULTURA_CAD_CULTURA1">
+            <End Role="CAD_CULTURA" EntitySet="CAD_CULTURA" />
+            <End Role="CAD_FASE_CULTURA" EntitySet="CAD_FASE_CULTURA" />
+          </AssociationSet>
           <AssociationSet Name="fk_CAD_PARCELA_CAD_CULTURA1" Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_CULTURA1">
             <End Role="CAD_CULTURA" EntitySet="CAD_CULTURA" />
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_SOLO_CAD_FAZENDA" Association="hidrocontrollModel.fk_CAD_SOLO_CAD_FAZENDA">
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+            <End Role="CAD_SOLO" EntitySet="CAD_SOLO" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_PARCELA_CAD_GOTEJADOR1" Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_GOTEJADOR1">
             <End Role="CAD_GOTEJADOR" EntitySet="CAD_GOTEJADOR" />
@@ -862,8 +946,16 @@
             <End Role="CAD_OUTORGA" EntitySet="CAD_OUTORGA" />
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
           </AssociationSet>
+          <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_PARCELA1" Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1">
+            <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
+            <End Role="CAD_UMIDADE" EntitySet="CAD_UMIDADE" />
+          </AssociationSet>
           <AssociationSet Name="fk_CAD_PARCELA_CAD_PIVO_CENTRAL1" Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_PIVO_CENTRAL1">
             <End Role="CAD_PIVO_CENTRAL" EntitySet="CAD_PIVO_CENTRAL" />
+            <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_PARCELA_CAD_SOLO" Association="hidrocontrollModel.fk_CAD_PARCELA_CAD_SOLO">
+            <End Role="CAD_SOLO" EntitySet="CAD_SOLO" />
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_PRECIPITACAO_CAD_PARCELA1" Association="hidrocontrollModel.fk_CAD_PRECIPITACAO_CAD_PARCELA1">
@@ -874,33 +966,27 @@
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
             <End Role="CAD_UMIDADE" EntitySet="CAD_UMIDADE" />
           </AssociationSet>
-          <EntitySet Name="CAD_FASE_CULTURA" EntityType="hidrocontrollModel.CAD_FASE_CULTURA" />
-          <AssociationSet Name="fk_CAD_FASE_CULTURA_CAD_CULTURA1" Association="hidrocontrollModel.fk_CAD_FASE_CULTURA_CAD_CULTURA1">
-            <End Role="CAD_CULTURA" EntitySet="CAD_CULTURA" />
-            <End Role="CAD_FASE_CULTURA" EntitySet="CAD_FASE_CULTURA" />
-          </AssociationSet>
-          <EntitySet Name="CAD_IRRIGACAO" EntityType="hidrocontrollModel.CAD_IRRIGACAO" />
-          <EntitySet Name="REG_MANEJO" EntityType="hidrocontrollModel.REG_MANEJO" />
-          <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1">
-            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
-            <End Role="CAD_IRRIGACAO" EntitySet="CAD_IRRIGACAO" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_PARCELA1" Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1">
-            <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
-            <End Role="CAD_IRRIGACAO" EntitySet="CAD_IRRIGACAO" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_RESERVATORIO1" Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_RESERVATORIO1">
-            <End Role="CAD_RESERVATORIO" EntitySet="CAD_RESERVATORIO" />
-            <End Role="CAD_IRRIGACAO" EntitySet="CAD_IRRIGACAO" />
-          </AssociationSet>
           <AssociationSet Name="fk_REG_MANEJO_CAD_PARCELA1" Association="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1">
             <End Role="CAD_PARCELA" EntitySet="CAD_PARCELA" />
             <End Role="REG_MANEJO" EntitySet="REG_MANEJO" />
           </AssociationSet>
-          <EntitySet Name="CAD_CLIMA" EntityType="hidrocontrollModel.CAD_CLIMA" />
-          <AssociationSet Name="fk_CAD_CLIMA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1">
+          <EntitySet Name="CAD_MOTOBOMBA_TARIFA" EntityType="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA" />
+          <EntitySet Name="CAD_MOTOBOMBA" EntityType="hidrocontrollModel.CAD_MOTOBOMBA" />
+          <AssociationSet Name="fk_CAD_MOTOBOMBA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-            <End Role="CAD_CLIMA" EntitySet="CAD_CLIMA" />
+            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" Association="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1">
+            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
+            <End Role="CAD_IRRIGACAO" EntitySet="CAD_IRRIGACAO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" Association="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1">
+            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
+            <End Role="CAD_MOTOBOMBA_TARIFA" EntitySet="CAD_MOTOBOMBA_TARIFA" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" Association="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1">
+            <End Role="CAD_MOTOBOMBA" EntitySet="CAD_MOTOBOMBA" />
+            <End Role="CAD_RESERVATORIO_DIARIO" EntitySet="CAD_RESERVATORIO_DIARIO" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CAD_ADMINISTRADOR">
@@ -945,8 +1031,8 @@
           <Property Name="NOM_CULTURA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1" FromRole="CAD_CULTURA" ToRole="CAD_FAZENDA" />
-          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_CULTURA1" FromRole="CAD_CULTURA" ToRole="CAD_PARCELA" />
           <NavigationProperty Name="CAD_FASE_CULTURA" Relationship="hidrocontrollModel.fk_CAD_FASE_CULTURA_CAD_CULTURA1" FromRole="CAD_CULTURA" ToRole="CAD_FASE_CULTURA" />
+          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_CULTURA1" FromRole="CAD_CULTURA" ToRole="CAD_PARCELA" />
         </EntityType>
         <EntityType Name="CAD_ESTADO">
           <Key>
@@ -983,11 +1069,13 @@
           <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIENTE" />
           <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CULTURA" />
           <NavigationProperty Name="CAD_GOTEJADOR" Relationship="hidrocontrollModel.fk_CAD_GOTEJADOR_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_GOTEJADOR" />
-          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_MOTOBOMBA" />
           <NavigationProperty Name="CAD_OUTORGA" Relationship="hidrocontrollModel.fk_CAD_OUTORGA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_OUTORGA" />
-          <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_PIVO_CENTRAL" />
           <NavigationProperty Name="CAD_RESERVATORIO" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_RESERVATORIO" />
           <NavigationProperty Name="CAD_CLIMA" Relationship="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIMA" />
+          <NavigationProperty Name="CAD_USUARIO" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_IDC_CAD_FAZENDA" FromRole="CAD_FAZENDA" ToRole="CAD_USUARIO" />
+          <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_PIVO_CENTRAL" />
+          <NavigationProperty Name="CAD_SOLO" Relationship="hidrocontrollModel.fk_CAD_SOLO_CAD_FAZENDA" FromRole="CAD_FAZENDA" ToRole="CAD_SOLO" />
+          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_MOTOBOMBA" />
         </EntityType>
         <EntityType Name="CAD_GOTEJADOR">
           <Key>
@@ -1005,42 +1093,6 @@
           <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_GOTEJADOR_CAD_FAZENDA1" FromRole="CAD_GOTEJADOR" ToRole="CAD_FAZENDA" />
           <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_GOTEJADOR1" FromRole="CAD_GOTEJADOR" ToRole="CAD_PARCELA" />
         </EntityType>
-        <EntityType Name="CAD_MODELO_PIVO">
-          <Key>
-            <PropertyRef Name="IDC_CAD_MODELO_PIVO" />
-          </Key>
-          <Property Name="IDC_CAD_MODELO_PIVO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM_MODELO_PIVO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" FromRole="CAD_MODELO_PIVO" ToRole="CAD_PIVO_CENTRAL" />
-        </EntityType>
-        <EntityType Name="CAD_MOTOBOMBA">
-          <Key>
-            <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
-          </Key>
-          <Property Name="IDC_CAD_MOTOBOMBA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM_MOTOBOMBA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="VAR_POTENCIA" Type="Int32" />
-          <Property Name="VAR_CONSUMO" Type="Double" />
-          <Property Name="VAZ_MOTOBOMBA" Type="Double" />
-          <Property Name="VAR_TARIFAS" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_FAZENDA" />
-          <NavigationProperty Name="CAD_MOTOBOMBA_TARIFA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_MOTOBOMBA_TARIFA" />
-          <NavigationProperty Name="CAD_RESERVATORIO_DIARIO" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_RESERVATORIO_DIARIO" />
-          <NavigationProperty Name="CAD_IRRIGACAO" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_IRRIGACAO" />
-        </EntityType>
-        <EntityType Name="CAD_MOTOBOMBA_TARIFA">
-          <Key>
-            <PropertyRef Name="IDC_CAD_MOTOBOMBA_TARIFA" />
-          </Key>
-          <Property Name="IDC_CAD_MOTOBOMBA_TARIFA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM_TARIFA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="HOR_INICIO_TARIFA" Type="Time" Precision="7" />
-          <Property Name="HOR_FIM_TARIFA" Type="Time" Precision="7" />
-          <Property Name="VAL_TARIFA" Type="Double" />
-          <Property Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA_TARIFA" ToRole="CAD_MOTOBOMBA" />
-        </EntityType>
         <EntityType Name="CAD_OUTORGA">
           <Key>
             <PropertyRef Name="IDC_CAD_OUTORGA" />
@@ -1051,24 +1103,6 @@
           <NavigationProperty Name="CAD_FASE_OUTORGA" Relationship="hidrocontrollModel.fk_CAD_FASE_OUTORGA_CAD_OUTORGA1" FromRole="CAD_OUTORGA" ToRole="CAD_FASE_OUTORGA" />
           <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_OUTORGA_CAD_FAZENDA1" FromRole="CAD_OUTORGA" ToRole="CAD_FAZENDA" />
           <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_OUTORGA1" FromRole="CAD_OUTORGA" ToRole="CAD_PARCELA" />
-        </EntityType>
-        <EntityType Name="CAD_PIVO_CENTRAL">
-          <Key>
-            <PropertyRef Name="IDC_CAD_PIVO_CENTRAL" />
-          </Key>
-          <Property Name="IDC_CAD_PIVO_CENTRAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VEL_100_PIVO" Type="Double" />
-          <Property Name="TEMP_DIARIO_MAX" Type="Time" Precision="7" />
-          <Property Name="DIS_RAIO_TOTAL" Type="Double" />
-          <Property Name="VAR_VAO_BALANCO" Type="Double" />
-          <Property Name="VAZ_PIVO" Type="Double" />
-          <Property Name="VAR_EFICIENCIA" Type="Double" />
-          <Property Name="VAR_LAMINA" Type="Double" />
-          <Property Name="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" Type="Int32" />
-          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" FromRole="CAD_PIVO_CENTRAL" ToRole="CAD_FAZENDA" />
-          <NavigationProperty Name="CAD_MODELO_PIVO" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" FromRole="CAD_PIVO_CENTRAL" ToRole="CAD_MODELO_PIVO" />
-          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_PIVO_CENTRAL1" FromRole="CAD_PIVO_CENTRAL" ToRole="CAD_PARCELA" />
         </EntityType>
         <EntityType Name="CAD_PRECIPITACAO">
           <Key>
@@ -1105,8 +1139,8 @@
           <Property Name="VAR_CONSUMO" Type="Double" />
           <Property Name="CAD_RESERVATORIO_IDC_RESERVATORIO" Type="Int32" Nullable="false" />
           <Property Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" FromRole="CAD_RESERVATORIO_DIARIO" ToRole="CAD_MOTOBOMBA" />
           <NavigationProperty Name="CAD_RESERVATORIO" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_RESERVATORIO1" FromRole="CAD_RESERVATORIO_DIARIO" ToRole="CAD_RESERVATORIO" />
+          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" FromRole="CAD_RESERVATORIO_DIARIO" ToRole="CAD_MOTOBOMBA" />
         </EntityType>
         <EntityType Name="CAD_UMIDADE">
           <Key>
@@ -1121,20 +1155,8 @@
           <Property Name="VOL_CM50" Type="Double" />
           <Property Name="VOL_CM60" Type="Double" />
           <Property Name="CAD_PARCELA_IDC_CAD_PARCELA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_UMIDADE_CAD_PARCELA1" FromRole="CAD_UMIDADE" ToRole="CAD_PARCELA" />
-        </EntityType>
-        <EntityType Name="CAD_USUARIO">
-          <Key>
-            <PropertyRef Name="IDC_CAD_USUARIO" />
-          </Key>
-          <Property Name="IDC_CAD_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NUM_MATRICULA" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NOM_USUARIO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="CNF_SENHA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="DAT_CRIACAO" Type="DateTime" Precision="0" />
-          <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="Int32" Nullable="false" />
-          <Property Name="DAT_ALTERACAO" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_USUARIO" ToRole="CAD_CLIENTE" />
+          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1" FromRole="CAD_UMIDADE" ToRole="CAD_PARCELA" />
+          <NavigationProperty Name="CAD_PARCELA1" Relationship="hidrocontrollModel.fk_CAD_UMIDADE_CAD_PARCELA1" FromRole="CAD_UMIDADE" ToRole="CAD_PARCELA" />
         </EntityType>
         <Association Name="fk_CAD_CIDADE_CAD_ESTADO1">
           <End Type="hidrocontrollModel.CAD_ESTADO" Role="CAD_ESTADO" Multiplicity="1" />
@@ -1168,18 +1190,6 @@
               <PropertyRef Name="IDC_CAD_CLIENTE" />
             </Principal>
             <Dependent Role="CAD_FAZENDA">
-              <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_USUARIO_CAD_CLIENTE1">
-          <End Type="hidrocontrollModel.CAD_CLIENTE" Role="CAD_CLIENTE" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_USUARIO" Role="CAD_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_CLIENTE">
-              <PropertyRef Name="IDC_CAD_CLIENTE" />
-            </Principal>
-            <Dependent Role="CAD_USUARIO">
               <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
@@ -1224,20 +1234,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_CAD_MOTOBOMBA_CAD_FAZENDA1">
-          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_FAZENDA">
-              <PropertyRef Name="IDC_CAD_FAZENDA" />
-            </Principal>
-            <Dependent Role="CAD_MOTOBOMBA">
-              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_CAD_OUTORGA_CAD_FAZENDA1">
           <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1248,20 +1244,6 @@
               <PropertyRef Name="IDC_CAD_FAZENDA" />
             </Principal>
             <Dependent Role="CAD_OUTORGA">
-              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1">
-          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="hidrocontrollModel.CAD_PIVO_CENTRAL" Role="CAD_PIVO_CENTRAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_FAZENDA">
-              <PropertyRef Name="IDC_CAD_FAZENDA" />
-            </Principal>
-            <Dependent Role="CAD_PIVO_CENTRAL">
               <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
             </Dependent>
           </ReferentialConstraint>
@@ -1280,44 +1262,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1">
-          <End Type="hidrocontrollModel.CAD_MODELO_PIVO" Role="CAD_MODELO_PIVO" Multiplicity="0..1" />
-          <End Type="hidrocontrollModel.CAD_PIVO_CENTRAL" Role="CAD_PIVO_CENTRAL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_MODELO_PIVO">
-              <PropertyRef Name="IDC_CAD_MODELO_PIVO" />
-            </Principal>
-            <Dependent Role="CAD_PIVO_CENTRAL">
-              <PropertyRef Name="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1">
-          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA" Role="CAD_MOTOBOMBA_TARIFA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_MOTOBOMBA">
-              <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
-            </Principal>
-            <Dependent Role="CAD_MOTOBOMBA_TARIFA">
-              <PropertyRef Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1">
-          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_RESERVATORIO_DIARIO" Role="CAD_RESERVATORIO_DIARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_MOTOBOMBA">
-              <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
-            </Principal>
-            <Dependent Role="CAD_RESERVATORIO_DIARIO">
-              <PropertyRef Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_CAD_RESERVATORIO_DIARIO_CAD_RESERVATORIO1">
           <End Type="hidrocontrollModel.CAD_RESERVATORIO" Role="CAD_RESERVATORIO" Multiplicity="1" />
           <End Type="hidrocontrollModel.CAD_RESERVATORIO_DIARIO" Role="CAD_RESERVATORIO_DIARIO" Multiplicity="*" />
@@ -1327,134 +1271,6 @@
             </Principal>
             <Dependent Role="CAD_RESERVATORIO_DIARIO">
               <PropertyRef Name="CAD_RESERVATORIO_IDC_RESERVATORIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CAD_PARCELA">
-          <Key>
-            <PropertyRef Name="IDC_CAD_PARCELA" />
-          </Key>
-          <Property Name="IDC_CAD_PARCELA" Type="Int32" Nullable="false" />
-          <Property Name="NOM_PARCELA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ARE_PARCELA" Type="Double" />
-          <Property Name="VAR_PLUVIOMETRO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="VAR_UMIDADE_SOLO_PLANTIO" Type="Double" />
-          <Property Name="VAR_ESTRESSE_EXCEDIDO" Type="Double" />
-          <Property Name="CAD_OUTORGA_IDC_CAD_OUTORGA" Type="Int32" />
-          <Property Name="CAD_CULTURA_IDC_CAD_CULTURA" Type="Int32" Nullable="false" />
-          <Property Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" Type="Int32" />
-          <Property Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" Type="Int32" />
-          <Property Name="DAT_PLANTIO" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_CULTURA1" FromRole="CAD_PARCELA" ToRole="CAD_CULTURA" />
-          <NavigationProperty Name="CAD_GOTEJADOR" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_GOTEJADOR1" FromRole="CAD_PARCELA" ToRole="CAD_GOTEJADOR" />
-          <NavigationProperty Name="CAD_OUTORGA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_OUTORGA1" FromRole="CAD_PARCELA" ToRole="CAD_OUTORGA" />
-          <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_PIVO_CENTRAL1" FromRole="CAD_PARCELA" ToRole="CAD_PIVO_CENTRAL" />
-          <NavigationProperty Name="CAD_PRECIPITACAO" Relationship="hidrocontrollModel.fk_CAD_PRECIPITACAO_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="CAD_PRECIPITACAO" />
-          <NavigationProperty Name="CAD_UMIDADE" Relationship="hidrocontrollModel.fk_CAD_UMIDADE_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="CAD_UMIDADE" />
-          <NavigationProperty Name="CAD_IRRIGACAO" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="CAD_IRRIGACAO" />
-          <NavigationProperty Name="REG_MANEJO" Relationship="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="REG_MANEJO" />
-        </EntityType>
-        <Association Name="fk_CAD_PARCELA_CAD_CULTURA1">
-          <End Type="hidrocontrollModel.CAD_CULTURA" Role="CAD_CULTURA" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_CULTURA">
-              <PropertyRef Name="IDC_CAD_CULTURA" />
-            </Principal>
-            <Dependent Role="CAD_PARCELA">
-              <PropertyRef Name="CAD_CULTURA_IDC_CAD_CULTURA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_PARCELA_CAD_GOTEJADOR1">
-          <End Type="hidrocontrollModel.CAD_GOTEJADOR" Role="CAD_GOTEJADOR" Multiplicity="0..1" />
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_GOTEJADOR">
-              <PropertyRef Name="IDC_CAD_GOTEJADOR" />
-            </Principal>
-            <Dependent Role="CAD_PARCELA">
-              <PropertyRef Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_PARCELA_CAD_OUTORGA1">
-          <End Type="hidrocontrollModel.CAD_OUTORGA" Role="CAD_OUTORGA" Multiplicity="0..1" />
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_OUTORGA">
-              <PropertyRef Name="IDC_CAD_OUTORGA" />
-            </Principal>
-            <Dependent Role="CAD_PARCELA">
-              <PropertyRef Name="CAD_OUTORGA_IDC_CAD_OUTORGA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_PARCELA_CAD_PIVO_CENTRAL1">
-          <End Type="hidrocontrollModel.CAD_PIVO_CENTRAL" Role="CAD_PIVO_CENTRAL" Multiplicity="0..1" />
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_PIVO_CENTRAL">
-              <PropertyRef Name="IDC_CAD_PIVO_CENTRAL" />
-            </Principal>
-            <Dependent Role="CAD_PARCELA">
-              <PropertyRef Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_PRECIPITACAO_CAD_PARCELA1">
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_PRECIPITACAO" Role="CAD_PRECIPITACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_PARCELA">
-              <PropertyRef Name="IDC_CAD_PARCELA" />
-            </Principal>
-            <Dependent Role="CAD_PRECIPITACAO">
-              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_UMIDADE_CAD_PARCELA1">
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_UMIDADE" Role="CAD_UMIDADE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_PARCELA">
-              <PropertyRef Name="IDC_CAD_PARCELA" />
-            </Principal>
-            <Dependent Role="CAD_UMIDADE">
-              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CAD_FASE_CULTURA">
-          <Key>
-            <PropertyRef Name="IDC_CAD_FASE_CULTURA" />
-          </Key>
-          <Property Name="IDC_CAD_FASE_CULTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOM_FASE_CULTURA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="VAR_KC" Type="Double" />
-          <Property Name="PRF_RAIZ" Type="Double" />
-          <Property Name="VAR_PONTO_MURCHA" Type="Double" />
-          <Property Name="VAR_CAPACIDADE_CAMPO" Type="Double" />
-          <Property Name="ARE_SOMBREADA" Type="Double" />
-          <Property Name="LIM_FASE_CULTURA" Type="Double" />
-          <Property Name="DEN_APARENTE" Type="Double" />
-          <Property Name="CAD_CULTURA_IDC_CAD_CULTURA" Type="Int32" Nullable="false" />
-          <Property Name="NUM_INICIO" Type="Int32" Nullable="false" />
-          <Property Name="NUM_FIM" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_FASE_CULTURA_CAD_CULTURA1" FromRole="CAD_FASE_CULTURA" ToRole="CAD_CULTURA" />
-        </EntityType>
-        <Association Name="fk_CAD_FASE_CULTURA_CAD_CULTURA1">
-          <End Type="hidrocontrollModel.CAD_CULTURA" Role="CAD_CULTURA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="hidrocontrollModel.CAD_FASE_CULTURA" Role="CAD_FASE_CULTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_CULTURA">
-              <PropertyRef Name="IDC_CAD_CULTURA" />
-            </Principal>
-            <Dependent Role="CAD_FASE_CULTURA">
-              <PropertyRef Name="CAD_CULTURA_IDC_CAD_CULTURA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1475,60 +1291,9 @@
           <Property Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" Type="Int32" Nullable="false" />
           <Property Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" Type="Int32" Nullable="false" />
           <Property Name="TMO_IRRIGACAO_FIM" Type="Time" Precision="7" />
-          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" FromRole="CAD_IRRIGACAO" ToRole="CAD_MOTOBOMBA" />
-          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1" FromRole="CAD_IRRIGACAO" ToRole="CAD_PARCELA" />
           <NavigationProperty Name="CAD_RESERVATORIO" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_RESERVATORIO1" FromRole="CAD_IRRIGACAO" ToRole="CAD_RESERVATORIO" />
+          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" FromRole="CAD_IRRIGACAO" ToRole="CAD_MOTOBOMBA" />
         </EntityType>
-        <EntityType Name="REG_MANEJO">
-          <Key>
-            <PropertyRef Name="IDC_CAD_MANEJO" />
-          </Key>
-          <Property Name="IDC_CAD_MANEJO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DAT_MANEJO" Type="DateTime" Precision="0" />
-          <Property Name="VAR_IDADE_PARCELA" Type="Int32" />
-          <Property Name="VOL_IRRIGACAO_NECESSARIA" Type="Double" />
-          <Property Name="VOL_IRRIGACAO_REALIZADA" Type="Double" />
-          <Property Name="PER_PERCENTIMETRO" Type="Double" />
-          <Property Name="VOL_CONSUMO_DIARIO" Type="Double" />
-          <Property Name="TMO_MANEJO" Type="Double" />
-          <Property Name="VAR_KS" Type="Double" />
-          <Property Name="VAR_BALANCO" Type="Double" />
-          <Property Name="VAR_ETO" Type="Double" />
-          <Property Name="VAR_KC" Type="Double" />
-          <Property Name="VAR_KL" Type="Double" />
-          <Property Name="VAR_PRECIPITACAO" Type="Double" />
-          <Property Name="TMO_IRRIGADO_GOTEJO" Type="Double" />
-          <Property Name="TMO_IRRIGADO_PIVO" Type="Double" />
-          <Property Name="QTD_IRRIGADA" Type="Double" />
-          <Property Name="VAR_EXTRESSE_ULTRAPASSADO" Type="Double" />
-          <Property Name="CAD_PARCELA_IDC_CAD_PARCELA" Type="Int32" Nullable="false" />
-          <Property Name="VOL_IRRIGACAO_DESNECESSARIA" Type="Double" />
-          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1" FromRole="REG_MANEJO" ToRole="CAD_PARCELA" />
-        </EntityType>
-        <Association Name="fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1">
-          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_IRRIGACAO" Role="CAD_IRRIGACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_MOTOBOMBA">
-              <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
-            </Principal>
-            <Dependent Role="CAD_IRRIGACAO">
-              <PropertyRef Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_IRRIGACAO_CAD_PARCELA1">
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_IRRIGACAO" Role="CAD_IRRIGACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_PARCELA">
-              <PropertyRef Name="IDC_CAD_PARCELA" />
-            </Principal>
-            <Dependent Role="CAD_IRRIGACAO">
-              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_CAD_IRRIGACAO_CAD_RESERVATORIO1">
           <End Type="hidrocontrollModel.CAD_RESERVATORIO" Role="CAD_RESERVATORIO" Multiplicity="1" />
           <End Type="hidrocontrollModel.CAD_IRRIGACAO" Role="CAD_IRRIGACAO" Multiplicity="*" />
@@ -1538,20 +1303,6 @@
             </Principal>
             <Dependent Role="CAD_IRRIGACAO">
               <PropertyRef Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_REG_MANEJO_CAD_PARCELA1">
-          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="hidrocontrollModel.REG_MANEJO" Role="REG_MANEJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_PARCELA">
-              <PropertyRef Name="IDC_CAD_PARCELA" />
-            </Principal>
-            <Dependent Role="REG_MANEJO">
-              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1582,6 +1333,405 @@
             </Principal>
             <Dependent Role="CAD_CLIMA">
               <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CAD_USUARIO">
+          <Key>
+            <PropertyRef Name="IDC_CAD_USUARIO" />
+          </Key>
+          <Property Name="IDC_CAD_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_MATRICULA" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_USUARIO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CNF_SENHA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DAT_CRIACAO" Type="DateTime" Precision="0" />
+          <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="DAT_ALTERACAO" Type="DateTime" Precision="0" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" />
+          <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_USUARIO" ToRole="CAD_CLIENTE" />
+          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_IDC_CAD_FAZENDA" FromRole="CAD_USUARIO" ToRole="CAD_FAZENDA" />
+        </EntityType>
+        <Association Name="fk_CAD_USUARIO_CAD_CLIENTE1">
+          <End Type="hidrocontrollModel.CAD_CLIENTE" Role="CAD_CLIENTE" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_USUARIO" Role="CAD_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_CLIENTE">
+              <PropertyRef Name="IDC_CAD_CLIENTE" />
+            </Principal>
+            <Dependent Role="CAD_USUARIO">
+              <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
+          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="0..1" />
+          <End Type="hidrocontrollModel.CAD_USUARIO" Role="CAD_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_USUARIO">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CAD_MODELO_PIVO_CENTRAL">
+          <Key>
+            <PropertyRef Name="IDC_CAD_MODELO_PIVO_CENTRAL" />
+          </Key>
+          <Property Name="IDC_CAD_MODELO_PIVO_CENTRAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_MODELO_PIVO_CENTRAL" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" FromRole="CAD_MODELO_PIVO_CENTRAL" ToRole="CAD_PIVO_CENTRAL" />
+        </EntityType>
+        <EntityType Name="CAD_PIVO_CENTRAL">
+          <Key>
+            <PropertyRef Name="IDC_CAD_PIVO_CENTRAL" />
+          </Key>
+          <Property Name="IDC_CAD_PIVO_CENTRAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VEL_100_PIVO" Type="Double" />
+          <Property Name="TEMP_DIARIO_MAX" Type="Time" Precision="7" />
+          <Property Name="DIS_RAIO_TOTAL" Type="Double" />
+          <Property Name="VAR_VAO_BALANCO" Type="Double" />
+          <Property Name="VAZ_PIVO" Type="Double" />
+          <Property Name="VAR_EFICIENCIA" Type="Double" />
+          <Property Name="VAR_LAMINA" Type="Double" />
+          <Property Name="CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL" Type="Int32" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
+          <Property Name="NOM_PIVO_CENTRAL" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" FromRole="CAD_PIVO_CENTRAL" ToRole="CAD_FAZENDA" />
+          <NavigationProperty Name="CAD_MODELO_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1" FromRole="CAD_PIVO_CENTRAL" ToRole="CAD_MODELO_PIVO_CENTRAL" />
+          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_PIVO_CENTRAL1" FromRole="CAD_PIVO_CENTRAL" ToRole="CAD_PARCELA" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1">
+          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hidrocontrollModel.CAD_PIVO_CENTRAL" Role="CAD_PIVO_CENTRAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_PIVO_CENTRAL">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PIVO_CENTRAL_CAD_MODELO_PIVO1">
+          <End Type="hidrocontrollModel.CAD_MODELO_PIVO_CENTRAL" Role="CAD_MODELO_PIVO_CENTRAL" Multiplicity="0..1" />
+          <End Type="hidrocontrollModel.CAD_PIVO_CENTRAL" Role="CAD_PIVO_CENTRAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_MODELO_PIVO_CENTRAL">
+              <PropertyRef Name="IDC_CAD_MODELO_PIVO_CENTRAL" />
+            </Principal>
+            <Dependent Role="CAD_PIVO_CENTRAL">
+              <PropertyRef Name="CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CAD_FASE_CULTURA">
+          <Key>
+            <PropertyRef Name="IDC_CAD_FASE_CULTURA" />
+          </Key>
+          <Property Name="IDC_CAD_FASE_CULTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_FASE_CULTURA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="VAR_KC" Type="Double" />
+          <Property Name="PRF_RAIZ" Type="Double" />
+          <Property Name="ARE_SOMBREADA" Type="Double" />
+          <Property Name="CAD_CULTURA_IDC_CAD_CULTURA" Type="Int32" Nullable="false" />
+          <Property Name="NUM_INICIO" Type="Int32" Nullable="false" />
+          <Property Name="NUM_FIM" Type="Int32" Nullable="false" />
+          <Property Name="VAR_PREF_RADICULAR" Type="Double" />
+          <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_FASE_CULTURA_CAD_CULTURA1" FromRole="CAD_FASE_CULTURA" ToRole="CAD_CULTURA" />
+        </EntityType>
+        <EntityType Name="CAD_PARCELA">
+          <Key>
+            <PropertyRef Name="IDC_CAD_PARCELA" />
+          </Key>
+          <Property Name="NOM_PARCELA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ARE_PARCELA" Type="Double" />
+          <Property Name="VAR_PLUVIOMETRO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="VAR_UMIDADE_SOLO_PLANTIO" Type="Double" />
+          <Property Name="VAR_ESTRESSE_EXCEDIDO" Type="Double" />
+          <Property Name="CAD_OUTORGA_IDC_CAD_OUTORGA" Type="Int32" />
+          <Property Name="CAD_CULTURA_IDC_CAD_CULTURA" Type="Int32" Nullable="false" />
+          <Property Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" Type="Int32" />
+          <Property Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" Type="Int32" />
+          <Property Name="DAT_PLANTIO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IDC_CAD_PARCELA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CAD_SOLO_IDC_CAD_SOLO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_CULTURA1" FromRole="CAD_PARCELA" ToRole="CAD_CULTURA" />
+          <NavigationProperty Name="CAD_GOTEJADOR" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_GOTEJADOR1" FromRole="CAD_PARCELA" ToRole="CAD_GOTEJADOR" />
+          <NavigationProperty Name="CAD_OUTORGA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_OUTORGA1" FromRole="CAD_PARCELA" ToRole="CAD_OUTORGA" />
+          <NavigationProperty Name="CAD_UMIDADE" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="CAD_UMIDADE" />
+          <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_PIVO_CENTRAL1" FromRole="CAD_PARCELA" ToRole="CAD_PIVO_CENTRAL" />
+          <NavigationProperty Name="CAD_SOLO" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_SOLO" FromRole="CAD_PARCELA" ToRole="CAD_SOLO" />
+          <NavigationProperty Name="CAD_PRECIPITACAO" Relationship="hidrocontrollModel.fk_CAD_PRECIPITACAO_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="CAD_PRECIPITACAO" />
+          <NavigationProperty Name="CAD_UMIDADE1" Relationship="hidrocontrollModel.fk_CAD_UMIDADE_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="CAD_UMIDADE" />
+          <NavigationProperty Name="REG_MANEJO" Relationship="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1" FromRole="CAD_PARCELA" ToRole="REG_MANEJO" />
+        </EntityType>
+        <EntityType Name="CAD_SOLO">
+          <Key>
+            <PropertyRef Name="IDC_CAD_SOLO" />
+          </Key>
+          <Property Name="IDC_CAD_SOLO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_SOLO" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="VAR_CAPACIDADE_CAMPO" Type="Double" />
+          <Property Name="VAR_PONTO_MURCHA" Type="Double" />
+          <Property Name="DEN_APARENTE" Type="Double" />
+          <Property Name="VAR_LIMITE" Type="Double" />
+          <Property Name="VAR_KS" Type="Double" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" />
+          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_SOLO_CAD_FAZENDA" FromRole="CAD_SOLO" ToRole="CAD_FAZENDA" />
+          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_CAD_PARCELA_CAD_SOLO" FromRole="CAD_SOLO" ToRole="CAD_PARCELA" />
+        </EntityType>
+        <EntityType Name="REG_MANEJO">
+          <Key>
+            <PropertyRef Name="IDC_REG_MANEJO" />
+          </Key>
+          <Property Name="IDC_REG_MANEJO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DAT_MANEJO" Type="DateTime" Precision="0" />
+          <Property Name="VAR_IDADE_PARCELA" Type="Int32" />
+          <Property Name="VOL_IRRIGACAO_NECESSARIA" Type="Double" />
+          <Property Name="VOL_IRRIGACAO_REALIZADA" Type="Double" />
+          <Property Name="PER_PERCENTIMETRO" Type="Double" />
+          <Property Name="VOL_CONSUMO_DIARIO" Type="Double" />
+          <Property Name="TMO_MANEJO" Type="Double" />
+          <Property Name="VAR_KS" Type="Double" />
+          <Property Name="VAR_BALANCO" Type="Double" />
+          <Property Name="VAR_ETO" Type="Double" />
+          <Property Name="VAR_KC" Type="Double" />
+          <Property Name="VAR_KL" Type="Double" />
+          <Property Name="VAR_PRECIPITACAO" Type="Double" />
+          <Property Name="TMO_IRRIGADO_GOTEJO" Type="Double" />
+          <Property Name="TMO_IRRIGADO_PIVO" Type="Double" />
+          <Property Name="QTD_IRRIGADA" Type="Double" />
+          <Property Name="VAR_EXTRESSE_ULTRAPASSADO" Type="Double" />
+          <Property Name="CAD_PARCELA_IDC_CAD_PARCELA" Type="Int32" Nullable="false" />
+          <Property Name="VOL_IRRIGACAO_DESNECESSARIA" Type="Double" />
+          <NavigationProperty Name="CAD_PARCELA" Relationship="hidrocontrollModel.fk_REG_MANEJO_CAD_PARCELA1" FromRole="REG_MANEJO" ToRole="CAD_PARCELA" />
+        </EntityType>
+        <Association Name="fk_CAD_FASE_CULTURA_CAD_CULTURA1">
+          <End Type="hidrocontrollModel.CAD_CULTURA" Role="CAD_CULTURA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hidrocontrollModel.CAD_FASE_CULTURA" Role="CAD_FASE_CULTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_CULTURA">
+              <PropertyRef Name="IDC_CAD_CULTURA" />
+            </Principal>
+            <Dependent Role="CAD_FASE_CULTURA">
+              <PropertyRef Name="CAD_CULTURA_IDC_CAD_CULTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PARCELA_CAD_CULTURA1">
+          <End Type="hidrocontrollModel.CAD_CULTURA" Role="CAD_CULTURA" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_CULTURA">
+              <PropertyRef Name="IDC_CAD_CULTURA" />
+            </Principal>
+            <Dependent Role="CAD_PARCELA">
+              <PropertyRef Name="CAD_CULTURA_IDC_CAD_CULTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_SOLO_CAD_FAZENDA">
+          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="0..1" />
+          <End Type="hidrocontrollModel.CAD_SOLO" Role="CAD_SOLO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_SOLO">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PARCELA_CAD_GOTEJADOR1">
+          <End Type="hidrocontrollModel.CAD_GOTEJADOR" Role="CAD_GOTEJADOR" Multiplicity="0..1" />
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_GOTEJADOR">
+              <PropertyRef Name="IDC_CAD_GOTEJADOR" />
+            </Principal>
+            <Dependent Role="CAD_PARCELA">
+              <PropertyRef Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PARCELA_CAD_OUTORGA1">
+          <End Type="hidrocontrollModel.CAD_OUTORGA" Role="CAD_OUTORGA" Multiplicity="0..1" />
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_OUTORGA">
+              <PropertyRef Name="IDC_CAD_OUTORGA" />
+            </Principal>
+            <Dependent Role="CAD_PARCELA">
+              <PropertyRef Name="CAD_OUTORGA_IDC_CAD_OUTORGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_IRRIGACAO_CAD_PARCELA1">
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_UMIDADE" Role="CAD_UMIDADE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_PARCELA">
+              <PropertyRef Name="IDC_CAD_PARCELA" />
+            </Principal>
+            <Dependent Role="CAD_UMIDADE">
+              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PARCELA_CAD_PIVO_CENTRAL1">
+          <End Type="hidrocontrollModel.CAD_PIVO_CENTRAL" Role="CAD_PIVO_CENTRAL" Multiplicity="0..1" />
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_PIVO_CENTRAL">
+              <PropertyRef Name="IDC_CAD_PIVO_CENTRAL" />
+            </Principal>
+            <Dependent Role="CAD_PARCELA">
+              <PropertyRef Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PARCELA_CAD_SOLO">
+          <End Type="hidrocontrollModel.CAD_SOLO" Role="CAD_SOLO" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_SOLO">
+              <PropertyRef Name="IDC_CAD_SOLO" />
+            </Principal>
+            <Dependent Role="CAD_PARCELA">
+              <PropertyRef Name="CAD_SOLO_IDC_CAD_SOLO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_PRECIPITACAO_CAD_PARCELA1">
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_PRECIPITACAO" Role="CAD_PRECIPITACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_PARCELA">
+              <PropertyRef Name="IDC_CAD_PARCELA" />
+            </Principal>
+            <Dependent Role="CAD_PRECIPITACAO">
+              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_UMIDADE_CAD_PARCELA1">
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_UMIDADE" Role="CAD_UMIDADE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_PARCELA">
+              <PropertyRef Name="IDC_CAD_PARCELA" />
+            </Principal>
+            <Dependent Role="CAD_UMIDADE">
+              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_REG_MANEJO_CAD_PARCELA1">
+          <End Type="hidrocontrollModel.CAD_PARCELA" Role="CAD_PARCELA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hidrocontrollModel.REG_MANEJO" Role="REG_MANEJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_PARCELA">
+              <PropertyRef Name="IDC_CAD_PARCELA" />
+            </Principal>
+            <Dependent Role="REG_MANEJO">
+              <PropertyRef Name="CAD_PARCELA_IDC_CAD_PARCELA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CAD_MOTOBOMBA_TARIFA">
+          <Key>
+            <PropertyRef Name="IDC_CAD_MOTOBOMBA_TARIFA" />
+          </Key>
+          <Property Name="IDC_CAD_MOTOBOMBA_TARIFA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_TARIFA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="HOR_INICIO_TARIFA" Type="Time" Precision="7" />
+          <Property Name="HOR_FIM_TARIFA" Type="Time" Precision="7" />
+          <Property Name="VAL_TARIFA" Type="Double" />
+          <Property Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA_TARIFA" ToRole="CAD_MOTOBOMBA" />
+        </EntityType>
+        <EntityType Name="CAD_MOTOBOMBA">
+          <Key>
+            <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
+          </Key>
+          <Property Name="IDC_CAD_MOTOBOMBA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_MOTOBOMBA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="VAR_POTENCIA" Type="Int32" />
+          <Property Name="VAR_CONSUMO" Type="Double" />
+          <Property Name="VAZ_MOTOBOMBA" Type="Double" />
+          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_FAZENDA" />
+          <NavigationProperty Name="CAD_IRRIGACAO" Relationship="hidrocontrollModel.fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_IRRIGACAO" />
+          <NavigationProperty Name="CAD_MOTOBOMBA_TARIFA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_MOTOBOMBA_TARIFA" />
+          <NavigationProperty Name="CAD_RESERVATORIO_DIARIO" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1" FromRole="CAD_MOTOBOMBA" ToRole="CAD_RESERVATORIO_DIARIO" />
+        </EntityType>
+        <Association Name="fk_CAD_MOTOBOMBA_CAD_FAZENDA1">
+          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_FAZENDA">
+              <PropertyRef Name="IDC_CAD_FAZENDA" />
+            </Principal>
+            <Dependent Role="CAD_MOTOBOMBA">
+              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_IRRIGACAO_CAD_MOTOBOMBA1">
+          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_IRRIGACAO" Role="CAD_IRRIGACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_MOTOBOMBA">
+              <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
+            </Principal>
+            <Dependent Role="CAD_IRRIGACAO">
+              <PropertyRef Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_MOTOBOMBA_TARIFA_CAD_MOTOBOMBA1">
+          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA" Role="CAD_MOTOBOMBA_TARIFA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_MOTOBOMBA">
+              <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
+            </Principal>
+            <Dependent Role="CAD_MOTOBOMBA_TARIFA">
+              <PropertyRef Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_RESERVATORIO_DIARIO_CAD_MOTOBOMBA1">
+          <End Type="hidrocontrollModel.CAD_MOTOBOMBA" Role="CAD_MOTOBOMBA" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_RESERVATORIO_DIARIO" Role="CAD_RESERVATORIO_DIARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_MOTOBOMBA">
+              <PropertyRef Name="IDC_CAD_MOTOBOMBA" />
+            </Principal>
+            <Dependent Role="CAD_RESERVATORIO_DIARIO">
+              <PropertyRef Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1681,61 +1831,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CAD_MODELO_PIVO">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MODELO_PIVO">
-              <MappingFragment StoreEntitySet="CAD_MODELO_PIVO">
-                <ScalarProperty Name="NOM_MODELO_PIVO" ColumnName="NOM_MODELO_PIVO" />
-                <ScalarProperty Name="IDC_CAD_MODELO_PIVO" ColumnName="IDC_CAD_MODELO_PIVO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_MOTOBOMBA">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA">
-              <MappingFragment StoreEntitySet="CAD_MOTOBOMBA">
-                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-                <ScalarProperty Name="VAR_TARIFAS" ColumnName="VAR_TARIFAS" />
-                <ScalarProperty Name="VAZ_MOTOBOMBA" ColumnName="VAZ_MOTOBOMBA" />
-                <ScalarProperty Name="VAR_CONSUMO" ColumnName="VAR_CONSUMO" />
-                <ScalarProperty Name="VAR_POTENCIA" ColumnName="VAR_POTENCIA" />
-                <ScalarProperty Name="NOM_MOTOBOMBA" ColumnName="NOM_MOTOBOMBA" />
-                <ScalarProperty Name="IDC_CAD_MOTOBOMBA" ColumnName="IDC_CAD_MOTOBOMBA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_MOTOBOMBA_TARIFA">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA">
-              <MappingFragment StoreEntitySet="CAD_MOTOBOMBA_TARIFA">
-                <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-                <ScalarProperty Name="VAL_TARIFA" ColumnName="VAL_TARIFA" />
-                <ScalarProperty Name="HOR_FIM_TARIFA" ColumnName="HOR_FIM_TARIFA" />
-                <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
-                <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
-                <ScalarProperty Name="IDC_CAD_MOTOBOMBA_TARIFA" ColumnName="IDC_CAD_MOTOBOMBA_TARIFA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CAD_OUTORGA">
             <EntityTypeMapping TypeName="hidrocontrollModel.CAD_OUTORGA">
               <MappingFragment StoreEntitySet="CAD_OUTORGA">
                 <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
                 <ScalarProperty Name="NOM_OUTORGA" ColumnName="NOM_OUTORGA" />
                 <ScalarProperty Name="IDC_CAD_OUTORGA" ColumnName="IDC_CAD_OUTORGA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_PIVO_CENTRAL">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PIVO_CENTRAL">
-              <MappingFragment StoreEntitySet="CAD_PIVO_CENTRAL">
-                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-                <ScalarProperty Name="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" ColumnName="CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO" />
-                <ScalarProperty Name="VAR_LAMINA" ColumnName="VAR_LAMINA" />
-                <ScalarProperty Name="VAR_EFICIENCIA" ColumnName="VAR_EFICIENCIA" />
-                <ScalarProperty Name="VAZ_PIVO" ColumnName="VAZ_PIVO" />
-                <ScalarProperty Name="VAR_VAO_BALANCO" ColumnName="VAR_VAO_BALANCO" />
-                <ScalarProperty Name="DIS_RAIO_TOTAL" ColumnName="DIS_RAIO_TOTAL" />
-                <ScalarProperty Name="TEMP_DIARIO_MAX" ColumnName="TEMP_DIARIO_MAX" />
-                <ScalarProperty Name="VEL_100_PIVO" ColumnName="VEL_100_PIVO" />
-                <ScalarProperty Name="IDC_CAD_PIVO_CENTRAL" ColumnName="IDC_CAD_PIVO_CENTRAL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1789,54 +1890,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CAD_USUARIO">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
-              <MappingFragment StoreEntitySet="CAD_USUARIO">
-                <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
-                <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-                <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
-                <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
-                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
-                <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
-                <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_PARCELA">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PARCELA">
-              <MappingFragment StoreEntitySet="CAD_PARCELA">
-                <ScalarProperty Name="DAT_PLANTIO" ColumnName="DAT_PLANTIO" />
-                <ScalarProperty Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" ColumnName="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" />
-                <ScalarProperty Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" ColumnName="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" />
-                <ScalarProperty Name="CAD_CULTURA_IDC_CAD_CULTURA" ColumnName="CAD_CULTURA_IDC_CAD_CULTURA" />
-                <ScalarProperty Name="CAD_OUTORGA_IDC_CAD_OUTORGA" ColumnName="CAD_OUTORGA_IDC_CAD_OUTORGA" />
-                <ScalarProperty Name="VAR_ESTRESSE_EXCEDIDO" ColumnName="VAR_ESTRESSE_EXCEDIDO" />
-                <ScalarProperty Name="VAR_UMIDADE_SOLO_PLANTIO" ColumnName="VAR_UMIDADE_SOLO_PLANTIO" />
-                <ScalarProperty Name="VAR_PLUVIOMETRO" ColumnName="VAR_PLUVIOMETRO" />
-                <ScalarProperty Name="ARE_PARCELA" ColumnName="ARE_PARCELA" />
-                <ScalarProperty Name="NOM_PARCELA" ColumnName="NOM_PARCELA" />
-                <ScalarProperty Name="IDC_CAD_PARCELA" ColumnName="IDC_CAD_PARCELA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_FASE_CULTURA">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_FASE_CULTURA">
-              <MappingFragment StoreEntitySet="CAD_FASE_CULTURA">
-                <ScalarProperty Name="NUM_FIM" ColumnName="NUM_FIM" />
-                <ScalarProperty Name="NUM_INICIO" ColumnName="NUM_INICIO" />
-                <ScalarProperty Name="CAD_CULTURA_IDC_CAD_CULTURA" ColumnName="CAD_CULTURA_IDC_CAD_CULTURA" />
-                <ScalarProperty Name="DEN_APARENTE" ColumnName="DEN_APARENTE" />
-                <ScalarProperty Name="LIM_FASE_CULTURA" ColumnName="LIM_FASE_CULTURA" />
-                <ScalarProperty Name="ARE_SOMBREADA" ColumnName="ARE_SOMBREADA" />
-                <ScalarProperty Name="VAR_CAPACIDADE_CAMPO" ColumnName="VAR_CAPACIDADE_CAMPO" />
-                <ScalarProperty Name="VAR_PONTO_MURCHA" ColumnName="VAR_PONTO_MURCHA" />
-                <ScalarProperty Name="PRF_RAIZ" ColumnName="PRF_RAIZ" />
-                <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
-                <ScalarProperty Name="NOM_FASE_CULTURA" ColumnName="NOM_FASE_CULTURA" />
-                <ScalarProperty Name="IDC_CAD_FASE_CULTURA" ColumnName="IDC_CAD_FASE_CULTURA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CAD_IRRIGACAO">
             <EntityTypeMapping TypeName="hidrocontrollModel.CAD_IRRIGACAO">
               <MappingFragment StoreEntitySet="CAD_IRRIGACAO">
@@ -1853,6 +1906,119 @@
                 <ScalarProperty Name="TMO_IRRIGACAO_PIVO" ColumnName="TMO_IRRIGACAO_PIVO" />
                 <ScalarProperty Name="DAT_IRRIGACAO" ColumnName="DAT_IRRIGACAO" />
                 <ScalarProperty Name="IDC_CAD_IRRIGACAO" ColumnName="IDC_CAD_IRRIGACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_CLIMA">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
+              <MappingFragment StoreEntitySet="CAD_CLIMA">
+                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+                <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
+                <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
+                <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
+                <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
+                <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
+                <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
+                <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
+                <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
+                <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_USUARIO">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
+              <MappingFragment StoreEntitySet="CAD_USUARIO">
+                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+                <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
+                <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+                <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
+                <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
+                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+                <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+                <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_MODELO_PIVO_CENTRAL">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MODELO_PIVO_CENTRAL">
+              <MappingFragment StoreEntitySet="CAD_MODELO_PIVO_CENTRAL">
+                <ScalarProperty Name="NOM_MODELO_PIVO_CENTRAL" ColumnName="NOM_MODELO_PIVO_CENTRAL" />
+                <ScalarProperty Name="IDC_CAD_MODELO_PIVO_CENTRAL" ColumnName="IDC_CAD_MODELO_PIVO_CENTRAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_PIVO_CENTRAL">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PIVO_CENTRAL">
+              <MappingFragment StoreEntitySet="CAD_PIVO_CENTRAL">
+                <ScalarProperty Name="NOM_PIVO_CENTRAL" ColumnName="NOM_PIVO_CENTRAL" />
+                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+                <ScalarProperty Name="CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL" ColumnName="CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL" />
+                <ScalarProperty Name="VAR_LAMINA" ColumnName="VAR_LAMINA" />
+                <ScalarProperty Name="VAR_EFICIENCIA" ColumnName="VAR_EFICIENCIA" />
+                <ScalarProperty Name="VAZ_PIVO" ColumnName="VAZ_PIVO" />
+                <ScalarProperty Name="VAR_VAO_BALANCO" ColumnName="VAR_VAO_BALANCO" />
+                <ScalarProperty Name="DIS_RAIO_TOTAL" ColumnName="DIS_RAIO_TOTAL" />
+                <ScalarProperty Name="TEMP_DIARIO_MAX" ColumnName="TEMP_DIARIO_MAX" />
+                <ScalarProperty Name="VEL_100_PIVO" ColumnName="VEL_100_PIVO" />
+                <ScalarProperty Name="IDC_CAD_PIVO_CENTRAL" ColumnName="IDC_CAD_PIVO_CENTRAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="hidrocontrollModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_FASE_CULTURA">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_FASE_CULTURA">
+              <MappingFragment StoreEntitySet="CAD_FASE_CULTURA">
+                <ScalarProperty Name="VAR_PREF_RADICULAR" ColumnName="VAR_PREF_RADICULAR" />
+                <ScalarProperty Name="NUM_FIM" ColumnName="NUM_FIM" />
+                <ScalarProperty Name="NUM_INICIO" ColumnName="NUM_INICIO" />
+                <ScalarProperty Name="CAD_CULTURA_IDC_CAD_CULTURA" ColumnName="CAD_CULTURA_IDC_CAD_CULTURA" />
+                <ScalarProperty Name="ARE_SOMBREADA" ColumnName="ARE_SOMBREADA" />
+                <ScalarProperty Name="PRF_RAIZ" ColumnName="PRF_RAIZ" />
+                <ScalarProperty Name="VAR_KC" ColumnName="VAR_KC" />
+                <ScalarProperty Name="NOM_FASE_CULTURA" ColumnName="NOM_FASE_CULTURA" />
+                <ScalarProperty Name="IDC_CAD_FASE_CULTURA" ColumnName="IDC_CAD_FASE_CULTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_PARCELA">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_PARCELA">
+              <MappingFragment StoreEntitySet="CAD_PARCELA">
+                <ScalarProperty Name="CAD_SOLO_IDC_CAD_SOLO" ColumnName="CAD_SOLO_IDC_CAD_SOLO" />
+                <ScalarProperty Name="IDC_CAD_PARCELA" ColumnName="IDC_CAD_PARCELA" />
+                <ScalarProperty Name="DAT_PLANTIO" ColumnName="DAT_PLANTIO" />
+                <ScalarProperty Name="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" ColumnName="CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" />
+                <ScalarProperty Name="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" ColumnName="CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" />
+                <ScalarProperty Name="CAD_CULTURA_IDC_CAD_CULTURA" ColumnName="CAD_CULTURA_IDC_CAD_CULTURA" />
+                <ScalarProperty Name="CAD_OUTORGA_IDC_CAD_OUTORGA" ColumnName="CAD_OUTORGA_IDC_CAD_OUTORGA" />
+                <ScalarProperty Name="VAR_ESTRESSE_EXCEDIDO" ColumnName="VAR_ESTRESSE_EXCEDIDO" />
+                <ScalarProperty Name="VAR_UMIDADE_SOLO_PLANTIO" ColumnName="VAR_UMIDADE_SOLO_PLANTIO" />
+                <ScalarProperty Name="VAR_PLUVIOMETRO" ColumnName="VAR_PLUVIOMETRO" />
+                <ScalarProperty Name="ARE_PARCELA" ColumnName="ARE_PARCELA" />
+                <ScalarProperty Name="NOM_PARCELA" ColumnName="NOM_PARCELA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_SOLO">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_SOLO">
+              <MappingFragment StoreEntitySet="CAD_SOLO">
+                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+                <ScalarProperty Name="VAR_KS" ColumnName="VAR_KS" />
+                <ScalarProperty Name="VAR_LIMITE" ColumnName="VAR_LIMITE" />
+                <ScalarProperty Name="DEN_APARENTE" ColumnName="DEN_APARENTE" />
+                <ScalarProperty Name="VAR_PONTO_MURCHA" ColumnName="VAR_PONTO_MURCHA" />
+                <ScalarProperty Name="VAR_CAPACIDADE_CAMPO" ColumnName="VAR_CAPACIDADE_CAMPO" />
+                <ScalarProperty Name="NOM_SOLO" ColumnName="NOM_SOLO" />
+                <ScalarProperty Name="IDC_CAD_SOLO" ColumnName="IDC_CAD_SOLO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1878,23 +2044,31 @@
                 <ScalarProperty Name="VOL_IRRIGACAO_NECESSARIA" ColumnName="VOL_IRRIGACAO_NECESSARIA" />
                 <ScalarProperty Name="VAR_IDADE_PARCELA" ColumnName="VAR_IDADE_PARCELA" />
                 <ScalarProperty Name="DAT_MANEJO" ColumnName="DAT_MANEJO" />
-                <ScalarProperty Name="IDC_CAD_MANEJO" ColumnName="IDC_CAD_MANEJO" />
+                <ScalarProperty Name="IDC_REG_MANEJO" ColumnName="IDC_REG_MANEJO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CAD_CLIMA">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
-              <MappingFragment StoreEntitySet="CAD_CLIMA">
+          <EntitySetMapping Name="CAD_MOTOBOMBA_TARIFA">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA">
+              <MappingFragment StoreEntitySet="CAD_MOTOBOMBA_TARIFA">
+                <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+                <ScalarProperty Name="VAL_TARIFA" ColumnName="VAL_TARIFA" />
+                <ScalarProperty Name="HOR_FIM_TARIFA" ColumnName="HOR_FIM_TARIFA" />
+                <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
+                <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
+                <ScalarProperty Name="IDC_CAD_MOTOBOMBA_TARIFA" ColumnName="IDC_CAD_MOTOBOMBA_TARIFA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_MOTOBOMBA">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA">
+              <MappingFragment StoreEntitySet="CAD_MOTOBOMBA">
                 <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-                <ScalarProperty Name="VAR_RADIACAO" ColumnName="VAR_RADIACAO" />
-                <ScalarProperty Name="VAR_PRECIPITACAO_TOTAL" ColumnName="VAR_PRECIPITACAO_TOTAL" />
-                <ScalarProperty Name="VEL_VENTO" ColumnName="VEL_VENTO" />
-                <ScalarProperty Name="VAR_UMIDADE_RELATIVA" ColumnName="VAR_UMIDADE_RELATIVA" />
-                <ScalarProperty Name="TMP_CLIMA_MEDIA" ColumnName="TMP_CLIMA_MEDIA" />
-                <ScalarProperty Name="TMP_CLIMA_MIN" ColumnName="TMP_CLIMA_MIN" />
-                <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
-                <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
-                <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
+                <ScalarProperty Name="VAZ_MOTOBOMBA" ColumnName="VAZ_MOTOBOMBA" />
+                <ScalarProperty Name="VAR_CONSUMO" ColumnName="VAR_CONSUMO" />
+                <ScalarProperty Name="VAR_POTENCIA" ColumnName="VAR_POTENCIA" />
+                <ScalarProperty Name="NOM_MOTOBOMBA" ColumnName="NOM_MOTOBOMBA" />
+                <ScalarProperty Name="IDC_CAD_MOTOBOMBA" ColumnName="IDC_CAD_MOTOBOMBA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

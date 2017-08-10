@@ -44,7 +44,7 @@ namespace hidrocontroll.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != reg_manejo.IDC_CAD_MANEJO)
+            if (id != reg_manejo.IDC_REG_MANEJO)
             {
                 return BadRequest();
             }
@@ -85,7 +85,7 @@ namespace hidrocontroll.Controllers
             db.REG_MANEJO.Add(reg_manejo);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = reg_manejo.IDC_CAD_MANEJO }, reg_manejo);
+            return CreatedAtRoute("DefaultApi", new { id = reg_manejo.IDC_REG_MANEJO }, reg_manejo);
         }
 
         // DELETE api/Manejo/5
@@ -118,6 +118,7 @@ namespace hidrocontroll.Controllers
             CAD_GOTEJADOR gotejador = null;
             CAD_CULTURA cultura = db.CAD_CULTURA.Include(c => c.CAD_PARCELA).Include(c => c.CAD_FASE_CULTURA).Where(c2 => c2.IDC_CAD_CULTURA == parcela.CAD_CULTURA_IDC_CAD_CULTURA).First();
             CAD_FAZENDA fazenda = db.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Include(f => f.CAD_CLIMA).Where(f2 => f2.IDC_CAD_FAZENDA == cultura.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
+            CAD_SOLO solo = db.CAD_SOLO.Where(s => s.IDC_CAD_SOLO == parcela.CAD_SOLO_IDC_CAD_SOLO).First();
             CAD_FASE_CULTURA faseCultura = null;
 
 
@@ -191,7 +192,7 @@ namespace hidrocontroll.Controllers
            
             if (contInicio == 0)
             {
-                necessariaInicial = (faseCultura.VAR_CAPACIDADE_CAMPO.Value - parcela.VAR_UMIDADE_SOLO_PLANTIO.Value) / 100 * 1.05 * (faseCultura.PRF_RAIZ.Value * 10);
+                necessariaInicial = (solo.VAR_CAPACIDADE_CAMPO.Value - parcela.VAR_UMIDADE_SOLO_PLANTIO.Value) / 100 * 1.05 * (faseCultura.PRF_RAIZ.Value * 10);
                 ks = 0;
                 balanco = 0;
             }
@@ -321,7 +322,7 @@ namespace hidrocontroll.Controllers
                 double etc = faseCultura.VAR_KC.Value * kl * eto * ks;
                 double balancoHidrico = etc - irrigacao.VOL_IRRIGACAO.Value - chuva + necessariaInicial;
                 necessariaInicial = 0;
-                double irrigacaoDesnecessaria = balanco + etc - irrigacao.VOL_IRRIGACAO.Value + (faseCultura.LIM_FASE_CULTURA.Value * -1);
+                double irrigacaoDesnecessaria = balanco + etc - irrigacao.VOL_IRRIGACAO.Value + (solo.VAR_LIMITE.Value * -1);
                 double? necessaria = null;
 
                 if (irrigacaoDesnecessaria > 0)
@@ -329,9 +330,9 @@ namespace hidrocontroll.Controllers
                     irrigacaoDesnecessaria = 0;
                 }
 
-                if (balancoHidrico + balanco < faseCultura.LIM_FASE_CULTURA)
+                if (balancoHidrico + balanco < solo.VAR_LIMITE)
                 {
-                    balanco = faseCultura.LIM_FASE_CULTURA.Value;
+                    balanco = solo.VAR_LIMITE.Value;
                 }
                 if (balanco < 0)
                 {
@@ -342,9 +343,9 @@ namespace hidrocontroll.Controllers
                     necessaria = balanco;
                 }
 
-                ks = (Math.Log10((((((faseCultura.VAR_CAPACIDADE_CAMPO.Value - faseCultura.VAR_PONTO_MURCHA.Value) / 100) * faseCultura.DEN_APARENTE.Value) *
-                    (faseCultura.PRF_RAIZ.Value * 10)) - necessaria.Value) + 1)) / (Math.Log10(((((faseCultura.VAR_CAPACIDADE_CAMPO.Value - faseCultura.VAR_PONTO_MURCHA.Value) / 100)
-                    * faseCultura.DEN_APARENTE.Value) * (faseCultura.PRF_RAIZ.Value * 10)) + 1));
+                ks = (Math.Log10((((((solo.VAR_CAPACIDADE_CAMPO.Value - solo.VAR_PONTO_MURCHA.Value) / 100) * solo.DEN_APARENTE.Value) *
+                    (faseCultura.PRF_RAIZ.Value * 10)) - necessaria.Value) + 1)) / (Math.Log10(((((solo.VAR_CAPACIDADE_CAMPO.Value - solo.VAR_PONTO_MURCHA.Value) / 100)
+                    * solo.DEN_APARENTE.Value) * (faseCultura.PRF_RAIZ.Value * 10)) + 1));
 
                 if (ks < 0.01)
                 {
@@ -380,7 +381,7 @@ namespace hidrocontroll.Controllers
                     manejo = new REG_MANEJO();
                     manejo.CAD_PARCELA_IDC_CAD_PARCELA= parcela.IDC_CAD_PARCELA;
                     manejo.DAT_MANEJO = data;
-                    manejo.IDC_CAD_MANEJO = contInicio.Value;
+                    manejo.IDC_REG_MANEJO = contInicio.Value;
                     try
                     {
                         REG_MANEJO r = atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado);
@@ -393,7 +394,7 @@ namespace hidrocontroll.Controllers
                 }
                 else
                 {
-                    PutREG_MANEJO(manejo.IDC_CAD_MANEJO,atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado));
+                    PutREG_MANEJO(manejo.IDC_REG_MANEJO,atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado));
                 }
 
                 contInicio += 1;
@@ -435,7 +436,7 @@ namespace hidrocontroll.Controllers
 
         private bool REG_MANEJOExists(int id)
         {
-            return db.REG_MANEJO.Count(e => e.IDC_CAD_MANEJO == id) > 0;
+            return db.REG_MANEJO.Count(e => e.IDC_REG_MANEJO == id) > 0;
         }
 
        

@@ -1,30 +1,64 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("CulturaParcelasController", culturaController);
+    angular.module("hidrocontroll.web").controller("CulturaCadastrosController", culturaController);
 
-    function culturaController(EntitiesService, $mdMedia, $mdDialog, $filter) {
+    function culturaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams) {
         var self = this;
 
         initializeData();
 
+        var intervalID = window.setInterval(refresh, 500);
+
         function initializeData() {
+
+            self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
+
             self.Cultura = EntitiesService.cultura;
             self.Fazenda = EntitiesService.fazenda;
+            self.FaseCultura = EntitiesService.faseCultura;
+            
             self.$mdMedia = $mdMedia;
             self.excluir = excluir;
+            self.excluir = excluir;
             self.create = create;
+            self.getContFasesCultura = getContFasesCultura;
             self.update = update;
             self.printData = printData;
-            self.getFazenda = getFazenda;
             self.showhints;
+            self.refresh = refresh;
+            self.cols = [
+              {
+                  field: "NOM_CULTURA", title: "Nome", sortable: "NOM_CULTURA", show: true, filter: { NOM_CULTURA: "text" }, type: "valor"
+              },
+              { field: "IDC_CAD_CULTURA", title: "Quantidade de Fases", show: true, type: "valorComposto" },
+
+              { title: "Editar", show: true, type: "comandoEditar", class: 'width-70-px' },
+              { title: "Deletar", show: true, type: "comandoDeletar", class: 'width-70-px' }
+            ];
 
             self.tabela = {
-                "titulo": "Cultura",
-                "subtitulo": "Informações sobre cultura:",
-                "cabecalho": ["Código","Nome/Variedade","Fazenda"]
+                "titulo": "Culturas",
+                "subtitulo": "Cadastro de cultura:"
             };
 
-            self.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
         };
+
+        function refresh() {
+            if (self.Cultura.list.length != 0) {
+                clearInterval(intervalID);
+            }
+            try {
+                var list = [];
+
+                list = $filter('filter')(self.Cultura.list, function (cultura) {
+                    return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
+                });
+                list = $filter('orderBy')(list, 'NOM_CULTURA');
+
+                self.tableParams = new NgTableParams({}, { dataset: list });
+                $rootScope.$digest();
+            } catch (e) {
+            }
+        }
 
 
         var success = $mdDialog.alert()
@@ -64,8 +98,6 @@
            
             if (item) {
                 item.$select();
-                item.CAD_FAZENDA = getFazenda(item.CAD_FAZENDA_IDC_CAD_FAZENDA);
-                console.log(item);
                 method = "$update";
             };
 
@@ -76,14 +108,17 @@
                     {},
                     function () { //Função de sucesso: objeto foi inserido
                         $mdDialog
-                            .show(success)
+                            .show(success).finally(function () {
+                                if (resource.IDC_CAD_CULTURA)
+                                    for (var i = 0; i < self.Cultura.list.length; i++)
+                                        if (self.Cultura.list[i].IDC_CAD_CULTURA == resource.IDC_CAD_CULTURA)
+                                            self.Cultura.list[i] = resource;
+                                refresh();
+                            });
                     },
                     function () { //Função de erro: objeto não pode ser inserido
                         $mdDialog
-                            .show(error)
-                        .finally(function () {
-                            location.reload();
-                        });
+                            .show(error);
                     }
                 );
             });
@@ -108,11 +143,13 @@
                     {},
                     function () {
                         $mdDialog
-                            .show(success)
+                             .show(success).finally(function () {
+                                 refresh();
+                             });
                     },
                     function () {
                         $mdDialog
-                            .show(error)
+                            .show(error);
                     }
                 );
             });
@@ -123,7 +160,7 @@
 
             return $mdDialog.show({
                 controller: dialogController,
-                templateUrl: 'pages/parcelas/criar_cultura.html',
+                templateUrl: 'pages/cadastros/dialogs/criar_cultura.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,
@@ -132,7 +169,10 @@
         };
 
         function dialogController($scope, $mdDialog) {
-            $scope.selected = self.Cultura.selected;
+            $scope.selected = jQuery.extend({}, self.Cultura.selected);
+
+
+            $scope.selected.CAD_FAZENDA_IDC_CAD_FAZENDA =self.codFazendaAtual;
 
             $scope.hide = function () {
                 $mdDialog.hide();
@@ -146,27 +186,15 @@
                 }
 
             };
-
-            $scope.getMatchesFazenda = function (text) {
-                return $filter('filter')(self.Fazenda.list, text);
-            };
-
-            $scope.onchangeSelectedFazenda = function (fazenda) {
-                try {
-                    console.log(fazenda);
-                    self.Cultura.selected.CAD_FAZENDA_IDC_CAD_FAZENDA = fazenda.IDC_CAD_FAZENDA;
-                } catch (err) {
-                    //Tratamento de exceção
-                }
-            };
         };
 
-       
-
-        function getFazenda(id) {
-            for (var i = 0; i < self.Fazenda.list.length; i++)
-                if (self.Fazenda.list[i].IDC_CAD_FAZENDA == id)
-                    return self.Fazenda.list[i];
+      
+        function getContFasesCultura(idCultura) {
+            var cont = 0;
+            for (var i = 0; i < self.FaseCultura.list.length; i++)
+                if (self.FaseCultura.list[i].CAD_CULTURA_IDC_CAD_CULTURA == idCultura)
+                    cont++;
+            return cont;
         };
         
     };

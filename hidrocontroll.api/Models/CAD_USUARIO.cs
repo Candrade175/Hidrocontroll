@@ -21,7 +21,9 @@ namespace hidrocontroll.Models
         public Nullable<System.DateTime> DAT_CRIACAO { get; set; }
         public int CAD_CLIENTE_IDC_CAD_CLIENTE { get; set; }
         public Nullable<System.DateTime> DAT_ALTERACAO { get; set; }
+        public Nullable<int> CAD_FAZENDA_IDC_CAD_FAZENDA { get; set; }
     
         public virtual CAD_CLIENTE CAD_CLIENTE { get; set; }
+        public virtual CAD_FAZENDA CAD_FAZENDA { get; set; }
     }
 }

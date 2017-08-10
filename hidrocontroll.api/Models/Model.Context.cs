@@ -33,20 +33,22 @@ namespace hidrocontroll.Models
         public DbSet<CAD_FASE_OUTORGA> CAD_FASE_OUTORGA { get; set; }
         public DbSet<CAD_FAZENDA> CAD_FAZENDA { get; set; }
         public DbSet<CAD_GOTEJADOR> CAD_GOTEJADOR { get; set; }
-        public DbSet<CAD_MODELO_PIVO> CAD_MODELO_PIVO { get; set; }
-        public DbSet<CAD_MOTOBOMBA> CAD_MOTOBOMBA { get; set; }
-        public DbSet<CAD_MOTOBOMBA_TARIFA> CAD_MOTOBOMBA_TARIFA { get; set; }
         public DbSet<CAD_OUTORGA> CAD_OUTORGA { get; set; }
-        public DbSet<CAD_PIVO_CENTRAL> CAD_PIVO_CENTRAL { get; set; }
         public DbSet<CAD_PRECIPITACAO> CAD_PRECIPITACAO { get; set; }
         public DbSet<CAD_RESERVATORIO> CAD_RESERVATORIO { get; set; }
         public DbSet<CAD_RESERVATORIO_DIARIO> CAD_RESERVATORIO_DIARIO { get; set; }
         public DbSet<CAD_UMIDADE> CAD_UMIDADE { get; set; }
-        public DbSet<CAD_USUARIO> CAD_USUARIO { get; set; }
-        public DbSet<CAD_PARCELA> CAD_PARCELA { get; set; }
-        public DbSet<CAD_FASE_CULTURA> CAD_FASE_CULTURA { get; set; }
         public DbSet<CAD_IRRIGACAO> CAD_IRRIGACAO { get; set; }
-        public DbSet<REG_MANEJO> REG_MANEJO { get; set; }
         public DbSet<CAD_CLIMA> CAD_CLIMA { get; set; }
+        public DbSet<CAD_USUARIO> CAD_USUARIO { get; set; }
+        public DbSet<CAD_MODELO_PIVO_CENTRAL> CAD_MODELO_PIVO_CENTRAL { get; set; }
+        public DbSet<CAD_PIVO_CENTRAL> CAD_PIVO_CENTRAL { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<CAD_FASE_CULTURA> CAD_FASE_CULTURA { get; set; }
+        public DbSet<CAD_PARCELA> CAD_PARCELA { get; set; }
+        public DbSet<CAD_SOLO> CAD_SOLO { get; set; }
+        public DbSet<REG_MANEJO> REG_MANEJO { get; set; }
+        public DbSet<CAD_MOTOBOMBA_TARIFA> CAD_MOTOBOMBA_TARIFA { get; set; }
+        public DbSet<CAD_MOTOBOMBA> CAD_MOTOBOMBA { get; set; }
     }
 }

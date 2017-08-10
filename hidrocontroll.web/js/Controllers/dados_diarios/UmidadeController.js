@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("UmidadeDadosController", umidadeController);
+    angular.module("hidrocontroll.web").controller("UmidadeDadosDiariosController", umidadeController);
 
     function umidadeController($http, C, store, $state, $mdDialog) {
         var umidade = this;

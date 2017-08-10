@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("LoginController", loginController);
 
-    function loginController($http, C, store, $state, $mdDialog) {
+    function loginController($http, C, store, $state, $mdDialog, EntitiesService) {
         var self = this;
 
         self.obj = {};
@@ -30,7 +30,14 @@
         }
 
         function sucesso(result) {
+            
             store.set('user', result.data);
+            fazendas = EntitiesService.fazenda;
+            for (var i = 0; i < fazendas.list.length; i++)
+                if (fazendas.list[i].CAD_CLIENTE_IDC_CAD_CLIENTE == result.data.CAD_CLIENTE_IDC_CAD_CLIENTE) {
+                    store.set('fazenda', fazendas.list[i]);
+                    break;
+                }
             $state.go("main");
         };
 

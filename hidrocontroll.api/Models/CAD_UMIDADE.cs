@@ -25,5 +25,6 @@ namespace hidrocontroll.Models
         public int CAD_PARCELA_IDC_CAD_PARCELA { get; set; }
     
         public virtual CAD_PARCELA CAD_PARCELA { get; set; }
+        public virtual CAD_PARCELA CAD_PARCELA1 { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace hidrocontroll.Models
         public int CAD_RESERVATORIO_IDC_RESERVATORIO { get; set; }
         public int CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA { get; set; }
     
-        public virtual CAD_MOTOBOMBA CAD_MOTOBOMBA { get; set; }
         public virtual CAD_RESERVATORIO CAD_RESERVATORIO { get; set; }
+        public virtual CAD_MOTOBOMBA CAD_MOTOBOMBA { get; set; }
     }
 }

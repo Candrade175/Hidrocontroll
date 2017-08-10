@@ -1,0 +1,122 @@
+﻿<md-dialog aria-label="Dados Fase Cultura" class="tela-cadastro" ng-cloak>
+    <form name="faseCulturaForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Fase Cultura</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+
+
+
+                <md-input-container class="md-block">
+                    <label>Nome</label>
+                    <input name="Nome" ng-model="selected.NOM_FASE_CULTURA" required ng-maxlength="45" ng-minlength="4">
+                    <!-- Error messages for the input -->
+                    <div ng-messages="faseCulturaForm.Nome.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="minlength">Campo muito pequeno.</div>
+                        <div ng-message="maxlength">Campo muito grande.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Início (dias)</label>
+                    <input name="NUM_INICIO" type="number" ng-model="selected.NUM_INICIO" min="{{inicio_min}}" required />
+                    <div class="validation-messages" ng-messages="faseCulturaForm.NUM_INICIO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{inicio_min}}.</div>
+                    </div>
+                </md-input-container>
+
+
+                <md-input-container class="md-block">
+                    <label>Fim (dias)</label>
+                    <input name="NUM_FIM" type="number" ng-model="selected.NUM_FIM" min="{{selected.NUM_INICIO}}" required />
+                    <div class="validation-messages" ng-messages="faseCulturaForm.NUM_FIM.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{selected.NUM_INICIO}}.</div>
+                    </div>
+                </md-input-container>
+
+
+                <md-input-container class="md-block">
+                    <label>Kc</label>
+                    <input name="VAR_KC" type="number" ng-model="selected.VAR_KC" min="{{kc_min}}" max="{{kc_max}}" required />
+                    <div class="validation-messages" ng-messages="faseCulturaForm.VAR_KC.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{kc_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{kc_max}}.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Profundidade da raiz</label>
+                    <input name="PRF_RAIZ" type="number" ng-model="selected.PRF_RAIZ" min="{{raiz_min}}" max="{{raiz_max}}" required />
+                    <div class="validation-messages" ng-messages="faseCulturaForm.PRF_RAIZ.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{raiz_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{raiz_max}}.</div>
+                    </div>
+                </md-input-container>
+
+
+                <md-input-container class="md-block">
+                    <label>Área sombreada</label>
+                    <input name="ARE_SOMBREADA" type="number" ng-model="selected.ARE_SOMBREADA" min="{{area_min}}" max="{{area_max}}" required />
+                    <div class="validation-messages" ng-messages="faseCulturaForm.ARE_SOMBREADA.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{area_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{area_max}}.</div>
+                    </div>
+                </md-input-container>
+
+                
+
+                <md-input-container class="md-block">
+                    <label>Pref. Radicular</label>
+                    <input name="VAR_PREF_RADICULAR" type="number" ng-model="selected.VAR_PREF_RADICULAR" required />
+                    <div class="validation-messages" ng-messages="faseCulturaForm.VAR_PREF_RADICULAR.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                
+
+                <md-input-container id="autocomplete-container-cultura" class="md-block autocomplete-container">
+                    <label>Cultura</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_CULTURA"
+                                     md-items="cultura in getMatchesCultura(searchTextCultura)"
+                                     md-search-text="searchTextCultura" md-item-text="cultura.NOM_CULTURA"
+                                     md-selected-item-change="onchangeSelectedCultura(selected.CAD_CULTURA)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextCultura">{{cultura.NOM_CULTURA}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Cultura não encontrada.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isCulturaInvalida" class="messagem-erro">
+                        Escolha uma Cultura válida.
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="faseCulturaForm.$valid && salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

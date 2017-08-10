@@ -12,9 +12,8 @@ using hidrocontroll.Models;
 
 namespace hidrocontroll.Controllers
 {
-    public class GotejadorController : ApiController
+    public class GotejadorController : BaseController
     {
-        private hidrocontrollEntities db = new hidrocontrollEntities();
 
         // GET api/Gotejador
         public IQueryable<CAD_GOTEJADOR> GetCAD_GOTEJADOR()
@@ -47,7 +46,6 @@ namespace hidrocontroll.Controllers
             {
                 return BadRequest();
             }
-
             db.Entry(cad_gotejador).State = EntityState.Modified;
 
             try

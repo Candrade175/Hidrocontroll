@@ -145,14 +145,22 @@
     <Compile Include="Controllers\ClimaController.cs" />
     <Compile Include="Controllers\CulturaController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
+    <Compile Include="Controllers\FaseCulturaController.cs" />
+    <Compile Include="Controllers\FaseOutorgaController.cs" />
     <Compile Include="Controllers\FazendaController.cs" />
     <Compile Include="Controllers\GotejadorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IrrigacaoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManejoController.cs" />
+    <Compile Include="Controllers\ModeloPivoCentralController.cs" />
+    <Compile Include="Controllers\MotobombaController.cs" />
+    <Compile Include="Controllers\OutorgaController.cs" />
+    <Compile Include="Controllers\ParcelaController.cs" />
+    <Compile Include="Controllers\PivoCentralController.cs" />
     <Compile Include="Controllers\PrecipitacaoController.cs" />
     <Compile Include="Controllers\ReservatorioController.cs" />
+    <Compile Include="Controllers\SoloController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,7 +197,7 @@
     <Compile Include="Models\CAD_IRRIGACAO.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CAD_MODELO_PIVO.cs">
+    <Compile Include="Models\CAD_MODELO_PIVO_CENTRAL.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CAD_MOTOBOMBA.cs">
@@ -216,6 +224,9 @@
     <Compile Include="Models\CAD_RESERVATORIO_DIARIO.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CAD_SOLO.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CAD_UMIDADE.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -238,6 +249,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\REG_MANEJO.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

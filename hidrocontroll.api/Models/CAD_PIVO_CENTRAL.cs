@@ -27,11 +27,12 @@ namespace hidrocontroll.Models
         public Nullable<double> VAZ_PIVO { get; set; }
         public Nullable<double> VAR_EFICIENCIA { get; set; }
         public Nullable<double> VAR_LAMINA { get; set; }
-        public Nullable<int> CAD_MODELO_PIVO_IDC_CAD_MODELO_PIVO { get; set; }
+        public Nullable<int> CAD_MODELO_PIVO_CENTRAL_IDC_CAD_MODELO_PIVO_CENTRAL { get; set; }
         public int CAD_FAZENDA_IDC_CAD_FAZENDA { get; set; }
+        public string NOM_PIVO_CENTRAL { get; set; }
     
         public virtual CAD_FAZENDA CAD_FAZENDA { get; set; }
-        public virtual CAD_MODELO_PIVO CAD_MODELO_PIVO { get; set; }
+        public virtual CAD_MODELO_PIVO_CENTRAL CAD_MODELO_PIVO_CENTRAL { get; set; }
         public virtual ICollection<CAD_PARCELA> CAD_PARCELA { get; set; }
     }
 }

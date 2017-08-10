@@ -17,14 +17,36 @@
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown" ng-repeat="menuOpt in body.menu">
-                            <a class="dropdown-toggle" data-toggle="dropdown">{{menuOpt.menu}} <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity {{menuOpt.iconClass}}"></span></a>
+                            <a ng-show="menuOpt.subMenu" class="dropdown-toggle" data-toggle="dropdown">{{menuOpt.menu}} <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity {{menuOpt.icon}}"></span></a>
+                            <a ng-show="!menuOpt.subMenu" ng-click="body.go(('main.' + menuOpt.menu))" class="dropdown-toggle" data-toggle="dropdown">{{menuOpt.menu}}<span style="font-size:16px;" class="pull-right hidden-xs showopacity {{menuOpt.icon}}"></span></a>
+
                             <ul style="padding-bottom:30px;" class="dropdown-menu forAnimate" role="menu">
                                 <span ng-repeat="submenu in menuOpt.subMenu">
-                                    <li ng-click="body.go(('main.' + submenu.nome + menuOpt.menu).replace(' ',''))">
-                                        <a style="width: 100%; text-align: left;" class="btn btn-default">{{submenu.nome}}
-                                            <span class="pull-right {{submenu.icon}}"</span>
+                                    <li ng-show="!submenu.subSubMenu" ng-click="body.go(('main.' +menuOpt.menu+ submenu.nome).replace(' ',''))">
+                                        <a style="width: 100%; text-align: left;" class="btn btn-default">
+                                            {{submenu.nome}}
+                                            <span class="pull-right {{submenu.icon}}"></span>
                                         </a>
                                     </li>
+                                    
+                                    <li class="dropdown" ng-show="submenu.subSubMenu">
+                                        <a style="width: 100%; text-align: left;" class="btn btn-default">
+                                            {{submenu.nome}}
+                                            <span class="caret"></span>
+                                            <span class="pull-right {{submenu.icon}}"></span>
+                                        </a>
+                                        <ul style="padding-bottom:30px;" class="forAnimate" role="menu">
+                                            <span ng-repeat="subSubMenu in submenu.subSubMenu">
+                                                <li ng-click="body.go(('main.'+menuOpt.menu+ submenu.nome+subSubMenu.nome).replace(' ',''))">
+                                                    <a style="width: 100%; text-align: left;" class="btn btn-default">
+                                                        {{subSubMenu.nome}}
+                                                        <span class="pull-right {{subSubMenu.icon}}"></span>
+                                                    </a>
+                                                </li>
+                                            </span>
+                                        </ul>
+                                    </li>
+                                </span>
                             </ul>
                         </li>
                     </ul>

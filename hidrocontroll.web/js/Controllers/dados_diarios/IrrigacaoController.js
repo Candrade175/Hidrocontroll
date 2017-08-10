@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("IrrigacaoDadosController", irrigacaoController);
+    angular.module("hidrocontroll.web").controller("IrrigacaoDadosDiariosController", irrigacaoController);
 
     function irrigacaoController(EntitiesService, $mdMedia, $mdDialog, $filter) {
         var self = this;
@@ -133,7 +133,7 @@
 
             return $mdDialog.show({
                 controller: dialogController,
-                templateUrl: 'pages/dados_diarios/criar_clima.html',
+                templateUrl: 'pages/dados_diarios/dialog/criar_clima.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true,

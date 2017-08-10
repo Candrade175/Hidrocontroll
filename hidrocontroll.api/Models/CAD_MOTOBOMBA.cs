@@ -16,9 +16,9 @@ namespace hidrocontroll.Models
     {
         public CAD_MOTOBOMBA()
         {
+            this.CAD_IRRIGACAO = new HashSet<CAD_IRRIGACAO>();
             this.CAD_MOTOBOMBA_TARIFA = new HashSet<CAD_MOTOBOMBA_TARIFA>();
             this.CAD_RESERVATORIO_DIARIO = new HashSet<CAD_RESERVATORIO_DIARIO>();
-            this.CAD_IRRIGACAO = new HashSet<CAD_IRRIGACAO>();
         }
     
         public int IDC_CAD_MOTOBOMBA { get; set; }
@@ -26,12 +26,11 @@ namespace hidrocontroll.Models
         public Nullable<int> VAR_POTENCIA { get; set; }
         public Nullable<double> VAR_CONSUMO { get; set; }
         public Nullable<double> VAZ_MOTOBOMBA { get; set; }
-        public string VAR_TARIFAS { get; set; }
         public int CAD_FAZENDA_IDC_CAD_FAZENDA { get; set; }
     
         public virtual CAD_FAZENDA CAD_FAZENDA { get; set; }
+        public virtual ICollection<CAD_IRRIGACAO> CAD_IRRIGACAO { get; set; }
         public virtual ICollection<CAD_MOTOBOMBA_TARIFA> CAD_MOTOBOMBA_TARIFA { get; set; }
         public virtual ICollection<CAD_RESERVATORIO_DIARIO> CAD_RESERVATORIO_DIARIO { get; set; }
-        public virtual ICollection<CAD_IRRIGACAO> CAD_IRRIGACAO { get; set; }
     }
 }

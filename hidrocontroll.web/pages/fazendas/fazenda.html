@@ -1,58 +1,60 @@
 ﻿<!-- Conteúdo a direita -->
 
 <md-content class="conteudo-lateral">
-    <div class="container tabela-container">
+    <di>
         <div class="tabela-cabecalho" layout="row">
             <span class="tabela-cabecalho-titulo" layout="column">
-                <h2>{{fazenda.tabela.titulo}}</h2>
-            </span>
-
-            <!-- Campos de entrada de datas -->
-            <span class="tabela-cabecalho-campos">
-                <!-- Campo de busca -->
-                <md-input-container class="tabela-cabecalho-input">
-                    <label for="busca">Busca</label>
-                    <input ng-model="buscador">
-                </md-input-container>
+                <h2>{{fazendas.tabela.titulo}}</h2>
+                <p style="display: inline; margin-right= 50px;">{{fazendas.tabela.subtitulo}}</p>
             </span>
         </div>
-        <!-- Botões -->
-        <md-button style="float: right;" class="md-primary md-raised" ng-click="fazenda.create()">Novo</md-button>
-        <md-button style="float: right;" class="md-primary md-raised" ng-click="fazenda.printData()">Imprimir</md-button>
+
+        <div layout="row">
+            <div class="col-sm-6 no-padding">
+                <!-- Botões -->
+                <md-button class="md-primary md-raised" ng-click="fazendas.create()">Novo</md-button>
+                <md-button class="md-primary md-raised" ng-click="fazendas.printData()">Imprimir</md-button>
+            </div>
+        </div>
 
         <!-- Tabela -->
-        <table class="table table-striped table-bordered table-hover" id="tabela_dados">
-            <thead>
-                <tr>
-                    <th ng-repeat="dado in fazenda.tabela.cabecalho">{{dado}}</th>
-                    <th id='th_editar_excluir' >Editar</th>
-                    <th id='th_editar_excluir' >Excluir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item  in fazenda.Fazenda.list| filter:buscador">
-                    <td ng-show="fazenda.$mdMedia('gt-sm')">{{item.IDC_CAD_FAZENDA}}</td>
-                    <td ng-show="fazenda.$mdMedia('gt-sm')">{{item.NOME}}</td>
-                    <td id='td_editar_excluir'>
-                        <md-button class="md-icon-button"
-                                   ng-click="fazenda.update($event, item)"
-                                   aria-label="Editar">
-                            <md-icon> create </md-icon>
 
-                        </md-button>
+     
+
+        <!-- Tabela -->
+        <div class="tabela-container">
+            <table ng-table-dynamic="fazendas.tableParams with fazendas.cols" class="table" show-filter="true">
+                <tr ng-repeat="row in $data" ng-class="{'success': row.IDC_CAD_FAZENDA == fazendas.codFazendaAtual }">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='valorCompostoCidade'"> {{fazendas.getCidade(row[col.field]).NOM_CIDADE}}</span>
+                        <span ng-if="col.type=='valorCompostoEstado'"> {{fazendas.getEstado().SIG_ESTADO}}</span>
+
+                        <span ng-if="col.type=='comandoMarcar'" class='width-70-px'>
+                            <md-button class="md-icon-button"
+                                       ng-click="fazendas.selecionar($event, row)"
+                                       aria-label="Editar">
+                                <md-icon> check  </md-icon>
+
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='comandoEditar'" class='width-70-px'>
+                            <md-button class="md-icon-button"
+                                       ng-click="fazendas.update($event, row)"
+                                       aria-label="Editar">
+                                <md-icon> create </md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='comandoDeletar'">
+                            <md-button class="md-icon-button"
+                                       ng-click="fazendas.excluir($event, row)"
+                                       aria-label="Excluir">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </span>
                     </td>
-                    <td id='td_editar_excluir'>
-
-                        <md-button class="md-icon-button"
-                                   ng-click="fazenda.excluir($event, item)"
-                                   aria-label="Excluir">
-                            <md-icon>delete</md-icon>
-                        </md-button>
-                    </td>
                 </tr>
-            </tbody>
-        </table>
-
-       
-    </div>
+            </table>
+        </div>
+        </div>
 </md-content>

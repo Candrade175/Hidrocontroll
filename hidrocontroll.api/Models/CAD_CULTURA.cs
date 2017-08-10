@@ -16,8 +16,8 @@ namespace hidrocontroll.Models
     {
         public CAD_CULTURA()
         {
-            this.CAD_PARCELA = new HashSet<CAD_PARCELA>();
             this.CAD_FASE_CULTURA = new HashSet<CAD_FASE_CULTURA>();
+            this.CAD_PARCELA = new HashSet<CAD_PARCELA>();
         }
     
         public int IDC_CAD_CULTURA { get; set; }
@@ -25,7 +25,7 @@ namespace hidrocontroll.Models
         public int CAD_FAZENDA_IDC_CAD_FAZENDA { get; set; }
     
         public virtual CAD_FAZENDA CAD_FAZENDA { get; set; }
-        public virtual ICollection<CAD_PARCELA> CAD_PARCELA { get; set; }
         public virtual ICollection<CAD_FASE_CULTURA> CAD_FASE_CULTURA { get; set; }
+        public virtual ICollection<CAD_PARCELA> CAD_PARCELA { get; set; }
     }
 }

@@ -9,6 +9,10 @@
        url(MaterialIcons-Regular.woff) format('woff'),*/
 }
 
+.col-sm-6 {
+    width: 50%;
+}
+
 /* Inclusion of the Google Material Icons*/
 .material-icons {
     font-family: 'Material Icons';
@@ -77,6 +81,7 @@ html, body {
     width: 100%;
     height: 100%;
     padding-top: 40px;
+    align-content: center;
 }
 
 .default-background {
@@ -299,7 +304,8 @@ section {
 
 .tabela-container {
     margin: 0;
-    width: 98%;
+    width: 100%;
+    align-content: center;
 }
 
 .titulo {
@@ -326,12 +332,83 @@ a.md-button.md-default-theme.md-primary, a.md-button.md-primary, .md-button.md-d
     color: #006622;
 }
 
-#th_editar_excluir{
-    text-align: center;
-    width:60px;
+.md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+    border: 1px solid green;
 }
 
-input[type="number"] {
-   width:200px;
+.md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator, .md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator {
+    background: green;
+    color: rgba(255,255,255,0.87);
+    border-color: transparent;
 }
 
+.no-padding {
+    padding-right: 0px !important; 
+    padding-left: 0px !important;
+}
+
+.md-datepicker-open .md-datepicker-calendar-icon {
+    fill:green;
+}
+
+.md-datepicker-input-container .md-datepicker-focused {
+    border-bottom-color:green ;
+}
+
+.tela-cadastro{
+    min-width: 50%;
+}
+
+.autocomplete-container{
+    padding-bottom: 18px;
+
+}
+.messagem-erro{
+    font-size: 12px;
+    line-height: 14px;
+    overflow: hidden;
+    color: rgb(221,44,0);   
+    padding-right: 5px;
+    padding-left: 0;
+    opacity: 1;
+    margin-top: 0px;
+    padding-top: 5px;
+}
+
+.md-virtual-repeat-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height:60vh; 
+  border: solid 0px #ccc;
+  padding: 10px;
+}
+
+.tabela-header {
+   margin-bottom: 0px !important;
+}
+
+.md-virtual-repeat-container.md-autocomplete-suggestions-container{
+   max-width:1px !important;
+}
+.pagination>.active>a{
+    
+        color: white!important;
+}
+
+.pagination > li > a {
+        color: green!important;
+}
+.pagination > .active > a {
+    background-color: green!important;
+    border-color:green!important;
+}
+.ng-table th.sortable.sort-asc, .ng-table th.sortable.sort-desc{
+        background-color: rgba(142, 219, 141, 0.25)!important;
+
+}
+
+.form-control:focus {
+    border-color: green!important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 233, 130, 0.6)!important;
+}

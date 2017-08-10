@@ -13,21 +13,27 @@
     <!-- For IE 11+ on Windows 8.1+ -->
     <!-- Additional content http://blogs.msdn.com/b/ie/archive/2012/04/03/pinned-sites-in-windows-8.aspx -->
     <meta name="msapplication-config" content="xml/mstiles.xml" />
+   
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="lib/css/angular-csp.css" rel="stylesheet" />
     <link href="lib/css/angular-material.min.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" />
+    <link href="css/width.css" rel="stylesheet" />
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="lib/css/font-awesome.min.css">
 
-    <title>Hidroferti</title>
+    <title>Hidrocontroll</title>
 
 </head>
 <body ng-app="hidrocontroll.web" data-layout="column">
 
     <div data-ui-view data-flex data-layout="column"></div>
 
-    <!-- JS lib Includes -->
-    <script src="lib/js/jquery-1.12.0.min.js"></script>
+    <!-- JS lib Includes -->   
+    <script src="lib/js/jquery-3.2.1.min.js"></script> 
+    <script src="lib/js/bootstrap.min.js"></script>
+   <!--  <script src="lib/js/jquery-1.12.0.min.js"></script>-->
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/angular-animate.min.js"></script>
     <script src="lib/js/angular-aria.min.js"></script>
@@ -37,8 +43,8 @@
     <script src="lib/js/angular-storage.js"></script>
     <script src="lib/js/angular-messages.min.js"></script>
     <script src="lib/js/html5-qrcode.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+    <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 
     <!-- JS local Includes -->
     <script src="js/Services/Model.js"></script>
@@ -46,21 +52,28 @@
     <script src="js/Constants.js"></script>
     <script src="js/Services/EntitiesService.js"></script>
 
+    <script src="js/Controllers/fazendas/FazendaController.js"></script>
+
     <script src="js/Controllers/dados_diarios/ClimaController.js"></script>
     <script src="js/Controllers/dados_diarios/IrrigacaoController.js"></script>
     <script src="js/Controllers/dados_diarios/PrecipitacaoController.js"></script>
     <script src="js/Controllers/dados_diarios/ReservatorioController.js"></script>
     <script src="js/Controllers/dados_diarios/UmidadeController.js"></script>
+    <script src="js/Controllers/dados_diarios/ManejoController.js"></script>
 
-    <script src="js/Controllers/equipamentos/GotejadorController.js"></script>
-    <script src="js/Controllers/equipamentos/MotobombaController.js"></script>
-    <script src="js/Controllers/equipamentos/OutorgaController.js"></script>
-    <script src="js/Controllers/equipamentos/PivoCentralController.js"></script>
-    <script src="js/Controllers/equipamentos/ReservatorioController.js"></script>
 
-    <script src="js/Controllers/parcelas/CulturaController.js"></script>
+    <script src="js/Controllers/cadastros/CulturaController.js"></script>
+    <script src="js/Controllers/cadastros/FaseCulturaController.js"></script>
+    <script src="js/Controllers/cadastros/SoloController.js"></script>
+    <script src="js/Controllers/cadastros/equipamentos/GotejadorController.js"></script>
+    <script src="js/Controllers/cadastros/equipamentos/MotobombaController.js"></script>
+    <script src="js/Controllers/cadastros/equipamentos/ModeloPivoCentralController.js"></script>
+    <script src="js/Controllers/cadastros/equipamentos/PivoCentralController.js"></script>
+    <script src="js/Controllers/cadastros/OutorgaController.js"></script>
+    <script src="js/Controllers/cadastros/FaseOutorgaController.js"></script>
+    <script src="js/Controllers/cadastros/ReservatorioController.js"></script>
+
     <script src="js/Controllers/parcelas/ParcelasController.js"></script>
-    <script src="js/Controllers/parcelas/FazendaController.js"></script>
 
     <script src="js/Controllers/relatorios/ClimaController.js"></script>
     <script src="js/Controllers/relatorios/ConsumoFertirrigacaoController.js"></script>

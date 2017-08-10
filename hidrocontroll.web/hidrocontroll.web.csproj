@@ -114,7 +114,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
-    <Folder Include="js\Controllers\fazendas\" />
+    <Folder Include="pages\parcelas\dialogs\" />
     <Folder Include="Properties\" />
     <Folder Include="svg\" />
     <Folder Include="xml\" />
@@ -127,23 +127,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\main.css" />
+    <Content Include="css\width.css" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="js\Constants.js" />
     <Content Include="js\Controllers\BodyController.js" />
+    <Content Include="js\Controllers\cadastros\FaseCulturaController.js" />
+    <Content Include="js\Controllers\cadastros\FaseOutorgaController.js" />
+    <Content Include="js\Controllers\cadastros\SoloController.js" />
     <Content Include="js\Controllers\dados_diarios\ClimaController.js" />
+    <Content Include="js\Controllers\dados_diarios\ManejoController.js" />
     <Content Include="js\Controllers\dados_diarios\IrrigacaoController.js" />
     <Content Include="js\Controllers\dados_diarios\PrecipitacaoController.js" />
     <Content Include="js\Controllers\dados_diarios\ReservatorioController.js" />
     <Content Include="js\Controllers\dados_diarios\UmidadeController.js" />
-    <Content Include="js\Controllers\equipamentos\GotejadorController.js" />
-    <Content Include="js\Controllers\equipamentos\MotobombaController.js" />
-    <Content Include="js\Controllers\equipamentos\OutorgaController.js" />
-    <Content Include="js\Controllers\equipamentos\PivoCentralController.js" />
-    <Content Include="js\Controllers\equipamentos\ReservatorioController.js" />
-    <Content Include="js\Controllers\parcelas\FazendaController.js" />
+    <Content Include="js\Controllers\cadastros\equipamentos\ModeloPivoCentralController.js" />
+    <Content Include="js\Controllers\cadastros\equipamentos\GotejadorController.js" />
+    <Content Include="js\Controllers\cadastros\equipamentos\MotobombaController.js" />
+    <Content Include="js\Controllers\cadastros\OutorgaController.js" />
+    <Content Include="js\Controllers\cadastros\equipamentos\PivoCentralController.js" />
+    <Content Include="js\Controllers\cadastros\ReservatorioController.js" />
+    <Content Include="js\Controllers\fazendas\FazendaController.js" />
     <Content Include="js\Controllers\LoginController.js" />
-    <Content Include="js\Controllers\parcelas\CulturaController.js" />
+    <Content Include="js\Controllers\cadastros\CulturaController.js" />
     <Content Include="js\Controllers\parcelas\ParcelasController.js" />
     <Content Include="js\Controllers\relatorios\ClimaController.js" />
     <Content Include="js\Controllers\relatorios\ConsumoFertirrigacaoController.js" />
@@ -159,6 +165,7 @@
     <Content Include="lib\css\angular-material.layouts.css" />
     <Content Include="lib\css\angular-material.layouts.min.css" />
     <Content Include="lib\css\angular-material.min.css" />
+    <Content Include="lib\css\bootstrap.css" />
     <Content Include="lib\css\md-data-table-style.css" />
     <Content Include="lib\js\angular-animate.js" />
     <Content Include="lib\js\angular-animate.min.js" />
@@ -175,6 +182,7 @@
     <Content Include="lib\js\angular.min.js" />
     <Content Include="lib\js\html5-qrcode.min.js" />
     <Content Include="lib\js\jquery-1.12.0.min.js" />
+    <Content Include="lib\js\jquery.js" />
     <Content Include="lib\js\lodash.min.js" />
     <Content Include="lib\js\md-data-table-templates.js" />
     <Content Include="lib\js\md-data-table.js" />
@@ -183,24 +191,37 @@
     <Content Include="lib\js\angular.min.js.gzip" />
     <Content Include="lib\js\angular.min.js.map" />
     <Content Include="js\Services\Model.js" />
-    <Content Include="pages\dados_diarios\criar_clima.html" />
+    <Content Include="pages\cadastros\dialogs\criar_faseCultura.html" />
+    <Content Include="pages\cadastros\dialogs\criar_reservatorio.html" />
+    <Content Include="pages\cadastros\dialogs\criar_faseOutorga.html" />
+    <Content Include="pages\cadastros\dialogs\criar_outorga.html" />
+    <Content Include="pages\cadastros\dialogs\criar_solo.html" />
+    <Content Include="pages\cadastros\equipamentos\dialogs\criar_motobomba.html" />
+    <Content Include="pages\cadastros\faseCultura.html" />
+    <Content Include="pages\cadastros\faseOutorga.html" />
+    <Content Include="pages\cadastros\solo.html" />
+    <Content Include="pages\dados_diarios\dialogs\criar_clima.html" />
     <Content Include="pages\dados_diarios\clima.html" />
+    <Content Include="pages\dados_diarios\manejo.html" />
     <Content Include="pages\dados_diarios\irrigacao.html" />
     <Content Include="pages\dados_diarios\precipitacao.html" />
     <Content Include="pages\dados_diarios\reservatorio.html" />
     <Content Include="pages\dados_diarios\umidade.html" />
-    <Content Include="pages\equipamentos\criar_gotejador.html" />
-    <Content Include="pages\equipamentos\gotejador.html" />
-    <Content Include="pages\equipamentos\motobomba.html" />
-    <Content Include="pages\equipamentos\outorga.html" />
-    <Content Include="pages\equipamentos\pivoCentral.html" />
-    <Content Include="pages\equipamentos\reservatorio.html" />
-    <Content Include="pages\fazendas\criar_fazenda.html" />
+    <Content Include="pages\cadastros\equipamentos\dialogs\criar_modeloPivoCentral.html" />
+    <Content Include="pages\cadastros\equipamentos\dialogs\criar_pivoCentral.html" />
+    <Content Include="pages\cadastros\equipamentos\dialogs\criar_gotejador.html" />
+    <Content Include="pages\cadastros\equipamentos\pivoCentral.html" />
+    <Content Include="pages\cadastros\equipamentos\gotejador.html" />
+    <Content Include="pages\cadastros\equipamentos\motobomba.html" />
+    <Content Include="pages\cadastros\outorga.html" />
+    <Content Include="pages\cadastros\equipamentos\modeloPivoCentral.html" />
+    <Content Include="pages\cadastros\reservatorio.html" />
+    <Content Include="pages\fazendas\dialogs\criar_fazenda.html" />
     <Content Include="pages\fazendas\fazenda.html" />
     <Content Include="pages\login.html" />
     <Content Include="pages\main.html" />
-    <Content Include="pages\parcelas\criar_cultura.html" />
-    <Content Include="pages\parcelas\cultura.html" />
+    <Content Include="pages\cadastros\dialogs\criar_cultura.html" />
+    <Content Include="pages\cadastros\cultura.html" />
     <Content Include="pages\parcelas\parcelas.html" />
     <Content Include="pages\relatorios\clima.html" />
     <Content Include="pages\relatorios\consumoFertirrigacao.html" />
@@ -216,7 +237,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="lib\js\bootstrap.js" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -28,8 +28,7 @@ namespace hidrocontroll.Models
         public int CAD_RESERVATORIO_IDC_CAD_RESERVATORIO { get; set; }
         public Nullable<System.TimeSpan> TMO_IRRIGACAO_FIM { get; set; }
     
-        public virtual CAD_MOTOBOMBA CAD_MOTOBOMBA { get; set; }
-        public virtual CAD_PARCELA CAD_PARCELA { get; set; }
         public virtual CAD_RESERVATORIO CAD_RESERVATORIO { get; set; }
+        public virtual CAD_MOTOBOMBA CAD_MOTOBOMBA { get; set; }
     }
 }
