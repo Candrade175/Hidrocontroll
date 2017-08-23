@@ -15,16 +15,15 @@ namespace hidrocontroll.Models
     public partial class CAD_UMIDADE
     {
         public int IDC_CAD_UMIDADE { get; set; }
-        public int DAT_UMIDADE { get; set; }
-        public Nullable<double> VOL_CM10 { get; set; }
-        public Nullable<double> VOL_CM20 { get; set; }
-        public Nullable<double> VOL_CM30 { get; set; }
-        public Nullable<double> VOL_CM40 { get; set; }
-        public Nullable<double> VOL_CM50 { get; set; }
-        public Nullable<double> VOL_CM60 { get; set; }
         public int CAD_PARCELA_IDC_CAD_PARCELA { get; set; }
+        public Nullable<byte> VOL_CM10 { get; set; }
+        public Nullable<byte> VOL_CM20 { get; set; }
+        public Nullable<byte> VOL_CM30 { get; set; }
+        public Nullable<byte> VOL_CM40 { get; set; }
+        public Nullable<byte> VOL_CM50 { get; set; }
+        public Nullable<byte> VOL_CM60 { get; set; }
+        public System.DateTime DAT_UMIDADE { get; set; }
     
         public virtual CAD_PARCELA CAD_PARCELA { get; set; }
-        public virtual CAD_PARCELA CAD_PARCELA1 { get; set; }
     }
 }

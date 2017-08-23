@@ -1,10 +1,22 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("ClimaDadosDiariosController", climaController).filter("dateFilter", dateFilter);
+    angular.module("hidrocontroll.web").controller("ClimaDadosDiariosController", climaController).filter("dateFilterClima", dateFilter);
 
-    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter,store) {
+    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams) {
         var self = this;
 
         initializeData();
+
+        var intervalID = window.setInterval(refresh, 500);
+
+        var success = $mdDialog.alert()
+               .title('Sucesso')
+               .textContent('A operação foi realizada com sucesso!')
+               .ok('Fechar');
+
+        var error = $mdDialog.alert()
+               .title('Falha')
+               .textContent('Operação não pode ser realizada!')
+               .ok('Fechar');
 
         function initializeData() {
             self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
@@ -16,33 +28,54 @@
             self.update = update;
             self.printData = printData;
             self.showhints;
+            self.refresh = refresh;
+
+            self.cols = [
+            {
+                field: "DAT_CLIMA", title: "Data", sortable: "DAT_CLIMA", isDate: true, show: true, type: "valor"
+            },
+            { field: "TMP_CLIMA_MAX", title: "Temp. máxima (ºC)",  show: true, type: "valor" },
+            { field: "TMP_CLIMA_MIN", title: "Temp. mínima (ºC)", show: true, type: "valor" },
+            { field: "TMP_CLIMA_MEDIA", title: "Temp. média (ºC)", show: true, type: "valor" },
+            { field: "VAR_UMIDADE_RELATIVA", title: "Umidade relativa (%)", show: true, type: "valor" },
+            { field: "VEL_VENTO", title: "Velocidade do vento (m/s)", show: true, type: "valor" },
+            { field: "VAR_PRECIPITACAO_TOTAL", title: "Precipitação total (mm)", show: true, type: "valor" },
+            { field: "VAR_RADIACAO", title: "Radiação média 24h (W/m²)", show: true, type: "valor" },
+
+            { title: "Editar", show: true, type: "comandoEditar", class: 'width-70-px' },
+             { title: "Deletar", show: true, type: "comandoDeletar", class: 'width-70-px' }
+            ];
+
 
             self.tabela = {
                 "titulo": "Clima",
-                "subtitulo": "Dados diários de clima:",
-                "cabecalho": ["Data",
-                            "Temp. máxima (ºC)",
-                            "Temp. mínima (ºC)",
-                            "Temp. média (ºC)",
-                            "Umidade relativa (%)",
-                            "Velocidade do vento (m/s)",
-                            "Precipitação total (mm)",
-                            "Radiação média 24h (W/m²)"]
+                "subtitulo": "Dados diários de clima:"
             };
-
+            self.tabela.data_inicio = null;
             self.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
         };
 
+        function refresh() {
+            if (self.Clima.list.length != 0) {
+                clearInterval(intervalID);
+            }
+            try {
+                var list = [];
 
-        var success = $mdDialog.alert()
-               .title('Sucesso')
-               .textContent('A operação foi realizada com sucesso!')
-               .ok('Fechar');
+                list = $filter('filter')(self.Clima.list, function (clima) {
+                    return clima.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
+                });
 
-        var error = $mdDialog.alert()
-               .title('Falha')
-               .textContent('Operação não pode ser realizada!')
-               .ok('Fechar');
+                list = $filter('dateFilterClima')(list, self.tabela.data_inicio, self.tabela.data_fim);
+                list = $filter('orderBy')(list, '-DAT_CLIMA');
+
+
+                self.tableParams = new NgTableParams({}, { dataset: list });
+                $rootScope.$digest();
+            } catch (e) {
+            }
+        }
+
 
         function printData() {
             var divToPrint = document.getElementById("tabela_dados");
@@ -73,7 +106,6 @@
 
             if (item) {
                 item.$select();
-                console.log(item);
                 method = "$update";
             };
 
@@ -84,14 +116,16 @@
                     {},
                     function () { //Função de sucesso: objeto foi inserido
                         $mdDialog
-                            .show(success)
+                            .show(success).finally(function () {
+                                if (resource.IDC_CAD_CLIMA)
+                                    for (var i = 0; i < self.Clima.list.length; i++)
+                                        if (self.Clima.list[i].IDC_CAD_CLIMA == resource.IDC_CAD_CLIMA)
+                                            self.Clima.list[i] = resource;
+                                refresh();
+                            });
                     },
                     function () { //Função de erro: objeto não pode ser inserido
-                        $mdDialog
-                            .show(error)
-                        .finally(function () {
-                            location.reload();
-                        });
+                        $mdDialog.show(error);
                     }
                 );
             });
@@ -101,7 +135,7 @@
 
        
             var confirm = $mdDialog.confirm()
-                  .title('Deseja realmente excluir o registro do dia ' + item.DAT_CLIMA.getDate()+ "/"+(item.DAT_CLIMA.getMonth()+1)+"/"+ item.DAT_CLIMA.getFullYear() + ' ?')
+                  .title('Deseja realmente excluir o registro do dia ' + item.DAT_CLIMA.getDate() + "/" + (item.DAT_CLIMA.getMonth() + 1) + "/" + item.DAT_CLIMA.getFullYear() + ' parcela ' + getParcela(item.CAD_PARCELA_IDC_CAD_PARCELA).NOM_PARCELA + '?')
                   .textContent('Após a exclusão a operação não poderá ser desfeita.')
                   .ariaLabel('Exclusão de Registro')
                   .targetEvent(ev)
@@ -118,11 +152,12 @@
                     {},
                     function () {
                         $mdDialog
-                            .show(success)
+                            .show(success).finally(function () {
+                                refresh();
+                            });
                     },
                     function () {
-                        $mdDialog
-                            .show(error)
+                        $mdDialog.show(error);
                     }
                 );
             });
@@ -143,7 +178,8 @@
 
         function dialogController($scope, $mdDialog) {
 
-            $scope.selected = self.Clima.selected;
+            $scope.selected = jQuery.extend({}, self.Clima.selected);
+
             $scope.temp_max_max = 45;
             $scope.temp_max_min = 10;
             $scope.temp_min_max = 30;
@@ -165,8 +201,6 @@
             };
             $scope.cancel = function () {
                 $mdDialog.cancel();
-
-                location.reload();
             };
             $scope.salvar = function (clima) {
 

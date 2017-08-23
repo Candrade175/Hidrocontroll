@@ -1,0 +1,96 @@
+﻿<md-dialog class="tela-cadastro" aria-label="Dados Clima" ng-cloak>
+    <form name="climaForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Clima</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+
+                <md-datepicker class="md-block" name="data" ng-model="selected.DAT_CLIMA" md-placeholder="Data" required>
+                    {{selected.DAT_CLIMA | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+                <div ng-messages="climaForm.data.$error" ng-show="climaForm.data.$touched" role="alert">
+                    <div ng-message="required" class="messagem-erro">Campo obrigatório.</div>
+                </div>
+                <br />
+
+                <md-input-container class="md-block">
+                    <label>Temperatura máxima (ºC)</label>
+                    <input name="Temp_max" type="number" ng-change="calcularMedia(selected)" ng-model="selected.TMP_CLIMA_MAX" min="{{temp_max_min}}" max="{{temp_max_max}}" required />
+                    <div class="validation-messages" ng-messages="climaForm.Temp_max.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{temp_max_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{temp_max_max}}.</div>
+                    </div>
+                </md-input-container>
+             
+                <md-input-container class="md-block">
+                    <label>Temperatura mínima (ºC)</label>
+                    <input name="Temp_min" type="number" ng-change="calcularMedia(selected)" ng-model="selected.TMP_CLIMA_MIN" min="{{temp_min_min}}" max="{{temp_min_max}}" required />
+                    <div ng-messages="climaForm.Temp_min.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{temp_min_max}}.</div>
+                        <div ng-message="max">Valor máximo é {{temp_min_max}}.</div>
+                    </div>
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Temperatura média (ºC)</label>
+                    <input type="number" ng-model="selected.TMP_CLIMA_MEDIA" ng-readonly="true" />
+                </md-input-container>
+               
+                <md-input-container class="md-block">
+                    <label>Umidade relativa (%)</label>
+                    <input name="umidade" type="number" ng-model="selected.VAR_UMIDADE_RELATIVA" min="{{umidade_min}}" max="{{umidade_max}}" required />
+                    <div ng-messages="climaForm.umidade.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{umidade_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{umidade_max}}.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Velocidade do vento (m/s)</label>
+                    <input name="vento" type="number" ng-model="selected.VEL_VENTO" min="{{vento_min}}" max="{{vento_max}}" required />
+                    <div ng-messages="climaForm.vento.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{vento_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{vento_max}}.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Precipitação total (mm)</label>
+                    <input name="precipitacao" type="number" ng-model="selected.VAR_PRECIPITACAO_TOTAL" min="{{precipitacao_min}}" max="{{precipitacao_max}}" required />
+                    <div ng-messages="climaForm.precipitacao.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{precipitacao_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{precipitacao_max}}.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Radiação média 24h (W/m²)</label>
+                    <input name="radiacao" type="number" ng-model="selected.VAR_RADIACAO" min="{{radiacao_min}}" max="{{radiacao_max}}" required />
+                    <div ng-messages="climaForm.radiacao.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{radiacao_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{radiacao_max}}.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="climaForm.$valid &&salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

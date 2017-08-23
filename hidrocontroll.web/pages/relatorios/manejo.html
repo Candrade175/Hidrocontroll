@@ -1,76 +1,111 @@
 ﻿<!-- Conteúdo a direita -->
 <md-content class="conteudo-lateral">
     <div class="tabela-container">
-        <div class="tabela-cabecalho" layout="row">
-            <span class="tabela-cabecalho-titulo" layout="column">
-                <span layout="column">
-                    <h2>{{manejoRel.tabela.titulo}}</h2>
-                    <p>{{manejoRel.tabela.subtitulo}}</p>
-                </span>
+        <span class="tabela-cabecalho-titulo" layout="column">
+            <span layout="column">
+                <h2>{{manejoRel.cabecalho.titulo}}</h2>
+                <p>{{manejoRel.cabecalho.subtitulo}}</p>
             </span>
+        </span>
 
-            <!-- Campos de entrada de datas -->
-            <span class="tabela-cabecalho-campos">
-                <!-- Campos de entrada de datas -->
-                <md-datepicker class="tabela-cabecalho-float" ng-model="manejoRel.tabela.data_fim" md-placeholder="Data de Fim">
-                    {{dados.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
-                </md-datepicker>
-                <md-datepicker class="tabela-cabecalho-float" ng-model="manejoRel.tabela.data_inicio" md-placeholder="Data de Início">
-                    {{dados.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
-                </md-datepicker>
+        <div layout="row" class="linha-filtros">
 
-                <md-input-container class="tabela-cabecalho-input">
+          
+            <div class="col-sm-2 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
                     <label>Tipo</label>
-                    <md-select ng-model="manejoRel.tipo">
-                        <md-option><em>None</em></md-option>
-                        <md-option ng-repeat="tipo in manejoRel.tabela.tipo" ng-value="tipo">
+                    <md-select ng-model="manejoRel.tipo" ng-change="manejoRel.atualizaData();">
+                        <md-option ng-repeat=" tipo in manejoRel.cabecalho.tipo" ng-value="tipo">
                             {{tipo}}
                         </md-option>
                     </md-select>
                 </md-input-container>
-
-                <md-input-container class="tabela-cabecalho-input">
+            </div>
+            <div class="col-sm-2 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
                     <label>Data</label>
-                    <md-select ng-model="manejoRel.data">
-                        <md-option><em>None</em></md-option>
-                        <md-option ng-repeat="data in manejoRel.tabela.data" ng-value="data">
+                    <md-select ng-model="manejoRel.data" ng-disabled="manejoRel.tipo == null " ng-change="manejoRel.alteraAtributos()">
+                        <md-option ng-repeat="data in manejoRel.cabecalho.data" ng-value="data">
                             {{data}}
                         </md-option>
                     </md-select>
                 </md-input-container>
+            </div>
 
-                <md-input-container class="tabela-cabecalho-input">
+
+            <div class="col-sm-3 no-padding  div-filtro" style="text-align: center;">
+
+                <md-datepicker ng-model="manejoRel.cabecalho.data_inicio" md-placeholder="Data de Início" ng-disabled="manejoRel.tipo == null || manejoRel.data != 'Período'">
+                    {{dados.cabecalho.data_inicio | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+                <md-datepicker ng-model="manejoRel.cabecalho.data_fim" md-placeholder="Data de Fim" md-min-date="manejoRel.cabecalho.data_inicio" ng-disabled="manejoRel.tipo == null || manejoRel.data != 'Período' || manejoRel.cabecalho.data_inicio == null">
+                    {{dados.cabecalho.data_fim | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+            </div>
+            <div class="col-sm-2 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
+
                     <label>Parcela</label>
-                    <md-select ng-model="manejoRel.parcela">
-                        <md-option><em>None</em></md-option>
-                        <md-option ng-repeat="parcela in manejoRel.parcelas" ng-value="parcela">
-                            {{parcelas}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+                    <md-select ng-model="manejoRel.ParcelasFiltro"
+                               md-on-close="manejoRel.clearSearchTerm()"
+                               data-md-container-class="selectdemoSelectHeader"
+                               multiple
+                               ng-disabled="manejoRel.tipo == null  ||manejoRel.data==null|| (manejoRel.data == 'Período' && manejoRel.cabecalho.data_inicio == null && manejoRel.cabecalho.data_fim == null)">
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="manejoRel.searchTerm"
+                                   type="search"
+                                   placeholder="Buscar Parcela"
+                                   class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup>
 
-                <md-input-container class="tabela-cabecalho-input">
+                            <md-button class="md-primary md-raised" ng-click="manejoRel.marcarTodosParcelas()">Todos</md-button>
+                            <md-button class="md-primary md-raised" ng-click="manejoRel.limparTodosParcelas()">Limpar</md-button>
+                            <md-option ng-value="parcela" ng-repeat="parcela in manejoRel.buscarParcelaFazenda(manejoRel.searchTerm)">{{parcela.NOM_PARCELA}}</md-option>
+                        </md-optgroup>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+
+            <div class="col-sm-2 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
                     <label>Atributos</label>
-                    <md-select multiple="" ng-model="manejoRel.atributo">
+                    <md-select multiple="" ng-model="manejoRel.atributosMarcados" ng-disabled="manejoRel.ParcelasFiltro.length == 0 || manejoRel.tipo == null ||manejoRel.data==null|| (manejoRel.data == 'Período' && manejoRel.cabecalho.data_inicio == null && manejoRel.cabecalho.data_fim == null)" >
                         <md-optgroup label="Atributos">
-                            <md-option><em>None</em></md-option>
+                            <md-button class="md-primary md-raised" ng-click="manejoRel.marcarTodosAtributos()">Todos</md-button>
+                            <md-button class="md-primary md-raised" ng-click="manejoRel.limparTodosAtributos()">Limpar</md-button>
                             <md-option ng-repeat="atributo in manejoRel.atributos" ng-value="atributo">
                                 {{atributo}}
                             </md-option>
                         </md-optgroup>
                     </md-select>
                 </md-input-container>
-            </span>
+            </div>
+
+            <div class="col-sm-1 div-filtro no-padding">
+                <md-button class=" md-primary md-raised" ng-click="manejoRel.iniciaBusca()" style="float: right;">
+                    Buscar
+                </md-button>
+            </div>
         </div>
 
-        <!-- Tabela -->
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th ng-repeat="equipamento in manejoRel.tabela.cabecalho">{{equipamento}}</th>
+        <div class="tabela-container" ng-repeat="tabela in manejoRel.tablesParams track by $index">
+            <md-toolbar class="titulo-tabela">
+                <div class="md-toolbar-tools">{{manejoRel.nomesParcelas[$index]}}</div>
+            </md-toolbar>
+            <table ng-table-dynamic="tabela with manejoRel.cols " class="table">   
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valorMes'"> {{row[col.field]| date:"MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='valorIntervalo'"> {{col.valor}}</span>
+                                       
+                    </td>
                 </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+            </table>
+        </div>
+
     </div>
 </md-content>

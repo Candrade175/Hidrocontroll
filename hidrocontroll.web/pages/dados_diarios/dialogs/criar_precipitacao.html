@@ -1,0 +1,71 @@
+﻿<md-dialog class="tela-cadastro" aria-label="Dados Precipitação" ng-cloak>
+    <form name="precipitacaoForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Precipitação</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+
+                <md-datepicker class="md-block" name="data" ng-model="selected.DAT_PRECIPITACAO" md-placeholder="Data" required>
+                    {{selected.DAT_PRECIPITACAO | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+                <div ng-messages="precipitacaoForm.data.$error" ng-show="precipitacaoForm.data.$touched" role="alert">
+                    <div ng-message="required" class="messagem-erro">Campo obrigatório.</div>
+                </div>
+                <br />
+                <md-input-container id="autocomplete-container-parcela" class="md-block autocomplete-container">
+                    <label>Parcela</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_PARCELA"
+                                     md-items="parcela in getMatchesParcela(searchTextParcela)"
+                                     md-search-text="searchTextParcela" md-item-text="parcela.NOM_PARCELA"
+                                     md-selected-item-change="onchangeSelectedParcela(selected.CAD_PARCELA)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextParcela">{{parcela.NOM_PARCELA}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Parcela não encontrada.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isParcelaInvalida" class="messagem-erro">
+                        Escolha uma Parcela válida.
+                    </div>
+                </md-input-container>
+
+
+               <!-- <div layout="row">
+
+                    <div class="col-sm-6">
+                        <md-checkbox style="top:23%" ng-model=" selected.VOL_CM10">
+                            10 cm
+                        </md-checkbox>
+                    </div>
+                </div>
+                   -->
+                <md-input-container class="md-block">
+                    <label>Precipitação (mm)</label>
+                    <input name="VAR_PRECIPITACAO" type="number" ng-model="selected.VAR_PRECIPITACAO" required />
+                    <div ng-messages="climaForm.VAR_PRECIPITACAO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="precipitacaoForm.$valid &&salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

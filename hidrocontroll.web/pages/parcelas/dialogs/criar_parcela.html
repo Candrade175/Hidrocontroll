@@ -1,0 +1,164 @@
+﻿<md-dialog class="tela-cadastro" aria-label="Dados Parcela" ng-cloak>
+    <form name="parcelaForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Parcela</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+
+                <md-datepicker class="md-block" name="data" ng-model="selected.DAT_PLANTIO" md-placeholder="Data" required>
+                    {{selected.DAT_PLANTIO | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+                <div ng-messages="parcelaForm.data.$error" ng-show="parcelaForm.data.$touched" role="alert">
+                    <div ng-message="required" class="messagem-erro">Campo obrigatório.</div>
+                </div>
+                <br />
+                <md-input-container class="md-block">
+                    <label>Nome</label>
+                    <input name="Nome" type="text" ng-model="selected.NOM_PARCELA" required ng-maxlength="45" ng-minlength="4">
+                    <!-- Error messages for the input -->
+                    <div ng-messages="parcelaForm.Nome.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="minlength">Campo muito pequeno.</div>
+                        <div ng-message="maxlength">Campo muito grande.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-cultura" class="md-block autocomplete-container">
+                    <label>Cultura</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_CULTURA"
+                                     md-items="cultura in getMatchesCultura(searchTextCultura)"
+                                     md-search-text="searchTextCultura" md-item-text="cultura.NOM_CULTURA"
+                                     md-selected-item-change="onchangeSelectedCultura(selected.CAD_CULTURA)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextCultura">{{cultura.NOM_CULTURA}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Cultura não encontrada.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isCulturaInvalida" class="messagem-erro">
+                        Escolha uma Cultura válida.
+                    </div>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-solo" class="md-block autocomplete-container">
+                    <label>Solo</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_SOLO"
+                                     md-items="solo in getMatchesSolo(searchTextSolo)"
+                                     md-search-text="searchTextSolo" md-item-text="solo.NOM_SOLO"
+                                     md-selected-item-change="onchangeSelectedSolo(selected.CAD_SOLO)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextSolo">{{solo.NOM_SOLO}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Solo não encontrado.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isSoloInvalido" class="messagem-erro">
+                        Escolha um Solo válido.
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Área (ha)</label>
+                    <input name="ARE_PARCELA" type="number" ng-model="selected.ARE_PARCELA" required />
+                    <div class="validation-messages" ng-messages="parcelaForm.ARE_PARCELA.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Pluviômetro</label>
+                    <input name="VAR_PLUVIOMETRO" type="text" ng-change="calcularMedia(selected)" ng-model="selected.VAR_PLUVIOMETRO" required />
+                    <div ng-messages="parcelaForm.VAR_PLUVIOMETRO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Umidade do solo no plantio (%)</label>
+                    <input name="VAR_UMIDADE_SOLO_PLANTIO" type="number" ng-model="selected.VAR_UMIDADE_SOLO_PLANTIO" required />
+                    <div ng-messages="parcelaForm.VAR_UMIDADE_SOLO_PLANTIO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Velocidade do vento (m/s)</label>
+                    <input name="Estresse excedido (mm)" type="number" ng-model="selected.VAR_ESTRESSE_EXCEDIDO" required />
+                    <div ng-messages="parcelaForm.VAR_ESTRESSE_EXCEDIDO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-gotejador" class="md-block autocomplete-container" >
+                    <label>Gotejador</label>
+                    <md-autocomplete ng-disabled="selected.CAD_PIVO_CENTRAL" md-no-cache="true" md-selected-item="selected.CAD_GOTEJADOR"
+                                     md-items="gotejador in getMatchesGotejador(searchTextGotejador)"
+                                     md-search-text="searchTextGotejador" md-item-text="gotejador.NOM_GOTEJADOR"
+                                     md-selected-item-change="onchangeSelectedGotejador(selected.CAD_GOTEJADOR)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextGotejador">{{gotejador.NOM_GOTEJADOR}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Gotejador não encontrado.
+                        </md-not-found>
+                    </md-autocomplete>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-pivoCentral" class="md-block autocomplete-container">
+                    <label>Pivo Central</label>
+                    <md-autocomplete ng-disabled="selected.CAD_GOTEJADOR" md-no-cache="true" md-selected-item="selected.CAD_PIVO_CENTRAL"
+                                     md-items="pivoCentral in getMatchesPivoCentral(searchTextPivoCentral)"
+                                     md-search-text="searchTextPivoCentral" md-item-text="pivoCentral.NOM_PIVO_CENTRAL"
+                                     md-selected-item-change="onchangeSelectedPivoCentral(selected.CAD_PIVO_CENTRAL)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextPivoCentral">{{pivoCentral.NOM_PIVO_CENTRAL}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Pivo central não encontrado.
+                        </md-not-found>
+                    </md-autocomplete>
+
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-outorga" class="md-block autocomplete-container">
+                    <label>Outorga</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_OUTORGA"
+                                     md-items="outorga in getMatchesOutorga(searchTextOutorga)"
+                                     md-search-text="searchTextOutorga" md-item-text="outorga.NOM_OUTORGA"
+                                     md-selected-item-change="onchangeSelectedOutorga(selected.CAD_OUTORGA)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextOutorga">{{outorga.NOM_OUTORGA}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Outorga não encontrada.
+                        </md-not-found>
+                    </md-autocomplete>
+
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="parcelaForm.$valid &&salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

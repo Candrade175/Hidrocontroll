@@ -12,15 +12,15 @@ namespace hidrocontroll.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CAD_MOTOBOMBA_TARIFA
+    public partial class CAD_TARIFA
     {
-        public int IDC_CAD_MOTOBOMBA_TARIFA { get; set; }
+        public int IDC_CAD_TARIFA { get; set; }
         public string NOM_TARIFA { get; set; }
         public Nullable<System.TimeSpan> HOR_INICIO_TARIFA { get; set; }
         public Nullable<System.TimeSpan> HOR_FIM_TARIFA { get; set; }
         public Nullable<double> VAL_TARIFA { get; set; }
-        public int CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA { get; set; }
+        public int CAD_FAZENDA_IDC_CAD_FAZENDA { get; set; }
     
-        public virtual CAD_MOTOBOMBA CAD_MOTOBOMBA { get; set; }
+        public virtual CAD_FAZENDA CAD_FAZENDA { get; set; }
     }
 }

@@ -72,10 +72,17 @@ namespace hidrocontroll.Controllers
         [ResponseType(typeof(CAD_PARCELA))]
         public IHttpActionResult PostCAD_PARCELA(CAD_PARCELA cad_parcela)
         {
+            System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\test.txt");
+            file.WriteLine("1");
+
             if (!ModelState.IsValid)
             {
+                file.WriteLine("2");
+                file.Close();
                 return BadRequest(ModelState);
             }
+
+            file.Close();
 
             db.CAD_PARCELA.Add(cad_parcela);
 

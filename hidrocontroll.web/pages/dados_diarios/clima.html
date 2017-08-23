@@ -17,54 +17,40 @@
             </div>
             <!-- Campos de entrada de datas -->
             <div class="col-sm-6 no-padding">
-                <md-datepicker class="tabela-cabecalho-input" ng-model="climaDds.tabela.data_fim" md-placeholder="Data de Fim" md-min-date="climaDds.tabela.data_inicio">
-                    {{climaDds.tabela.data_fim | date:"dd/MM/yyyy"}}
+                <md-datepicker class="tabela-cabecalho-input" ng-model="climaDds.tabela.data_fim" md-placeholder="Data de Fim" md-min-date="climaDds.tabela.data_inicio" ng-change="climaDds.refresh()">
+                  
                 </md-datepicker>
-                <md-datepicker class="tabela-cabecalho-input" ng-model=" climaDds.tabela.data_inicio" md-placeholder="Data de Início">
-                    {{climaDds.tabela.data_inicio | date:"dd/MM/yyyy"}}
+                <md-datepicker class="tabela-cabecalho-input" ng-model=" climaDds.tabela.data_inicio" md-placeholder="Data de Início" ng-change="climaDds.refresh()">
+                 
                 </md-datepicker>
 
             </div>
         </div>
         <!-- Tabela -->
-        <table class="table table-striped table-bordered table-hover" id="tabela_dados">
-            <thead>
-                <tr>
-                    <th ng-repeat="dado in climaDds.tabela.cabecalho">{{dado}}</th>
-                    <th id='th_editar_excluir'>Editar</th>
-                    <th id='th_editar_excluir'>Excluir</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="item  in climaDds.Clima.list| orderBy:'-DAT_CLIMA' | dateFilter:climaDds.tabela.data_inicio:climaDds.tabela.data_fim | filter:{CAD_FAZENDA_IDC_CAD_FAZENDA:climaDds.codFazendaAtual}">
-                    <td>{{item.DAT_CLIMA | date:"dd/MM/yyyy"}}</td>
-                    <td>{{item.TMP_CLIMA_MAX}}</td>
-                    <td>{{item.TMP_CLIMA_MIN}}</td>
-                    <td>{{item.TMP_CLIMA_MEDIA}}</td>
-                    <td>{{item.VAR_UMIDADE_RELATIVA}}</td>
-                    <td>{{item.VEL_VENTO}}</td>
-                    <td>{{item.VAR_PRECIPITACAO_TOTAL}}</td>
-                    <td>{{item.VAR_RADIACAO}}</td>
-                    <td id='td_editar_excluir'>
-                        <md-button class="md-icon-button"
-                                   ng-click="climaDds.update($event, item)"
-                                   aria-label="Editar">
-                            <md-icon> create </md-icon>
-
-                        </md-button>
-                    </td>
-                    <td id='td_editar_excluir'>
-
-                        <md-button class="md-icon-button"
-                                   ng-click="climaDds.excluir($event, item)"
-                                   aria-label="Excluir">
-                            <md-icon>delete</md-icon>
-                        </md-button>
+        <div class="tabela-container">
+            <table ng-table-dynamic="climaDds.tableParams with climaDds.cols" class="table">
+                <tr ng-repeat="row in $data" >
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='comandoEditar'" class='width-70-px'>
+                            <md-button class="md-icon-button"
+                                       ng-click="climaDds.update($event, row)"
+                                       aria-label="Editar">
+                                <md-icon> create </md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='comandoDeletar'">
+                            <md-button class="md-icon-button"
+                                       ng-click="climaDds.excluir($event, row)"
+                                       aria-label="Excluir">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </span>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+            </table>
+        </div>
     </div>
 
 

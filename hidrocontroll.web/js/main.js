@@ -16,6 +16,16 @@
             var millisecondsToAdd = qtdDias * 24 * 60 * 60 * 1000;
             return new Date(millisecondsSinc1970 + millisecondsToAdd);
         }
+        Date.prototype.addMinutes = function (qtdMinutes) {
+            var millisecondsSinc1970 = this.getTime();
+            var millisecondsToAdd = qtdMinutes * 60 * 1000;
+            return new Date(millisecondsSinc1970 + millisecondsToAdd);
+        }
+        Date.prototype.addHours = function (qtdHours) {
+            var millisecondsSinc1970 = this.getTime();
+            var millisecondsToAdd = qtdHours * 60 * 60 * 1000;
+            return new Date(millisecondsSinc1970 + millisecondsToAdd);
+        }
     })
 
 
@@ -147,7 +157,9 @@
                                     { "nome": "Motobomba", "icon": "glyphicon glyphicon-wrench" }]},
                     { "nome": "Outorga", "icon": "glyphicon glyphicon-tasks" },
                     { "nome": "Fases de Outorga", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Reservatório/Rebombeamento", "icon": "glyphicon glyphicon-th-large" }],
+                    { "nome": "Reservatório/Rebombeamento", "icon": "glyphicon glyphicon-th-large" },
+
+                    { "nome": "Tarifa", "icon": "glyphicon glyphicon-th-large" }],
 
                 icon: "glyphicon glyphicon-leaf"
             })
@@ -173,6 +185,14 @@
                 controller: "SoloCadastrosController",
                 controllerAs: "soloCdt"
             })
+
+             .state('main.CadastrosTarifa', {
+                 url: "/tarifa",
+                 templateUrl: "pages/cadastros/tarifa.html",
+                 controller: "TarifaCadastrosController",
+                 controllerAs: "tarifaCdt"
+             })
+
 
             .state('main.CadastrosReservatório/Rebombeamento', {
                 url: "/reservatorio",
@@ -226,6 +246,7 @@
                 controllerAs: "motobombaEqp"
             })
 
+
             
 
 
@@ -254,7 +275,7 @@
                 icon: "glyphicon glyphicon-list-alt"
             })
 
-            .state('main.ManejoRelatórios', {
+            .state('main.RelatóriosManejo', {
                 url: "/manejo",
                 templateUrl: "pages/relatorios/manejo.html",
                 controller: "ManejoRelatoriosController",

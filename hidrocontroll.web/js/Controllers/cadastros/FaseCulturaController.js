@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("FaseCulturaCadastrosController", faseCulturaController);
 
-    function faseCulturaController(EntitiesService, $mdMedia, $mdDialog, $timeout, store, $filter, $rootScope, NgTableParams) {
+    function faseCulturaController(EntitiesService, $mdMedia, $mdDialog, $timeout, store, $filter, $rootScope, NgTableParams, $element) {
         var self = this;
 
         initializeData();
@@ -35,6 +35,10 @@
             self.printData = printData;
             self.buscador = "";
             self.showhints;
+            self.buscarCulturaFazenda = buscarCulturaFazenda;
+            self.searchTerm;
+            self.clearSearchTerm;
+            self.CulturasFiltro = [];
             self.cols = [
               {
                   field: "NOM_FASE_CULTURA", title: "Nome", sortable: "NOM_FASE_CULTURA", show: true, filter: { NOM_FASE_CULTURA: "text" }, type: "valor"
@@ -59,6 +63,9 @@
 
         };
 
+        $element.find('input').on('keydown', function (ev) {
+            ev.stopPropagation();
+        });
 
         function refresh() {
             if (self.FaseCultura.list.length != 0) {
@@ -70,6 +77,17 @@
                 list = $filter('filter')(self.FaseCultura.list, function (faseCultura) {
                     return getCultura(faseCultura.CAD_CULTURA_IDC_CAD_CULTURA).CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
+
+                if (self.CulturasFiltro.length > 0) {
+                    list = $filter('filter')(list, function (faseCultura) {
+                        for (i = 0; i < self.CulturasFiltro.length; i++)
+                            if (faseCultura.CAD_CULTURA_IDC_CAD_CULTURA == self.CulturasFiltro[i].IDC_CAD_CULTURA)
+                                return true;
+                        return false;
+                    });
+                }
+
+
                 list = $filter('orderBy')(list, 'NOM_FASE_CULTURA');
                 
 
@@ -159,8 +177,7 @@
                             });
                     },
                     function () {
-                        $mdDialog
-                            .show(error)
+                        $mdDialog.show(error);
                     }
                 );
             });
@@ -216,23 +233,27 @@
             };
 
             $scope.getMatchesCultura = function (text) {
-                var list = $filter('filter')(self.Cultura.list, function (cultura) {
-                    return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
-                });
-                list = $filter('filter')(list, text);
-                return  $filter('orderBy')(list, 'NOM_CULTURA');
-
+                
+                return self.buscarCulturaFazenda(text);
             };
 
             $scope.onchangeSelectedCultura = function (cultura) {
                 try {
-                    self.Cultura.selected.CAD_CULTURA_IDC_CAD_CULTURA = cultura.IDC_CAD_CULTURA;
+                    $scope.selected.CAD_CULTURA_IDC_CAD_CULTURA = cultura.IDC_CAD_CULTURA;
                     $scope.isCulturaInvalida = false;
                     document.getElementById("autocomplete-container-cultura").classList.remove('md-input-invalid');
                 } catch (err) {
                     //Tratamento de exceção
                 }
             };
+        };
+
+        function buscarCulturaFazenda(text) {
+            var list = $filter('filter')(self.Cultura.list, function (cultura) {
+                return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
+            });
+            list = $filter('filter')(list, text);
+            return $filter('orderBy')(list, 'NOM_CULTURA');
         };
 
         function getCultura(id) {

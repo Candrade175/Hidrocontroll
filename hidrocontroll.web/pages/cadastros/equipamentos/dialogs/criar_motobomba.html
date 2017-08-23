@@ -1,0 +1,59 @@
+﻿<md-dialog aria-label="Dados Motobomba" class="tela-cadastro" ng-cloak>
+    <form name="motobombaForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Motobomba</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+
+                <md-input-container class="md-block">
+                    <label>Nome</label>
+                    <input name="Nome" ng-model="selected.NOM_MOTOBOMBA" required ng-maxlength="45" ng-minlength="4">
+                    <!-- Error messages for the input -->
+                    <div ng-messages="motobombaForm.Nome.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="minlength">Campo muito pequeno.</div>
+                        <div ng-message="maxlength">Campo muito grande.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Potência (CV)</label>
+                    <input name="VAR_POTENCIA" type="number" ng-model="selected.VAR_POTENCIA" required />
+                    <div ng-messages="motobombaForm.VAR_POTENCIA.$error" role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Consumo (Kw/h)</label>
+                    <input name="VAR_CONSUMO" type="number" ng-model="selected.VAR_CONSUMO" required />
+                    <div ng-messages="motobombaForm.VAR_CONSUMO.$error" role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Vazão (m³/h)</label>
+                    <input name="VAZ_MOTOBOMBA" type="number" ng-model="selected.VAZ_MOTOBOMBA" required />
+                    <div ng-messages="motobombaForm.VAZ_MOTOBOMBA.$error" role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+                </md-input-container>
+               
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="motobombaForm.$valid && salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

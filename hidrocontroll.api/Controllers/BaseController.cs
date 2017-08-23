@@ -10,7 +10,7 @@ namespace hidrocontroll.Controllers
     public class BaseController : ApiController
     {
         protected hidrocontrollEntities db = new hidrocontrollEntities();
-
+        
         public BaseController()
         {
             db.Configuration.ProxyCreationEnabled = false;

@@ -16,10 +16,10 @@ namespace hidrocontroll.Models
     {
         public CAD_PARCELA()
         {
-            this.CAD_UMIDADE = new HashSet<CAD_UMIDADE>();
             this.CAD_PRECIPITACAO = new HashSet<CAD_PRECIPITACAO>();
-            this.CAD_UMIDADE1 = new HashSet<CAD_UMIDADE>();
             this.REG_MANEJO = new HashSet<REG_MANEJO>();
+            this.CAD_IRRIGACAO = new HashSet<CAD_IRRIGACAO>();
+            this.CAD_UMIDADE = new HashSet<CAD_UMIDADE>();
         }
     
         public string NOM_PARCELA { get; set; }
@@ -38,11 +38,11 @@ namespace hidrocontroll.Models
         public virtual CAD_CULTURA CAD_CULTURA { get; set; }
         public virtual CAD_GOTEJADOR CAD_GOTEJADOR { get; set; }
         public virtual CAD_OUTORGA CAD_OUTORGA { get; set; }
-        public virtual ICollection<CAD_UMIDADE> CAD_UMIDADE { get; set; }
         public virtual CAD_PIVO_CENTRAL CAD_PIVO_CENTRAL { get; set; }
         public virtual CAD_SOLO CAD_SOLO { get; set; }
         public virtual ICollection<CAD_PRECIPITACAO> CAD_PRECIPITACAO { get; set; }
-        public virtual ICollection<CAD_UMIDADE> CAD_UMIDADE1 { get; set; }
         public virtual ICollection<REG_MANEJO> REG_MANEJO { get; set; }
+        public virtual ICollection<CAD_IRRIGACAO> CAD_IRRIGACAO { get; set; }
+        public virtual ICollection<CAD_UMIDADE> CAD_UMIDADE { get; set; }
     }
 }

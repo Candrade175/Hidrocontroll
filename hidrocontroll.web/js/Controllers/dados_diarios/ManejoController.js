@@ -8,8 +8,7 @@
 
         function initializeData() {
 
-            self.codFazendaAtual = store.get('user').CAD_FAZENDA_IDC_CAD_FAZENDA;
-            self.Teste=["OI","asdsa"];
+            self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
             self.Manejo = EntitiesService.manejo;
             self.Parcela = EntitiesService.parcela;
             self.Cultura = EntitiesService.cultura;
@@ -17,16 +16,28 @@
             self.printData = printData;
             self.getParcela = getParcela;
             self.getCultura = getCultura;
-            self.selectedParcelas = [];
-            self.searchTerm = "";
             self.showhints;
+            self.refresh = refresh;
+            self.searchTerm;
+            self.clearSearchTerm;
+            self.ParcelasFiltro = [];
+            self.buscarParcelaFazenda = buscarParcelaFazenda;
 
-            console.log(self.Manejo.list);
+
+            self.cols = [
+                {
+                    field: "DAT_MANEJO", title: "Data", sortable: "DAT_MANEJO", isDate: true, show: true, type: "valor"
+                },
+                { field: "CAD_PARCELA_IDC_CAD_PARCELA", title: "Parcela", show: true, type: "valorCompostoParcela" },
+                {  title: "Cultura", show: true, type: "valorCompostoCultura" },
+                { field: "VOL_IRRIGACAO_NECESSARIA", title: "Irrigação Necessária (mm)", show: true, type: "valor" },
+                { field: "TMO_MANEJO", title: "Tempo Necessário", show: true, type: "valor" },
+                { field: "PER_PERCENTIMETRO", title: "Percentimetro (%)", show: true, type: "valor" }
+            ];
 
             self.tabela = {
                 "titulo": "Manejo",
-                "subtitulo": "Informações sobre manejo:",
-                "cabecalho": ["Data","Parcela","Cultura","Irrigação Necessária (mm)","Tempo Necessário","Percentimetro (%)"]
+                "subtitulo": "Informações sobre manejo:"
             };
 
             self.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
@@ -40,6 +51,39 @@
             ev.stopPropagation();
         });
 
+        function refresh() {
+            if (self.Manejo.list.length * self.Cultura.list.length * self.Parcela.list.length != 0) {
+                clearInterval(intervalID);
+            }
+            try {
+                var list = [];
+
+
+                list = $filter('filter')(self.Manejo.list, function (manejo) {
+                    return getCultura(getParcela(manejo.CAD_PARCELA_IDC_CAD_PARCELA).CAD_CULTURA_IDC_CAD_CULTURA).CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
+                });
+
+
+                list = $filter('dateFilterManejo')(list, self.filtroData);
+
+                if (self.ParcelasFiltro.length > 0) {
+                    list = $filter('filter')(list, function (manejo) {
+                        for (i = 0; i < self.ParcelasFiltro.length; i++)
+                            if (manejo.CAD_PARCELA_IDC_CAD_PARCELA == self.ParcelasFiltro[i].IDC_CAD_PARCELA)
+                                return true;
+                        return false;
+                    });
+                }
+
+                list = $filter('orderBy')(list, '-DAT_MANEJO');
+
+
+                self.tableParams = new NgTableParams({}, { dataset: list });
+                $rootScope.$digest();
+            } catch (e) {
+
+            }
+        }
 
         function printData() {
             var divToPrint = document.getElementById("tabela_dados");
@@ -61,10 +105,30 @@
         };
 
         function getCultura() {
+            if (self.Parcela.list.length)
+                for (var i = 0; i < self.Cultura.list.length; i++)
+                    if (self.Cultura.list[i].IDC_CAD_CULTURA == parcela.CAD_CULTURA_IDC_CAD_CULTURA)
+                        return self.Cultura.list[i];
+        };
+
+        function getCulturaPorId(id) {
             for (var i = 0; i < self.Cultura.list.length; i++)
-                if (self.Cultura.list[i].IDC_CAD_CULTURA == parcela.CAD_CULTURA_IDC_CAD_CULTURA)
+                if (self.Cultura.list[i].IDC_CAD_CULTURA == id)
                     return self.Cultura.list[i];
         };
+
+        function buscarParcelaFazenda(text) {
+            var list = $filter('filter')(self.Parcela.list, function (parcela) {
+                cultura = getCulturaPorId(parcela.CAD_CULTURA_IDC_CAD_CULTURA);
+                if (cultura)
+                    return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
+                else
+                    return false;
+            });
+            list = $filter('filter')(list, text);
+            return $filter('orderBy')(list, 'NOM_PARCELA');
+        };
+
 
         
     };
@@ -78,8 +142,6 @@ function dateFilterEquals() {
                 items[i].DAT_MANEJO.setHours(0, 0, 0, 0);
                 if (items[i].DAT_MANEJO.getTime() == date.getTime()) {
                     result.push(items[i]);
-                    console.log("asd");
-                    
                 }
             }
         } else {

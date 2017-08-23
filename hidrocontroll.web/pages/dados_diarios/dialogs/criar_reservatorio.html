@@ -1,0 +1,110 @@
+﻿<md-dialog class="tela-cadastro" aria-label="Dados Reservatório" ng-cloak>
+    <form name="reservatorioDiarioForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Reservatório</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+                <md-datepicker class="md-block" name="data" ng-model="selected.DAT_RESERVATORIO_DIARIO" md-placeholder="Data" required>
+                    {{selected.DAT_RESERVATORIO_DIARIO | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+                <div ng-messages="reservatorioDiarioForm.data.$error" ng-show="reservatorioDiarioForm.data.$touched" role="alert">
+                    <div ng-message="required" class="messagem-erro">Campo obrigatório.</div>
+                </div>
+                <br />
+
+
+                <md-input-container id="autocomplete-container-reservatorio" class="md-block autocomplete-container">
+                    <label>Reservatorio</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_RESERVATORIO"
+                                     md-items="reservatorio in getMatchesReservatorio(searchTextReservatorio)"
+                                     md-search-text="searchTextReservatorio" md-item-text="reservatorio.NOM_RESERVATORIO"
+                                     md-selected-item-change="onchangeSelectedReservatorio(selected.CAD_RESERVATORIO)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextReservatorio">{{reservatorio.NOM_RESERVATORIO}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Reservatorio não encontrado.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isReservatorioInvalido" class="messagem-erro">
+                        Escolha uma Reservatorio válido.
+                    </div>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-motobomba" class="md-block autocomplete-container">
+                    <label>Motobomba</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_MOTOBOMBA"
+                                     md-items="motobomba in getMatchesMotobomba(searchTextMotobomba)"
+                                     md-search-text="searchTextMotobomba" md-item-text="motobomba.NOM_MOTOBOMBA"
+                                     md-selected-item-change="onchangeSelectedMotobomba(selected.CAD_MOTOBOMBA)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextMotobomba">{{motobomba.NOM_MOTOBOMBA}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Motobomba não encontrada.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isMotobombaInvalida" class="messagem-erro">
+                        Escolha uma Motobomba válida.
+                    </div>
+                </md-input-container>
+
+
+                <md-input-container class="md-block">
+                    <label>Início (horas)</label>
+                    <input name="TMO_INICIO" type="time" placeholder="HH:mm" ng-model="selected.TMO_INICIO" ng-change="validaTime()" required />
+                    <div ng-messages="pivoCentralForm.TMO_INICIO.$error" ng-messages-multiple role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+                    <div ng-show="!timeValido" class="messagem-erro">
+                        Tempo Inicial deve ser menor que tempo Final.
+                    </div>
+                </md-input-container>
+                
+
+                <md-input-container class="md-block">
+                    <label>Término (horas)</label>
+                    <input name="TMO_TERMINO" type="time" placeholder="HH:mm" ng-model="selected.TMO_TERMINO" ng-change="validaTime()" min="getTimeFormated(selected.TMO_INICIO)" required />
+                    <div ng-messages="pivoCentralForm.TMO_TERMINO.$error" ng-messages-multiple role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                        <div ng-message="min">Valor mínimo é {{getTimeFormated(selected.TMO_INICIO)}}.</div>
+                    </div>
+                    <div ng-show="!timeValido" class="messagem-erro">
+                        Tempo Inicial deve ser menor que tempo Final.
+                    </div>
+
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Volume (m³)</label>
+                    <input id="VOL_RESERVATORIO_DIARIO" ng-model="selected.VOL_RESERVATORIO_DIARIO" ng-readonly="true" />
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Consumo (R$/m³)</label>
+                    <input id="VAR_CONSUMO" ng-model="selected.VAR_CONSUMO" ng-readonly="true" />
+                </md-input-container>
+
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="reservatorioDiarioForm.$valid&&timeValido &&salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

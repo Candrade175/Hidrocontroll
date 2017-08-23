@@ -121,54 +121,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CAD_RESERVATORIO_DIARIO">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_RESERVATORIO_DIARIO">
-        <MappingFragment StoreEntitySet="CAD_RESERVATORIO_DIARIO">
-          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-          <ScalarProperty Name="CAD_RESERVATORIO_IDC_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_RESERVATORIO" />
-          <ScalarProperty Name="VAR_CONSUMO" ColumnName="VAR_CONSUMO" />
-          <ScalarProperty Name="VOL_RESERVATORIO_DIARIO" ColumnName="VOL_RESERVATORIO_DIARIO" />
-          <ScalarProperty Name="TMO_TERMINO" ColumnName="TMO_TERMINO" />
-          <ScalarProperty Name="TMO_INICIO" ColumnName="TMO_INICIO" />
-          <ScalarProperty Name="DAT_RESERVATORIO_DIARIO" ColumnName="DAT_RESERVATORIO_DIARIO" />
-          <ScalarProperty Name="IDC_CAD_RESERVATORIO_DIARIO" ColumnName="IDC_CAD_RESERVATORIO_DIARIO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CAD_UMIDADE">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_UMIDADE">
-        <MappingFragment StoreEntitySet="CAD_UMIDADE">
-          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
-          <ScalarProperty Name="VOL_CM60" ColumnName="VOL_CM60" />
-          <ScalarProperty Name="VOL_CM50" ColumnName="VOL_CM50" />
-          <ScalarProperty Name="VOL_CM40" ColumnName="VOL_CM40" />
-          <ScalarProperty Name="VOL_CM30" ColumnName="VOL_CM30" />
-          <ScalarProperty Name="VOL_CM20" ColumnName="VOL_CM20" />
-          <ScalarProperty Name="VOL_CM10" ColumnName="VOL_CM10" />
-          <ScalarProperty Name="DAT_UMIDADE" ColumnName="DAT_UMIDADE" />
-          <ScalarProperty Name="IDC_CAD_UMIDADE" ColumnName="IDC_CAD_UMIDADE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CAD_IRRIGACAO">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_IRRIGACAO">
-        <MappingFragment StoreEntitySet="CAD_IRRIGACAO">
-          <ScalarProperty Name="TMO_IRRIGACAO_FIM" ColumnName="TMO_IRRIGACAO_FIM" />
-          <ScalarProperty Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
-          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
-          <ScalarProperty Name="VAR_FERTIRRIGACAO" ColumnName="VAR_FERTIRRIGACAO" />
-          <ScalarProperty Name="VAR_VALOR_ENERGETICO" ColumnName="VAR_VALOR_ENERGETICO" />
-          <ScalarProperty Name="VOL_CONSUMIDO" ColumnName="VOL_CONSUMIDO" />
-          <ScalarProperty Name="VOL_IRRIGACAO" ColumnName="VOL_IRRIGACAO" />
-          <ScalarProperty Name="TMO_IRRIGACAO_INICIO" ColumnName="TMO_IRRIGACAO_INICIO" />
-          <ScalarProperty Name="TMO_IRRIGACAO_GOTEJO" ColumnName="TMO_IRRIGACAO_GOTEJO" />
-          <ScalarProperty Name="TMO_IRRIGACAO_PIVO" ColumnName="TMO_IRRIGACAO_PIVO" />
-          <ScalarProperty Name="DAT_IRRIGACAO" ColumnName="DAT_IRRIGACAO" />
-          <ScalarProperty Name="IDC_CAD_IRRIGACAO" ColumnName="IDC_CAD_IRRIGACAO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CAD_CLIMA">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIMA">
         <MappingFragment StoreEntitySet="CAD_CLIMA">
@@ -308,18 +260,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CAD_MOTOBOMBA_TARIFA">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA_TARIFA">
-        <MappingFragment StoreEntitySet="CAD_MOTOBOMBA_TARIFA">
-          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
-          <ScalarProperty Name="VAL_TARIFA" ColumnName="VAL_TARIFA" />
-          <ScalarProperty Name="HOR_FIM_TARIFA" ColumnName="HOR_FIM_TARIFA" />
-          <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
-          <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
-          <ScalarProperty Name="IDC_CAD_MOTOBOMBA_TARIFA" ColumnName="IDC_CAD_MOTOBOMBA_TARIFA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CAD_MOTOBOMBA">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_MOTOBOMBA">
         <MappingFragment StoreEntitySet="CAD_MOTOBOMBA">
@@ -329,6 +269,66 @@
           <ScalarProperty Name="VAR_POTENCIA" ColumnName="VAR_POTENCIA" />
           <ScalarProperty Name="NOM_MOTOBOMBA" ColumnName="NOM_MOTOBOMBA" />
           <ScalarProperty Name="IDC_CAD_MOTOBOMBA" ColumnName="IDC_CAD_MOTOBOMBA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_IRRIGACAO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_IRRIGACAO">
+        <MappingFragment StoreEntitySet="CAD_IRRIGACAO">
+          <ScalarProperty Name="TMO_IRRIGACAO_FIM" ColumnName="TMO_IRRIGACAO_FIM" />
+          <ScalarProperty Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
+          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="VAR_FERTIRRIGACAO" ColumnName="VAR_FERTIRRIGACAO" />
+          <ScalarProperty Name="VAR_VALOR_ENERGETICO" ColumnName="VAR_VALOR_ENERGETICO" />
+          <ScalarProperty Name="VOL_CONSUMIDO" ColumnName="VOL_CONSUMIDO" />
+          <ScalarProperty Name="VOL_IRRIGACAO" ColumnName="VOL_IRRIGACAO" />
+          <ScalarProperty Name="TMO_IRRIGACAO_INICIO" ColumnName="TMO_IRRIGACAO_INICIO" />
+          <ScalarProperty Name="TMO_IRRIGACAO_GOTEJO" ColumnName="TMO_IRRIGACAO_GOTEJO" />
+          <ScalarProperty Name="TMO_IRRIGACAO_PIVO" ColumnName="TMO_IRRIGACAO_PIVO" />
+          <ScalarProperty Name="DAT_IRRIGACAO" ColumnName="DAT_IRRIGACAO" />
+          <ScalarProperty Name="IDC_CAD_IRRIGACAO" ColumnName="IDC_CAD_IRRIGACAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_UMIDADE">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_UMIDADE">
+        <MappingFragment StoreEntitySet="CAD_UMIDADE">
+          <ScalarProperty Name="DAT_UMIDADE" ColumnName="DAT_UMIDADE" />
+          <ScalarProperty Name="VOL_CM60" ColumnName="VOL_CM60" />
+          <ScalarProperty Name="VOL_CM50" ColumnName="VOL_CM50" />
+          <ScalarProperty Name="VOL_CM40" ColumnName="VOL_CM40" />
+          <ScalarProperty Name="VOL_CM30" ColumnName="VOL_CM30" />
+          <ScalarProperty Name="VOL_CM20" ColumnName="VOL_CM20" />
+          <ScalarProperty Name="VOL_CM10" ColumnName="VOL_CM10" />
+          <ScalarProperty Name="CAD_PARCELA_IDC_CAD_PARCELA" ColumnName="CAD_PARCELA_IDC_CAD_PARCELA" />
+          <ScalarProperty Name="IDC_CAD_UMIDADE" ColumnName="IDC_CAD_UMIDADE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_RESERVATORIO_DIARIO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_RESERVATORIO_DIARIO">
+        <MappingFragment StoreEntitySet="CAD_RESERVATORIO_DIARIO">
+          <ScalarProperty Name="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" ColumnName="CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA" />
+          <ScalarProperty Name="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" ColumnName="CAD_RESERVATORIO_IDC_CAD_RESERVATORIO" />
+          <ScalarProperty Name="VAR_CONSUMO" ColumnName="VAR_CONSUMO" />
+          <ScalarProperty Name="VOL_RESERVATORIO_DIARIO" ColumnName="VOL_RESERVATORIO_DIARIO" />
+          <ScalarProperty Name="TMO_TERMINO" ColumnName="TMO_TERMINO" />
+          <ScalarProperty Name="TMO_INICIO" ColumnName="TMO_INICIO" />
+          <ScalarProperty Name="DAT_RESERVATORIO_DIARIO" ColumnName="DAT_RESERVATORIO_DIARIO" />
+          <ScalarProperty Name="IDC_CAD_RESERVATORIO_DIARIO" ColumnName="IDC_CAD_RESERVATORIO_DIARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_TARIFA">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_TARIFA">
+        <MappingFragment StoreEntitySet="CAD_TARIFA">
+          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
+          <ScalarProperty Name="VAL_TARIFA" ColumnName="VAL_TARIFA" />
+          <ScalarProperty Name="HOR_FIM_TARIFA" ColumnName="HOR_FIM_TARIFA" />
+          <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
+          <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
+          <ScalarProperty Name="IDC_CAD_TARIFA" ColumnName="IDC_CAD_TARIFA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

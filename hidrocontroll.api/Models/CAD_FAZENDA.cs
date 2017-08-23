@@ -25,6 +25,7 @@ namespace hidrocontroll.Models
             this.CAD_PIVO_CENTRAL = new HashSet<CAD_PIVO_CENTRAL>();
             this.CAD_SOLO = new HashSet<CAD_SOLO>();
             this.CAD_MOTOBOMBA = new HashSet<CAD_MOTOBOMBA>();
+            this.CAD_TARIFA = new HashSet<CAD_TARIFA>();
         }
     
         public int IDC_CAD_FAZENDA { get; set; }
@@ -45,5 +46,6 @@ namespace hidrocontroll.Models
         public virtual ICollection<CAD_PIVO_CENTRAL> CAD_PIVO_CENTRAL { get; set; }
         public virtual ICollection<CAD_SOLO> CAD_SOLO { get; set; }
         public virtual ICollection<CAD_MOTOBOMBA> CAD_MOTOBOMBA { get; set; }
+        public virtual ICollection<CAD_TARIFA> CAD_TARIFA { get; set; }
     }
 }

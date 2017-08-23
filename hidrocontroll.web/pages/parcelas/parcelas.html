@@ -7,28 +7,47 @@
                 <p style="display: inline; margin-right= 50px;">{{parcelasPrc.tabela.subtitulo}}</p>
             </span>
 
-            <!-- Campos de entrada de datas -->
-            <span class="tabela-cabecalho-campos">
-                <!-- Campo de busca -->
-                <md-input-container class="tabela-cabecalho-input">
-                    <label for="busca">Busca</label>
-                    <input type="number" ng-model="parcelasPrc.tabela.busca" aria-label="ShowHideAccountant" value="busca" />
-                </md-input-container>
-            </span>
         </div>
 
+        <div layout="row">
+            <div class="col-sm-6 no-padding">
+                <!-- Botões -->
+                <md-button class="md-primary md-raised" ng-click="parcelasPrc.create()">Novo</md-button>
+                <md-button class="md-primary md-raised" ng-click="parcelasPrc.printData()">Imprimir</md-button>
+            </div>
+        </div>
         <!-- Tabela -->
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th ng-repeat="dado in parcelasPrc.tabela.cabecalho">{{dado}}</th>
+        <div class="tabela-container">
+            <table ng-table-dynamic="parcelasPrc.tableParams with parcelasPrc.cols" class="table">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='valorCompostoCultura'"> {{parcelasPrc.getCultura(row[col.field]).NOM_CULTURA}}</span>
+                        <span ng-if="col.type=='valorCompostoOutorga'"> {{parcelasPrc.getOutorga(row[col.field]).NOM_OUTORGA}}</span>
+                        <span ng-if="col.type=='valorCompostoPivoCentral'"> {{parcelasPrc.getPivoCentral(row[col.field]).NOM_PIVO_CENTRAL}}</span>
+                        <span ng-if="col.type=='valorCompostoGotejador'"> {{parcelasPrc.getGotejador(row[col.field]).NOM_GOTEJADOR}}</span>
+                        <span ng-if="col.type=='valorCompostoSolo'"> {{parcelasPrc.getSolo(row[col.field]).NOM_SOLO}}</span>
+                     
+                        <span ng-if="col.type=='comandoEditar'" class='width-70-px'>
+                            <md-button class="md-icon-button"
+                                       ng-click="parcelasPrc.update($event, row)"
+                                       aria-label="Editar">
+                                <md-icon> create </md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='comandoDeletar'">
+                            <md-button class="md-icon-button"
+                                       ng-click="parcelasPrc.excluir($event, row)"
+                                       aria-label="Excluir">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </span>
+                    </td>
                 </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-        <!-- Botões -->
-        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
-        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+            </table>
+        </div>
     </div>
+
+
 </md-content>

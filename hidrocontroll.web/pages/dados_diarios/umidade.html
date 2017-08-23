@@ -7,39 +7,80 @@
                 <p style="display: inline; margin-right= 50px;">{{umidadeDds.tabela.subtitulo}}</p>
             </span>
 
-            <!-- Campos de entrada de datas -->
-            <span class="tabela-cabecalho-campos">
-                <md-datepicker class="tabela-cabecalho-float" ng-model="umidadeDds.tabela.data_inicio" md-placeholder="Data de Início">
-                    {{umidadeDds.tabela.data_inicio | date:"dd/MM/yyyy HH:mm"}}
-                </md-datepicker>
-                <md-datepicker class="tabela-cabecalho-float" ng-model="umidadeDds.tabela.data_fim" md-placeholder="Data de Fim">
-                    {{umidadeDds.tabela.data_fim | date:"dd/MM/yyyy HH:mm"}}
-                </md-datepicker>
-
-                <md-input-container class="tabela-cabecalho-input">
-                    <label>Parcela</label>
-                    <md-select ng-model="umidadeDds.parcela">
-                        <md-option><em>None</em></md-option>
-                        <md-option ng-repeat="parcela in umidadeDds.parcelas" ng-value="parcela">
-                            {{parcelas}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-            </span>
         </div>
+        <div layout="row">
+            <div class="col-sm-4 no-padding div-filtro">
+                <!-- Botões -->
+                <md-button class="md-primary md-raised" ng-click="umidadeDds.create()">Novo</md-button>
+                <md-button class="md-primary md-raised" ng-click="umidadeDds.printData()">Imprimir</md-button>
+            </div>
+            <div class="col-sm-4 no-padding  div-filtro">
+                <md-input-container class="filtro-seletor">
 
+                    <label>Parcela</label>
+                    <md-select ng-model="umidadeDds.ParcelasFiltro"
+                               md-on-close="umidadeDds.clearSearchTerm()"
+                               data-md-container-class="selectdemoSelectHeader"
+                               multiple ng-change="umidadeDds.refresh()">
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="searchTerm"
+                                   type="search"
+                                   placeholder="Buscar Parcela"
+                                   class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup>
+                            <md-option ng-value="parcela" ng-repeat="parcela in umidadeDds.buscarParcelaFazenda(searchTerm)">{{parcela.NOM_PARCELA}}</md-option>
+                        </md-optgroup>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+            <!-- Campos de entrada de datas -->
+            <div class="col-sm-4 no-padding div-filtro">
+                <md-datepicker class="tabela-cabecalho-input" ng-model="umidadeDds.tabela.data_fim" md-placeholder="Data de Fim" md-min-date="umidadeDds.tabela.data_inicio" ng-change="umidadeDds.refresh()">
+                    {{umidadeDds.tabela.data_fim | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+                <md-datepicker class="tabela-cabecalho-input" ng-model="umidadeDds.tabela.data_inicio" md-placeholder="Data de Início" ng-change="umidadeDds.refresh()">
+                    {{umidadeDds.tabela.data_inicio | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+
+            </div>
+        </div>
         <!-- Tabela -->
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th ng-repeat="dado in umidadeDds.tabela.cabecalho">{{dado}}</th>
+        <div class="tabela-container">
+            <table ng-table-dynamic="umidadeDds.tableParams with umidadeDds.cols" class="table">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valorCompostoParcela'"> {{umidadeDds.getParcela(row[col.field]).NOM_PARCELA}}</span>
+                        <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='valorBool'&&row[col.field]">
+                            <md-button ng-disabled="true" class="md-icon-button">
+                                <md-icon class="glyphicon glyphicon-ok-sign"></md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='valorBool'&&!row[col.field]">
+                            <md-button ng-disabled="true" class="md-icon-button">
+                                <md-icon class="glyphicon glyphicon-remove-sign"></md-icon>
+                            </md-button>
+                        </span>
+                       <span ng-if="col.type=='comandoEditar'" class='width-70-px'>
+                            <md-button class="md-icon-button"
+                                       ng-click="umidadeDds.update($event, row)"
+                                       aria-label="Editar">
+                                <md-icon> create </md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='comandoDeletar'">
+                            <md-button class="md-icon-button"
+                                       ng-click="umidadeDds.excluir($event, row)"
+                                       aria-label="Excluir">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </span>
+                    </td>
                 </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-        <!-- Botões -->
-        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Novo</md-button>
-        <md-button style="float: right;" class="md-primary md-raised" ng-click="">Imprimir</md-button>
+            </table>
+        </div>
     </div>
 </md-content>

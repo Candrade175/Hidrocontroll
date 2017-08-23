@@ -160,7 +160,10 @@
     <Compile Include="Controllers\PivoCentralController.cs" />
     <Compile Include="Controllers\PrecipitacaoController.cs" />
     <Compile Include="Controllers\ReservatorioController.cs" />
+    <Compile Include="Controllers\ReservatorioDiarioController.cs" />
     <Compile Include="Controllers\SoloController.cs" />
+    <Compile Include="Controllers\TarifaController.cs" />
+    <Compile Include="Controllers\UmidadeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,9 +206,6 @@
     <Compile Include="Models\CAD_MOTOBOMBA.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CAD_MOTOBOMBA_TARIFA.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CAD_OUTORGA.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -225,6 +225,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CAD_SOLO.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAD_TARIFA.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CAD_UMIDADE.cs">

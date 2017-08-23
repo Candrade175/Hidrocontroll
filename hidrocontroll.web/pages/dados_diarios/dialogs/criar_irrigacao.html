@@ -1,0 +1,144 @@
+﻿<md-dialog class="tela-cadastro" aria-label="Dados Irrigação" ng-cloak>
+    <form name="irrigacaoForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Irrigação</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" style="text-align: center">
+                <div layout="row">
+                    <div class="col-sm-6">
+                        <md-datepicker class="md-block" name="data" ng-model="selected.DAT_IRRIGACAO" md-placeholder="Data" required>
+                            {{selected.DAT_IRRIGACAO | date:"dd/MM/yyyy"}}
+                        </md-datepicker>
+                        <div ng-messages="irrigacaoForm.data.$error" ng-show="irrigacaoForm.data.$touched" role="alert">
+                            <div ng-message="required" class="messagem-erro">Campo obrigatório.</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <md-checkbox style="top:23%" ng-model=" selected.VAR_FERTIRRIGACAO">
+                            Fertirrigação
+                        </md-checkbox>
+                    </div>
+                </div>
+
+                    <br />
+                <md-input-container id="autocomplete-container-parcela" class="md-block autocomplete-container">
+                <label>Parcela</label>
+                <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_PARCELA"
+                                 md-items="parcela in getMatchesParcela(searchTextParcela)"
+                                 md-search-text="searchTextParcela" md-item-text="parcela.NOM_PARCELA"
+                                 md-selected-item-change="onchangeSelectedParcela(selected.CAD_PARCELA)"
+                                 md-min-length="0">
+                    <md-item-template>
+                        <span md-highlight-text="searchTextParcela">{{parcela.NOM_PARCELA}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        Parcela não encontrada.
+                    </md-not-found>
+                </md-autocomplete>
+                <div ng-show="isParcelaInvalida" class="messagem-erro">
+                    Escolha uma Parcela válida.
+                </div>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-motobomba" class="md-block autocomplete-container">
+                    <label>Motobomba</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_MOTOBOMBA"
+                                     md-items="motobomba in getMatchesMotobomba(searchTextMotobomba)"
+                                     md-search-text="searchTextMotobomba" md-item-text="motobomba.NOM_MOTOBOMBA"
+                                     md-selected-item-change="onchangeSelectedMotobomba(selected.CAD_MOTOBOMBA)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextMotobomba">{{motobomba.NOM_MOTOBOMBA}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Motobomba não encontrada.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isMotobombaInvalida" class="messagem-erro">
+                        Escolha uma Motobomba válida.
+                    </div>
+                </md-input-container>
+
+                <md-input-container id="autocomplete-container-reservatorio" class="md-block autocomplete-container">
+                    <label>Reservatorio</label>
+                    <md-autocomplete md-no-cache="true" md-selected-item="selected.CAD_RESERVATORIO"
+                                     md-items="reservatorio in getMatchesReservatorio(searchTextReservatorio)"
+                                     md-search-text="searchTextReservatorio" md-item-text="reservatorio.NOM_RESERVATORIO"
+                                     md-selected-item-change="onchangeSelectedReservatorio(selected.CAD_RESERVATORIO)"
+                                     md-min-length="0">
+                        <md-item-template>
+                            <span md-highlight-text="searchTextReservatorio">{{reservatorio.NOM_RESERVATORIO}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            Reservatorio não encontrado.
+                        </md-not-found>
+                    </md-autocomplete>
+                    <div ng-show="isReservatorioInvalido" class="messagem-erro">
+                        Escolha uma Reservatorio válido.
+                    </div>
+                    <div ng-show="isReservatorioVazio" class="messagem-erro">
+                        Reservatório vazio.
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Irrigação pivô (%)</label>
+                    <input ng-disabled="!selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" name="TMO_IRRIGACAO_PIVO" type="number" on-change="calculaDados()" ng-model="selected.TMO_IRRIGACAO_PIVO" min="{{pivo_min}}" max="{{pivo_max}}" ng-required="selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL&&true" />
+                    <div class="validation-messages" ng-messages="irrigacaoForm.TMO_IRRIGACAO_PIVO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{pivo_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{pivo_max}}.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Irrigação gotejo (minutos)</label>
+                    <input ng-disabled="!selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" name="TMO_IRRIGACAO_GOTEJO" type="number" on-change="calculaDados()" ng-model="selected.TMO_IRRIGACAO_GOTEJO" min="{{gotejador_min}}" max="{{gotejador_max}}" ng-required="selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR&&true" />
+                    <div ng-messages="irrigacaoForm.TMO_IRRIGACAO_GOTEJO.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="min">Valor mínimo é {{gotejador_min}}.</div>
+                        <div ng-message="max">Valor máximo é {{gotejador_max}}.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Início da irrigação (horas)</label>
+                    <input name="TMO_IRRIGACAO_INICIO" type="time" placeholder="HH:mm" ng-model="selected.TMO_IRRIGACAO_INICIO" on-change="calculaDados()" required />
+                    <div ng-messages="pivoCentralForm.TMO_IRRIGACAO_INICIO.$error" ng-messages-multiple role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Irrigação (mm)</label>
+                    <input  ng-model="selected.VOL_IRRIGACAO" ng-readonly="true" />
+                </md-input-container>
+               
+                <md-input-container class="md-block">
+                    <label>Volume consumido (m³)</label>
+                    <input name="VOL_CONSUMIDO"  ng-model="selected.VOL_CONSUMIDO" ng-readonly="true" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Valor energético (R$)</label>
+                    <input name="vento"  ng-model="selected.VAR_VALOR_ENERGETICO" ng-readonly="true" />
+                </md-input-container>
+                
+                  
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="irrigacaoForm.$valid&&!isReservatorioVazio &&salvar(selected)" class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

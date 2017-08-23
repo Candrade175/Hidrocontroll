@@ -24,11 +24,12 @@ namespace hidrocontroll.Models
         public Nullable<double> VAR_VALOR_ENERGETICO { get; set; }
         public Nullable<byte> VAR_FERTIRRIGACAO { get; set; }
         public int CAD_PARCELA_IDC_CAD_PARCELA { get; set; }
-        public int CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA { get; set; }
-        public int CAD_RESERVATORIO_IDC_CAD_RESERVATORIO { get; set; }
+        public Nullable<int> CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA { get; set; }
+        public Nullable<int> CAD_RESERVATORIO_IDC_CAD_RESERVATORIO { get; set; }
         public Nullable<System.TimeSpan> TMO_IRRIGACAO_FIM { get; set; }
     
-        public virtual CAD_RESERVATORIO CAD_RESERVATORIO { get; set; }
         public virtual CAD_MOTOBOMBA CAD_MOTOBOMBA { get; set; }
+        public virtual CAD_RESERVATORIO CAD_RESERVATORIO { get; set; }
+        public virtual CAD_PARCELA CAD_PARCELA { get; set; }
     }
 }

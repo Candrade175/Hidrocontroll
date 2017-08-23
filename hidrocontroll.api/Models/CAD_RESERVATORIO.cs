@@ -16,8 +16,8 @@ namespace hidrocontroll.Models
     {
         public CAD_RESERVATORIO()
         {
-            this.CAD_RESERVATORIO_DIARIO = new HashSet<CAD_RESERVATORIO_DIARIO>();
             this.CAD_IRRIGACAO = new HashSet<CAD_IRRIGACAO>();
+            this.CAD_RESERVATORIO_DIARIO = new HashSet<CAD_RESERVATORIO_DIARIO>();
         }
     
         public int IDC_CAD_RESERVATORIO { get; set; }
@@ -27,7 +27,7 @@ namespace hidrocontroll.Models
         public int CAD_FAZENDA_IDC_CAD_FAZENDA { get; set; }
     
         public virtual CAD_FAZENDA CAD_FAZENDA { get; set; }
-        public virtual ICollection<CAD_RESERVATORIO_DIARIO> CAD_RESERVATORIO_DIARIO { get; set; }
         public virtual ICollection<CAD_IRRIGACAO> CAD_IRRIGACAO { get; set; }
+        public virtual ICollection<CAD_RESERVATORIO_DIARIO> CAD_RESERVATORIO_DIARIO { get; set; }
     }
 }

@@ -52,7 +52,6 @@ namespace hidrocontroll.Controllers
             try
             {
                 db.SaveChanges();
-                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -66,6 +65,14 @@ namespace hidrocontroll.Controllers
                 }
             }
 
+            try
+            {
+                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+            }
+            catch (Exception e)
+            {
+
+            }
             return StatusCode(HttpStatusCode.NoContent);
         }
 
@@ -80,7 +87,14 @@ namespace hidrocontroll.Controllers
 
             db.CAD_PRECIPITACAO.Add(cad_precipitacao);
             db.SaveChanges();
-            new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+            try
+            {
+                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+            }
+            catch (Exception e)
+            {
+
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = cad_precipitacao.IDC_CAD_PRECIPITACAO }, cad_precipitacao);
         }
@@ -97,7 +111,14 @@ namespace hidrocontroll.Controllers
 
             db.CAD_PRECIPITACAO.Remove(cad_precipitacao);
             db.SaveChanges();
-            new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+            try
+            {
+                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+            }
+            catch (Exception e)
+            {
+
+            }
 
             return Ok(cad_precipitacao);
         }

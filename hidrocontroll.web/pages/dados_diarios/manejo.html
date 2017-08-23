@@ -1,0 +1,61 @@
+﻿<!-- Conteúdo a direita -->
+<md-content class="conteudo-lateral">
+    <div class="tabela-container">
+        <div class="tabela-cabecalho" layout="row">
+            <span class="tabela-cabecalho-titulo" layout="column">
+                <h2>{{manejoDds.tabela.titulo}}</h2>
+                <p style="display: inline; margin-right= 50px;">{{manejoDds.tabela.subtitulo}}</p>
+            </span>
+
+            
+        </div>
+
+        <div layout="row">
+            <div class="col-sm-3 no-padding div-filtro">
+
+                <md-button class="md-primary md-raised" ng-click="manejoDds.printData()">Imprimir</md-button>
+            </div>
+            <div class="col-sm-6 no-padding  div-filtro">
+                <md-input-container class="filtro-seletor">
+
+                    <label>Parcela</label>
+                    <md-select ng-model="manejoDds.ParcelasFiltro"
+                               md-on-close="manejoDds.clearSearchTerm()"
+                               data-md-container-class="selectdemoSelectHeader"
+                               multiple ng-change="manejoDds.refresh()">
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="searchTerm"
+                                   type="search"
+                                   placeholder="Buscar Parcela"
+                                   class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup>
+                            <md-option ng-value="parcela" ng-repeat="parcela in manejoDds.buscarParcelaFazenda(searchTerm)">{{parcela.NOM_PARCELA}}</md-option>
+                        </md-optgroup>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+            <!-- Campos de entrada de datas -->
+            <div class="col-sm-3 no-padding div-filtro">
+                <md-datepicker class="tabela-cabecalho-input" ng-model="manejoDds.filtroData" md-placeholder="Data">
+                    {{filtroData | date:"dd/MM/yyyy"}}
+                </md-datepicker>
+            </div>
+        </div>
+        <div class="tabela-container">
+            <table ng-table-dynamic="manejoDds.tableParams with manejoDds.cols" class="table">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valorCompostoParcela'"> {{manejoDds.getParcela(row[col.field]).NOM_PARCELA}}</span>
+                        <span ng-if="col.type=='valorCompostoCultura'"> {{manejoDds.getCultura()).NOM_CULTURA}}</span>
+                        <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
+                      
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</md-content>

@@ -1,0 +1,69 @@
+﻿<!-- Conteúdo a direita -->
+
+<md-content class="conteudo-lateral">
+    <di>
+        <div class="tabela-cabecalho" layout="row">
+            <span class="tabela-cabecalho-titulo" layout="column">
+                <h2>{{faseCulturaCdt.tabela.titulo}}</h2>
+                <p style="display: inline; margin-right= 50px;">{{faseCulturaCdt.tabela.subtitulo}}</p>
+            </span>
+        </div>
+
+        <div layout="row">
+            <div class="col-sm-6 no-padding div-filtro">
+                <!-- Botões -->
+                <md-button class="md-primary md-raised" ng-click="faseCulturaCdt.create()">Novo</md-button>
+                <md-button class="md-primary md-raised" ng-click="faseCulturaCdt.printData()">Imprimir</md-button>
+            </div>
+
+            <div class="col-sm-6 no-padding  div-filtro">
+                <md-input-container class="filtro-seletor">
+
+                    <label>Cultura</label>
+                    <md-select ng-model="faseCulturaCdt.CulturasFiltro"
+                               md-on-close="faseCulturaCdt.clearSearchTerm()"
+                               data-md-container-class="selectdemoSelectHeader"
+                               multiple ng-change="faseCulturaCdt.refresh()">
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="searchTerm"
+                                   type="search"
+                                   placeholder="Buscar Cultura"
+                                   class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup>
+                            <md-option ng-value="cultura" ng-repeat="cultura in faseCulturaCdt.buscarCulturaFazenda(searchTerm)">{{cultura.NOM_CULTURA}}</md-option>
+                        </md-optgroup>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+
+        </div>
+
+
+        <div class="tabela-container">
+            <table ng-table-dynamic="faseCulturaCdt.tableParams with faseCulturaCdt.cols" class="table" show-filter="true">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='valorComposto'"> {{faseCulturaCdt.getCultura(row[col.field]).NOM_CULTURA}}</span>
+                        <span ng-if="col.type=='comandoEditar'" class='width-70-px'>
+                            <md-button class="md-icon-button"
+                                       ng-click="faseCulturaCdt.update($event, row)"
+                                       aria-label="Editar">
+                                <md-icon> create </md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='comandoDeletar'">
+                            <md-button class="md-icon-button"
+                                       ng-click="faseCulturaCdt.excluir($event, row)"
+                                       aria-label="Excluir">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+   </div>
+</md-content>

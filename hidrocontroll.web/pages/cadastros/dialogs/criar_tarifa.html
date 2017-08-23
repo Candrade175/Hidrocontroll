@@ -1,0 +1,68 @@
+﻿<md-dialog class="tela-cadastro" aria-label="Dados Tarifa" ng-cloak>
+    <form name="tarifaForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools" id="tool-bar">
+                <h2>Dados Tarifa</h2>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+
+                    <label>Nome</label>
+                    <input name="NOM_TARIFA" type="text" ng-model="selected.NOM_TARIFA" required ng-maxlength="45" ng-minlength="4">
+                    <!-- Error messages for the input -->
+                    <div ng-messages="tarifaForm.NOM_TARIFA.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                        <div ng-message="minlength">Campo muito pequeno.</div>
+                        <div ng-message="maxlength">Campo muito grande.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Início (h)</label>
+                    <input name="HOR_INICIO_TARIFA" type="time" placeholder="HH:mm" ng-model="selected.HOR_INICIO_TARIFA" ng-change="validaTime()" required />
+                    <div ng-messages="pivoCentralForm.HOR_INICIO_TARIFA.$error  || !timeValido" ng-messages-multiple role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+                    <div ng-show="!timeValido" class="messagem-erro">
+                        Tempo Inicial deve ser menor que tempo Final.
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Fim (h)</label>
+                    <input name="HOR_FIM_TARIFA" type="time" placeholder="HH:mm" ng-model="selected.HOR_FIM_TARIFA" ng-change="validaTime()" required />
+                    <div ng-messages="pivoCentralForm.HOR_FIM_TARIFA.$error || !timeValido" ng-messages-multiple role="alert">
+                        <div ng-message="required">Campo obrigratório.</div>
+                    </div>
+
+                    <div ng-show="!timeValido" class="messagem-erro">
+                        Tempo Inicial deve ser menor que tempo Final.
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Valor</label>
+                    <input name="VAL_TARIFA" type="number" ng-model="selected.VAL_TARIFA" required>
+                    <div ng-messages="tarifaForm.VAL_TARIFA.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+
+            <span flex></span>
+            <md-button ng-click="cancel()" class="md-raised md-primary">
+                Cancelar
+            </md-button>
+            <md-button type="submit" ng-click="tarifaForm.$valid && timeValido&& salvar(selected) " class="md-raised md-primary" style="margin-right:20px;">
+                Salvar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
