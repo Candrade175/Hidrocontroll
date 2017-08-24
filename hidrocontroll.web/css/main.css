@@ -495,7 +495,20 @@ td, th {
  }
 
 .titulo-tabela {
-    background-color:#006622 !important;
+    background-color:green !important;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+}
+.ng-table-counts{
+    margin-bottom:10px;
+}
+.md-fab {
+    background-color:white !important;
+}
+
+md-toolbar:not(.md-menu-toolbar) .md-button:not(.md-raised) {
+    color:green !important;
+}
+ .md-button.md-fab md-icon {
+    color:green !important;
 }

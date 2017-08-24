@@ -27,6 +27,7 @@
             self.atributosMarcados = [];
             self.iniciaBusca = iniciaBusca;
             self.tablesParams = [];
+            self.imprimeTabela = imprimeTabela;
 
             self.cabecalho = {
                 "titulo": "Manejo",
@@ -67,26 +68,41 @@
             self.cols = [
                 { field: "DAT_MANEJO", title: "Data", sortable: "DAT_MANEJO", show: false, type: "valorData" },
                 { valor: '', title: "Período", show: false, type: "valorIntervalo" },
-                { field: 'DAT_MANEJO', title: "Mês/Ano", show: false, sortable: "DAT_MANEJO", type: "valorMes" },
-                { field: "VOL_CONSUMO_DIARIO", title: "Necessidade hídrica diária (mm)", show: false, type: "valor" },
-                { field: "VAR_PRECIPITACAO", title: "Precipitação (mm)", show: false, type: "valor" },
-                { field: "VOL_IRRIGACAO_NECESSARIA", title: "Irrigação necessária (mm)", show: false, type: "valor" },
-                { field: "VOL_IRRIGACAO_REALIZADA", title: "Irrigação realizada (mm)", show: false, type: "valor" },
-                { field: "TMO_MANEJO", title: "Tempo necessário", show: false, type: "valor" },
-                { field: 'TMO_IRRIGADO_PIVO', title: "Tempo irrigado (min)", show: false, type: "valor" },
-                { field: 'TMO_IRRIGADO_GOTEJO', title: "Tempo irrigado (min)", show: false, type: "valor" },
-                { field: "PER_PERCENTIMETRO", title: "Percentímetro (%)", show: false, type: "valor" },
-                { field: "VAR_IDADE_PARCELA", title: "Idade da cultura (dias)", show: false, type: "valor" },
-                { field: "VAR_ETO", title: "ETo", show: false, type: "valor" },
-                { field: "VAR_KC", title: "Kc", show: false, type: "valor" },
-                { field: "VAR_KL", title: "Kl", show: false, type: "valor" },
-                { field: "VAR_KS", title: "Ks", show: false, type: "valor" },
-                { field: "VOL_IRRIGACAO_DESNECESSARIA", title: "Irrigação desnecessária (mm)", show: false, type: "valor" },
+                { field: 'DAT_MANEJO', title: "Mês/Ano",  show: false, sortable: "DAT_MANEJO", type: "valorMes" },
+                { field: "VOL_CONSUMO_DIARIO", sortable: "VOL_CONSUMO_DIARIO", filter: { VOL_CONSUMO_DIARIO: "number" }, title: "Necessidade hídrica diária (mm)", show: false, type: "valor" },
+                { field: "VAR_PRECIPITACAO", sortable: "VAR_PRECIPITACAO", filter: { VAR_PRECIPITACAO: "number" }, title: "Precipitação (mm)", show: false, type: "valor" },
+                { field: "VOL_IRRIGACAO_NECESSARIA", sortable: "VOL_IRRIGACAO_NECESSARIA", filter: { VOL_IRRIGACAO_NECESSARIA: "number" }, title: "Irrigação necessária (mm)", show: false, type: "valor" },
+                { field: "VOL_IRRIGACAO_REALIZADA", sortable: "VOL_IRRIGACAO_REALIZADA", filter: { VOL_IRRIGACAO_REALIZADA: "number" }, title: "Irrigação realizada (mm)", show: false, type: "valor" },
+                { field: "TMO_MANEJO", sortable: "TMO_MANEJO", filter: { TMO_MANEJO: "number" }, title: "Tempo necessário", show: false, type: "valor" },
+                { field: 'TMO_IRRIGADO_PIVO', sortable: "TMO_IRRIGADO_PIVO", filter: { TMO_IRRIGADO_PIVO: "number" }, title: "Tempo irrigado (min)", show: false, type: "valor" },
+                { field: 'TMO_IRRIGADO_GOTEJO', sortable: "TMO_IRRIGADO_GOTEJO", filter: { TMO_IRRIGADO_GOTEJO: "number" }, title: "Tempo irrigado (min)", show: false, type: "valor" },
+                { field: "PER_PERCENTIMETRO", sortable: "PER_PERCENTIMETRO", filter: { PER_PERCENTIMETRO: "number" }, title: "Percentímetro (%)", show: false, type: "valor" },
+                { field: "VAR_IDADE_PARCELA", sortable: "VAR_IDADE_PARCELA", filter: { VAR_IDADE_PARCELA: "number" }, title: "Idade da cultura (dias)", show: false, type: "valor" },
+                { field: "VAR_ETO", sortable: "VAR_ETO", filter: { VAR_ETO: "number" }, title: "ETo", show: false, type: "valor" },
+                { field: "VAR_KC", sortable: "VAR_KC", filter: { VAR_KC: "number" }, filter: { DAT_CLIMA: "text" }, title: "Kc", show: false, type: "valor" },
+                { field: "VAR_KL", sortable: "VAR_KL", filter: { VAR_KL: "number" }, title: "Kl", show: false, type: "valor" },
+                { field: "VAR_KS", sortable: "VAR_KS", filter: { VAR_KS: "number" }, title: "Ks", show: false, type: "valor" },
+                { field: "VOL_IRRIGACAO_DESNECESSARIA", filter: { VOL_IRRIGACAO_DESNECESSARIA: "number" }, sortable: "VOL_IRRIGACAO_DESNECESSARIA", title: "Irrigação desnecessária (mm)", show: false, type: "valor" },
 
-                { field: "VAR_EXTRESSE_ULTRAPASSADO", title: "Estresse Ultrapassado (dias)", show: false, type: "valor" }
+                { field: "VAR_EXTRESSE_ULTRAPASSADO", sortable: "DAT_MANEJO", title: "Estresse Ultrapassado (dias)", show: false, type: "valor" }
             ];
 
-        }
+        };
+
+        function imprimeTabela(index,NomeParcela) {
+            var divToPrint = document.getElementById("tabela_resultado_" + index);
+            newWin = window.open("");
+            newWin.document.write("<h2 style='text-align:center'>"+NomeParcela+"</h2>" + divToPrint.outerHTML);
+            newWin.document.getElementById("tabela_resultado_" + index).setAttribute("border", "1");
+            var elements = newWin.document.getElementsByClassName("ng-table-filters");
+            while (elements.length > 0) {
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+            newWin.print();
+            newWin.close();
+        };
+
+
         function limparTodosAtributos() {
             self.atributosMarcados = [];
         };
@@ -100,6 +116,7 @@
         };
 
         function alteraAtributos() {
+            self.atributosMarcados = [];
             if (self.tipo == 'Detalhado') {
                 self.atributos= self.atributosCompletos;
             } else {
@@ -131,10 +148,6 @@
         }
 
         function iniciaBusca() {
-            buscar();
-        }
-
-        function buscar() {
             self.tablesParams = [];
             self.nomesParcelas = [];
             for (i = 0; i < self.cols.length; i++)
@@ -175,7 +188,13 @@
 
                             }
                         } else if (self.data == 'Por ciclo') {
-
+                            if (self.tipo == 'Detalhado') {
+                                self.cols[0].show = true;
+                                list = adicionaLinhaTotal(list, false);
+                            } else if (self.tipo == 'Por mês') {
+                                self.cols[2].show = true;
+                                list = somaMeses(list);
+                            }
                         }
 
 
@@ -211,14 +230,19 @@
                                 self.cols[15].show = true;
                             else if (self.atributosMarcados[j] == 'Irrigação desnecessária')
                                 self.cols[16].show = true;
+                            else if (self.atributosMarcados[j] == 'Estresse Ultrapassado')
+                                self.cols[17].show = true;
+                            
                         }
 
-                        self.tablesParams.push(new NgTableParams({}, { dataset: list }));
+                        self.tablesParams.push(new NgTableParams({}, {
+                            dataset: list
+                        }));
                         self.nomesParcelas.push(self.ParcelasFiltro[i].NOM_PARCELA);
                     }
                     //  clearInterval(self.intervalID);
 
-                    $rootScope.$digest();
+                  //  $rootScope.$digest();
 
                 }
             }

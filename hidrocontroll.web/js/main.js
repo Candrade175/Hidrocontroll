@@ -57,9 +57,9 @@
                 url: "/main",
                 templateUrl: "pages/main.html",
                 resolve: {
-                    security: ['$q','store', function($q,store){
+                    security: ['$q','store','$state', function($q,store){
                         if (!store.get('user'))
-                           return $q.reject("Not Authorized");
+                            $state.go('login');
                     }]
                 },
                 controller: "BodyController",
@@ -276,17 +276,17 @@
             })
 
             .state('main.RelatóriosManejo', {
-                url: "/manejo",
+                url: "/relatorioManejo",
                 templateUrl: "pages/relatorios/manejo.html",
                 controller: "ManejoRelatoriosController",
                 controllerAs: "manejoRel"
             })
 
-            .state('main.ClimaRelatórios', {
+            .state('main.RelatóriosClima', {
                 url: "/relatorioClima",
-                templateUrl: "pages/relatorios/gotejador.html",
+                templateUrl: "pages/relatorios/clima.html",
                 controller: "ClimaRelatoriosController",
-                controllerAs: "gotejadorRel"
+                controllerAs: "climaRel"
             })
 
             .state('main.CulturaRelatórios', {

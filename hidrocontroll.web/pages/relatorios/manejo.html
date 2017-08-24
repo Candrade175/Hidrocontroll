@@ -14,7 +14,7 @@
             <div class="col-sm-2 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
                     <label>Tipo</label>
-                    <md-select ng-model="manejoRel.tipo" ng-change="manejoRel.atualizaData();">
+                    <md-select ng-model="manejoRel.tipo" ng-change="manejoRel.atualizaData(); manejoRel.alteraAtributos();">
                         <md-option ng-repeat=" tipo in manejoRel.cabecalho.tipo" ng-value="tipo">
                             {{tipo}}
                         </md-option>
@@ -24,7 +24,7 @@
             <div class="col-sm-2 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
                     <label>Data</label>
-                    <md-select ng-model="manejoRel.data" ng-disabled="manejoRel.tipo == null " ng-change="manejoRel.alteraAtributos()">
+                    <md-select ng-model="manejoRel.data" ng-disabled="manejoRel.tipo == null " >
                         <md-option ng-repeat="data in manejoRel.cabecalho.data" ng-value="data">
                             {{data}}
                         </md-option>
@@ -50,6 +50,7 @@
                                md-on-close="manejoRel.clearSearchTerm()"
                                data-md-container-class="selectdemoSelectHeader"
                                multiple
+                               md-selected-text="{{manejoRel.ParcelasFiltro.length}} + ' Parcelas' "
                                ng-disabled="manejoRel.tipo == null  ||manejoRel.data==null|| (manejoRel.data == 'Período' && manejoRel.cabecalho.data_inicio == null && manejoRel.cabecalho.data_fim == null)">
                         <md-select-header class="demo-select-header">
                             <input ng-model="manejoRel.searchTerm"
@@ -71,7 +72,7 @@
             <div class="col-sm-2 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
                     <label>Atributos</label>
-                    <md-select multiple="" ng-model="manejoRel.atributosMarcados" ng-disabled="manejoRel.ParcelasFiltro.length == 0 || manejoRel.tipo == null ||manejoRel.data==null|| (manejoRel.data == 'Período' && manejoRel.cabecalho.data_inicio == null && manejoRel.cabecalho.data_fim == null)" >
+                    <md-select multiple="" md-selected-text="{{manejoRel.atributosMarcados.length}} + ' Atributos' " ng-model="manejoRel.atributosMarcados" ng-disabled="manejoRel.ParcelasFiltro.length == 0 || manejoRel.tipo == null ||manejoRel.data==null|| (manejoRel.data == 'Período' && manejoRel.cabecalho.data_inicio == null && manejoRel.cabecalho.data_fim == null)">
                         <md-optgroup label="Atributos">
                             <md-button class="md-primary md-raised" ng-click="manejoRel.marcarTodosAtributos()">Todos</md-button>
                             <md-button class="md-primary md-raised" ng-click="manejoRel.limparTodosAtributos()">Limpar</md-button>
@@ -84,7 +85,7 @@
             </div>
 
             <div class="col-sm-1 div-filtro no-padding">
-                <md-button class=" md-primary md-raised" ng-click="manejoRel.iniciaBusca()" style="float: right;">
+                <md-button class=" md-primary md-raised" ng-click="manejoRel.iniciaBusca()" ng-disabled="manejoRel.ParcelasFiltro.length * manejoRel.atributosMarcados.length == 0 || manejoRel.tipo == null ||manejoRel.data==null|| (manejoRel.data == 'Período' && manejoRel.cabecalho.data_inicio == null && manejoRel.cabecalho.data_fim == null)" style="float: right;">
                     Buscar
                 </md-button>
             </div>
@@ -92,16 +93,23 @@
 
         <div class="tabela-container" ng-repeat="tabela in manejoRel.tablesParams track by $index">
             <md-toolbar class="titulo-tabela">
-                <div class="md-toolbar-tools">{{manejoRel.nomesParcelas[$index]}}</div>
+                <div class="md-toolbar-tools">
+                    {{manejoRel.nomesParcelas[$index]}}
+                    <span flex></span>
+                    <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="manejoRel.imprimeTabela($index,manejoRel.nomesParcelas[$index])">
+                        <md-icon>print</md-icon>
+                    </md-button>
+                </div>
+                
             </md-toolbar>
-            <table ng-table-dynamic="tabela with manejoRel.cols " class="table">   
-                <tr ng-repeat="row in $data">
+            <table ng-table-dynamic="tabela with manejoRel.cols" id="tabela_resultado_{{$index}}" class="table">
+                <tr ng-repeat="row in $data track by $index">
                     <td ng-repeat="col in $columns">
                         <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
                         <span ng-if="col.type=='valorMes'"> {{row[col.field]| date:"MM/yyyy" }}</span>
                         <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
                         <span ng-if="col.type=='valorIntervalo'"> {{col.valor}}</span>
-                                       
+
                     </td>
                 </tr>
             </table>

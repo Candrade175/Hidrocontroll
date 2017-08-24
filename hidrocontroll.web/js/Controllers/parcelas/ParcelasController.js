@@ -91,8 +91,10 @@
         function printData() {
             var divToPrint = document.getElementById("tabela_dados");
             newWin = window.open("");
-            newWin.document.write("<h2 style='text-align:center'>Parcelas</h2>" + divToPrint.outerHTML);
-            newWin.document.getElementById("tabela_dados").setAttribute("border", "1");
+            newWin.document.write(" <link rel='stylesheet' href='lib/css/bootstrap.min.css'/>"+
+                +"<h2 style='text-align:center'>Parcelas</h2>" + divToPrint.outerHTML);
+            
+           
             while (newWin.document.getElementById("th_editar_excluir")) {
                 newWin.document.getElementById("th_editar_excluir").remove();
             }
