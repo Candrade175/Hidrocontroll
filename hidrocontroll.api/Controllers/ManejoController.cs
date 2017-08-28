@@ -106,6 +106,8 @@ namespace hidrocontroll.Controllers
 
         public void atualizaManejo(CAD_PARCELA parcela, DateTime dataAtualizacao)
         {
+            hidrocontrollEntities db = new hidrocontrollEntities();
+            db.Configuration.ProxyCreationEnabled = false;
             double necessariaInicial = 0;
             double ks = 0;
             double balanco = 0;

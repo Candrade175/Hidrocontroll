@@ -1,11 +1,12 @@
-﻿<!-- Conteúdo a direita -->
+﻿
+<!-- Conteúdo a direita -->
 <md-content class="conteudo-lateral">
     <div class="tabela-container">
         <!-- Campos de filtro -->
         <span class="tabela-cabecalho-titulo" layout="column">
             <span layout="column">
-                <h2>{{climaRel.cabecalho.titulo}}</h2>
-                <p>{{climaRel.cabecalho.subtitulo}}</p>
+                <h2>{{consumoPrcRel.cabecalho.titulo}}</h2>
+                <p>{{consumoPrcRel.cabecalho.subtitulo}}</p>
             </span>
         </span>
         <div layout="row" class="linha-filtros">
@@ -13,8 +14,8 @@
             <div class="col-sm-3 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
                     <label>Data</label>
-                    <md-select ng-model="climaRel.data" >
-                        <md-option ng-repeat="data in climaRel.cabecalho.data" ng-value="data">
+                    <md-select ng-model="consumoPrcRel.data">
+                        <md-option ng-repeat="data in consumoPrcRel.cabecalho.data" ng-value="data">
                             {{data}}
                         </md-option>
                     </md-select>
@@ -24,10 +25,10 @@
 
             <div class="col-sm-3 no-padding  div-filtro" style="text-align: center;">
 
-                <md-datepicker ng-model="climaRel.cabecalho.data_inicio" md-placeholder="Data de Início" ng-disabled="climaRel.data != 'Período'">
+                <md-datepicker ng-model="consumoPrcRel.cabecalho.data_inicio" md-placeholder="Data de Início" ng-disabled="consumoPrcRel.data != 'Período'">
                     {{dados.cabecalho.data_inicio | date:"dd/MM/yyyy HH:mm"}}
                 </md-datepicker>
-                <md-datepicker ng-model="climaRel.cabecalho.data_fim" md-placeholder="Data de Fim" md-min-date="climaRel.cabecalho.data_inicio" ng-disabled="climaRel.data != 'Período' || climaRel.cabecalho.data_inicio == null">
+                <md-datepicker ng-model="consumoPrcRel.cabecalho.data_fim" md-placeholder="Data de Fim" md-min-date="consumoPrcRel.cabecalho.data_inicio" ng-disabled="consumoPrcRel.data != 'Período' || consumoPrcRel.cabecalho.data_inicio == null">
                     {{dados.cabecalho.data_fim | date:"dd/MM/yyyy HH:mm"}}
                 </md-datepicker>
             </div>
@@ -35,11 +36,11 @@
             <div class="col-sm-3 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
                     <label>Atributos</label>
-                    <md-select multiple="" md-selected-text="{{climaRel.atributosMarcados.length}} + ' Atributos' " ng-model="climaRel.atributosMarcados" ng-disabled="climaRel.data==null|| (climaRel.data == 'Período' && climaRel.cabecalho.data_inicio == null && climaRel.cabecalho.data_fim == null)">
+                    <md-select multiple="" md-selected-text="{{consumoPrcRel.atributosMarcados.length}} + ' Atributos' " ng-model="consumoPrcRel.atributosMarcados" ng-disabled="consumoPrcRel.data==null|| (consumoPrcRel.data == 'Período' && consumoPrcRel.cabecalho.data_inicio == null && consumoPrcRel.cabecalho.data_fim == null)">
                         <md-optgroup label="Atributos">
-                            <md-button class="md-primary md-raised" ng-click="climaRel.marcarTodosAtributos()">Todos</md-button>
-                            <md-button class="md-primary md-raised" ng-click="climaRel.limparTodosAtributos()">Limpar</md-button>
-                            <md-option ng-repeat="atributo in climaRel.atributos" ng-value="atributo">
+                            <md-button class="md-primary md-raised" ng-click="consumoPrcRel.marcarTodosAtributos()">Todos</md-button>
+                            <md-button class="md-primary md-raised" ng-click="consumoPrcRel.limparTodosAtributos()">Limpar</md-button>
+                            <md-option ng-repeat="atributo in consumoPrcRel.atributos" ng-value="atributo">
                                 {{atributo}}
                             </md-option>
                         </md-optgroup>
@@ -48,7 +49,7 @@
             </div>
 
             <div class="col-sm-3 div-filtro no-padding">
-                <md-button class=" md-primary md-raised" ng-click="climaRel.iniciaBusca()" ng-disabled="climaRel.atributosMarcados.length == 0 ||climaRel.data==null|| (climaRel.data == 'Período' && climaRel.cabecalho.data_inicio == null && climaRel.cabecalho.data_fim == null)" style="float: right;">
+                <md-button class=" md-primary md-raised" ng-click="consumoPrcRel.iniciaBusca()" ng-disabled="consumoPrcRel.atributosMarcados.length == 0 ||consumoPrcRel.data==null|| (consumoPrcRel.data == 'Período' && consumoPrcRel.cabecalho.data_inicio == null && consumoPrcRel.cabecalho.data_fim == null)" style="float: right;">
                     Buscar
                 </md-button>
             </div>
@@ -56,19 +57,19 @@
 
         <!-- Tabela -->
         <!-- Tabela -->
-        <div class="tabela-container" ng-if="climaRel.tableParams">
+        <div class="tabela-container" ng-if="consumoPrcRel.tableParams">
             <md-toolbar class="titulo-tabela">
                 <div class="md-toolbar-tools">
                     Climas
                     <span flex></span>
-                    <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="climaRel.bla();climaRel.imprimeTabela();">
+                    <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="consumoPrcRel.imprimeTabela()">
                         <md-icon>print</md-icon>
                     </md-button>
                 </div>
 
             </md-toolbar>
-            <table id="tabela_resultado" ng-table-dynamic="climaRel.tableParams with climaRel.cols" class="table">
-                <tr ng-repeat="row in $data">
+            <table id="tabela_resultado" ng-table-dynamic="consumoPrcRel.tableParams with consumoPrcRel.cols" class="table">
+                <tr ng-repeat="row in $data" >
                     <td ng-repeat="col in $columns">
                         <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
                         <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
@@ -77,5 +78,5 @@
             </table>
         </div>
 
-   </div>
+    </div>
 </md-content>

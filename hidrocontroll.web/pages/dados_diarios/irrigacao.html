@@ -66,12 +66,12 @@
                         <span ng-if="col.type=='valorCompostoMotobomba'"> {{irrigacaoDds.getMotobomba(row[col.field]).NOM_MOTOBOMBA}}</span>
                         <span ng-if="col.type=='valorCompostoReservatorio'"> {{irrigacaoDds.getReservatorio(row[col.field]).NOM_RESERVATORIO}}</span>
                         <span ng-if="col.type=='valorBool'&&row[col.field]">
-                            <md-button ng-disabled="true" class="md-icon-button">
+                            <md-button ng-disabled="true" class="md-icon-button" aria-label="fertirrigacao verdeira">
                                 <md-icon class="glyphicon glyphicon-ok-sign"></md-icon>
                             </md-button>
                         </span>
                         <span ng-if="col.type=='valorBool'&&!row[col.field]">
-                            <md-button ng-disabled="true" class="md-icon-button">
+                            <md-button ng-disabled="true" class="md-icon-button" aria-label="fertirrigacao falsa">
                                 <md-icon class="glyphicon glyphicon-remove-sign"></md-icon>
                             </md-button>
                         </span>

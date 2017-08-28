@@ -24,7 +24,7 @@
              
                 <md-input-container class="md-block">
                     <label>Vazão (l/h)</label>
-                    <input name="VAZ_GOTEJADOR" type="number" ng-model="selected.VAZ_GOTEJADOR" required />
+                    <input name="VAZ_GOTEJADOR" type="number" ng-model="selected.VAZ_GOTEJADOR" required ng-change="calculaLaminaGotejador()" />
                     <div ng-messages="gotejadorForm.VAZ_GOTEJADOR.$error" role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>
@@ -32,7 +32,7 @@
                
                 <md-input-container class="md-block">
                     <label>Espaçamento entre Gotejadores</label>
-                    <input name="VAR_ESPACAMENTO_GOTEJADORES" type="number" ng-model="selected.VAR_ESPACAMENTO_GOTEJADORES" required />
+                    <input name="VAR_ESPACAMENTO_GOTEJADORES" type="number" ng-model="selected.VAR_ESPACAMENTO_GOTEJADORES" required ng-change="calculaLaminaGotejador()" />
                     <div ng-messages="gotejadorForm.VAR_ESPACAMENTO_GOTEJADORES.$error" ng-messages-multiple role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>
@@ -40,7 +40,7 @@
                 
                 <md-input-container class="md-block">
                     <label>Espaçamento entre linhas laterais</label>
-                    <input name="VAR_ESPACAMENTO_LINHAS_LATERAIS" type="number" ng-model="selected.VAR_ESPACAMENTO_LINHAS_LATERAIS" required />
+                    <input name="VAR_ESPACAMENTO_LINHAS_LATERAIS" type="number" ng-model="selected.VAR_ESPACAMENTO_LINHAS_LATERAIS" required ng-change="calculaLaminaGotejador()" />
                     <div ng-messages="gotejadorForm.VAR_ESPACAMENTO_LINHAS_LATERAIS.$error" ng-messages-multiple role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>
@@ -48,7 +48,7 @@
                
                 <md-input-container class="md-block">
                     <label>Largura da Faixa Molhada</label>
-                    <input name="LAR_FAIXA_MOLHADA" type="number" ng-model="selected.LAR_FAIXA_MOLHADA" required />
+                    <input name="LAR_FAIXA_MOLHADA" type="number" ng-model="selected.LAR_FAIXA_MOLHADA" required ng-change="calculaLaminaGotejador()" />
                     <div ng-messages="gotejadorForm.LAR_FAIXA_MOLHADA.$error" ng-messages-multiple role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>
@@ -56,14 +56,14 @@
                
                 <md-input-container class="md-block">
                     <label>Uniformidade (%)</label>
-                    <input name="VAR_UNIFORMIDADE" type="number" ng-model="selected.VAR_UNIFORMIDADE" required />
+                    <input name="VAR_UNIFORMIDADE" type="number" ng-model="selected.VAR_UNIFORMIDADE" required ng-change="calculaLaminaGotejador()" />
                     <div ng-messages="gotejadorForm.VAR_UNIFORMIDADE.$error" role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Lâmina (mm)</label>
-                    <input name="VAR_LAMINA" type="number" ng-model="selected.VAR_LAMINA" required />
+                    <input name="VAR_LAMINA" ng-model="selected.VAR_LAMINA" ng-readonly="true" />
                     <div ng-messages="gotejadorForm.VAR_LAMINA.$error" role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>

@@ -115,20 +115,37 @@ namespace hidrocontroll.Controllers
 
         private void fazMudancasClima(CAD_CLIMA cad_clima)
         {
-            DateTime dataAtualizacao = cad_clima.DAT_CLIMA;
-            CAD_FAZENDA fazenda = db.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Where(f2 => f2.IDC_CAD_FAZENDA == cad_clima.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
-            CAD_FASE_CULTURA faseCultura = null;
-            
+            // Compose a string that consists of three lines.
+            string lines = "First line.\r\nSecond line.\r\nThird line.";
 
+            // Write the string to a file.
+            System.IO.StreamWriter file = new System.IO.StreamWriter("c:\\test1.txt");
+            file.WriteLine(lines);
+
+            file.Close();
+
+            hidrocontrollEntities db2 = new hidrocontrollEntities();
+            db2.Configuration.ProxyCreationEnabled = false;
+
+            DateTime dataAtualizacao = cad_clima.DAT_CLIMA;
+            CAD_FAZENDA fazenda = db2.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Where(f2 => f2.IDC_CAD_FAZENDA == cad_clima.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
+            CAD_FASE_CULTURA faseCultura = null;
+
+            file = new System.IO.StreamWriter("c:\\test2.txt");
+            file.WriteLine(lines);
+
+            file.Close();
 
             foreach (CAD_CULTURA c in fazenda.CAD_CULTURA)
             {
                 bool primeiro = true;
                 double fimFaseMax = 0;
+                file = new System.IO.StreamWriter("c:\\test3.txt");
+                file.WriteLine(lines);
 
-               
-               
-                foreach (CAD_FASE_CULTURA fc in db.CAD_FASE_CULTURA.Where(fc => fc.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
+                file.Close();
+
+                foreach (CAD_FASE_CULTURA fc in db2.CAD_FASE_CULTURA.Where(fc => fc.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
                 {
 
                     if (primeiro)
@@ -147,16 +164,17 @@ namespace hidrocontroll.Controllers
                     }
                 }
 
-                foreach (CAD_PARCELA p in db.CAD_PARCELA.Where(p => p.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
+                foreach (CAD_PARCELA p in db2.CAD_PARCELA.Where(p => p.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
                 {
                     if (fimFaseMax >= DateTimeFunctional.diferencaDeDias(DateTime.Now, p.DAT_PLANTIO))
                     {
                         new ManejoController().atualizaManejo(p, dataAtualizacao);
-
                     }
-
                 }
+                file = new System.IO.StreamWriter("c:\\test4.txt");
+                file.WriteLine(lines);
 
+                file.Close();
             }
 
         }

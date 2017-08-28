@@ -7,7 +7,7 @@
 
      */
     var isLogado = false;
-    var srp = angular.module("hidrocontroll.web", ["ngMaterial", "ui.router", "Model", "angular-storage", "ngMessages", 'ngTable']);
+    var srp = angular.module("hidrocontroll.web", ["ngMaterial", "ui.router", "Model", "angular-storage", "ngMessages", "ngTable", "AngularPrint"]);
 
     srp.run(function () {
         
@@ -77,7 +77,7 @@
             })
 
              .state('main.Fazendas', {
-                 url: "/Fazendas",
+                 url: "/fazendas",
                  templateUrl: "pages/fazendas/fazenda.html",
                  controller: "FazendaController",
                  controllerAs: "fazendas",
@@ -103,7 +103,7 @@
 
             .state('main.DadosDiáriosClima', {
 
-                url: "/Clima",
+                url: "/clima",
                 templateUrl: "pages/dados_diarios/clima.html",
                 controller: "ClimaDadosDiariosController",
                 controllerAs: "climaDds"
@@ -138,7 +138,7 @@
             })
 
             .state('main.DadosDiáriosCalcular', {
-                url: "/Calcular",
+                url: "/calcular",
                 templateUrl: "pages/dados_diarios/manejo.html",
                 controller: "ManejoDadosDiariosController",
                 controllerAs: "manejoDds"
@@ -269,9 +269,12 @@
                 subMenu: [{ "nome": "Manejo", "icon": "glyphicon glyphicon-tree-deciduous" },
                     { "nome": "Clima", "icon": "glyphicon glyphicon-cloud" },
                     { "nome": "Cultura", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Consumo Outorga", "icon": "glyphicon glyphicon-align-left" },
-                    { "nome": "Consumo Parcela", "icon": "glyphicon glyphicon-align-center" },
-                    { "nome": "Consumo Fertirrigação", "icon": "glyphicon glyphicon-align-right" }],
+                    {
+                        "nome": "Consumo", "icon": "glyphicon glyphicon-align-left",
+                        "subSubMenu":
+                            [{ "nome": "Parcela", "icon": "glyphicon glyphicon-tint" },
+                                    { "nome": "Outorga", "icon": "glyphicon glyphicon-move" },
+                                    { "nome": "Fertirrigação", "icon": "glyphicon glyphicon-move" }]},],
                 icon: "glyphicon glyphicon-list-alt"
             })
 
@@ -289,30 +292,30 @@
                 controllerAs: "climaRel"
             })
 
-            .state('main.CulturaRelatórios', {
+            .state('main.RelatóriosCultura', {
                 url: "/relatorioCultura",
                 templateUrl: "pages/relatorios/cultura.html",
                 controller: "CulturaRelatoriosController",
                 controllerAs: "culturaRel"
             })
 
-            .state('main.ConsumoOutorgaRelatórios', {
+            .state('main.RelatóriosConsumoOutorga', {
                 url: "/consumoOutorga",
-                templateUrl: "pages/relatorios/consumoOutorga.html",
+                templateUrl: "pages/relatorios/consumo/outorga.html",
                 controller: "ConsumoOutorgaRelatoriosController",
                 controllerAs: "consumoOutRel"
             })
 
-            .state('main.ConsumoParcelaRelatórios', {
+            .state('main.RelatóriosConsumoParcela', {
                 url: "/consumoParcela",
-                templateUrl: "pages/relatorios/consumoParcela.html",
+                templateUrl: "pages/relatorios/consumo/parcela.html",
                 controller: "ConsumoParcelaRelatoriosController",
                 controllerAs: "consumoPrcRel"
             })
 
-            .state('main.ConsumoFertirrigaçãoRelatórios', {
+            .state('main.RelatóriosConsumoFertirrigação', {
                 url: "/consumoFertirrigacao",
-                templateUrl: "pages/relatorios/consumoFertirrigacao.html",
+                templateUrl: "pages/relatorios/consumo/fertirrigacao.html",
                 controller: "ConsumoFertirrigacaoRelatoriosController",
                 controllerAs: "consumoFerRel"
             })

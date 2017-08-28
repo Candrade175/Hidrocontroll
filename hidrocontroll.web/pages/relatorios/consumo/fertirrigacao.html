@@ -1,0 +1,93 @@
+﻿
+<!-- Conteúdo a direita -->
+<md-content class="conteudo-lateral">
+    <div class="tabela-container">
+        <!-- Campos de filtro -->
+        <span class="tabela-cabecalho-titulo" layout="column">
+            <span layout="column">
+                <h2>{{consumoFerRel.cabecalho.titulo}}</h2>
+                <p>{{consumoFerRel.cabecalho.subtitulo}}</p>
+            </span>
+        </span>
+        <div layout="row" class="linha-filtros">
+
+            <div class="col-sm-3 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
+                    <label>Data</label>
+                    <md-select ng-model="consumoFerRel.data">
+                        <md-option ng-repeat="data in consumoFerRel.cabecalho.data" ng-value="data">
+                            {{data}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+
+            <div class="col-sm-3 no-padding  div-filtro" style="text-align: center;">
+
+                <md-datepicker ng-model="consumoFerRel.cabecalho.data_inicio" md-placeholder="Data de Início" ng-disabled="consumoFerRel.data != 'Período'">
+                    {{dados.cabecalho.data_inicio | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+                <md-datepicker ng-model="consumoFerRel.cabecalho.data_fim" md-placeholder="Data de Fim" md-min-date="consumoFerRel.cabecalho.data_inicio" ng-disabled="consumoFerRel.data != 'Período' || consumoFerRel.cabecalho.data_inicio == null">
+                    {{dados.cabecalho.data_fim | date:"dd/MM/yyyy HH:mm"}}
+                </md-datepicker>
+            </div>
+
+            <div class="col-sm-3 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
+                    <label>Atributos</label>
+                    <md-select multiple="" md-selected-text="{{consumoFerRel.atributosMarcados.length}} + ' Atributos' " ng-model="consumoFerRel.atributosMarcados" ng-disabled="consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)">
+                        <md-optgroup label="Atributos">
+                            <md-button class="md-primary md-raised" ng-click="consumoFerRel.marcarTodosAtributos()">Todos</md-button>
+                            <md-button class="md-primary md-raised" ng-click="consumoFerRel.limparTodosAtributos()">Limpar</md-button>
+                            <md-option ng-repeat="atributo in consumoFerRel.atributos" ng-value="atributo">
+                                {{atributo}}
+                            </md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div class="col-sm-3 div-filtro no-padding">
+                <md-button class=" md-primary md-raised" ng-click="consumoFerRel.iniciaBusca()" ng-disabled="consumoFerRel.atributosMarcados.length == 0 ||consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)" style="float: right;">
+                    Buscar
+                </md-button>
+            </div>
+        </div>
+
+        <!-- Tabela -->
+        <!-- Tabela -->
+        <div class="tabela-container" ng-if="consumoFerRel.tableParams">
+            <md-toolbar class="titulo-tabela">
+                <div class="md-toolbar-tools">
+                    Climas
+                    <span flex></span>
+                    <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="consumoFerRel.imprimeTabela();">
+                        <md-icon>print</md-icon>
+                    </md-button>
+                </div>
+
+            </md-toolbar>
+            <table id="tabela_resultado" ng-table-dynamic="consumoFerRel.tableParams with consumoFerRel.cols" class="table">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">
+                        <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
+                        <span ng-if="col.type=='valorTime'"> {{row[col.field].substr(0,5)  }}</span>
+                        <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
+                        <span ng-if="col.type=='valorBool'&&row[col.field]" id="item-true">
+                            <md-button ng-disabled="true" class="md-icon-button" aria-label="fertirrigacao verdeira">
+                                <md-icon class="glyphicon glyphicon-ok-sign"></md-icon>
+                            </md-button>
+                        </span>
+                        <span ng-if="col.type=='valorBool'&&!row[col.field]" id="item-false">
+                            <md-button ng-disabled="true" class="md-icon-button" aria-label="fertirrigacao falsa">
+                                <md-icon class="glyphicon glyphicon-remove-sign"></md-icon>
+                            </md-button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</md-content>

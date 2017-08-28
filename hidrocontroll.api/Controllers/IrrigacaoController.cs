@@ -37,6 +37,7 @@ namespace hidrocontroll.Controllers
         // PUT api/Irrigacao/5
         public IHttpActionResult PutCAD_IRRIGACAO(int id, CAD_IRRIGACAO cad_irrigacao)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -50,19 +51,22 @@ namespace hidrocontroll.Controllers
             double antigoVolume = db.CAD_IRRIGACAO.Find(id).VOL_CONSUMIDO.Value;
             double novoVolume = cad_irrigacao.VOL_CONSUMIDO.Value;
             double diferenca = antigoVolume - novoVolume;
-            db.Entry(cad_irrigacao).State = EntityState.Modified;
+           
+            hidrocontrollEntities db2 = new hidrocontrollEntities();
+            db2.Configuration.ProxyCreationEnabled = false;
+
+            db2.Entry(cad_irrigacao).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                db2.SaveChanges();
 
-                if (cad_irrigacao.CAD_RESERVATORIO!=null)
+                if (cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO != null)
                 {
                     cad_irrigacao.CAD_RESERVATORIO.VOL_ATUAL += diferenca;
                     new ReservatorioController().PutCAD_RESERVATORIO(cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO.Value, cad_irrigacao.CAD_RESERVATORIO);
                 }
-
-                CAD_PARCELA parcela = db.CAD_PARCELA.Where(p => p.IDC_CAD_PARCELA == cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA).First();
+                CAD_PARCELA parcela = db2.CAD_PARCELA.Where(p => p.IDC_CAD_PARCELA == cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA).First();
                 new ManejoController().atualizaManejo(parcela, cad_irrigacao.DAT_IRRIGACAO);
 
             }
@@ -92,7 +96,7 @@ namespace hidrocontroll.Controllers
 
             db.CAD_IRRIGACAO.Add(cad_irrigacao);
             db.SaveChanges();
-            if (cad_irrigacao.CAD_RESERVATORIO != null)
+            if (cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO != null)
             {
                 cad_irrigacao.CAD_RESERVATORIO.VOL_ATUAL -= cad_irrigacao.VOL_CONSUMIDO;
                 new ReservatorioController().PutCAD_RESERVATORIO(cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO.Value, cad_irrigacao.CAD_RESERVATORIO);
@@ -115,7 +119,7 @@ namespace hidrocontroll.Controllers
 
             db.CAD_IRRIGACAO.Remove(cad_irrigacao);
             db.SaveChanges();
-            if (cad_irrigacao.CAD_RESERVATORIO != null)
+            if (cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO != null)
             {
                 cad_irrigacao.CAD_RESERVATORIO.VOL_ATUAL += cad_irrigacao.VOL_CONSUMIDO;
                 new ReservatorioController().PutCAD_RESERVATORIO(cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO.Value, cad_irrigacao.CAD_RESERVATORIO);

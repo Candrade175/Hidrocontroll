@@ -135,7 +135,7 @@
 
        
             var confirm = $mdDialog.confirm()
-                  .title('Deseja realmente excluir o registro do dia ' + item.DAT_CLIMA.getDate() + "/" + (item.DAT_CLIMA.getMonth() + 1) + "/" + item.DAT_CLIMA.getFullYear() + ' parcela ' + getParcela(item.CAD_PARCELA_IDC_CAD_PARCELA).NOM_PARCELA + '?')
+                  .title('Deseja realmente excluir o registro do dia ' + item.DAT_CLIMA.getDate() + "/" + (item.DAT_CLIMA.getMonth() + 1) + "/" + item.DAT_CLIMA.getFullYear() +'?')
                   .textContent('Após a exclusão a operação não poderá ser desfeita.')
                   .ariaLabel('Exclusão de Registro')
                   .targetEvent(ev)

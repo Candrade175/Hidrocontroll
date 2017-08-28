@@ -152,9 +152,9 @@
     <Content Include="js\Controllers\cadastros\CulturaController.js" />
     <Content Include="js\Controllers\parcelas\ParcelasController.js" />
     <Content Include="js\Controllers\relatorios\ClimaController.js" />
-    <Content Include="js\Controllers\relatorios\ConsumoFertirrigacaoController.js" />
-    <Content Include="js\Controllers\relatorios\ConsumoOutorgaController.js" />
-    <Content Include="js\Controllers\relatorios\ConsumoParcelaController.js" />
+    <Content Include="js\Controllers\relatorios\consumo\FertirrigacaoController.js" />
+    <Content Include="js\Controllers\relatorios\consumo\OutorgaController.js" />
+    <Content Include="js\Controllers\relatorios\consumo\ParcelaController.js" />
     <Content Include="js\Controllers\relatorios\CulturaController.js" />
     <Content Include="js\Controllers\relatorios\ManejoController.js" />
     <Content Include="js\main.js" />
@@ -166,6 +166,7 @@
     <Content Include="lib\css\angular-material.layouts.css" />
     <Content Include="lib\css\angular-material.layouts.min.css" />
     <Content Include="lib\css\angular-material.min.css" />
+    <Content Include="lib\css\angularPrint.css" />
     <Content Include="lib\css\bootstrap.css" />
     <Content Include="lib\css\md-data-table-style.css" />
     <Content Include="lib\css\ng-table-min.css" />
@@ -183,6 +184,7 @@
     <Content Include="lib\js\angular.js" />
     <Content Include="lib\js\angular.min.js" />
     <Content Include="lib\js\html5-qrcode.min.js" />
+    <Content Include="lib\js\angularPrint.js" />
     <Content Include="lib\js\jquery-1.12.0.min.js" />
     <Content Include="lib\js\jquery.js" />
     <Content Include="lib\js\lodash.min.js" />
@@ -234,9 +236,9 @@
     <Content Include="pages\parcelas\dialogs\criar_parcela.html" />
     <Content Include="pages\parcelas\parcelas.html" />
     <Content Include="pages\relatorios\clima.html" />
-    <Content Include="pages\relatorios\consumoFertirrigacao.html" />
-    <Content Include="pages\relatorios\consumoOutorga.html" />
-    <Content Include="pages\relatorios\consumoParcela.html" />
+    <Content Include="pages\relatorios\consumo\fertirrigacao.html" />
+    <Content Include="pages\relatorios\consumo\outorga.html" />
+    <Content Include="pages\relatorios\consumo\parcela.html" />
     <Content Include="pages\relatorios\cultura.html" />
     <Content Include="pages\relatorios\manejo.html" />
     <Content Include="Web.config" />

@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("ClimaRelatoriosController", climaController).filter("dateFilterClimaRelatorio", dateFilter);
 
-    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element) {
+    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element,$timeout) {
         var self = this;
 
         initializeData();
@@ -25,9 +25,6 @@
                 "titulo": "Clima",
                 "subtitulo": "Relatório de clima:",
 
-                "tipo": ["Detalhado",
-                         "Por mês",
-                         "Por período"],
                 "data": ["Período",
                          "Todos"]
             };
@@ -61,16 +58,21 @@
         };
 
         function imprimeTabela() {
-            var divToPrint = document.getElementById("tabela_resultado");
-            newWin = window.open("");
-            newWin.document.write("<h2 style='text-align:center'>Climas</h2>" + divToPrint.outerHTML);
-            newWin.document.getElementById("tabela_resultado").setAttribute("border", "1");
-            var elements = newWin.document.getElementsByClassName("ng-table-filters");
-            while (elements.length > 0) {
-                elements[0].parentNode.removeChild(elements[0]);
-            }
-            newWin.print();
-            newWin.close();
+            self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list});
+            $timeout(function () {
+                var divToPrint = document.getElementById("tabela_resultado");
+                newWin = window.open("");
+                newWin.document.write("<h2 style='text-align:center'>Climas</h2>" + divToPrint.outerHTML);
+                newWin.document.getElementById("tabela_resultado").setAttribute("border", "1");
+                var elements = newWin.document.getElementsByClassName("ng-table-filters");
+                while (elements.length > 0) {
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+                newWin.print();
+                newWin.close();
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
+            });
+           
         };
 
         self.clearSearchTerm = function () {
@@ -93,23 +95,20 @@
             }
         }
 
-        function iniciaBusca() {
-            buscar();
-        }
 
-        function buscar() {
+        function iniciaBusca() {
             for (i = 0; i < self.cols.length; i++)
                 self.cols[i].show = false;
             if (self.data != null)
                 if ((self.data == 'Período' && self.cabecalho.data_inicio != null && self.cabecalho.data_fim != null) || self.data == 'Todos') {
-                    var list =                         self.Clima.list;
+                    self.list = self.Clima.list;
 
-                    list = $filter('filter')(list, function (clima) {
+                    self.list = $filter('filter')(self.list, function (clima) {
                         return clima.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                     });
-
-                    list = $filter('dateFilterClimaRelatorio')(list, self.cabecalho.data_inicio, self.cabecalho.data_fim);
-                    list = $filter('orderBy')(list, '-DAT_CLIMA');
+                    if (self.data=='Período')
+                        self.list = $filter('dateFilterClimaRelatorio')(self.list, self.cabecalho.data_inicio, self.cabecalho.data_fim);
+                    self.list = $filter('orderBy')(self.list, '-DAT_CLIMA');
                    
                     self.cols[0].show = true;
                     for (j = 0; j < self.atributosMarcados.length; j++) {
@@ -129,7 +128,7 @@
                         else if (self.atributosMarcados[j] == 'Radiação médio 24h')
                             self.cols[7].show = true;
                     }
-                    self.tableParams = new NgTableParams({}, { dataset: list });
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
                 }
         };
 

@@ -88,7 +88,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Irrigação pivô (%)</label>
-                    <input ng-disabled="!selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" name="TMO_IRRIGACAO_PIVO" type="number" on-change="calculaDados()" ng-model="selected.TMO_IRRIGACAO_PIVO" min="{{pivo_min}}" max="{{pivo_max}}" ng-required="selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL&&true" />
+                    <input ng-disabled="!selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL" name="TMO_IRRIGACAO_PIVO" type="number" ng-change="calculaDados()" ng-model="selected.TMO_IRRIGACAO_PIVO" min="{{pivo_min}}" max="{{pivo_max}}" ng-required="selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL&&true" />
                     <div class="validation-messages" ng-messages="irrigacaoForm.TMO_IRRIGACAO_PIVO.$error">
                         <div ng-message="required">Campo obrigatório.</div>
                         <div ng-message="min">Valor mínimo é {{pivo_min}}.</div>
@@ -97,7 +97,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <label>Irrigação gotejo (minutos)</label>
-                    <input ng-disabled="!selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" name="TMO_IRRIGACAO_GOTEJO" type="number" on-change="calculaDados()" ng-model="selected.TMO_IRRIGACAO_GOTEJO" min="{{gotejador_min}}" max="{{gotejador_max}}" ng-required="selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR&&true" />
+                    <input ng-disabled="!selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR" name="TMO_IRRIGACAO_GOTEJO" type="number" ng-change="calculaDados()" ng-model="selected.TMO_IRRIGACAO_GOTEJO" min="{{gotejador_min}}" max="{{gotejador_max}}" ng-required="selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR&&true" />
                     <div ng-messages="irrigacaoForm.TMO_IRRIGACAO_GOTEJO.$error">
                         <div ng-message="required">Campo obrigatório.</div>
                         <div ng-message="min">Valor mínimo é {{gotejador_min}}.</div>
@@ -107,7 +107,7 @@
 
                 <md-input-container class="md-block">
                     <label>Início da irrigação (horas)</label>
-                    <input name="TMO_IRRIGACAO_INICIO" type="time" placeholder="HH:mm" ng-model="selected.TMO_IRRIGACAO_INICIO" on-change="calculaDados()" required />
+                    <input name="TMO_IRRIGACAO_INICIO" type="time" placeholder="HH:mm" ng-model="selected.TMO_IRRIGACAO_INICIO" ng-change="calculaDados()" required />
                     <div ng-messages="pivoCentralForm.TMO_IRRIGACAO_INICIO.$error" ng-messages-multiple role="alert">
                         <div ng-message="required">Campo obrigratório.</div>
                     </div>

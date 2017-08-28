@@ -9,6 +9,8 @@
         initializeData();
 
 
+        var intervalID = window.setInterval(refresh, 500);
+
         var success = $mdDialog.alert()
                .title('Sucesso')
                .textContent('A operação foi realizada com sucesso!')
@@ -241,53 +243,62 @@
             };
 
             $scope.calculaDados = function () {
-                pivo = getPivoCentral($scope.selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL);
-                gotejador = getGotejador($scope.selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR);
-                $scope.selected.VOL_CONSUMIDO = 0;
-                $scope.selected.VAR_VALOR_ENERGETICO = 0;
+                if  ($scope.selected.CAD_PARCELA )
+                    if (!$scope.selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR)
+                        $scope.selected.TMO_IRRIGACAO_GOTEJO = null;
+                    else if (!$scope.selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL)
+                        $scope.selected.TMO_IRRIGACAO_PIVO = null;
+                if ($scope.selected.CAD_PARCELA && (!$scope.selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR || ($scope.selected.TMO_IRRIGACAO_GOTEJO && $scope.selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR)) &&
+                    (!$scope.selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL || ($scope.selected.TMO_IRRIGACAO_PIVO && $scope.selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL)) &&
+                    $scope.selected.TMO_IRRIGACAO_INICIO) {
+                    pivo = getPivoCentral($scope.selected.CAD_PARCELA.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL);
+                    gotejador = getGotejador($scope.selected.CAD_PARCELA.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR);
+                    $scope.selected.VOL_CONSUMIDO = 0;
+                    $scope.selected.VAR_VALOR_ENERGETICO = 0;
 
-                if (pivo) {
-                    //quantidade
-                    $scope.selected.VOL_IRRIGACAO = (100 * pivo.VAR_LAMINA) / $scope.selected.TMO_IRRIGACAO_PIVO;
+                    if (pivo) {
+                        //quantidade
+                        $scope.selected.VOL_IRRIGACAO = (100 * pivo.VAR_LAMINA) / $scope.selected.TMO_IRRIGACAO_PIVO;
 
-                    // volume
-                    $scope.selected.VOL_CONSUMIDO = ($scope.selected.CAD_PARCELA.ARE_PARCELA * $scope.selected.VOL_IRRIGACAO * 10000) / 1000;
+                        // volume
+                        $scope.selected.VOL_CONSUMIDO = ($scope.selected.CAD_PARCELA.ARE_PARCELA * $scope.selected.VOL_IRRIGACAO * 10000) / 1000;
 
-                    //consumo energetico
-                    if ($scope.selected.VOL_IRRIGACAO) {
-                        perimetro = 2 * Math.PI * (pivo.DIS_RAIO_TOTAL - pivo.VAR_VAO_BALANCO);
-                        ttotal = perimetro / (pivo.VEL_100_PIVO * ($scope.selected.TMO_IRRIGACAO_PIVO / 100));
-                        percentimetro = ((100 * pivo.VAR_LAMINA) / $scope.selected.VOL_IRRIGACAO);
-                        temponecessario = ((100 * ttotal) / percentimetro);
-                        horaPivo = DateTimeService.decimalEmHoras(temponecessario);
-                        $scope.selected.VAR_VALOR_ENERGETICO = calcularConsumoEnergeticoMotobomba(horaPivo, $scope.selected.CAD_PARCELA, $scope.selected);
+                        //consumo energetico
+                        if ($scope.selected.VOL_IRRIGACAO) {
+                            perimetro = 2 * Math.PI * (pivo.DIS_RAIO_TOTAL - pivo.VAR_VAO_BALANCO);
+                            ttotal = perimetro / (pivo.VEL_100_PIVO * ($scope.selected.TMO_IRRIGACAO_PIVO / 100));
+                            percentimetro = ((100 * pivo.VAR_LAMINA) / $scope.selected.VOL_IRRIGACAO);
+                            temponecessario = ((100 * ttotal) / percentimetro);
+                            horaPivo = DateTimeService.decimalEmHoras(temponecessario);
+                            $scope.selected.VAR_VALOR_ENERGETICO = calcularConsumoEnergeticoMotobomba(horaPivo, $scope.selected.CAD_PARCELA, $scope.selected);
+                        }
+
+                    } else if (gotejador) {
+                        //quantidade
+                        $scope.selected.VOL_IRRIGACAO = (gotejador.VAR_LAMINA * $scope.selected.TMO_IRRIGACAO_GOTEJO) / 60;
+
+                        // volume         
+                        $scope.selected.VOL_CONSUMIDO = (((((100 / gotejador.VAR_ESPACAMENTO_LINHAS_LATERAIS) * (100 * (1 / gotejador.VAR_ESPACAMENTO_GOTEJADORES))) * gotejador.VAZ_GOTEJADOR) * $scope.selected.CAD_PARCELA.ARE_PARCELA) / 1000) * $scope.selected.TMO_IRRIGACAO_GOTEJO / 60;
+
+
+                        //consumo energetico
+                        horaGotejador = DateTimeService.converterMinutosEmHoras($scope.selected.TMO_IRRIGACAO_GOTEJO);
+                        $scope.selected.VAR_VALOR_ENERGETICO = calcularConsumoEnergeticoMotobomba(horaGotejador, $scope.selected.CAD_PARCELA, $scope.selected);
+
                     }
 
-                } else if (gotejador) {
-                    //quantidade
-                    $scope.selected.VOL_IRRIGACAO = (gotejador.VAR_LAMINA * $scope.selected.TMO_IRRIGACAO_GOTEJO) / 60;
-
-                    // volume         
-                    $scope.selected.VOL_CONSUMIDO = (((((100 / gotejador.VAR_ESPACAMENTO_LINHAS_LATERAIS) * (100 * (1 / gotejador.VAR_ESPACAMENTO_GOTEJADORES))) * gotejador.VAZ_GOTEJADOR) * $scope.selected.CAD_PARCELA.ARE_PARCELA) / 1000) * $scope.selected.TMO_IRRIGACAO_GOTEJO / 60;
-
-
-                    //consumo energetico
-                    horaGotejador = DateTimeService.converterMinutosEmHoras($scope.selected.TMO_IRRIGACAO_GOTEJO);
-                    $scope.selected.VAR_VALOR_ENERGETICO = calcularConsumoEnergeticoMotobomba(horaGotejador, $scope.selected.CAD_PARCELA, $scope.selected);
-
-                }
-
-                if ($scope.selected.CAD_RESERVATORIO) {
-                    if ($scope.selected.CAD_RESERVATORIO.VOL_ATUAL >= $scope.selected.VOL_CONSUMIDO)
-                        $scope.selected.VAR_VALOR_ENERGETICO += ($scope.selected.CAD_RESERVATORIO.VAR_VALOR * $scope.selected.VOL_CONSUMIDO);
-                    else {
-                        $scope.isReservatorioVazio = true;
+                    if ($scope.selected.CAD_RESERVATORIO) {
+                        if ($scope.selected.CAD_RESERVATORIO.VOL_ATUAL >= $scope.selected.VOL_CONSUMIDO)
+                            $scope.selected.VAR_VALOR_ENERGETICO += ($scope.selected.CAD_RESERVATORIO.VAR_VALOR * $scope.selected.VOL_CONSUMIDO);
+                        else {
+                            $scope.isReservatorioVazio = true;
+                        }
                     }
-                }
 
-                $scope.selected.VOL_IRRIGACAO = $scope.selected.VOL_IRRIGACAO.toFixed(2);
-                $scope.selected.VOL_CONSUMIDO = $scope.selected.VOL_CONSUMIDO.toFixed(2);
-                $scope.selected.VAR_VALOR_ENERGETICO = $scope.selected.VAR_VALOR_ENERGETICO.toFixed(2);
+                    $scope.selected.VOL_IRRIGACAO = $scope.selected.VOL_IRRIGACAO.toFixed(2);
+                    $scope.selected.VOL_CONSUMIDO = $scope.selected.VOL_CONSUMIDO.toFixed(2);
+                    $scope.selected.VAR_VALOR_ENERGETICO = $scope.selected.VAR_VALOR_ENERGETICO.toFixed(2);
+                }
 
             };
 
@@ -363,8 +374,12 @@
                 try {
                     $scope.selected.CAD_PARCELA_IDC_CAD_PARCELA = parcela.IDC_CAD_PARCELA;
                     $scope.isParcelaInvalida = false;
+                    $scope.selected.VOL_IRRIGACAO = null;
+                    $scope.selected.VOL_CONSUMIDO = null;
+                    $scope.selected.VAR_VALOR_ENERGETICO = null;
                     $scope.calculaDados();
                     document.getElementById("autocomplete-container-parcela").classList.remove('md-input-invalid');
+
                 } catch (err) {
                     //Tratamento de exceção
                 }
