@@ -58,21 +58,22 @@
         };
 
         function imprimeTabela() {
-            self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list});
-            $timeout(function () {
-                var divToPrint = document.getElementById("tabela_resultado");
-                newWin = window.open("");
-                newWin.document.write("<h2 style='text-align:center'>Climas</h2>" + divToPrint.outerHTML);
-                newWin.document.getElementById("tabela_resultado").setAttribute("border", "1");
-                var elements = newWin.document.getElementsByClassName("ng-table-filters");
-                while (elements.length > 0) {
-                    elements[0].parentNode.removeChild(elements[0]);
-                }
-                newWin.print();
-                newWin.close();
-                self.tableParams = new NgTableParams({}, { dataset: self.list });
-            });
-           
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    var divToPrint = document.getElementById("tabela_resultado");
+                    newWin = window.open("");
+                    newWin.document.write("<h2 style='text-align:center'>Climas</h2>" + divToPrint.outerHTML);
+                    newWin.document.getElementById("tabela_resultado").setAttribute("border", "1");
+                    var elements = newWin.document.getElementsByClassName("ng-table-filters");
+                    while (elements.length > 0) {
+                        elements[0].parentNode.removeChild(elements[0]);
+                    }
+                    newWin.print();
+                    newWin.close();
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
+            }         
         };
 
         self.clearSearchTerm = function () {

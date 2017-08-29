@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("ManejoRelatoriosController", manejoController).filter("dateFilterManejoRelatorio", dateFilter);
 
-    function manejoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element) {
+    function manejoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element, $timeout) {
         var self = this;
 
         initializeData();
@@ -68,7 +68,7 @@
             self.cols = [
                 { field: "DAT_MANEJO", title: "Data", sortable: "DAT_MANEJO", show: false, type: "valorData" },
                 { valor: '', title: "Período", show: false, type: "valorIntervalo" },
-                { field: 'DAT_MANEJO', title: "Mês/Ano",  show: false, sortable: "DAT_MANEJO", type: "valorMes" },
+                { field: 'DAT_MANEJO', title: "Mês/Ano", show: false, sortable: "DAT_MANEJO", type: "valorMes" },
                 { field: "VOL_CONSUMO_DIARIO", sortable: "VOL_CONSUMO_DIARIO", filter: { VOL_CONSUMO_DIARIO: "number" }, title: "Necessidade hídrica diária (mm)", show: false, type: "valor" },
                 { field: "VAR_PRECIPITACAO", sortable: "VAR_PRECIPITACAO", filter: { VAR_PRECIPITACAO: "number" }, title: "Precipitação (mm)", show: false, type: "valor" },
                 { field: "VOL_IRRIGACAO_NECESSARIA", sortable: "VOL_IRRIGACAO_NECESSARIA", filter: { VOL_IRRIGACAO_NECESSARIA: "number" }, title: "Irrigação necessária (mm)", show: false, type: "valor" },
@@ -89,17 +89,23 @@
 
         };
 
-        function imprimeTabela(index,NomeParcela) {
-            var divToPrint = document.getElementById("tabela_resultado_" + index);
-            newWin = window.open("");
-            newWin.document.write("<h2 style='text-align:center'>"+NomeParcela+"</h2>" + divToPrint.outerHTML);
-            newWin.document.getElementById("tabela_resultado_" + index).setAttribute("border", "1");
-            var elements = newWin.document.getElementsByClassName("ng-table-filters");
-            while (elements.length > 0) {
-                elements[0].parentNode.removeChild(elements[0]);
-            }
-            newWin.print();
-            newWin.close();
+        function imprimeTabela(index, NomeParcela) {
+
+            list = jQuery.extend({}, self.tablesParams[index].data);
+            self.tablesParams[index] = new NgTableParams({ count: list.length }, { dataset: list });
+            $timeout(function () {
+                var divToPrint = document.getElementById("tabela_resultado_" + index);
+                newWin = window.open("");
+                newWin.document.write("<h2 style='text-align:center'>" + NomeParcela + "</h2>" + divToPrint.outerHTML);
+                newWin.document.getElementById("tabela_resultado_" + index).setAttribute("border", "1");
+                var elements = newWin.document.getElementsByClassName("ng-table-filters");
+                while (elements.length > 0) {
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+                newWin.print();
+                newWin.close();
+                self.tablesParams[index] = new NgTableParams({}, { dataset: list });
+            });
         };
 
 
@@ -111,18 +117,21 @@
             self.atributosMarcados = self.atributos;
         };
 
-        function limparTodosParcelas() {
-            self.ParcelasFiltro = [];
-        };
 
         function alteraAtributos() {
             self.atributosMarcados = [];
             if (self.tipo == 'Detalhado') {
-                self.atributos= self.atributosCompletos;
+                self.atributos = self.atributosCompletos;
             } else {
                 self.atributos = self.atributosSomatorio;
             }
         }
+
+        function limparTodosParcelas() {
+            self.ParcelasFiltro = [];
+        };
+
+
         function marcarTodosParcelas() {
             self.ParcelasFiltro = buscarParcelaFazenda(self.searchTerm);
         };
@@ -232,7 +241,7 @@
                                 self.cols[16].show = true;
                             else if (self.atributosMarcados[j] == 'Estresse Ultrapassado')
                                 self.cols[17].show = true;
-                            
+
                         }
 
                         self.tablesParams.push(new NgTableParams({}, {
@@ -242,7 +251,7 @@
                     }
                     //  clearInterval(self.intervalID);
 
-                  //  $rootScope.$digest();
+                    //  $rootScope.$digest();
 
                 }
             }

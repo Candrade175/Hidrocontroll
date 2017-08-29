@@ -11,7 +11,7 @@
         </span>
         <div layout="row" class="linha-filtros">
 
-            <div class="col-sm-3 div-filtro no-padding">
+            <div class="col-sm-2 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
                     <label>Data</label>
                     <md-select ng-model="consumoFerRel.data">
@@ -35,8 +35,35 @@
 
             <div class="col-sm-3 div-filtro no-padding">
                 <md-input-container class="filtro-seletor">
+
+                    <label>Parcela</label>
+                    <md-select ng-model="consumoFerRel.ParcelasFiltro"
+                               md-on-close="consumoFerRel.clearSearchTerm()"
+                               data-md-container-class="selectdemoSelectHeader"
+                               multiple
+                               md-selected-text="{{consumoFerRel.ParcelasFiltro.length}} + ' Parcelas' "
+                               ng-disabled="consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)">
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="consumoFerRel.searchTerm"
+                                   type="search"
+                                   placeholder="Buscar Parcela"
+                                   class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-optgroup>
+
+                            <md-button class="md-primary md-raised" ng-click="consumoFerRel.marcarTodosParcelas()">Todos</md-button>
+                            <md-button class="md-primary md-raised" ng-click="consumoFerRel.limparTodosParcelas()">Limpar</md-button>
+                            <md-option ng-value="parcela" ng-repeat="parcela in consumoFerRel.buscarParcelaFazenda(consumoFerRel.searchTerm)">{{parcela.NOM_PARCELA}}</md-option>
+                        </md-optgroup>
+                    </md-select>
+
+                </md-input-container>
+            </div>
+
+            <div class="col-sm-3 div-filtro no-padding">
+                <md-input-container class="filtro-seletor">
                     <label>Atributos</label>
-                    <md-select multiple="" md-selected-text="{{consumoFerRel.atributosMarcados.length}} + ' Atributos' " ng-model="consumoFerRel.atributosMarcados" ng-disabled="consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)">
+                    <md-select multiple="" md-selected-text="{{consumoFerRel.atributosMarcados.length}} + ' Atributos' " ng-model="consumoFerRel.atributosMarcados" ng-disabled="consumoFerRel.ParcelasFiltro.length==0|| consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)">
                         <md-optgroup label="Atributos">
                             <md-button class="md-primary md-raised" ng-click="consumoFerRel.marcarTodosAtributos()">Todos</md-button>
                             <md-button class="md-primary md-raised" ng-click="consumoFerRel.limparTodosAtributos()">Limpar</md-button>
@@ -48,8 +75,8 @@
                 </md-input-container>
             </div>
 
-            <div class="col-sm-3 div-filtro no-padding">
-                <md-button class=" md-primary md-raised" ng-click="consumoFerRel.iniciaBusca()" ng-disabled="consumoFerRel.atributosMarcados.length == 0 ||consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)" style="float: right;">
+            <div class="col-sm-1 div-filtro no-padding">
+                <md-button class=" md-primary md-raised" ng-click="consumoFerRel.iniciaBusca()" ng-disabled="consumoFerRel.atributosMarcados.length*consumoFerRel.ParcelasFiltro.length == 0 ||consumoFerRel.data==null|| (consumoFerRel.data == 'Período' && consumoFerRel.cabecalho.data_inicio == null && consumoFerRel.cabecalho.data_fim == null)" style="float: right;">
                     Buscar
                 </md-button>
             </div>
