@@ -314,11 +314,6 @@
                 controller: "ConsumoFertirrigacaoRelatoriosController",
                 controllerAs: "consumoFerRel"
             })
-            .state('main.logout', {
-                url: "/logout",
-                menu: "Parcelas",
-                icon: "fa fa-pie-chart"
-            })
     });
 
     /**
