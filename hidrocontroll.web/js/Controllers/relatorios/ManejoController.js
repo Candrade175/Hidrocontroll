@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("ManejoRelatoriosController", manejoController).filter("dateFilterManejoRelatorio", dateFilter);
 
-    function manejoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element, $timeout) {
+    function manejoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element, $timeout, PrintService) {
         var self = this;
 
         initializeData();
@@ -62,14 +62,13 @@
                                     "Tempo irrigado",
                                     "ETo",
                                     "Estresse Ultrapassado"
-
             ];
 
             self.cols = [
                 { field: "DAT_MANEJO", title: "Data", sortable: "DAT_MANEJO", show: false, type: "valorData" },
                 { valor: '', title: "Período", show: false, type: "valorIntervalo" },
                 { field: 'DAT_MANEJO', title: "Mês/Ano", show: false, sortable: "DAT_MANEJO", type: "valorMes" },
-                { field: "VOL_CONSUMO_DIARIO", sortable: "VOL_CONSUMO_DIARIO", filter: { VOL_CONSUMO_DIARIO: "number" }, title: "Necessidade hídrica diária (mm)", show: false, type: "valor" },
+                { field: "VOL_CONSUMO_DIARIO", sortable: "VOL_CONSUMO_DIARIO", filter: { VOL_CONSUMO_DIARIO: "number" }, title: "Necessidade hídrica (mm)", show: false, type: "valor" },
                 { field: "VAR_PRECIPITACAO", sortable: "VAR_PRECIPITACAO", filter: { VAR_PRECIPITACAO: "number" }, title: "Precipitação (mm)", show: false, type: "valor" },
                 { field: "VOL_IRRIGACAO_NECESSARIA", sortable: "VOL_IRRIGACAO_NECESSARIA", filter: { VOL_IRRIGACAO_NECESSARIA: "number" }, title: "Irrigação necessária (mm)", show: false, type: "valor" },
                 { field: "VOL_IRRIGACAO_REALIZADA", sortable: "VOL_IRRIGACAO_REALIZADA", filter: { VOL_IRRIGACAO_REALIZADA: "number" }, title: "Irrigação realizada (mm)", show: false, type: "valor" },
@@ -84,28 +83,20 @@
                 { field: "VAR_KS", sortable: "VAR_KS", filter: { VAR_KS: "number" }, title: "Ks", show: false, type: "valor" },
                 { field: "VOL_IRRIGACAO_DESNECESSARIA", filter: { VOL_IRRIGACAO_DESNECESSARIA: "number" }, sortable: "VOL_IRRIGACAO_DESNECESSARIA", title: "Irrigação desnecessária (mm)", show: false, type: "valor" },
 
-                { field: "VAR_EXTRESSE_ULTRAPASSADO", sortable: "DAT_MANEJO", title: "Estresse Ultrapassado (dias)", show: false, type: "valor" }
+                { field: "VAR_EXTRESSE_ULTRAPASSADO", filter: { VAR_EXTRESSE_ULTRAPASSADO: "number" }, sortable: "VAR_EXTRESSE_ULTRAPASSADO", title: "Estresse Ultrapassado (dias)", show: false, type: "valor" }
             ];
 
         };
 
         function imprimeTabela(index, NomeParcela) {
-
-            list = jQuery.extend({}, self.tablesParams[index].data);
-            self.tablesParams[index] = new NgTableParams({ count: list.length }, { dataset: list });
-            $timeout(function () {
-                var divToPrint = document.getElementById("tabela_resultado_" + index);
-                newWin = window.open("");
-                newWin.document.write("<h2 style='text-align:center'>" + NomeParcela + "</h2>" + divToPrint.outerHTML);
-                newWin.document.getElementById("tabela_resultado_" + index).setAttribute("border", "1");
-                var elements = newWin.document.getElementsByClassName("ng-table-filters");
-                while (elements.length > 0) {
-                    elements[0].parentNode.removeChild(elements[0]);
-                }
-                newWin.print();
-                newWin.close();
-                self.tablesParams[index] = new NgTableParams({}, { dataset: list });
-            });
+            if (self.lists[index]) {
+                self.tablesParams[index] = new NgTableParams({ count: self.lists[index].length }, { dataset: self.lists[index] });
+                $timeout(function () {
+                    PrintService.imprimirTabelaRelatorio(NomeParcela, index);
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
+                self.tablesParams[index] = new NgTableParams({}, { dataset: self.lists[index] });
+            }
         };
 
 
@@ -159,6 +150,7 @@
         function iniciaBusca() {
             self.tablesParams = [];
             self.nomesParcelas = [];
+            self.lists=[];
             for (i = 0; i < self.cols.length; i++)
                 self.cols[i].show = false;
             if (self.Manejo.list.length * self.Cultura.list.length * self.Parcela.list.length) {
@@ -169,7 +161,8 @@
 
                     for (var i = 0; i < self.ParcelasFiltro.length; i++) {
 
-
+                        self.cols[8].show = false;
+                        self.cols[9].show = false;
                         var list = self.Manejo.list;
 
                         list = $filter('filter')(list, function (manejo) {
@@ -248,6 +241,7 @@
                             dataset: list
                         }));
                         self.nomesParcelas.push(self.ParcelasFiltro[i].NOM_PARCELA);
+                        self.lists.push(list);
                     }
                     //  clearInterval(self.intervalID);
 
@@ -268,6 +262,7 @@
                 m1.TMO_IRRIGADO_PIVO += m2.TMO_IRRIGADO_PIVO;
             else if (m1.TMO_IRRIGADO_GOTEJO)
                 m1.TMO_IRRIGADO_GOTEJO += m2.TMO_IRRIGADO_GOTEJO;
+
             m1.VOL_IRRIGACAO_DESNECESSARIA += m2.VOL_IRRIGACAO_DESNECESSARIA;
             m1.VAR_EXTRESSE_ULTRAPASSADO += m2.VAR_EXTRESSE_ULTRAPASSADO;
             return m1;

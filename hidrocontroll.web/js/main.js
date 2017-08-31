@@ -7,7 +7,7 @@
 
      */
     var isLogado = false;
-    var srp = angular.module("hidrocontroll.web", ["ngMaterial", "ui.router", "Model", "angular-storage", "ngMessages", "ngTable", "AngularPrint"]);
+    var srp = angular.module("hidrocontroll.web", ["ngMaterial", "ui.router", "Model", "angular-storage", "ngMessages", "ngTable"]);
 
     srp.run(function () {
         
@@ -82,7 +82,7 @@
                  controller: "FazendaController",
                  controllerAs: "fazendas",
                  menu: "Fazendas",
-                 icon: "glyphicon glyphicon-signal"
+                 icon: "fa fa-home"
              })
 
 
@@ -94,9 +94,9 @@
                     { "nome": "Irrigação", "icon": "fa fa-shower" },
                     { "nome": "Umidade", "icon": "glyphicon glyphicon-tint" },
                     { "nome": "Precipitação", "icon": "glyphicon glyphicon-cloud" },
-                    { "nome": "Reservatório", "icon": "glyphicon glyphicon-th-large" },
+                    { "nome": "Reservatório", "icon": "glyphicon glyphicon-inbox" },
                     { "nome": "Calcular", "icon": "fa fa-calculator" }],
-                icon: "glyphicon glyphicon-signal"
+                icon: "fa fa-calendar"
             })
 
             
@@ -148,20 +148,20 @@
             .state('main.Cadastros', {
                 menu: "Cadastros",
                 subMenu: [{ "nome": "Cultura", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Fases de Cultura", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Solo", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Equipamentos", "icon": "glyphicon glyphicon-tasks",
-                       "subSubMenu": [{ "nome": "Gotejador", "icon": "glyphicon glyphicon-tint" },
-                                    { "nome": "Modelo Pivô Central", "icon": "glyphicon glyphicon-move" },
-                                    { "nome": "Pivô Central", "icon": "glyphicon glyphicon-move" },
-                                    { "nome": "Motobomba", "icon": "glyphicon glyphicon-wrench" }]},
+                    { "nome": "Fases de Cultura", "icon": "fa fa-retweet" },
+                    { "nome": "Solo", "icon": "fa fa-globe" },
+                    { "nome": "Equipamentos", "icon": "glyphicon glyphicon-wrench",
+                       "subSubMenu": [{ "nome": "Gotejador" },
+                                    { "nome": "Modelo Pivô Central"},
+                                    { "nome": "Pivô Central" },
+                                    { "nome": "Motobomba" }]},
                     { "nome": "Outorga", "icon": "glyphicon glyphicon-tasks" },
-                    { "nome": "Fases de Outorga", "icon": "glyphicon glyphicon-grain" },
-                    { "nome": "Reservatório/Rebombeamento", "icon": "glyphicon glyphicon-th-large" },
+                    { "nome": "Fases de Outorga", "icon": "fa fa-retweet" },
+                    { "nome": "Reservatório/Rebombeamento", "icon": "glyphicon glyphicon-inbox" },
 
-                    { "nome": "Tarifa", "icon": "glyphicon glyphicon-th-large" }],
+                    { "nome": "Tarifa", "icon": "glyphicon glyphicon-flash" }],
 
-                icon: "glyphicon glyphicon-leaf"
+                icon: "fa fa-archive"
             })
 
 
@@ -247,34 +247,29 @@
             })
 
 
-            
-
-
             //### Parcelas ###
 
             .state('main.Parcelas', {
                 url: "/parcelas",
                 menu: "Parcelas",
-                icon: "glyphicon glyphicon-signal",
+                icon: "fa fa-pie-chart",
                 templateUrl: "pages/parcelas/parcelas.html",
                 controller: "ParcelasController",
                 controllerAs: "parcelasPrc"
             })
 
-            
-
             //### Relatórios ###
             .state('main.relatorios', {
                 menu: "Relatórios",
-                subMenu: [{ "nome": "Manejo", "icon": "glyphicon glyphicon-tree-deciduous" },
-                    { "nome": "Clima", "icon": "glyphicon glyphicon-cloud" },
+                subMenu: [{ "nome": "Manejo", "icon": "fa fa-shower" },
+                    { "nome": "Clima", "icon": "fa fa-thermometer-quarter" },
                     { "nome": "Cultura", "icon": "glyphicon glyphicon-grain" },
                     {
-                        "nome": "Consumo", "icon": "glyphicon glyphicon-align-left",
+                        "nome": "Consumo", "icon": "fa fa-money",
                         "subSubMenu":
-                            [{ "nome": "Parcela", "icon": "glyphicon glyphicon-tint" },
-                                    { "nome": "Outorga", "icon": "glyphicon glyphicon-move" },
-                                    { "nome": "Fertirrigação", "icon": "glyphicon glyphicon-move" }]},],
+                            [{ "nome": "Parcela" },
+                                    { "nome": "Outorga"},
+                                    { "nome": "Fertirrigação" }]},],
                 icon: "glyphicon glyphicon-list-alt"
             })
 
@@ -318,6 +313,11 @@
                 templateUrl: "pages/relatorios/consumo/fertirrigacao.html",
                 controller: "ConsumoFertirrigacaoRelatoriosController",
                 controllerAs: "consumoFerRel"
+            })
+            .state('main.logout', {
+                url: "/logout",
+                menu: "Parcelas",
+                icon: "fa fa-pie-chart"
             })
     });
 

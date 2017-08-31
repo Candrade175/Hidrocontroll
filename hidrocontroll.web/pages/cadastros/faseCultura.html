@@ -42,9 +42,9 @@
 
 
         <div class="tabela-container">
-            <table ng-table-dynamic="faseCulturaCdt.tableParams with faseCulturaCdt.cols" class="table" show-filter="true">
+            <table id="tabela_dados" ng-table-dynamic="faseCulturaCdt.tableParams with faseCulturaCdt.cols" class="table" show-filter="true">
                 <tr ng-repeat="row in $data">
-                    <td ng-repeat="col in $columns">
+                    <td ng-repeat="col in $columns" id="{{col.type}}">
                         <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
                         <span ng-if="col.type=='valorComposto'"> {{faseCulturaCdt.getCultura(row[col.field]).NOM_CULTURA}}</span>
                         <span ng-if="col.type=='comandoEditar'" class='width-70-px'>

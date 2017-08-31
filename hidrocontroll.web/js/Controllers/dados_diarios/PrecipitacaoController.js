@@ -3,7 +3,7 @@
 (function () {
     angular.module("hidrocontroll.web").controller("PrecipitacaoDadosDiariosController", precipitacaoController).filter("dateFilterPrecipitacao", dateFilter);
 
-    function precipitacaoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element) {
+    function precipitacaoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element,$timeout,PrintService) {
         var self = this;
 
         initializeData();
@@ -62,23 +62,24 @@
         $element.find('input').on('keydown', function (ev) {
             ev.stopPropagation();
         });
+
         function refresh() {
             if (self.Precipitacao.list.length * self.Cultura.list.length * self.Parcela.list.length != 0) {
                 clearInterval(intervalID);
             }
             try {
-                var list = [];
+                self.list = [];
 
 
-                list = $filter('filter')(self.Precipitacao.list, function (precipitacao) {
+                self.list = $filter('filter')(self.Precipitacao.list, function (precipitacao) {
                     return getCultura(getParcela(precipitacao.CAD_PARCELA_IDC_CAD_PARCELA).CAD_CULTURA_IDC_CAD_CULTURA).CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
 
 
-                list = $filter('dateFilterPrecipitacao')(list, self.tabela.data_inicio, self.tabela.data_fim);
+                self.list = $filter('dateFilterPrecipitacao')(self.list, self.tabela.data_inicio, self.tabela.data_fim);
 
                 if (self.ParcelasFiltro.length > 0) {
-                    list = $filter('filter')(list, function (precipitacao) {
+                    self.list = $filter('filter')(self.list, function (precipitacao) {
                         for (i = 0; i < self.ParcelasFiltro.length; i++)
                             if (precipitacao.CAD_PARCELA_IDC_CAD_PARCELA == self.ParcelasFiltro[i].IDC_CAD_PARCELA)
                                 return true;
@@ -86,10 +87,10 @@
                     });
                 }
 
-                list = $filter('orderBy')(list, '-DAT_PRECIPITACAO');
+                self.list = $filter('orderBy')(self.list, '-DAT_PRECIPITACAO');
 
 
-                self.tableParams = new NgTableParams({}, { dataset: list });
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
                 $rootScope.$digest();
             } catch (e) {
 
@@ -98,20 +99,12 @@
 
 
         function printData() {
-            var divToPrint = document.getElementById("tabela_dados");
-            if (divToPrint) {
-                newWin = window.open("");
-                newWin.document.write("<h2 style='text-align:center'>Precipitacaos</h2>" + divToPrint.outerHTML);
-                newWin.document.getElementById("tabela_dados").setAttribute("border", "1");
-                while (newWin.document.getElementById("th_editar_excluir")) {
-                    newWin.document.getElementById("th_editar_excluir").remove();
-                }
-                while (newWin.document.getElementById("td_editar_excluir")) {
-                    newWin.document.getElementById("td_editar_excluir").remove();
-                }
-                newWin.print();
-                console.log(newWin.document);
-                newWin.close();
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    PrintService.imprimirTabela('Precipitações');
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
             }
         };
 

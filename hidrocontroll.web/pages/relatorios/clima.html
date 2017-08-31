@@ -59,7 +59,7 @@
         <div class="tabela-container" ng-if="climaRel.tableParams">
             <md-toolbar class="titulo-tabela">
                 <div class="md-toolbar-tools">
-                    Climas
+                    Relatório de Climas
                     <span flex></span>
                     <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="climaRel.bla();climaRel.imprimeTabela();">
                         <md-icon>print</md-icon>
@@ -67,7 +67,7 @@
                 </div>
 
             </md-toolbar>
-            <table id="tabela_resultado" ng-table-dynamic="climaRel.tableParams with climaRel.cols" class="table">
+            <table id="tabela_dados" ng-table-dynamic="climaRel.tableParams with climaRel.cols" class="table">
                 <tr ng-repeat="row in $data">
                     <td ng-repeat="col in $columns">
                         <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>

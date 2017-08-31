@@ -23,9 +23,9 @@
 
         <!-- Tabela -->
         <div class="tabela-container">
-            <table ng-table-dynamic="fazendas.tableParams with fazendas.cols" class="table" show-filter="true">
+            <table id="tabela_dados" ng-table-dynamic="fazendas.tableParams with fazendas.cols" class="table" show-filter="true">
                 <tr ng-repeat="row in $data" ng-class="{'success': row.IDC_CAD_FAZENDA == fazendas.codFazendaAtual }">
-                    <td ng-repeat="col in $columns">
+                    <td ng-repeat="col in $columns" id="{{col.type}}">
                         <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>
                         <span ng-if="col.type=='valorCompostoCidade'"> {{fazendas.getCidade(row[col.field]).NOM_CIDADE}}</span>
                         <span ng-if="col.type=='valorCompostoEstado'"> {{fazendas.getEstado().SIG_ESTADO}}</span>

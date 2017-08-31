@@ -3,7 +3,7 @@
 (function () {
     angular.module("hidrocontroll.web").controller("ConsumoOutorgaRelatoriosController", parcelaController).filter("dateFilterIrrigacaoRelatorio", dateFilter);
 
-    function parcelaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element,$timeout) {
+    function parcelaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element, $timeout, PrintService) {
         var self = this;
 
         initializeData();
@@ -59,17 +59,7 @@
             if (self.list) {
                 self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
                 $timeout(function () {
-                    var divToPrint = document.getElementById("tabela_resultado");
-                    newWin = window.open("");
-                    console.log(self.tableParams);
-                    newWin.document.write("<h2 style='text-align:center'>Consumo Outorga</h2>" + divToPrint.outerHTML);
-                    newWin.document.getElementById("tabela_resultado").setAttribute("border", "1");
-                    var elements = newWin.document.getElementsByClassName("ng-table-filters");
-                    while (elements.length > 0) {
-                        elements[0].parentNode.removeChild(elements[0]);
-                    }
-                    newWin.print();
-                    newWin.close();
+                    PrintService.imprimirTabela('Relatório de Consumo Outorgas');
                     self.tableParams = new NgTableParams({}, { dataset: self.list });
                 });
             }

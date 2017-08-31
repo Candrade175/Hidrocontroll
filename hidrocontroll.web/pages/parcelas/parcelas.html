@@ -18,9 +18,9 @@
         </div>
         <!-- Tabela -->
         <div class="tabela-container">
-            <table ng-table-dynamic="parcelasPrc.tableParams with parcelasPrc.cols" class="table">
-                <tr ng-repeat="row in $data">
-                    <td ng-repeat="col in $columns">
+            <table id="tabela_dados" ng-table-dynamic="parcelasPrc.tableParams with parcelasPrc.cols" class="table">
+                <tr ng-repeat="row in $data" >
+                    <td ng-repeat="col in $columns" id="{{col.type}}">
                         <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
                         <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
                         <span ng-if="col.type=='valorCompostoCultura'"> {{parcelasPrc.getCultura(row[col.field]).NOM_CULTURA}}</span>
@@ -28,7 +28,7 @@
                         <span ng-if="col.type=='valorCompostoPivoCentral'"> {{parcelasPrc.getPivoCentral(row[col.field]).NOM_PIVO_CENTRAL}}</span>
                         <span ng-if="col.type=='valorCompostoGotejador'"> {{parcelasPrc.getGotejador(row[col.field]).NOM_GOTEJADOR}}</span>
                         <span ng-if="col.type=='valorCompostoSolo'"> {{parcelasPrc.getSolo(row[col.field]).NOM_SOLO}}</span>
-                     
+
                         <span ng-if="col.type=='comandoEditar'" class='width-70-px'>
                             <md-button class="md-icon-button"
                                        ng-click="parcelasPrc.update($event, row)"

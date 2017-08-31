@@ -160,6 +160,7 @@
     <Content Include="js\main.js" />
     <Content Include="js\Services\DateTimeService.js" />
     <Content Include="js\Services\EntitiesService.js" />
+    <Content Include="js\Services\PrintService.js" />
     <Content Include="lib\css\angular-csp.css" />
     <Content Include="lib\css\angular-material-layout.css" />
     <Content Include="lib\css\angular-material.css" />

@@ -87,7 +87,7 @@
         <div class="tabela-container" ng-if="consumoFerRel.tableParams">
             <md-toolbar class="titulo-tabela">
                 <div class="md-toolbar-tools">
-                    Climas
+                    Relatório de Consumo Fertirrigação
                     <span flex></span>
                     <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="consumoFerRel.imprimeTabela();">
                         <md-icon>print</md-icon>
@@ -95,7 +95,7 @@
                 </div>
 
             </md-toolbar>
-            <table id="tabela_resultado" ng-table-dynamic="consumoFerRel.tableParams with consumoFerRel.cols" class="table">
+            <table id="tabela_dados" ng-table-dynamic="consumoFerRel.tableParams with consumoFerRel.cols" class="table">
                 <tr ng-repeat="row in $data">
                     <td ng-repeat="col in $columns">
                         <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>

@@ -102,7 +102,7 @@
                 </div>
                 
             </md-toolbar>
-            <table ng-table-dynamic="tabela with manejoRel.cols" id="tabela_resultado_{{$index}}" class="table">
+            <table ng-table-dynamic="tabela with manejoRel.cols" id="tabela_dados_{{$index}}" class="table">
                 <tr ng-repeat="row in $data track by $index">
                     <td ng-repeat="col in $columns">
                         <span ng-if="col.type=='valorData'"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>

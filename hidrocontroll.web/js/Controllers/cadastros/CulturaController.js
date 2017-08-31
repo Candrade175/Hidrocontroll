@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("CulturaCadastrosController", culturaController);
 
-    function culturaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams) {
+    function culturaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams,$timeout,PrintService) {
         var self = this;
 
         initializeData();
@@ -47,14 +47,14 @@
                 clearInterval(intervalID);
             }
             try {
-                var list = [];
+                self.list = [];
 
-                list = $filter('filter')(self.Cultura.list, function (cultura) {
+                self.list = $filter('filter')(self.Cultura.list, function (cultura) {
                     return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
-                list = $filter('orderBy')(list, 'NOM_CULTURA');
+               self.list = $filter('orderBy')(self.list, 'NOM_CULTURA');
 
-                self.tableParams = new NgTableParams({}, { dataset: list });
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
                 $rootScope.$digest();
             } catch (e) {
             }
@@ -72,19 +72,13 @@
                .ok('Fechar');
 
         function printData() {
-            var divToPrint = document.getElementById("tabela_dados");
-            newWin = window.open("");
-            newWin.document.write("<h2 style='text-align:center'>Culturas</h2>" + divToPrint.outerHTML);
-            newWin.document.getElementById("tabela_dados").setAttribute("border","1");
-            while (newWin.document.getElementById("th_editar_excluir")) {
-                newWin.document.getElementById("th_editar_excluir").remove();
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    PrintService.imprimirTabela('Culturas');
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
             }
-            while (newWin.document.getElementById("td_editar_excluir")) {
-                newWin.document.getElementById("td_editar_excluir").remove();
-            }
-            newWin.print();
-            console.log(newWin.document);
-            newWin.close();
         };
 
         function create(ev) {

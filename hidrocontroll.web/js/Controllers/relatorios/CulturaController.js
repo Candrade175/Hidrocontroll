@@ -1,49 +1,10 @@
-﻿(function () {
-    angular.module("hidrocontroll.web").controller("CulturaRelatoriosController", culturaController);
-
-    function culturaController($http, C, store, $state, $mdDialog) {
-        var cultura = this;
-
-        initializeData();
-
-        function initializeData() {
-            cultura.tabela = {
-                "titulo": "Cultura",
-                "subtitulo": "Relatório de cultura:",
-                "cabecalho": ["Data",
-                            "Necessidade hídrica quinzenal (mm)",
-                            "Precipitação (mm)",
-                            "Irrigação necessária (mm)",
-                            "Irrigação realizada (mm)",
-                            "Irrigação desnecessária",
-                            "Dia excedido",
-                            "Máxima necessidade hídrica"],
-               
-            };
-            cultura.atributos = ["Necessidade hídrica",
-                                    "Precipitação",
-                                    "Irrigação necessária",
-                                    "Irrigação realizada",
-                                    "Tempo necessário",
-                                    "Percentímetro",
-                                    "Idade da cultura",
-                                    "Irrigação desnecessária",
-                                    "Dias excedidos",
-                                    "Duração de irrigação",
-                                    "ETo",
-                                    "Kc",
-                                    "Kl",
-                                    "Ks"];
-            cultura.tabela.data_fim = new Date(new Date((new Date()).setMilliseconds(0)).setSeconds(0));
-        }
-    };
-})();
+﻿
 
 
 (function () {
-    angular.module("hidrocontroll.web").controller("ManejoRelatoriosController", manejoController).filter("dateFilterManejoRelatorio", dateFilter);
+    angular.module("hidrocontroll.web").controller("CulturaRelatoriosController", manejoController).filter("dateFilterCulturaRelatorio", dateFilter);
 
-    function manejoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element, $timeout) {
+    function manejoController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, $element, $timeout, PrintService) {
         var self = this;
 
         initializeData();
@@ -59,16 +20,16 @@
             self.limparTodosParcelas = limparTodosParcelas;
             self.marcarTodosParcelas = marcarTodosParcelas;
             self.buscarParcelaFazenda = buscarParcelaFazenda;
-            self.alteraAtributos = alteraAtributos;
+            self.buscarCulturaFazenda = buscarCulturaFazenda;
             self.searchTerm;
             self.clearSearchTerm;
             self.ParcelasFiltro = [];
-            self.atualizaData = atualizaData;
             self.data = null;
             self.tipo = null;
             self.atributosMarcados = [];
             self.iniciaBusca = iniciaBusca;
             self.tablesParams = [];
+            self.culturaFiltro = null;
             self.imprimeTabela = imprimeTabela;
 
             self.cabecalho = {
@@ -78,43 +39,43 @@
                 "tipo": ["Por quinzena",
                          "Por mês"],
                 "data": ["Período",
-                         "Ciclo"]
+                         "Por ciclo"]
             };
+
+
             self.atributos = [
                             "Necessidade hídrica (mm)",
                             "Precipitação (mm)",
-                            "Irrigação necessária (mm)",
                             "Irrigação realizada (mm)",
-                            "Irrigação desnecessária",
-                            "Dia excedido",
-                            "Máxima necessidade hídrica"];
+                            "Irrigação desnecessária (mm)",
+                            "Tempo irrigado (min)",
+                            "ETo",
+                            "Estresse Ultrapassado (dias)"
+            ];
 
             self.cols = [
-                { field: "DAT_MANEJO", title: "Data", sortable: "DAT_MANEJO", show: false, type: "valorData" },
-                { field: 'Necessidade hídrica quinzenal (mm)', title: "Necessidade hídrica (mm)", show: false, sortable: "DAT_MANEJO", type: "valorMes" },
-                { field: "VOL_CONSUMO_DIARIO", sortable: "", filter: { VOL_CONSUMO_DIARIO: "number" }, title: "Precipitação (mm)", show: false, type: "valor" },
-                { field: "VAR_PRECIPITACAO", sortable: "VAR_PRECIPITACAO", filter: { VAR_PRECIPITACAO: "number" }, title: "Irrigação necessária (mm)", show: false, type: "valor" },
+                { field: "DATA", title: "Data", sortable: "DATA", show: true, type: "valor" },
+                { field: "VOL_CONSUMO_DIARIO", sortable: "VOL_CONSUMO_DIARIO", filter: { VOL_CONSUMO_DIARIO: "number" }, title: "Necessidade hídrica (mm)", show: false, type: "valor" },
+                { field: "VAR_PRECIPITACAO", sortable: "VAR_PRECIPITACAO", filter: { VAR_PRECIPITACAO: "number" }, title: "Precipitação (mm)", show: false, type: "valor" },
                 { field: "VOL_IRRIGACAO_REALIZADA", sortable: "VOL_IRRIGACAO_REALIZADA", filter: { VOL_IRRIGACAO_REALIZADA: "number" }, title: "Irrigação realizada (mm)", show: false, type: "valor" },
                 { field: "VOL_IRRIGACAO_DESNECESSARIA", filter: { VOL_IRRIGACAO_DESNECESSARIA: "number" }, sortable: "VOL_IRRIGACAO_DESNECESSARIA", title: "Irrigação desnecessária (mm)", show: false, type: "valor" },
-                { field: "VOL_IRRIGACAO_DESNECESSARIA", filter: { VOL_IRRIGACAO_DESNECESSARIA: "number" }, sortable: "VOL_IRRIGACAO_DESNECESSARIA", title: "Dia excedido", show: false, type: "valor" },
-                { field: "VOL_IRRIGACAO_DESNECESSARIA", filter: { VOL_IRRIGACAO_DESNECESSARIA: "number" }, sortable: "VOL_IRRIGACAO_DESNECESSARIA", title: "Máxima necessidade hídrica", show: false, type: "valor" },
-
-                { field: "VAR_EXTRESSE_ULTRAPASSADO", sortable: "DAT_MANEJO", title: "Estresse Ultrapassado (dias)", show: false, type: "valor" }
+                { field: 'TMO_IRRIGADO_PIVO', sortable: "TMO_IRRIGADO_PIVO", filter: { TMO_IRRIGADO_PIVO: "number" }, title: "Tempo irrigado (min)", show: false, type: "valor" },
+                { field: 'TMO_IRRIGADO_GOTEJO', sortable: "TMO_IRRIGADO_GOTEJO", filter: { TMO_IRRIGADO_GOTEJO: "number" }, title: "Tempo irrigado (min)", show: false, type: "valor" },
+                { field: "VAR_ETO", sortable: "VAR_ETO", filter: { VAR_ETO: "number" }, title: "ETo", show: false, type: "valor" },
+                { field: "VAR_EXTRESSE_ULTRAPASSADO", sortable: "VAR_EXTRESSE_ULTRAPASSADO", filter: { VAR_EXTRESSE_ULTRAPASSADO: "number" }, title: "Estresse Ultrapassado (dias)", show: false, type: "valor" }
             ];
 
         };
 
         function imprimeTabela(index, NomeParcela) {
-            var divToPrint = document.getElementById("tabela_resultado_" + index);
-            newWin = window.open("");
-            newWin.document.write("<h2 style='text-align:center'>" + NomeParcela + "</h2>" + divToPrint.outerHTML);
-            newWin.document.getElementById("tabela_resultado_" + index).setAttribute("border", "1");
-            var elements = newWin.document.getElementsByClassName("ng-table-filters");
-            while (elements.length > 0) {
-                elements[0].parentNode.removeChild(elements[0]);
+            if (self.lists[index]) {
+                self.tablesParams[index] = new NgTableParams({ count: self.lists[index].length }, { dataset: self.lists[index] });
+                $timeout(function () {
+                    PrintService.imprimirTabelaRelatorio(NomeParcela, index);
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
+                self.tablesParams[index] = new NgTableParams({}, { dataset: self.lists[index] });
             }
-            newWin.print();
-            newWin.close();
         };
 
 
@@ -130,14 +91,6 @@
             self.ParcelasFiltro = [];
         };
 
-        function alteraAtributos() {
-            self.atributosMarcados = [];
-            if (self.tipo == 'Detalhado') {
-                self.atributos = self.atributosCompletos;
-            } else {
-                self.atributos = self.atributosSomatorio;
-            }
-        }
         function marcarTodosParcelas() {
             self.ParcelasFiltro = buscarParcelaFazenda(self.searchTerm);
         };
@@ -150,22 +103,12 @@
             ev.stopPropagation();
         });
 
-        function atualizaData() {
-            self.data = null;
-            self.cabecalho.data_inicio = null;
-            self.cabecalho.data_fim = null;
-            if (self.tipo == self.cabecalho.tipo[0] || self.tipo == self.cabecalho.tipo[1])
-                self.cabecalho.data = self.cabecalho.dataCompleto;
-            else if (self.tipo == self.cabecalho.tipo[2]) {
-                self.cabecalho.data = self.cabecalho.dataPeriodo;
-                self.data = "Período";
-            }
-        }
 
         function iniciaBusca() {
             self.tablesParams = [];
             self.nomesParcelas = [];
-            for (i = 0; i < self.cols.length; i++)
+            self.lists = [];
+            for (i = 1; i < self.cols.length; i++)
                 self.cols[i].show = false;
             if (self.Manejo.list.length * self.Cultura.list.length * self.Parcela.list.length) {
                 clearInterval(self.intervalID);
@@ -174,9 +117,9 @@
                 if ((self.data == 'Período' && self.cabecalho.data_inicio != null && self.cabecalho.data_fim != null) || self.data == 'Por ciclo') {
 
                     for (var i = 0; i < self.ParcelasFiltro.length; i++) {
-
-
-                        var list = self.Manejo.list;
+                        self.cols[5].show = false;
+                        self.cols[6].show = false;
+                        list = self.Manejo.list;
 
                         list = $filter('filter')(list, function (manejo) {
                             return self.ParcelasFiltro[i].IDC_CAD_PARCELA == manejo.CAD_PARCELA_IDC_CAD_PARCELA;
@@ -184,85 +127,45 @@
 
                         list = $filter('orderBy')(list, '-DAT_MANEJO');
 
-                        if (self.data == 'Período') {
-                            list = $filter('dateFilterManejoRelatorio')(list, self.cabecalho.data_inicio, self.cabecalho.data_fim);
-                            if (self.tipo == 'Detalhado') {
-                                self.cols[0].show = true;
-                                list = adicionaLinhaTotal(list, false);
-                            } else if (self.tipo == 'Por mês') {
-                                self.cols[2].show = true;
-                                list = somaMeses(list);
-                            } else if (self.tipo == 'Por período') {
+                        if (self.data == 'Período')
+                            list = $filter('dateFilterCulturaRelatorio')(list, self.cabecalho.data_inicio, self.cabecalho.data_fim);
 
-                                inicio = self.cabecalho.data_inicio.getDate() + '/' + self.cabecalho.data_inicio.getMonth() + '/' + self.cabecalho.data_inicio.getFullYear();
-                                fim = self.cabecalho.data_fim.getDate() + '/' + self.cabecalho.data_fim.getMonth() + '/' + self.cabecalho.data_fim.getFullYear();
-                                intervalo = inicio + ' à ' + fim;
-                                self.cols[1].show = true;
-                                self.cols[1].valor = intervalo;
-                                list = adicionaLinhaTotal(list, true);
-
-                            }
-                        } else if (self.data == 'Por ciclo') {
-                            if (self.tipo == 'Detalhado') {
-                                self.cols[0].show = true;
-                                list = adicionaLinhaTotal(list, false);
-                            } else if (self.tipo == 'Por mês') {
-                                self.cols[2].show = true;
-                                list = somaMeses(list);
-                            }
-                        }
-
-
+                        if (self.tipo == 'Por mês')
+                            list = somaMeses(list);
+                        else if (self.tipo == 'Por quinzena') 
+                            list = somaQuinzenas(list);
 
                         for (j = 0; j < self.atributosMarcados.length; j++) {
 
-                            if (self.atributosMarcados[j] == 'Necessidade hídrica')
+                            if (self.atributosMarcados[j] == self.cols[1].title)
+                                self.cols[1].show = true;
+                            else if (self.atributosMarcados[j] == self.cols[2].title)
+                                self.cols[2].show = true;
+                            else if (self.atributosMarcados[j] == self.cols[3].title)
                                 self.cols[3].show = true;
-                            else if (self.atributosMarcados[j] == 'Precipitação')
+                            else if (self.atributosMarcados[j] == self.cols[4].title)
                                 self.cols[4].show = true;
-                            else if (self.atributosMarcados[j] == 'Irrigação necessária')
-                                self.cols[5].show = true;
-                            else if (self.atributosMarcados[j] == 'Irrigação realizada')
-                                self.cols[6].show = true;
-                            else if (self.atributosMarcados[j] == 'Tempo necessário')
-                                self.cols[7].show = true;
-                            else if (self.atributosMarcados[j] == 'Tempo irrigado')
+                            else if (self.atributosMarcados[j] == self.cols[5].title)
                                 if (self.ParcelasFiltro[i].CAD_GOTEJADOR_IDC_CAD_GOTEJADOR)
-                                    self.cols[8].show = true;
+                                    self.cols[5].show = true;
                                 else
-                                    self.cols[9].show = true;
-                            else if (self.atributosMarcados[j] == 'Percentímetro')
-                                self.cols[10].show = true;
-                            else if (self.atributosMarcados[j] == 'Idade da cultura')
-                                self.cols[11].show = true;
-                            else if (self.atributosMarcados[j] == 'ETo')
-                                self.cols[12].show = true;
-                            else if (self.atributosMarcados[j] == 'Kc')
-                                self.cols[13].show = true;
-                            else if (self.atributosMarcados[j] == 'Kl')
-                                self.cols[14].show = true;
-                            else if (self.atributosMarcados[j] == 'Ks')
-                                self.cols[15].show = true;
-                            else if (self.atributosMarcados[j] == 'Irrigação desnecessária')
-                                self.cols[16].show = true;
-                            else if (self.atributosMarcados[j] == 'Estresse Ultrapassado')
-                                self.cols[17].show = true;
-
+                                    self.cols[6].show = true;
+                            else if (self.atributosMarcados[j] == self.cols[7].title)
+                                self.cols[7].show = true;
+                            else if (self.atributosMarcados[j] == self.cols[8].title)
+                                self.cols[8].show = true;
                         }
 
                         self.tablesParams.push(new NgTableParams({}, {
                             dataset: list
                         }));
                         self.nomesParcelas.push(self.ParcelasFiltro[i].NOM_PARCELA);
+                        self.lists.push(list);
                     }
-                    //  clearInterval(self.intervalID);
-
-                    //  $rootScope.$digest();
 
                 }
             }
         };
-        var parcela = null;
 
         function somaManejos(m1, m2) {
             m1.VOL_CONSUMO_DIARIO += m2.VOL_CONSUMO_DIARIO;
@@ -280,9 +183,11 @@
         }
 
         function somaMeses(list) {
-            if (list && list.length > 0) {
+            if (list && list.length > 0) { 
+                list[0].DATA = (list[0].DAT_MANEJO.getMonth() + 1) + '/' + list[0].DAT_MANEJO.getFullYear();
                 for (i = 0; i < list.length - 1; i++) {
                     if (list[i].DAT_MANEJO.getMonth() == list[i + 1].DAT_MANEJO.getMonth() && list[i].DAT_MANEJO.getFullYear() == list[i + 1].DAT_MANEJO.getFullYear()) {
+                        list[i].DATA = (list[i].DAT_MANEJO.getMonth() + 1) + '/' + list[i].DAT_MANEJO.getFullYear();
                         somaManejos(list[i], list[i + 1]);
                         list.splice(i + 1, 1);
                     }
@@ -291,20 +196,32 @@
             return list;
         }
 
-        function adicionaLinhaTotal(list, deletarLinhas) {
+
+        function somaQuinzenas(list) {
             if (list && list.length > 0) {
-                total = jQuery.extend({}, list[0]);
-                for (j = 1; j < list.length; j++) {
-                    total = somaManejos(total, list[j]);
-                }
-                if (deletarLinhas)
-                    return [total];
-                else {
-                    total.DAT_MANEJO = "Total";
-                    list.push(total);
-                    return list;
+                if (list[0].DAT_MANEJO.getDate() <= 15)
+                    list[0].DATA = '1ª/' + (list[0].DAT_MANEJO.getMonth() + 1) + '/' + list[0].DAT_MANEJO.getFullYear();
+                else
+                    list[0].DATA = '2ª/' + (list[0].DAT_MANEJO.getMonth() + 1) + '/' + list[0].DAT_MANEJO.getFullYear();
+                for (i = 0; i < list.length - 1; i++) {
+                   
+         
+                    if (list[i].DAT_MANEJO.getMonth() == list[i + 1].DAT_MANEJO.getMonth() && list[i].DAT_MANEJO.getFullYear() == list[i + 1].DAT_MANEJO.getFullYear()) {
+
+                        if (list[i].DAT_MANEJO.getDate() <= 15) {
+                            somaManejos(list[i], list[i + 1]);
+                            list.splice(i + 1, 1);
+                            list[i].DATA = '1ª/' + (list[i].DAT_MANEJO.getMonth() + 1) + '/' + list[i].DAT_MANEJO.getFullYear();
+
+                        } else if (list[i].DAT_MANEJO.getDate() > 15) {
+                            somaManejos(list[i], list[i + 1]);
+                            list.splice(i + 1, 1);
+                            list[i].DATA = '2ª/' + (list[i].DAT_MANEJO.getMonth() + 1) + '/' + list[i].DAT_MANEJO.getFullYear();
+                        }
+                    }
                 }
             }
+            return list;
         }
 
         function getParcela(id) {
@@ -323,14 +240,20 @@
 
         function buscarParcelaFazenda(text) {
             var list = $filter('filter')(self.Parcela.list, function (parcela) {
-                cultura = getCultura(parcela.CAD_CULTURA_IDC_CAD_CULTURA);
-                if (cultura)
-                    return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
-                else
-                    return false;
+                if (self.culturaFiltro)
+                    return self.culturaFiltro.IDC_CAD_CULTURA == parcela.CAD_CULTURA_IDC_CAD_CULTURA;
+                return false;
             });
             list = $filter('filter')(list, text);
             return $filter('orderBy')(list, 'NOM_PARCELA');
+        };
+
+        function buscarCulturaFazenda(text) {
+            var list = $filter('filter')(self.Cultura.list, function (cultura) {
+                return cultura.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
+            });
+            list = $filter('filter')(list, text);
+            return $filter('orderBy')(list, 'NOM_CULTURA');
         };
     };
 

@@ -60,7 +60,7 @@
         <div class="tabela-container" ng-if="consumoOutRel.tableParams">
             <md-toolbar class="titulo-tabela">
                 <div class="md-toolbar-tools">
-                    Climas
+                    Relatório de Consumo Outorgas
                     <span flex></span>
                     <md-button class="md-fab md-mini" aria-label="Imprimir" ng-click="consumoOutRel.imprimeTabela();">
                         <md-icon>print</md-icon>
@@ -68,7 +68,7 @@
                 </div>
 
             </md-toolbar>
-            <table id="tabela_resultado" ng-table-dynamic="consumoOutRel.tableParams with consumoOutRel.cols" class="table">
+            <table id="tabela_dados" ng-table-dynamic="consumoOutRel.tableParams with consumoOutRel.cols" class="table">
                 <tr ng-repeat="row in $data track by $index">
                     <td ng-repeat="col in $columns">
                         <span ng-if="col.type=='valor'"> {{row[col.field] }}</span>

@@ -28,9 +28,9 @@
         </div>
         <!-- Tabela -->
         <div class="tabela-container">
-            <table ng-table-dynamic="climaDds.tableParams with climaDds.cols" class="table">
-                <tr ng-repeat="row in $data" >
-                    <td ng-repeat="col in $columns">
+            <table id="tabela_dados" ng-table-dynamic="climaDds.tableParams with climaDds.cols" class="table">
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns" id="{{col.type}}">
                         <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
                         <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
                         <span ng-if="col.type=='comandoEditar'" class='width-70-px'>

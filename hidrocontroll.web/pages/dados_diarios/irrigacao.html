@@ -55,9 +55,9 @@
         </div>
         <!-- Tabela -->
         <div class="tabela-container">
-            <table ng-table-dynamic="irrigacaoDds.tableParams with irrigacaoDds.cols" class="table">
+            <table id="tabela_dados"  ng-table-dynamic="irrigacaoDds.tableParams with irrigacaoDds.cols" class="table">
                 <tr ng-repeat="row in $data">
-                    <td ng-repeat="col in $columns">
+                    <td ng-repeat="col in $columns" id="{{col.type}}">
                         <span ng-if="col.type=='valor'&&col.isDate&&!col.isTime"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
                         <span ng-if="col.type=='valor'&&!col.isDate&&!col.isTime"> {{row[col.field] }}</span>
 
@@ -65,12 +65,12 @@
                         <span ng-if="col.type=='valorCompostoParcela'"> {{irrigacaoDds.getParcela(row[col.field]).NOM_PARCELA}}</span>
                         <span ng-if="col.type=='valorCompostoMotobomba'"> {{irrigacaoDds.getMotobomba(row[col.field]).NOM_MOTOBOMBA}}</span>
                         <span ng-if="col.type=='valorCompostoReservatorio'"> {{irrigacaoDds.getReservatorio(row[col.field]).NOM_RESERVATORIO}}</span>
-                        <span ng-if="col.type=='valorBool'&&row[col.field]">
+                        <span id="item-true" ng-if="col.type=='valorBool'&&row[col.field]">
                             <md-button ng-disabled="true" class="md-icon-button" aria-label="fertirrigacao verdeira">
                                 <md-icon class="glyphicon glyphicon-ok-sign"></md-icon>
                             </md-button>
                         </span>
-                        <span ng-if="col.type=='valorBool'&&!row[col.field]">
+                        <span id="item-false" ng-if="col.type=='valorBool'&&!row[col.field]">
                             <md-button ng-disabled="true" class="md-icon-button" aria-label="fertirrigacao falsa">
                                 <md-icon class="glyphicon glyphicon-remove-sign"></md-icon>
                             </md-button>

@@ -4,7 +4,7 @@
 (function () {
     angular.module("hidrocontroll.web").controller("ReservatorioDadosDiariosController", reservatorioController).filter("dateFilterReservatorio", dateFilter);
 
-    function reservatorioController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, DateTimeService) {
+    function reservatorioController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams, DateTimeService, $timeout,PrintService) {
         var self = this;
 
         initializeData();
@@ -65,17 +65,17 @@
                 clearInterval(intervalID);
             }
             try {
-                var list = [];
+                self.list = [];
 
-                list = $filter('filter')(self.ReservatorioDiario.list, function (reservatorioDiario) {
+                self.list = $filter('filter')(self.ReservatorioDiario.list, function (reservatorioDiario) {
                     return getReservatorio(reservatorioDiario.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO).CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
 
-                list = $filter('dateFilterReservatorio')(list, self.tabela.data_inicio, self.tabela.data_fim);
-                list = $filter('orderBy')(list, '-DAT_RESERVATORIO_DIARIO');
+                self.list = $filter('dateFilterReservatorio')(self.list, self.tabela.data_inicio, self.tabela.data_fim);
+                self.list = $filter('orderBy')(self.list, '-DAT_RESERVATORIO_DIARIO');
 
 
-                self.tableParams = new NgTableParams({}, { dataset: list });
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
                 $rootScope.$digest();
             } catch (e) {
             }
@@ -83,20 +83,12 @@
 
 
         function printData() {
-            var divToPrint = document.getElementById("tabela_dados");
-            if (divToPrint) {
-                newWin = window.open("");
-                newWin.document.write("<h2 style='text-align:center'>ReservatorioDiarios</h2>" + divToPrint.outerHTML);
-                newWin.document.getElementById("tabela_dados").setAttribute("border", "1");
-                while (newWin.document.getElementById("th_editar_excluir")) {
-                    newWin.document.getElementById("th_editar_excluir").remove();
-                }
-                while (newWin.document.getElementById("td_editar_excluir")) {
-                    newWin.document.getElementById("td_editar_excluir").remove();
-                }
-                newWin.print();
-                console.log(newWin.document);
-                newWin.close();
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    PrintService.imprimirTabela('Reservatórios diários');
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
             }
         };
 
@@ -245,23 +237,24 @@
             };
 
             $scope.calculaVolume = function () {
-                $scope.selected.VOL_RESERVATORIO_DIARIO = 0;
-                motobomba = getMotobomba($scope.selected.CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA);
-                if (motobomba && $scope.timeValido) {
-
+                if ($scope.timeValido && $scope.selected.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO && $scope.selected.CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA && $scope.selected.TMO_INICIO && $scope.selected.TMO_TERMINO) {
+                    $scope.selected.VOL_RESERVATORIO_DIARIO = 0;
+                    motobomba = getMotobomba($scope.selected.CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA);
                     tempoAbastecimento = DateTimeService.subtraiHora(DateTimeService.getTimeFormated($scope.selected.TMO_TERMINO), DateTimeService.getTimeFormated($scope.selected.TMO_INICIO));
                     tempoAbastecimento = DateTimeService.horasEmDecimal(tempoAbastecimento);
 
                     $scope.selected.VOL_RESERVATORIO_DIARIO = (tempoAbastecimento * motobomba.VAZ_MOTOBOMBA).toFixed(2);
+
                 }
             };
 
             $scope.calculaConsumo = function () {
-                var horaInicio = DateTimeService.getTimeFormated($scope.selected.TMO_INICIO);
-                var horaFim = DateTimeService.getTimeFormated($scope.selected.TMO_TERMINO);
-                consumoEnergetico = 0;
-                motobomba = getMotobomba($scope.selected.CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA);
-                if (motobomba && $scope.timeValido && $scope.selected.TMO_INICIO && $scope.selected.TMO_TERMINO) {
+                if ($scope.timeValido && $scope.selected.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO && $scope.selected.CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA && $scope.selected.TMO_INICIO && $scope.selected.TMO_TERMINO) {
+
+                    var horaInicio = DateTimeService.getTimeFormated($scope.selected.TMO_INICIO);
+                    var horaFim = DateTimeService.getTimeFormated($scope.selected.TMO_TERMINO);
+                    consumoEnergetico = 0;
+                    motobomba = getMotobomba($scope.selected.CAD_MOTOBOMBA_IDC_CAD_MOTOBOMBA);
                     for (var i = 0; i < self.Tarifa.list.length; i++) {
                         if (DateTimeService.verificaHoraMenorIgual(horaInicio, self.Tarifa.list[i].HOR_INICIO_TARIFA)) {
                             if (DateTimeService.verificaHoraMaiorIgual(horaFim, self.Tarifa.list[i].HOR_FIM_TARIFA))
@@ -275,9 +268,9 @@
                                 consumoEnergetico += motobomba.VAR_CONSUMO * self.Tarifa.list[i].VAL_TARIFA * DateTimeService.horasEmDecimal(DateTimeService.subtraiHora(self.Tarifa.list[i].HOR_FIM_TARIFA, horaInicio));
                         }
                     }
+                    $scope.selected.VAR_CONSUMO = consumoEnergetico.toFixed(2);
                 }
-                $scope.selected.VAR_CONSUMO = consumoEnergetico.toFixed(2);
-            }
+            };
 
             $scope.getMatchesReservatorio = function (text) {
                 var list = $filter('filter')(self.Reservatorio.list, function (reservatorio) {

@@ -1,11 +1,12 @@
 ﻿(function () {
-    angular.module("hidrocontroll.web").controller("ManejoDadosDiariosController", manejoController).filter("dateFilterEquals", dateFilterEquals);
+    angular.module("hidrocontroll.web").controller("ManejoDadosDiariosController", manejoController).filter("dateFilterManejo", dateFilterEquals);
 
-    function manejoController(EntitiesService, $mdMedia, $filter, $element,store) {
+    function manejoController(EntitiesService, $mdMedia, $filter, $element, store, $timeout, NgTableParams,$rootScope,PrintService) {
         var self = this;
 
         initializeData();
 
+        var intervalID = window.setInterval(refresh, 500);
         function initializeData() {
 
             self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
@@ -56,18 +57,18 @@
                 clearInterval(intervalID);
             }
             try {
-                var list = [];
+                self.list = [];
 
 
-                list = $filter('filter')(self.Manejo.list, function (manejo) {
+                self.list = $filter('filter')(self.Manejo.list, function (manejo) {
                     return getCultura(getParcela(manejo.CAD_PARCELA_IDC_CAD_PARCELA).CAD_CULTURA_IDC_CAD_CULTURA).CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
 
 
-                list = $filter('dateFilterManejo')(list, self.filtroData);
+                self.list = $filter('dateFilterManejo')(self.list, self.filtroData);
 
                 if (self.ParcelasFiltro.length > 0) {
-                    list = $filter('filter')(list, function (manejo) {
+                    self.list = $filter('filter')(self.list, function (manejo) {
                         for (i = 0; i < self.ParcelasFiltro.length; i++)
                             if (manejo.CAD_PARCELA_IDC_CAD_PARCELA == self.ParcelasFiltro[i].IDC_CAD_PARCELA)
                                 return true;
@@ -75,23 +76,24 @@
                     });
                 }
 
-                list = $filter('orderBy')(list, '-DAT_MANEJO');
+                self.list = $filter('orderBy')(self.list, '-DAT_MANEJO');
 
 
-                self.tableParams = new NgTableParams({}, { dataset: list });
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
                 $rootScope.$digest();
             } catch (e) {
-
+                console.log(e);
             }
         }
 
         function printData() {
-            var divToPrint = document.getElementById("tabela_dados");
-            newWin = window.open("");
-            newWin.document.write("<h2 style='text-align:center'>Manejos</h2>" + divToPrint.outerHTML);
-            newWin.document.getElementById("tabela_dados").setAttribute("border","1");
-            newWin.print();
-            newWin.close();
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    PrintService.imprimirTabela('Manejos Resumidos');
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
+            }
         };
 
         var parcela=null;

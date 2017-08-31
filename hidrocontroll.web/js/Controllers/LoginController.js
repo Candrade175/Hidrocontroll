@@ -6,20 +6,22 @@
 
         self.obj = {};
         self.entrar = entrar;
+        self.desabilitaEntrar = false;
 
         function entrar() {
 
+            self.desabilitaEntrar = true;
             $http.post(C.loginUrl, self.obj, { timeout: 10000 })
             .then(sucesso, erro);
         };
 
         function erro(exc) {
-            var texto = exc.data ? exc.data.Message : "Ocorreu um erro inesperado.";
-
+            var texto = exc.data ? exc.data.Message : "Login ou senha inválidos.";
+            self.desabilitaEntrar = false;
             alert = $mdDialog.alert({
                 title: 'Atenção',
                 textContent: texto,
-                ok: 'Close'
+                ok: 'Fechar'
             });
 
             $mdDialog
@@ -38,6 +40,7 @@
                     store.set('fazenda', fazendas.list[i]);
                     break;
                 }
+            self.desabilitaEntrar = false;
             $state.go("main");
         };
 

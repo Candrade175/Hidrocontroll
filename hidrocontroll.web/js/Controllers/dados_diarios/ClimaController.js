@@ -1,7 +1,7 @@
 ﻿(function () {
     angular.module("hidrocontroll.web").controller("ClimaDadosDiariosController", climaController).filter("dateFilterClima", dateFilter);
 
-    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams) {
+    function climaController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams,$timeout,PrintService) {
         var self = this;
 
         initializeData();
@@ -60,17 +60,17 @@
                 clearInterval(intervalID);
             }
             try {
-                var list = [];
+                self.list = [];
 
-                list = $filter('filter')(self.Clima.list, function (clima) {
+                self.list = $filter('filter')(self.Clima.list, function (clima) {
                     return clima.CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
 
-                list = $filter('dateFilterClima')(list, self.tabela.data_inicio, self.tabela.data_fim);
-                list = $filter('orderBy')(list, '-DAT_CLIMA');
+                self.list = $filter('dateFilterClima')(self.list, self.tabela.data_inicio, self.tabela.data_fim);
+                self.list = $filter('orderBy')(self.list, '-DAT_CLIMA');
 
 
-                self.tableParams = new NgTableParams({}, { dataset: list });
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
                 $rootScope.$digest();
             } catch (e) {
             }
@@ -78,21 +78,14 @@
 
 
         function printData() {
-            var divToPrint = document.getElementById("tabela_dados");
-            if (divToPrint) {
-                newWin = window.open("");
-                newWin.document.write("<h2 style='text-align:center'>Climas</h2>" + divToPrint.outerHTML);
-                newWin.document.getElementById("tabela_dados").setAttribute("border", "1");
-                while (newWin.document.getElementById("th_editar_excluir")) {
-                    newWin.document.getElementById("th_editar_excluir").remove();
-                }
-                while (newWin.document.getElementById("td_editar_excluir")) {
-                    newWin.document.getElementById("td_editar_excluir").remove();
-                }
-                newWin.print();
-                console.log(newWin.document);
-                newWin.close();
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    PrintService.imprimirTabela('Climas');
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
             }
+            
         };
 
         function create(ev) {

@@ -2,7 +2,7 @@
 (function () {
     angular.module("hidrocontroll.web").controller("ParcelasController", parcelasController);
 
-    function parcelasController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams) {
+    function parcelasController(EntitiesService, $mdMedia, $mdDialog, $filter, store, $rootScope, NgTableParams,$timeout,PrintService) {
         var self = this;
 
         initializeData();
@@ -64,14 +64,14 @@
                 clearInterval(intervalID);
             }
             try {
-                var list = [];
+                self.list = [];
 
-                list = $filter('filter')(self.Parcela.list, function (parcela) {
+                self.list = $filter('filter')(self.Parcela.list, function (parcela) {
                     return getCultura(parcela.CAD_CULTURA_IDC_CAD_CULTURA).CAD_FAZENDA_IDC_CAD_FAZENDA === self.codFazendaAtual;
                 });
-                list = $filter('orderBy')(list, 'NOM_PARCELA');
+                self.list = $filter('orderBy')(self.list, 'NOM_PARCELA');
 
-                self.tableParams = new NgTableParams({}, { dataset: list });
+                self.tableParams = new NgTableParams({}, { dataset: self.list });
                 $rootScope.$digest();
             } catch (e) {
             }
@@ -89,21 +89,13 @@
                .ok('Fechar');
 
         function printData() {
-            var divToPrint = document.getElementById("tabela_dados");
-            newWin = window.open("");
-            newWin.document.write(" <link rel='stylesheet' href='lib/css/bootstrap.min.css'/>"+
-                +"<h2 style='text-align:center'>Parcelas</h2>" + divToPrint.outerHTML);
-            
-           
-            while (newWin.document.getElementById("th_editar_excluir")) {
-                newWin.document.getElementById("th_editar_excluir").remove();
+            if (self.list) {
+                self.tableParams = new NgTableParams({ count: self.list.length }, { dataset: self.list });
+                $timeout(function () {
+                    PrintService.imprimirTabela('Parcelas');
+                    self.tableParams = new NgTableParams({}, { dataset: self.list });
+                });
             }
-            while (newWin.document.getElementById("td_editar_excluir")) {
-                newWin.document.getElementById("td_editar_excluir").remove();
-            }
-            newWin.print();
-            console.log(newWin.document);
-            newWin.close();
         };
 
         function create(ev) {
