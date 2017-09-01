@@ -49,7 +49,7 @@
                     <td ng-repeat="col in $columns" id="{{col.type}}">
                         <span ng-if="col.type=='valor'&&col.isDate"> {{row[col.field]| date:"dd/MM/yyyy" }}</span>
                         <span ng-if="col.type=='valorCompostoParcela'"> {{manejoDds.getParcela(row[col.field]).NOM_PARCELA}}</span>
-                        <span ng-if="col.type=='valorCompostoCultura'"> {{manejoDds.getCultura()).NOM_CULTURA}}</span>
+                        <span ng-if="col.type=='valorCompostoCultura'"> {{manejoDds.getCultura().NOM_CULTURA}}</span>
                         <span ng-if="col.type=='valor'&&!col.isDate"> {{row[col.field] }}</span>
 
                     </td>

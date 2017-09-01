@@ -67,7 +67,8 @@ namespace hidrocontroll.Controllers
 
             try
             {
-                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+
+                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA_IDC_CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
             }
             catch (Exception e)
             {
@@ -89,7 +90,8 @@ namespace hidrocontroll.Controllers
             db.SaveChanges();
             try
             {
-                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+                    new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA_IDC_CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+
             }
             catch (Exception e)
             {
@@ -113,7 +115,7 @@ namespace hidrocontroll.Controllers
             db.SaveChanges();
             try
             {
-                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
+                new ManejoController().atualizaManejo(cad_precipitacao.CAD_PARCELA_IDC_CAD_PARCELA, cad_precipitacao.DAT_PRECIPITACAO.Value);
             }
             catch (Exception e)
             {

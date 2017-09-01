@@ -115,15 +115,7 @@ namespace hidrocontroll.Controllers
 
         private void fazMudancasClima(CAD_CLIMA cad_clima)
         {
-            // Compose a string that consists of three lines.
-            string lines = "First line.\r\nSecond line.\r\nThird line.";
-
-            // Write the string to a file.
-            System.IO.StreamWriter file = new System.IO.StreamWriter("c:\\test1.txt");
-            file.WriteLine(lines);
-
-            file.Close();
-
+            
             hidrocontrollEntities db2 = new hidrocontrollEntities();
             db2.Configuration.ProxyCreationEnabled = false;
 
@@ -131,19 +123,11 @@ namespace hidrocontroll.Controllers
             CAD_FAZENDA fazenda = db2.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Where(f2 => f2.IDC_CAD_FAZENDA == cad_clima.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
             CAD_FASE_CULTURA faseCultura = null;
 
-            file = new System.IO.StreamWriter("c:\\test2.txt");
-            file.WriteLine(lines);
-
-            file.Close();
-
+          
             foreach (CAD_CULTURA c in fazenda.CAD_CULTURA)
             {
                 bool primeiro = true;
                 double fimFaseMax = 0;
-                file = new System.IO.StreamWriter("c:\\test3.txt");
-                file.WriteLine(lines);
-
-                file.Close();
 
                 foreach (CAD_FASE_CULTURA fc in db2.CAD_FASE_CULTURA.Where(fc => fc.CAD_CULTURA_IDC_CAD_CULTURA == c.IDC_CAD_CULTURA))
                 {
@@ -168,13 +152,10 @@ namespace hidrocontroll.Controllers
                 {
                     if (fimFaseMax >= DateTimeFunctional.diferencaDeDias(DateTime.Now, p.DAT_PLANTIO))
                     {
-                        new ManejoController().atualizaManejo(p, dataAtualizacao);
+                        new ManejoController().atualizaManejo(p.IDC_CAD_PARCELA, dataAtualizacao);
                     }
                 }
-                file = new System.IO.StreamWriter("c:\\test4.txt");
-                file.WriteLine(lines);
-
-                file.Close();
+              
             }
 
         }

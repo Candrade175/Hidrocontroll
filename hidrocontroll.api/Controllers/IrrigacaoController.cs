@@ -66,8 +66,7 @@ namespace hidrocontroll.Controllers
                     cad_irrigacao.CAD_RESERVATORIO.VOL_ATUAL += diferenca;
                     new ReservatorioController().PutCAD_RESERVATORIO(cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO.Value, cad_irrigacao.CAD_RESERVATORIO);
                 }
-                CAD_PARCELA parcela = db2.CAD_PARCELA.Where(p => p.IDC_CAD_PARCELA == cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA).First();
-                new ManejoController().atualizaManejo(parcela, cad_irrigacao.DAT_IRRIGACAO);
+                new ManejoController().atualizaManejo(cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA, cad_irrigacao.DAT_IRRIGACAO);
 
             }
             catch (DbUpdateConcurrencyException)
@@ -101,8 +100,7 @@ namespace hidrocontroll.Controllers
                 cad_irrigacao.CAD_RESERVATORIO.VOL_ATUAL -= cad_irrigacao.VOL_CONSUMIDO;
                 new ReservatorioController().PutCAD_RESERVATORIO(cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO.Value, cad_irrigacao.CAD_RESERVATORIO);
             }
-            CAD_PARCELA parcela = db.CAD_PARCELA.Where(p => p.IDC_CAD_PARCELA == cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA).First();
-            new ManejoController().atualizaManejo(parcela, cad_irrigacao.DAT_IRRIGACAO);
+            new ManejoController().atualizaManejo(cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA, cad_irrigacao.DAT_IRRIGACAO);
 
             return CreatedAtRoute("DefaultApi", new { id = cad_irrigacao.IDC_CAD_IRRIGACAO }, cad_irrigacao);
         }
@@ -124,8 +122,7 @@ namespace hidrocontroll.Controllers
                 cad_irrigacao.CAD_RESERVATORIO.VOL_ATUAL += cad_irrigacao.VOL_CONSUMIDO;
                 new ReservatorioController().PutCAD_RESERVATORIO(cad_irrigacao.CAD_RESERVATORIO_IDC_CAD_RESERVATORIO.Value, cad_irrigacao.CAD_RESERVATORIO);
             }
-            CAD_PARCELA parcela = db.CAD_PARCELA.Where(p => p.IDC_CAD_PARCELA == cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA).First();
-            new ManejoController().atualizaManejo(parcela,cad_irrigacao.DAT_IRRIGACAO);
+            new ManejoController().atualizaManejo(cad_irrigacao.CAD_PARCELA_IDC_CAD_PARCELA, cad_irrigacao.DAT_IRRIGACAO);
             return Ok(cad_irrigacao);
         }
 

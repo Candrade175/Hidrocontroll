@@ -76,11 +76,11 @@ namespace hidrocontroll.Controllers
         {
             if (!ModelState.IsValid)
             {
-           
+
                 return BadRequest(ModelState);
 
             }
-           
+
 
             db.REG_MANEJO.Add(reg_manejo);
             db.SaveChanges();
@@ -104,10 +104,13 @@ namespace hidrocontroll.Controllers
             return Ok(reg_manejo);
         }
 
-        public void atualizaManejo(CAD_PARCELA parcela, DateTime dataAtualizacao)
+        public void atualizaManejo(int idc_parcela, DateTime dataAtualizacao)
         {
             hidrocontrollEntities db = new hidrocontrollEntities();
             db.Configuration.ProxyCreationEnabled = false;
+
+            CAD_PARCELA parcela = db.CAD_PARCELA.Include(c => c.CAD_PIVO_CENTRAL).Include(c => c.CAD_GOTEJADOR).Where(c2 => c2.IDC_CAD_PARCELA == idc_parcela).First();
+
             double necessariaInicial = 0;
             double ks = 0;
             double balanco = 0;
@@ -116,26 +119,20 @@ namespace hidrocontroll.Controllers
             int? contFim = DateTimeFunctional.diferencaDeDias(DateTime.Now, parcela.DAT_PLANTIO);
             int diaFinal = 0;
 
-            CAD_PIVO_CENTRAL pivo = null;
-            CAD_GOTEJADOR gotejador = null;
+
+            CAD_PIVO_CENTRAL pivo = parcela.CAD_PIVO_CENTRAL;
+            CAD_GOTEJADOR gotejador = parcela.CAD_GOTEJADOR;
             CAD_CULTURA cultura = db.CAD_CULTURA.Include(c => c.CAD_PARCELA).Include(c => c.CAD_FASE_CULTURA).Where(c2 => c2.IDC_CAD_CULTURA == parcela.CAD_CULTURA_IDC_CAD_CULTURA).First();
             CAD_FAZENDA fazenda = db.CAD_FAZENDA.Include(f => f.CAD_CULTURA).Include(f => f.CAD_CLIMA).Where(f2 => f2.IDC_CAD_FAZENDA == cultura.CAD_FAZENDA_IDC_CAD_FAZENDA).First();
             CAD_SOLO solo = db.CAD_SOLO.Where(s => s.IDC_CAD_SOLO == parcela.CAD_SOLO_IDC_CAD_SOLO).First();
             CAD_FASE_CULTURA faseCultura = null;
 
 
-           
 
-            
+
             if (parcela.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL != null)
             {
-                pivo = db.CAD_PIVO_CENTRAL.Find(parcela.CAD_PIVO_CENTRAL_IDC_CAD_PIVO_CENTRAL);
                 totalPivo = ((2 * Math.PI * (pivo.DIS_RAIO_TOTAL - pivo.VAR_VAO_BALANCO)) / pivo.VEL_100_PIVO).Value;
-            }
-
-            if (parcela.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR != null)
-            {
-                gotejador = db.CAD_GOTEJADOR.Find(parcela.CAD_GOTEJADOR_IDC_CAD_GOTEJADOR);
             }
 
             foreach (REG_MANEJO manejo in db.REG_MANEJO.Where(r => r.CAD_PARCELA_IDC_CAD_PARCELA == parcela.IDC_CAD_PARCELA))
@@ -191,7 +188,7 @@ namespace hidrocontroll.Controllers
                 }
 
             }
-           
+
             if (contInicio == 0)
             {
                 necessariaInicial = (solo.VAR_CAPACIDADE_CAMPO.Value - parcela.VAR_UMIDADE_SOLO_PLANTIO.Value) / 100 * 1.05 * (faseCultura.PRF_RAIZ.Value * 10);
@@ -356,8 +353,16 @@ namespace hidrocontroll.Controllers
 
                 if (pivo != null)
                 {
-                    percentimetro = (100 * pivo.VAR_LAMINA.Value) / necessaria.Value;
-                    temponecessario = (100 * totalPivo) / percentimetro;
+                    if (necessaria.Value != 0)
+                    {
+                        percentimetro = (100 * pivo.VAR_LAMINA.Value) / necessaria.Value;
+                        temponecessario = (100 * totalPivo) / percentimetro;
+                    }
+                    else
+                    {
+                        percentimetro = 0;
+                        temponecessario = 0;
+                    }
                 }
                 if (gotejador != null)
                 {
@@ -381,7 +386,7 @@ namespace hidrocontroll.Controllers
                 if (manejo == null)
                 {
                     manejo = new REG_MANEJO();
-                    manejo.CAD_PARCELA_IDC_CAD_PARCELA= parcela.IDC_CAD_PARCELA;
+                    manejo.CAD_PARCELA_IDC_CAD_PARCELA = parcela.IDC_CAD_PARCELA;
                     manejo.DAT_MANEJO = data;
                     manejo.IDC_REG_MANEJO = contInicio.Value;
                     try
@@ -396,7 +401,7 @@ namespace hidrocontroll.Controllers
                 }
                 else
                 {
-                    PutREG_MANEJO(manejo.IDC_REG_MANEJO,atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado));
+                    PutREG_MANEJO(manejo.IDC_REG_MANEJO, atualizaDadosManejo(manejo, necessaria, irrigacao.VOL_IRRIGACAO, irrigacaoDesnecessaria, temponecessario, percentimetro, etc, ks, balanco, eto, faseCultura.VAR_KC, kl, chuva, irrigacao.TMO_IRRIGACAO_GOTEJO, irrigacao.TMO_IRRIGACAO_PIVO, extresseUltrapassado));
                 }
 
                 contInicio += 1;
@@ -407,7 +412,7 @@ namespace hidrocontroll.Controllers
         private REG_MANEJO atualizaDadosManejo(REG_MANEJO manejo, double? necessaria, double? VOL_IRRIGACAO, double irrigacaoDesnecessaria, double temponecessario, double percentimetro, double etc, double ks, double balanco,
             double eto, double? kc, double kl, double chuva, double? TMO_IRRIGACAO_GOTEJO, double? TMO_IRRIGACAO_PIVO, double? extresseUltrapassado)
         {
-                   
+
             manejo.VOL_IRRIGACAO_NECESSARIA = necessaria;
             manejo.VOL_IRRIGACAO_REALIZADA = VOL_IRRIGACAO;
             manejo.VOL_IRRIGACAO_DESNECESSARIA = irrigacaoDesnecessaria;
@@ -423,7 +428,7 @@ namespace hidrocontroll.Controllers
             manejo.TMO_IRRIGADO_GOTEJO = TMO_IRRIGACAO_GOTEJO;
             manejo.TMO_IRRIGADO_PIVO = TMO_IRRIGACAO_PIVO;
             manejo.VAR_EXTRESSE_ULTRAPASSADO = extresseUltrapassado;
-           
+
             return manejo;
         }
 
@@ -441,6 +446,6 @@ namespace hidrocontroll.Controllers
             return db.REG_MANEJO.Count(e => e.IDC_REG_MANEJO == id) > 0;
         }
 
-       
+
     }
 }
