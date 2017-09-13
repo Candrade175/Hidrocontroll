@@ -11,7 +11,8 @@
 
         function initializeData() {
 
-            self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
+            if (store.get('fazenda'))
+                self.codFazendaAtual = store.get('fazenda').IDC_CAD_FAZENDA;
 
             self.Parcela = EntitiesService.parcela;
             self.Cultura = EntitiesService.cultura;

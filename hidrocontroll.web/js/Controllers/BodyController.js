@@ -23,7 +23,8 @@
         body.go = go;
         body.logout = logout;
         body.matriculaUsuario = store.get('user').NUM_MATRICULA;
-        body.nomeFazenda=store.get('fazenda').NOM_FAZENDA;
+        if (store.get('fazenda'))
+            body.nomeFazenda=store.get('fazenda').NOM_FAZENDA;
         //Ao criar uma instância deste Controller varre os estados/Rotas declarados e se
         //Contiverem a propriedade menu adiciona ao array menu para montagem do menu lateral
         angular.forEach($state.get(), function (state) {

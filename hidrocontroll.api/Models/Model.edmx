@@ -29,7 +29,6 @@
             <PropertyRef Name="IDC_CAD_CLIENTE" />
           </Key>
           <Property Name="IDC_CAD_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CNF_USUARIO_CLIENTE" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="NOM_CLIENTE" Type="varchar" MaxLength="45" />
           <Property Name="CNF_EMAIL_CLIENTE" Type="varchar" MaxLength="80" />
           <Property Name="CNF_SENHA_CLIENTE" Type="varchar" MaxLength="45" />
@@ -274,7 +273,6 @@
           <Property Name="DAT_CRIACAO" Type="date" />
           <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="int" Nullable="false" />
           <Property Name="DAT_ALTERACAO" Type="date" />
-          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="int" />
         </EntityType>
         <EntityType Name="REG_MANEJO">
           <Key>
@@ -396,18 +394,6 @@
             </Principal>
             <Dependent Role="CAD_FAZENDA">
               <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
-          <End Role="CAD_FAZENDA" Type="Self.CAD_FAZENDA" Multiplicity="0..1" />
-          <End Role="CAD_USUARIO" Type="Self.CAD_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_FAZENDA">
-              <PropertyRef Name="IDC_CAD_FAZENDA" />
-            </Principal>
-            <Dependent Role="CAD_USUARIO">
-              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -741,10 +727,6 @@
             <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
           </AssociationSet>
-          <AssociationSet Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA" Association="Self.fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
-            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
-          </AssociationSet>
           <AssociationSet Name="fk_CAD_GOTEJADOR_CAD_FAZENDA1" Association="Self.fk_CAD_GOTEJADOR_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_GOTEJADOR" EntitySet="CAD_GOTEJADOR" />
@@ -841,7 +823,6 @@
         <EntityContainer Name="hidrocontrollEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CAD_ADMINISTRADOR" EntityType="hidrocontrollModel.CAD_ADMINISTRADOR" />
           <EntitySet Name="CAD_CIDADE" EntityType="hidrocontrollModel.CAD_CIDADE" />
-          <EntitySet Name="CAD_CLIENTE" EntityType="hidrocontrollModel.CAD_CLIENTE" />
           <EntitySet Name="CAD_CULTURA" EntityType="hidrocontrollModel.CAD_CULTURA" />
           <EntitySet Name="CAD_ESTADO" EntityType="hidrocontrollModel.CAD_ESTADO" />
           <EntitySet Name="CAD_FASE_OUTORGA" EntityType="hidrocontrollModel.CAD_FASE_OUTORGA" />
@@ -856,10 +837,6 @@
           </AssociationSet>
           <AssociationSet Name="fk_CAD_FAZENDA_CAD_CIDADE1" Association="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CIDADE1">
             <End Role="CAD_CIDADE" EntitySet="CAD_CIDADE" />
-            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_FAZENDA_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1">
-            <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
           </AssociationSet>
           <AssociationSet Name="fk_CAD_CULTURA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1">
@@ -886,15 +863,6 @@
           <AssociationSet Name="fk_CAD_CLIMA_CAD_FAZENDA1" Association="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1">
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_CLIMA" EntitySet="CAD_CLIMA" />
-          </AssociationSet>
-          <EntitySet Name="CAD_USUARIO" EntityType="hidrocontrollModel.CAD_USUARIO" />
-          <AssociationSet Name="fk_CAD_USUARIO_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1">
-            <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
-            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA" Association="hidrocontrollModel.fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
-            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
           </AssociationSet>
           <EntitySet Name="CAD_MODELO_PIVO_CENTRAL" EntityType="hidrocontrollModel.CAD_MODELO_PIVO_CENTRAL" />
           <EntitySet Name="CAD_PIVO_CENTRAL" EntityType="hidrocontrollModel.CAD_PIVO_CENTRAL" />
@@ -984,6 +952,16 @@
             <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
             <End Role="CAD_TARIFA" EntitySet="CAD_TARIFA" />
           </AssociationSet>
+          <EntitySet Name="CAD_CLIENTE" EntityType="hidrocontrollModel.CAD_CLIENTE" />
+          <EntitySet Name="CAD_USUARIO" EntityType="hidrocontrollModel.CAD_USUARIO" />
+          <AssociationSet Name="fk_CAD_FAZENDA_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1">
+            <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
+            <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CAD_USUARIO_CAD_CLIENTE1" Association="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1">
+            <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
+            <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CAD_ADMINISTRADOR">
           <Key>
@@ -1005,19 +983,6 @@
           <Property Name="CAD_ESTADO_IDC_CAD_ESTADO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAD_ESTADO" Relationship="hidrocontrollModel.fk_CAD_CIDADE_CAD_ESTADO1" FromRole="CAD_CIDADE" ToRole="CAD_ESTADO" />
           <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CIDADE1" FromRole="CAD_CIDADE" ToRole="CAD_FAZENDA" />
-        </EntityType>
-        <EntityType Name="CAD_CLIENTE">
-          <Key>
-            <PropertyRef Name="IDC_CAD_CLIENTE" />
-          </Key>
-          <Property Name="IDC_CAD_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CNF_USUARIO_CLIENTE" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NOM_CLIENTE" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="CNF_EMAIL_CLIENTE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="CNF_SENHA_CLIENTE" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="CNF_ATIVO_CLIENTE" Type="Byte" />
-          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_CLIENTE" ToRole="CAD_FAZENDA" />
-          <NavigationProperty Name="CAD_USUARIO" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_CLIENTE" ToRole="CAD_USUARIO" />
         </EntityType>
         <EntityType Name="CAD_CULTURA">
           <Key>
@@ -1062,17 +1027,16 @@
           <Property Name="CAD_CIDADE_IDC_CAD_CIDADE" Type="Int32" Nullable="false" />
           <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAD_CIDADE" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CIDADE1" FromRole="CAD_FAZENDA" ToRole="CAD_CIDADE" />
-          <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIENTE" />
           <NavigationProperty Name="CAD_CULTURA" Relationship="hidrocontrollModel.fk_CAD_CULTURA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CULTURA" />
           <NavigationProperty Name="CAD_GOTEJADOR" Relationship="hidrocontrollModel.fk_CAD_GOTEJADOR_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_GOTEJADOR" />
           <NavigationProperty Name="CAD_OUTORGA" Relationship="hidrocontrollModel.fk_CAD_OUTORGA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_OUTORGA" />
           <NavigationProperty Name="CAD_RESERVATORIO" Relationship="hidrocontrollModel.fk_CAD_RESERVATORIO_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_RESERVATORIO" />
           <NavigationProperty Name="CAD_CLIMA" Relationship="hidrocontrollModel.fk_CAD_CLIMA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIMA" />
-          <NavigationProperty Name="CAD_USUARIO" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_IDC_CAD_FAZENDA" FromRole="CAD_FAZENDA" ToRole="CAD_USUARIO" />
           <NavigationProperty Name="CAD_PIVO_CENTRAL" Relationship="hidrocontrollModel.fk_CAD_PIVO_CENTRAL_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_PIVO_CENTRAL" />
           <NavigationProperty Name="CAD_SOLO" Relationship="hidrocontrollModel.fk_CAD_SOLO_CAD_FAZENDA" FromRole="CAD_FAZENDA" ToRole="CAD_SOLO" />
           <NavigationProperty Name="CAD_MOTOBOMBA" Relationship="hidrocontrollModel.fk_CAD_MOTOBOMBA_CAD_FAZENDA1" FromRole="CAD_FAZENDA" ToRole="CAD_MOTOBOMBA" />
           <NavigationProperty Name="CAD_TARIFA" Relationship="hidrocontrollModel.fk_CAD_TARIFA_CAD_FAZENDA" FromRole="CAD_FAZENDA" ToRole="CAD_TARIFA" />
+          <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_FAZENDA" ToRole="CAD_CLIENTE" />
         </EntityType>
         <EntityType Name="CAD_GOTEJADOR">
           <Key>
@@ -1145,18 +1109,6 @@
             </Principal>
             <Dependent Role="CAD_FAZENDA">
               <PropertyRef Name="CAD_CIDADE_IDC_CAD_CIDADE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_FAZENDA_CAD_CLIENTE1">
-          <End Type="hidrocontrollModel.CAD_CLIENTE" Role="CAD_CLIENTE" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_CLIENTE">
-              <PropertyRef Name="IDC_CAD_CLIENTE" />
-            </Principal>
-            <Dependent Role="CAD_FAZENDA">
-              <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1254,45 +1206,6 @@
               <PropertyRef Name="IDC_CAD_FAZENDA" />
             </Principal>
             <Dependent Role="CAD_CLIMA">
-              <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CAD_USUARIO">
-          <Key>
-            <PropertyRef Name="IDC_CAD_USUARIO" />
-          </Key>
-          <Property Name="IDC_CAD_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NUM_MATRICULA" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="NOM_USUARIO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="CNF_SENHA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="DAT_CRIACAO" Type="DateTime" Precision="0" />
-          <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="Int32" Nullable="false" />
-          <Property Name="DAT_ALTERACAO" Type="DateTime" Precision="0" />
-          <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="Int32" />
-          <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_USUARIO" ToRole="CAD_CLIENTE" />
-          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_IDC_CAD_FAZENDA" FromRole="CAD_USUARIO" ToRole="CAD_FAZENDA" />
-        </EntityType>
-        <Association Name="fk_CAD_USUARIO_CAD_CLIENTE1">
-          <End Type="hidrocontrollModel.CAD_CLIENTE" Role="CAD_CLIENTE" Multiplicity="1" />
-          <End Type="hidrocontrollModel.CAD_USUARIO" Role="CAD_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_CLIENTE">
-              <PropertyRef Name="IDC_CAD_CLIENTE" />
-            </Principal>
-            <Dependent Role="CAD_USUARIO">
-              <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
-          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="0..1" />
-          <End Type="hidrocontrollModel.CAD_USUARIO" Role="CAD_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CAD_FAZENDA">
-              <PropertyRef Name="IDC_CAD_FAZENDA" />
-            </Principal>
-            <Dependent Role="CAD_USUARIO">
               <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
             </Dependent>
           </ReferentialConstraint>
@@ -1729,6 +1642,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CAD_CLIENTE">
+          <Key>
+            <PropertyRef Name="IDC_CAD_CLIENTE" />
+          </Key>
+          <Property Name="IDC_CAD_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_CLIENTE" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CNF_EMAIL_CLIENTE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="CNF_SENHA_CLIENTE" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CNF_ATIVO_CLIENTE" Type="Byte" />
+          <NavigationProperty Name="CAD_FAZENDA" Relationship="hidrocontrollModel.fk_CAD_FAZENDA_CAD_CLIENTE1" FromRole="CAD_CLIENTE" ToRole="CAD_FAZENDA" />
+          <NavigationProperty Name="CAD_USUARIO" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_CLIENTE" ToRole="CAD_USUARIO" />
+        </EntityType>
+        <EntityType Name="CAD_USUARIO">
+          <Key>
+            <PropertyRef Name="IDC_CAD_USUARIO" />
+          </Key>
+          <Property Name="IDC_CAD_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUM_MATRICULA" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_USUARIO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CNF_SENHA" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="DAT_CRIACAO" Type="DateTime" Precision="0" />
+          <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="DAT_ALTERACAO" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CAD_CLIENTE" Relationship="hidrocontrollModel.fk_CAD_USUARIO_CAD_CLIENTE1" FromRole="CAD_USUARIO" ToRole="CAD_CLIENTE" />
+        </EntityType>
+        <Association Name="fk_CAD_FAZENDA_CAD_CLIENTE1">
+          <End Type="hidrocontrollModel.CAD_CLIENTE" Role="CAD_CLIENTE" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_FAZENDA" Role="CAD_FAZENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_CLIENTE">
+              <PropertyRef Name="IDC_CAD_CLIENTE" />
+            </Principal>
+            <Dependent Role="CAD_FAZENDA">
+              <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CAD_USUARIO_CAD_CLIENTE1">
+          <End Type="hidrocontrollModel.CAD_CLIENTE" Role="CAD_CLIENTE" Multiplicity="1" />
+          <End Type="hidrocontrollModel.CAD_USUARIO" Role="CAD_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAD_CLIENTE">
+              <PropertyRef Name="IDC_CAD_CLIENTE" />
+            </Principal>
+            <Dependent Role="CAD_USUARIO">
+              <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1753,18 +1715,6 @@
                 <ScalarProperty Name="CAD_ESTADO_IDC_CAD_ESTADO" ColumnName="CAD_ESTADO_IDC_CAD_ESTADO" />
                 <ScalarProperty Name="NOM_CIDADE" ColumnName="NOM_CIDADE" />
                 <ScalarProperty Name="IDC_CAD_CIDADE" ColumnName="IDC_CAD_CIDADE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_CLIENTE">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIENTE">
-              <MappingFragment StoreEntitySet="CAD_CLIENTE">
-                <ScalarProperty Name="CNF_ATIVO_CLIENTE" ColumnName="CNF_ATIVO_CLIENTE" />
-                <ScalarProperty Name="CNF_SENHA_CLIENTE" ColumnName="CNF_SENHA_CLIENTE" />
-                <ScalarProperty Name="CNF_EMAIL_CLIENTE" ColumnName="CNF_EMAIL_CLIENTE" />
-                <ScalarProperty Name="NOM_CLIENTE" ColumnName="NOM_CLIENTE" />
-                <ScalarProperty Name="CNF_USUARIO_CLIENTE" ColumnName="CNF_USUARIO_CLIENTE" />
-                <ScalarProperty Name="IDC_CAD_CLIENTE" ColumnName="IDC_CAD_CLIENTE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1868,20 +1818,6 @@
                 <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
                 <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
                 <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CAD_USUARIO">
-            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
-              <MappingFragment StoreEntitySet="CAD_USUARIO">
-                <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-                <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
-                <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-                <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
-                <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
-                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
-                <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
-                <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2063,6 +1999,30 @@
                 <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
                 <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
                 <ScalarProperty Name="IDC_CAD_TARIFA" ColumnName="IDC_CAD_TARIFA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_CLIENTE">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIENTE">
+              <MappingFragment StoreEntitySet="CAD_CLIENTE">
+                <ScalarProperty Name="CNF_ATIVO_CLIENTE" ColumnName="CNF_ATIVO_CLIENTE" />
+                <ScalarProperty Name="CNF_SENHA_CLIENTE" ColumnName="CNF_SENHA_CLIENTE" />
+                <ScalarProperty Name="CNF_EMAIL_CLIENTE" ColumnName="CNF_EMAIL_CLIENTE" />
+                <ScalarProperty Name="NOM_CLIENTE" ColumnName="NOM_CLIENTE" />
+                <ScalarProperty Name="IDC_CAD_CLIENTE" ColumnName="IDC_CAD_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAD_USUARIO">
+            <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
+              <MappingFragment StoreEntitySet="CAD_USUARIO">
+                <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
+                <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+                <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
+                <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
+                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+                <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+                <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

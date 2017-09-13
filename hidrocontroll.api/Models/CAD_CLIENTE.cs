@@ -21,7 +21,6 @@ namespace hidrocontroll.Models
         }
     
         public int IDC_CAD_CLIENTE { get; set; }
-        public string CNF_USUARIO_CLIENTE { get; set; }
         public string NOM_CLIENTE { get; set; }
         public string CNF_EMAIL_CLIENTE { get; set; }
         public string CNF_SENHA_CLIENTE { get; set; }

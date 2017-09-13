@@ -22,18 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CAD_CLIENTE">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIENTE">
-        <MappingFragment StoreEntitySet="CAD_CLIENTE">
-          <ScalarProperty Name="CNF_ATIVO_CLIENTE" ColumnName="CNF_ATIVO_CLIENTE" />
-          <ScalarProperty Name="CNF_SENHA_CLIENTE" ColumnName="CNF_SENHA_CLIENTE" />
-          <ScalarProperty Name="CNF_EMAIL_CLIENTE" ColumnName="CNF_EMAIL_CLIENTE" />
-          <ScalarProperty Name="NOM_CLIENTE" ColumnName="NOM_CLIENTE" />
-          <ScalarProperty Name="CNF_USUARIO_CLIENTE" ColumnName="CNF_USUARIO_CLIENTE" />
-          <ScalarProperty Name="IDC_CAD_CLIENTE" ColumnName="IDC_CAD_CLIENTE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CAD_CULTURA">
       <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CULTURA">
         <MappingFragment StoreEntitySet="CAD_CULTURA">
@@ -134,20 +122,6 @@
           <ScalarProperty Name="TMP_CLIMA_MAX" ColumnName="TMP_CLIMA_MAX" />
           <ScalarProperty Name="DAT_CLIMA" ColumnName="DAT_CLIMA" />
           <ScalarProperty Name="IDC_CAD_CLIMA" ColumnName="IDC_CAD_CLIMA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CAD_USUARIO">
-      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
-        <MappingFragment StoreEntitySet="CAD_USUARIO">
-          <ScalarProperty Name="CAD_FAZENDA_IDC_CAD_FAZENDA" ColumnName="CAD_FAZENDA_IDC_CAD_FAZENDA" />
-          <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
-          <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-          <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
-          <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
-          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
-          <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
-          <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -329,6 +303,30 @@
           <ScalarProperty Name="HOR_INICIO_TARIFA" ColumnName="HOR_INICIO_TARIFA" />
           <ScalarProperty Name="NOM_TARIFA" ColumnName="NOM_TARIFA" />
           <ScalarProperty Name="IDC_CAD_TARIFA" ColumnName="IDC_CAD_TARIFA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_CLIENTE">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_CLIENTE">
+        <MappingFragment StoreEntitySet="CAD_CLIENTE">
+          <ScalarProperty Name="CNF_ATIVO_CLIENTE" ColumnName="CNF_ATIVO_CLIENTE" />
+          <ScalarProperty Name="CNF_SENHA_CLIENTE" ColumnName="CNF_SENHA_CLIENTE" />
+          <ScalarProperty Name="CNF_EMAIL_CLIENTE" ColumnName="CNF_EMAIL_CLIENTE" />
+          <ScalarProperty Name="NOM_CLIENTE" ColumnName="NOM_CLIENTE" />
+          <ScalarProperty Name="IDC_CAD_CLIENTE" ColumnName="IDC_CAD_CLIENTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAD_USUARIO">
+      <EntityTypeMapping TypeName="hidrocontrollModel.CAD_USUARIO">
+        <MappingFragment StoreEntitySet="CAD_USUARIO">
+          <ScalarProperty Name="DAT_ALTERACAO" ColumnName="DAT_ALTERACAO" />
+          <ScalarProperty Name="CAD_CLIENTE_IDC_CAD_CLIENTE" ColumnName="CAD_CLIENTE_IDC_CAD_CLIENTE" />
+          <ScalarProperty Name="DAT_CRIACAO" ColumnName="DAT_CRIACAO" />
+          <ScalarProperty Name="CNF_SENHA" ColumnName="CNF_SENHA" />
+          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+          <ScalarProperty Name="NUM_MATRICULA" ColumnName="NUM_MATRICULA" />
+          <ScalarProperty Name="IDC_CAD_USUARIO" ColumnName="IDC_CAD_USUARIO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

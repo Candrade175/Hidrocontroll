@@ -27,7 +27,6 @@ namespace hidrocontroll.Models
     
         public DbSet<CAD_ADMINISTRADOR> CAD_ADMINISTRADOR { get; set; }
         public DbSet<CAD_CIDADE> CAD_CIDADE { get; set; }
-        public DbSet<CAD_CLIENTE> CAD_CLIENTE { get; set; }
         public DbSet<CAD_CULTURA> CAD_CULTURA { get; set; }
         public DbSet<CAD_ESTADO> CAD_ESTADO { get; set; }
         public DbSet<CAD_FASE_OUTORGA> CAD_FASE_OUTORGA { get; set; }
@@ -37,7 +36,6 @@ namespace hidrocontroll.Models
         public DbSet<CAD_PRECIPITACAO> CAD_PRECIPITACAO { get; set; }
         public DbSet<CAD_RESERVATORIO> CAD_RESERVATORIO { get; set; }
         public DbSet<CAD_CLIMA> CAD_CLIMA { get; set; }
-        public DbSet<CAD_USUARIO> CAD_USUARIO { get; set; }
         public DbSet<CAD_MODELO_PIVO_CENTRAL> CAD_MODELO_PIVO_CENTRAL { get; set; }
         public DbSet<CAD_PIVO_CENTRAL> CAD_PIVO_CENTRAL { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -50,5 +48,7 @@ namespace hidrocontroll.Models
         public DbSet<CAD_UMIDADE> CAD_UMIDADE { get; set; }
         public DbSet<CAD_RESERVATORIO_DIARIO> CAD_RESERVATORIO_DIARIO { get; set; }
         public DbSet<CAD_TARIFA> CAD_TARIFA { get; set; }
+        public DbSet<CAD_CLIENTE> CAD_CLIENTE { get; set; }
+        public DbSet<CAD_USUARIO> CAD_USUARIO { get; set; }
     }
 }

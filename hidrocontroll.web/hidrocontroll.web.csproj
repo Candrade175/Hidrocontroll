@@ -114,7 +114,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
-    <Folder Include="Properties\" />
     <Folder Include="svg\" />
     <Folder Include="xml\" />
   </ItemGroup>
@@ -186,8 +185,6 @@
     <Content Include="lib\js\angular.min.js" />
     <Content Include="lib\js\html5-qrcode.min.js" />
     <Content Include="lib\js\angularPrint.js" />
-    <Content Include="lib\js\jquery-1.12.0.min.js" />
-    <Content Include="lib\js\jquery.js" />
     <Content Include="lib\js\lodash.min.js" />
     <Content Include="lib\js\md-data-table-templates.js" />
     <Content Include="lib\js\md-data-table.js" />
@@ -255,6 +252,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\hidrocontroll.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

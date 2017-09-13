@@ -24,7 +24,6 @@
       <PropertyRef Name="IDC_CAD_CLIENTE" />
     </Key>
     <Property Name="IDC_CAD_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CNF_USUARIO_CLIENTE" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="NOM_CLIENTE" Type="varchar" MaxLength="45" />
     <Property Name="CNF_EMAIL_CLIENTE" Type="varchar" MaxLength="80" />
     <Property Name="CNF_SENHA_CLIENTE" Type="varchar" MaxLength="45" />
@@ -269,7 +268,6 @@
     <Property Name="DAT_CRIACAO" Type="date" />
     <Property Name="CAD_CLIENTE_IDC_CAD_CLIENTE" Type="int" Nullable="false" />
     <Property Name="DAT_ALTERACAO" Type="date" />
-    <Property Name="CAD_FAZENDA_IDC_CAD_FAZENDA" Type="int" />
   </EntityType>
   <EntityType Name="REG_MANEJO">
     <Key>
@@ -391,18 +389,6 @@
       </Principal>
       <Dependent Role="CAD_FAZENDA">
         <PropertyRef Name="CAD_CLIENTE_IDC_CAD_CLIENTE" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
-    <End Role="CAD_FAZENDA" Type="Self.CAD_FAZENDA" Multiplicity="0..1" />
-    <End Role="CAD_USUARIO" Type="Self.CAD_USUARIO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CAD_FAZENDA">
-        <PropertyRef Name="IDC_CAD_FAZENDA" />
-      </Principal>
-      <Dependent Role="CAD_USUARIO">
-        <PropertyRef Name="CAD_FAZENDA_IDC_CAD_FAZENDA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -735,10 +721,6 @@
     <AssociationSet Name="fk_CAD_FAZENDA_CAD_CLIENTE1" Association="Self.fk_CAD_FAZENDA_CAD_CLIENTE1">
       <End Role="CAD_CLIENTE" EntitySet="CAD_CLIENTE" />
       <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-    </AssociationSet>
-    <AssociationSet Name="fk_CAD_FAZENDA_IDC_CAD_FAZENDA" Association="Self.fk_CAD_FAZENDA_IDC_CAD_FAZENDA">
-      <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
-      <End Role="CAD_USUARIO" EntitySet="CAD_USUARIO" />
     </AssociationSet>
     <AssociationSet Name="fk_CAD_GOTEJADOR_CAD_FAZENDA1" Association="Self.fk_CAD_GOTEJADOR_CAD_FAZENDA1">
       <End Role="CAD_FAZENDA" EntitySet="CAD_FAZENDA" />
